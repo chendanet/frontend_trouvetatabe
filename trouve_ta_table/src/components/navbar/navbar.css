@@ -1,0 +1,20 @@
+nav{
+    background-color: #001A33;
+   
+}
+.nav-list{
+    color: white;
+    text-decoration: none;
+}
+.list-flex{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-right{
+    display: flex;
+}
+.item-list{
+    margin: 0 0.5rem;
+}
