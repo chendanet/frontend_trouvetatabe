@@ -1,17 +1,17 @@
-import Main from "components/Main";
+import Home from "pages/Home";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import "components/App/index.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <Main />
+      <Home />
       <Footer />
     </div>
-  );
+  )
 }
 
 export default App;
