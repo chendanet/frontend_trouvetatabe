@@ -1,7 +1,7 @@
-import Main from "../main/Main";
-import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
-import "./App.css";
+import Main from "components/Main";
+import Navbar from "components/Navbar";
+import Footer from "components/Footer";
+import "components/App/index.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
