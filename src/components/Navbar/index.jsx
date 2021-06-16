@@ -1,5 +1,6 @@
 import React from 'react'
 import "components/Navbar/index.css";
+import { Link } from "react-router-dom"
 
 function Navbar() {
   return (
@@ -54,9 +55,9 @@ function Navbar() {
 
               <div className="list-right">
                 <li className="nav-item">
-                  <a className="nav-list item-list" href="#">
+                  <Link className="nav-list item-list" to="/register">
                     Signup
-                    </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-list item-list" href="#">
