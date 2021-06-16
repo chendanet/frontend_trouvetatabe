@@ -1,0 +1,23 @@
+.footer-container{
+    width: 100%;
+    background-color: #001A33;
+    padding: 1rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content-left{
+    display: flex;
+    align-items:baseline;
+}
+.content-left h3{
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+svg{
+    margin: 0.5rem;
+}
+.content-right span{
+    margin: 0 1rem;
+}
