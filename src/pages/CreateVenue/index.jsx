@@ -5,7 +5,7 @@ const handleSubmit = (e) => {
     e.preventDefault();
       const data = new FormData(e.target);
   
-      fetch(`http://localhost:3001/venues`, {
+      fetch(`http://localhost:3001/api/venues`, { //a ne pas oublier de changer l'url par une variable !
         method: "post",
         body: data
       })      // pas de content type pour gérer multiple type de fichier
