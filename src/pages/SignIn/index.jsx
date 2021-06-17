@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { authenticate } from 'store/actions'
+import "pages/SignIn/SignIn.css";
+import { Link } from "react-router-dom"
 
 const SignIn = () => {
 
@@ -65,21 +67,39 @@ const SignIn = () => {
         history.push('/')
     }
     return (
-        <div >
+        <div className="container d-flex align-items-center justify-content-center">
+        <div className="form-container">
+          <div>
+            <h3>Sign Up</h3>
+            <p>Create your account</p>
+          </div>
+          <form>
             <div>
-                <h3>Sign In</h3>
+              <input
+                type="text"
+                name="email"
+                onChange={handleEmail}
+                placeholder="Enter Your Email"
+              />
+              <br />
+              <input
+                rows="4"
+                type="password"
+                name="password"
+                onChange={handlePassword}
+                placeholder="Enter your Password"
+              />
+              <br />
+            
+              <button type="submit" onClick={fetchSignIn} className="btn-signin">
+                Sign up
+              </button>
+              <br />
+              
             </div>
-            <form >
-                <div>
-                    <label type="text" name="email">Email</label>
-                    <input type="text" name="email" onChange={handleEmail} />
-                    <label type="text" name="password">Password</label>
-                    <input rows='4' type="password" name="password" onChange={handlePassword} />
-                    
-                    <button type="submit" onClick={fetchSignIn}>Sign in</button>
-                </div>
-            </form>
+          </form>
         </div>
+      </div>
     )
 }
 
