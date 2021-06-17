@@ -30,7 +30,7 @@ const Booking = () => {
 
         console.log('token', token)
 
-        const response = await fetch(`http://localhost:3000/api/booking`,
+        const response = await fetch(`http://localhost:3000/api/bookings`,
             {
                 method: 'post',
                 headers: {
