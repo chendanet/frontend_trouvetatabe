@@ -35,7 +35,7 @@ const dispatch = useDispatch();
       },
     };
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/api/booking", {
+    const response = await fetch("http://localhost:3000/api/bookings", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -68,9 +68,8 @@ const dispatch = useDispatch();
   };
   return (
     <div className="container d-flex align-items-center justify-content-center">
-      <div className="form-container">
+      <div className="form-container" align="center">
       <h3> Make a Reservation </h3>
-            </div>
             <form>
           <label for="name">Your Name</label>
           <input
@@ -80,23 +79,33 @@ const dispatch = useDispatch();
             placeholder="John Doe"
             required
           />
-          <label for="email">Your E-mail</label>
-          <input
-            type="email"
-            id="email"
-            name="visitor_email"
-            placeholder="john.doe@email.com"
-            required
-          ></input>
+          <label for="phone">Your Phone</label>
+          <input type="tel" 
+          id="phone"
+          name="visitor_phone"
+          placeholder="498-348-3872"  
+          required />
           <label for="adult">Number of people</label>
         <input 
         type="number" 
-        id="adult" name="total_adults" placeholder="2" min="1" required></input>
-           <label for="appt">Select a time:</label>
+        id="people" 
+        name="total_people" 
+        placeholder="2" 
+        min="1" 
+        required>
+        </input>
+        <label for="checkin-date"> Reservation Date</label>
+         <input type="date" id="checkin-date" name="checkin" align="center" required/>
+         <br/>
+           <label for="appt" align="center">Select a time:</label>
+           <br/>
+
             <input type="time" id="appt" name="appt" /> 
-            <button type="submit" onClick={fetchBooking} className="btn-signin" label="submit"/>
+            <button type="submit" onClick={fetchBooking} className="btn-signin"> Submit </button> 
         </form>
       </div>
+      </div>
+
 
 
   );
