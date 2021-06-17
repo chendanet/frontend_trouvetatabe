@@ -4,6 +4,7 @@ import Footer from "components/Footer";
 import "components/App/index.css";
 import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
+import CreateVenue from "pages/CreateVenue"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from 'store';
 import {
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/register">
               <SignUp />
             </Route>
+            <Route path="/api/venues" pages={CreateVenue} />
           </Switch>
           <Footer />
         </div>
