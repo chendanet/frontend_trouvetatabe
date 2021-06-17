@@ -28,7 +28,7 @@ const App = () => {
             <Route path="/register">
               <SignUp />
             </Route>
-            <Route path="/api/venues">
+            <Route path="/venues">
               <CreateVenue />
             </Route>
           </Switch>
