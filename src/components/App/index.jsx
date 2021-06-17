@@ -28,7 +28,9 @@ const App = () => {
             <Route path="/register">
               <SignUp />
             </Route>
-            <Route path="/api/venues" pages={CreateVenue} />
+            <Route path="/api/venues">
+              <CreateVenue />
+            </Route>
           </Switch>
           <Footer />
         </div>
