@@ -7,7 +7,7 @@ const SignIn = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [is_manager, setIsManager] = useState(false)
+    // const [is_manager, setIsManager] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory();
 
@@ -20,21 +20,17 @@ const SignIn = () => {
         setPassword(e.target.value)
     }
 
-    const handleOnChange = () => {
-        {
-            setIsManager(!is_manager)
-        }
-    }
+    
 
 
 
-    const fetchSignUp = async (e) => {
+    const fetchSignIn = async (e) => {
 
         const dataUser = {
             user: {
                 email: email,
                 password: password,
-                is_manager: is_manager
+                
             }
         }
         e.preventDefault();
@@ -45,11 +41,8 @@ const SignIn = () => {
             },
             body: JSON.stringify(dataUser)
         })
-        const d = await dataUser
-        const is = await is_manager
-        console.log("d", d)
-        console.log("is_manager", is_manager)
-
+       
+        
         if (response.status !== 200) {
 
             return
@@ -59,7 +52,10 @@ const SignIn = () => {
         const data = await response.json()
         const userId = data.data.id
         const userEmail = data.data.attributes.email
+        const is_manager = data.data.attributes.is_manager
 
+        console.log("data", is_manager);
+        
         dispatch(authenticate({
             id: userId,
             email: userEmail,
@@ -71,7 +67,7 @@ const SignIn = () => {
     return (
         <div >
             <div>
-                <h3>Sign Up</h3>
+                <h3>Sign In</h3>
             </div>
             <form >
                 <div>
@@ -80,7 +76,7 @@ const SignIn = () => {
                     <label type="text" name="password">Password</label>
                     <input rows='4' type="password" name="password" onChange={handlePassword} />
                     
-                    <button type="submit" onClick={fetchSignUp}>Sign up</button>
+                    <button type="submit" onClick={fetchSignIn}>Sign in</button>
                 </div>
             </form>
         </div>

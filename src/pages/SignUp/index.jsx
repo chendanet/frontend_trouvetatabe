@@ -45,10 +45,7 @@ const SignUp = () => {
             },
             body: JSON.stringify(dataUser)
         })
-        const d = await dataUser
-        const is = await is_manager
-        console.log("d", d)
-        console.log("is_manager", is_manager)
+        
 
         if (response.status !== 200) {
 
@@ -59,11 +56,12 @@ const SignUp = () => {
         const data = await response.json()
         const userId = data.data.id
         const userEmail = data.data.attributes.email
+        const isManager = data.data.attributes.is_manager
 
         dispatch(authenticate({
             id: userId,
             email: userEmail,
-            is_manager: is_manager
+            is_manager: isManager
         }, token))
 
         history.push('/')
