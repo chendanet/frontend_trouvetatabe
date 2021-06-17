@@ -1,72 +1,60 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { authenticate } from "store/actions";
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import config from 'config'
 import "pages/Booking/Booking.css";
-import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { authenticate } from 'store/actions'
+
 
 const Booking = () => {
-const [seat, setSeat] = useState()
-const [time, setTime] = useState()
-const [date, setDate] = useState()
-const [state, setState] = useState()
+    const [name, setName] = useState()
+    const [seat, setSeat] = useState()
+    const [time, setTime] = useState()
+    const [date, setDate] = useState()
 
+    const history = useHistory()
+    const token = Cookies.get(config.COOKIE_STORAGE_KEY)
 
-const dispatch = useDispatch();
-
-
-//   const handleChange = (e) => {
-//     setState(e.target.value)
-// }
-
-  const handleSubmit= (e) => {
-    alert("La reservation est bien prise en charge");
-    e.preventDefault();
-    }
-
-
-  const fetchBooking = async (e) => {
     const dataBooking = {
-    booking: {
-       seat: seat,
-       time: time,
-       date: date,
+        booking: {
+            seat: seat,
+            time: time,
+            date: date
+        }
+    }
+    const fetchBooking = async (e) => {
+        e.preventDefault()
 
-      },
-    };
-    e.preventDefault();
-    const response = await fetch("http://localhost:3000/api/bookings", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataBooking),
-    });
 
-    if (response.status !== 200) {
-      return;
+        console.log('token', token)
+
+        const response = await fetch(`http://localhost:3000/api/booking`,
+            {
+                method: 'post',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataBooking)
+            })
+
+        if (response) {
+            history.push('/myBookings')
+            return
+        }
+
+        const data = await response.json()
+         console.log(data)
     }
 
-    const token = response.headers.get("Authorization").split("Bearer ")[1];
-    const data = await response.json();
-    const userId = data.data.id;
-    const userEmail = data.data.attributes.email;
-    const isManager = data.data.attributes.is_manager;
-    console.log("here", isManager);
 
-    dispatch(
-      authenticate(
-        {
-          id: userId,
-          email: userEmail,
-          is_manager: isManager,
-        },
-        token
-      )
-    );
+    
+    console.log("token", token);
+    console.log("dataBooking", dataBooking);
 
-  };
-  return (
+    return (
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container" align="center">
       <h3> Make a Reservation </h3>
@@ -78,6 +66,7 @@ const dispatch = useDispatch();
             name="visitor_name"
             placeholder="John Doe"
             required
+            onChange={(e) => setName(e.target.value)} 
           />
           <label for="phone">Your Phone</label>
           <input type="tel" 
@@ -92,15 +81,26 @@ const dispatch = useDispatch();
         name="total_people" 
         placeholder="2" 
         min="1" 
-        required>
-        </input>
+        required
+        onChange={(e) => setSeat(e.target.value)} 
+        />
         <label for="checkin-date"> Reservation Date</label>
-         <input type="date" id="checkin-date" name="checkin" align="center" required/>
+         <input 
+         type="date" 
+         id="checkin-date" 
+         name="checkin" 
+         align="center" required
+         onChange={(e) => setDate(e.target.value)}
+         />
          <br/>
-           <label for="appt" align="center">Select a time:</label>
-           <br/>
-
-            <input type="time" id="appt" name="appt" /> 
+        <label for="appt" align="center">Select a time:</label>
+         <br/>
+         <input 
+         type="time" 
+         id="appt" 
+         name="appt"          
+         onChange={(e) => setTime(e.target.value)}
+        /> 
             <button type="submit" onClick={fetchBooking} className="btn-signin"> Submit </button> 
         </form>
       </div>
