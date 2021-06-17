@@ -45,7 +45,7 @@ const SignUp = () => {
             },
             body: JSON.stringify(dataUser)
         })
-        
+
 
         if (response.status !== 200) {
 
@@ -57,6 +57,7 @@ const SignUp = () => {
         const userId = data.data.id
         const userEmail = data.data.attributes.email
         const isManager = data.data.attributes.is_manager
+        console.log('here', isManager)
 
         dispatch(authenticate({
             id: userId,
