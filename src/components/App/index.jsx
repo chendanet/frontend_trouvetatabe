@@ -4,7 +4,7 @@ import Footer from "components/Footer";
 import "components/App/index.css";
 import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
-import SignIn from "pages/SignIn";
+import CreateVenue from "pages/CreateVenue"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from 'store';
 import {
@@ -28,18 +28,14 @@ const App = () => {
             <Route path="/register">
               <SignUp />
             </Route>
-            <Route path="/signin">
-              <SignIn />
+            <Route path="/api/venues">
+              <CreateVenue />
             </Route>
-
           </Switch>
           <Footer />
         </div>
       </Router>
     </Provider >
-
-
   )
 }
-
 export default App;
