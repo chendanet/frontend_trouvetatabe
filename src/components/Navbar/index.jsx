@@ -48,7 +48,7 @@ function Navbar() {
             </defs>
           </svg>
           <Link className="nav-list item-list item-list-logo" aria-current="page" to="/">
-                  TrouveTaTable
+            TrouveTaTable
                   </Link>
           <button
             className="navbar-toggler"
@@ -65,15 +65,15 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 list-flex">
               <li ></li>
-              {!currentUser.id && 
-                  <div className="list-right ">
+              {!currentUser.id &&
+                <div className="list-right ">
                   <li className="nav-item">
                     <Link className="nav-list item-list" to="/register">
                       Signup
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-list item-list" to="/signin">
+                    <Link className="nav-list item-list" to="/login">
                       Login
                       </Link>
                   </li>
@@ -85,27 +85,27 @@ function Navbar() {
                 </div>
               }
               {currentUser.id &&
-                     <div className="list-right">
-                     <li className="nav-item">
-                       <Link className="nav-list item-list" onClick={handleLogout}>
-                         Logout
+                <div className="list-right">
+                  <li className="nav-item">
+                    <Link className="nav-list item-list" onClick={handleLogout}>
+                      Logout
                        </Link>
-                     </li>
-                     <li className="nav-item">
-                       <a className="nav-list item-list" href="#">
-                         Profil
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-list item-list" href="#">
+                      Profil
                          </a>
-                     </li>
-                     <li className="nav-item">
-                       <a className="nav-list item-list" href="#">
-                         Blog
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-list item-list" href="#">
+                      Blog
                          </a>
-                     </li>
-                   </div>
+                  </li>
+                </div>
               }
-                  
 
-            
+
+
             </ul>
           </div>
         </div>
