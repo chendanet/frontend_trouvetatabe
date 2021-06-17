@@ -1,8 +1,23 @@
 import React from 'react'
 import "components/Navbar/index.css";
 import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "store/actions";
+import { useHistory } from "react-router-dom";
 
 function Navbar() {
+  const currentUser = useSelector(state => state.authReducer)
+  console.log('currentUser', currentUser)
+  const history = useHistory();
+  const dispatch = useDispatch()
+  const handleLogout = (e) => {
+    e.preventDefault()
+    dispatch(logout())
+    history.push('/')
+    window.alert("Disconnecting...see you soon!")
+
+  }
+
   return (
     <header>
       <nav className="navbar navbar-expand-md navbar-dark ">
@@ -32,7 +47,9 @@ function Navbar() {
               </clipPath>
             </defs>
           </svg>
-
+          <Link className="nav-list item-list item-list-logo" aria-current="page" to="/">
+                  TrouveTaTable
+                  </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -47,29 +64,48 @@ function Navbar() {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 list-flex">
-              <li className="nav-item mt-2">
-                <a className="nav-list item-list" aria-current="page" href="#">
-                  TrouveTaTable
-                  </a>
-              </li>
+              <li ></li>
+              {!currentUser.id && 
+                  <div className="list-right ">
+                  <li className="nav-item">
+                    <Link className="nav-list item-list" to="/register">
+                      Signup
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-list item-list" to="/signin">
+                      Login
+                      </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-list item-list" href="#">
+                      Blog
+                      </Link>
+                  </li>
+                </div>
+              }
+              {currentUser.id &&
+                     <div className="list-right">
+                     <li className="nav-item">
+                       <Link className="nav-list item-list" onClick={handleLogout}>
+                         Logout
+                       </Link>
+                     </li>
+                     <li className="nav-item">
+                       <a className="nav-list item-list" href="#">
+                         Profil
+                         </a>
+                     </li>
+                     <li className="nav-item">
+                       <a className="nav-list item-list" href="#">
+                         Blog
+                         </a>
+                     </li>
+                   </div>
+              }
+                  
 
-              <div className="list-right">
-                <li className="nav-item">
-                  <Link className="nav-list item-list" to="/register">
-                    Signup
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-list item-list" href="#">
-                    Login
-                    </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-list item-list" href="#">
-                    Blog
-                    </a>
-                </li>
-              </div>
+            
             </ul>
           </div>
         </div>
