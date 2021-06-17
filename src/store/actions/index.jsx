@@ -8,12 +8,14 @@ const authenticate = (user, token) => {
     const {
         id,
         email,
+        is_manager
     } = user;
     return {
         type: AUTHENTICATE,
         payload: {
             id: id,
-            email: email
+            email: email,
+            is_manager: is_manager
         },
         token: token
     }
