@@ -14,7 +14,12 @@ nav{
 }
 .list-right{
     display: flex;
+    margin-right: 1rem;
 }
 .item-list{
     margin: 0 0.5rem;
+}
+.item-list-logo{
+    font-size: 2rem;
+
 }
