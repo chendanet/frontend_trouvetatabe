@@ -41,7 +41,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <ListVenues />
+            <ListVenues />
             </Route>
             <Route path="/register">
               <SignUp />
@@ -55,7 +55,7 @@ const App = () => {
             <Route path="/venues/:idVenue" exact >
               <Venue venues={venues} />
             </Route>
-            </Switch>
+            </Switch>            
           <Footer />
         </div>
       </Router>
