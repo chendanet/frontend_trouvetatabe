@@ -25,7 +25,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <Home />
+            <ListVenues />
             </Route>
             <Route path="/register">
               <SignUp />
@@ -36,9 +36,7 @@ const App = () => {
             <Route path="/venues">
               <CreateVenue />
             </Route>
-            <Route path="/listVenues">
-              <ListVenues />
-            </Route>
+            
            
           
           </Switch>
