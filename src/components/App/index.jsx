@@ -12,6 +12,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import ListVenues from "pages/ListVenue";
 
 
 const App = () => {
@@ -30,6 +31,9 @@ const App = () => {
             </Route>
             <Route path="/api/venues">
               <CreateVenue />
+            </Route>
+            <Route path="/api/listVenues">
+              <ListVenues />
             </Route>
           </Switch>
           <Footer />
