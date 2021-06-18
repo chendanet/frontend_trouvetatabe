@@ -104,7 +104,7 @@ const Venue = ({venues}) => {
                     </button>
                   </div>
                   <button onClick={fetchDeleteVenue}>Delete</button>
-                </div>}
+                </div>
           </div>
         )}
     </div>
