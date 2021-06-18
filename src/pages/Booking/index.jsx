@@ -12,7 +12,7 @@ const Booking = () => {
     const [seat, setSeat] = useState()
     const [time, setTime] = useState()
     const [date, setDate] = useState()
-
+    const userId = useSelector(state => state.authReducer.id)
     const history = useHistory()
     const token = Cookies.get(config.COOKIE_STORAGE_KEY)
 
@@ -20,7 +20,9 @@ const Booking = () => {
         booking: {
             seat: seat,
             time: time,
-            date: date
+            date: date,
+            user_id: userId,
+            // venue_id: venueId
         }
     }
     const fetchBooking = async (e) => {
