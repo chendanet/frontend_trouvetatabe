@@ -150,10 +150,10 @@ const Venue = ({ venues }) => {
                  </div>
               </div>
 
-              {currentUser.is_manager && (
+              {currentVenue.user_id == currentUser.id && (
                 <div className="d-flex justify-content-around m-3">
                   <div>
-                    <button type="button">Edit</button>
+                    <button type="button" onClick={fetchEditVenue}>Edit</button>
                   </div>
                   <button onClick={fetchDeleteVenue}>Delete</button>
                 </div>
