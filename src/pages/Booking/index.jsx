@@ -9,7 +9,6 @@ import { authenticate } from 'store/actions'
 
 
 const Booking = () => {
-    const [name, setName] = useState()
     const [seat, setSeat] = useState()
     const [time, setTime] = useState()
     const [date, setDate] = useState()
@@ -66,7 +65,7 @@ const Booking = () => {
             name="visitor_name"
             placeholder="John Doe"
             required
-            onChange={(e) => setName(e.target.value)} 
+            // onChange={(e) => setName(e.target.value)} 
           />
           <label for="phone">Your Phone</label>
           <input type="tel" 
