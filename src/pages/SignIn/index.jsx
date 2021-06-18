@@ -65,8 +65,8 @@ const SignIn = () => {
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">
         <div>
-          <h3>Sign Up</h3>
-          <p>Create your account</p>
+          <h3>Login</h3>
+          
         </div>
         <form>
           <div>
@@ -87,7 +87,7 @@ const SignIn = () => {
             <br />
 
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
-              Sign up
+             Login
               </button>
             <br />
           </div>
