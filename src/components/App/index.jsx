@@ -55,6 +55,9 @@ const App = () => {
             <Route path="/venues/:idVenue" exact >
               <Venue venues={venues} />
             </Route>
+            <Route path="/booking" exact >
+              <Booking/>
+            </Route>
             </Switch>
           <Footer />
         </div>

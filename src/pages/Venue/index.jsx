@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link} from "react-router-dom";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import config from "config";
@@ -145,7 +145,8 @@ const Venue = ({ venues }) => {
                   <span>{currentVenue.price}</span>
                   </div>
                   <div>
-                  <button type="button">Find a Table</button>
+                  <Link  to="/booking">
+                  <button type="button">Find a Table</button> </Link>
                   </div>
                  </div>
               </div>
