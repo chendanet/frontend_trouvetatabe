@@ -5,6 +5,7 @@ import Footer from "components/Footer";
 import "components/App/index.css";
 import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
+import Booking from "pages/Booking";
 import SignIn from "pages/SignIn";
 import Venue from "pages/Venue";
 import CreateVenue from "pages/CreateVenue"
@@ -53,6 +54,9 @@ const App = () => {
             </Route>
             <Route path="/venues/:idVenue" exact >
               <Venue venues={venues} />
+            </Route>
+            <Route path="/booking" exact >
+              <Booking/>
             </Route>
             </Switch>
           <Footer />
