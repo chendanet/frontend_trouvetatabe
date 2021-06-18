@@ -14,7 +14,7 @@ const Venue = ({venues}) => {
   const [cuisine, setCuisine] = useState()
 
   const history = useHistory()
-  const currentUser = useSelector((state) => state.authReducer);
+  // const currentUser = useSelector((state) => state.authReducer);
   const dataVenue = {
     venue: {
       name: name,
