@@ -42,7 +42,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-            <ListVenues />
+              <ListVenues />
             </Route>
             <Route path="/register">
               <SignUp />
@@ -60,10 +60,7 @@ const App = () => {
             <Route path="/profile" exact>
               <Profile />
             </Route>
-              <Route path="/booking" exact >
-              <Booking/>
-              </Route>
-            </Switch>
+          </Switch>
           <Footer />
         </div>
       </Router>

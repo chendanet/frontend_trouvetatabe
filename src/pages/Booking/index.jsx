@@ -1,15 +1,18 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import config from "config";
 import "pages/Booking/Booking.css";
+import { useSelector } from "react-redux";
 
 
-const Booking = ({modal}) => {
+const Booking = ({ modal, idVenue }) => {
   const [seat, setSeat] = useState();
   const [time, setTime] = useState();
   const [date, setDate] = useState();
+  const currentUser = useSelector((state) => state.authReducer);
+
 
   const history = useHistory();
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
@@ -19,6 +22,8 @@ const Booking = ({modal}) => {
       seat: seat,
       time: time,
       date: date,
+      user_id: currentUser.id,
+      venue_id: idVenue,
     },
   };
   const fetchBooking = async (e) => {
@@ -35,12 +40,12 @@ const Booking = ({modal}) => {
       body: JSON.stringify(dataBooking),
     });
 
+    const data = await response.json();
+
     if (response) {
-      history.push("/myBookings");
+      history.push("/");
       return;
     }
-
-    const data = await response.json();
     console.log(data);
   };
 
@@ -50,8 +55,8 @@ const Booking = ({modal}) => {
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
       <div className="form-container " align="center">
-              <h3> Make a Reservation </h3>
-              <button type="button" onClick={modal} className="close">X</button>
+        <h3> Make a Reservation </h3>
+        <button type="button" onClick={modal} className="close">X</button>
         <form>
           <input
             type="text"
@@ -60,7 +65,7 @@ const Booking = ({modal}) => {
             placeholder="Your Name"
             required
             className="input"
-            // onChange={(e) => setName(e.target.value)}
+          // onChange={(e) => setName(e.target.value)}
           />
 
           <input
