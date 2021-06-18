@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import Home from "pages/Home";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
@@ -5,6 +6,7 @@ import "components/App/index.css";
 import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
 import SignIn from "pages/SignIn";
+import Venue from "pages/Venue";
 import CreateVenue from "pages/CreateVenue"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from 'store';
@@ -18,6 +20,20 @@ import ListVenues from "pages/ListVenue";
 
 const App = () => {
 
+  const [venues, setVenues] = useState([]);
+
+  const URL = "http://localhost:3000/api/venues";
+
+  useEffect(() => {
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+        console.log(data)
+      });
+  }, [])
+
+  
   return (
     <Provider store={store}>
       <Router>
@@ -33,15 +49,16 @@ const App = () => {
             <Route path="/login">
               <SignIn />
             </Route>
-            <Route path="/venues">
+            <Route path="/venues" exact>
               <CreateVenue />
             </Route>
             <Route path="/listVenues">
               <ListVenues />
             </Route>
-           
-          
-          </Switch>
+            <Route path="/venues/:idVenue" exact >
+              <Venue venues={venues} />
+            </Route>
+            </Switch>
           <Footer />
         </div>
       </Router>
