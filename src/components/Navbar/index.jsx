@@ -92,9 +92,9 @@ function Navbar() {
                        </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-list item-list" href="#">
+                    <Link className="nav-list item-list" to="/profile">
                       Profil
-                         </a>
+                         </Link>
                   </li>
                   <li className="nav-item">
                     <a className="nav-list item-list" href="#">
