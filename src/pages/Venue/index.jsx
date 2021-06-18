@@ -96,7 +96,7 @@ const Venue = ({venues}) => {
             <h2>{currentVenue.name}</h2>
             <p>{currentVenue.city}</p>
             <h6>{currentVenue.cuisine}</h6>       
-              {(currentUser.id == currentVenue.user.id) &&
+              {/* {(currentUser.id == currentVenue.user.id) && */}
                 <div>
                   <div>
                     <button type="button" >
@@ -104,7 +104,7 @@ const Venue = ({venues}) => {
                     </button>
                   </div>
                   <button onClick={fetchDeleteVenue}>Delete</button>
-                </div>}
+                </div>
           </div>
         )}
     </div>
