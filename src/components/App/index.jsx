@@ -8,6 +8,7 @@ import SignUp from "pages/SignUp";
 import Booking from "pages/Booking";
 import SignIn from "pages/SignIn";
 import Venue from "pages/Venue";
+import Profile from "pages/Profile";
 import CreateVenue from "pages/CreateVenue"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from 'store';
@@ -55,9 +56,13 @@ const App = () => {
             <Route path="/venues/:idVenue" exact >
               <Venue venues={venues} />
             </Route>
-            <Route path="/booking" exact >
-              <Booking/>
+
+            <Route path="/profile" exact>
+              <Profile />
             </Route>
+              <Route path="/booking" exact >
+              <Booking/>
+              </Route>
             </Switch>
           <Footer />
         </div>
