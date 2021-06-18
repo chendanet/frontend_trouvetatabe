@@ -1,9 +1,16 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "pages/ListVenue/listVenue.css";
-
-
+import { useHistory, Link } from 'react-router-dom'
 function ListVenues() {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/venues")
+      .then((response) => response.json())
+      .then((data) => setList(data));
+  }, []);
+  console.log(list);
+
   return (
     <div className="container-list">
       <div className="filter">
@@ -31,75 +38,28 @@ function ListVenues() {
           <li>toto toto</li>
           <li>toto toto</li>
           <li>toto toto</li>
-        </ul>     
+        </ul>
       </div>
-          <div className="container-img-item">
-          <div className="image-item">
-        <img
-          src="https://images.unsplash.com/photo-1623945305769-d48e9fc47792?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-          alt=""
-        />
-
-        <div className="container-item">
-        <h5>restau</h5>
-                      <p>Paris</p>
-                      <p>rating</p>
-          <button>valider</button>
-        </div>
+      <div className="container-img-item">
+        {list.map((item, index) => (
+          <div className="image-item" key={index}>
+          <img
+            src={item.photo}
+            alt=""
+          />
+            <Link to={""}>
+            
+          <div className="container-item">
+              <h5>{item.name}</h5>
+            <p>{item.city}</p>
+            <p>{item.cuisine}</p>
+            <button>valider</button>
+          </div>
+            </Link>
+          </div>))}
+        
+        
       </div>
-      <div className="image-item">
-        <img
-          src="https://images.unsplash.com/photo-1623945305769-d48e9fc47792?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-          alt=""
-        />
-
-        <div className="container-item">
-        <h5>restau</h5>
-                      <p>Paris</p>
-                      <p>rating</p>
-          <button>valider</button>
-        </div>
-      </div>
-      <div className="image-item">
-        <img
-          src="https://images.unsplash.com/photo-1623945305769-d48e9fc47792?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-          alt=""
-        />
-
-        <div className="container-item">
-        <h5>restau</h5>
-                      <p>Paris</p>
-                      <p>rating</p>
-          <button>valider</button>
-        </div>
-              </div>
-              <div className="image-item">
-        <img
-          src="https://images.unsplash.com/photo-1623945305769-d48e9fc47792?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-          alt=""
-        />
-
-        <div className="container-item">
-        <h5>restau</h5>
-                      <p>Paris</p>
-                      <p>rating</p>
-          <button>valider</button>
-        </div>
-              </div>
-              <div className="image-item">
-        <img
-          src="https://images.unsplash.com/photo-1623945305769-d48e9fc47792?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-          alt=""
-        />
-
-        <div className="container-item">
-          <h5>restau</h5>
-                      <p>Paris</p>
-                      <p>rating</p>
-          <button>valider</button>
-        </div>
-      </div>
-        </div>
     </div>
   );
 }
