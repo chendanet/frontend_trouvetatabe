@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import Home from "pages/Home";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
@@ -6,6 +7,7 @@ import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
 import Booking from "pages/Booking";
 import SignIn from "pages/SignIn";
+import Venue from "pages/Venue";
 import CreateVenue from "pages/CreateVenue"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import store from 'store';
@@ -14,9 +16,23 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import ListVenues from "pages/ListVenue";
 
 
 const App = () => {
+
+  const [venues, setVenues] = useState([]);
+
+  const URL = "http://localhost:3000/api/venues";
+
+  useEffect(() => {
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+        console.log(data)
+      });
+  }, [])
 
   return (
     <Provider store={store}>
@@ -25,7 +41,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <Home />
+            <ListVenues />
             </Route>
             <Route path="/register">
               <SignUp />
@@ -33,13 +49,13 @@ const App = () => {
             <Route path="/login">
               <SignIn />
             </Route>
-            <Route path="/venues">
+            <Route path="/venues" exact>
               <CreateVenue />
             </Route>
-            <Route path="/booking">
-              <Booking />
+            <Route path="/venues/:idVenue" exact >
+              <Venue venues={venues} />
             </Route>
-          </Switch>
+            </Switch>
           <Footer />
         </div>
       </Router>
