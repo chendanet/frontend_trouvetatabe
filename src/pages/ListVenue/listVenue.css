@@ -29,6 +29,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 .container-item{
     padding: 1rem;
@@ -38,6 +39,7 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    width: 100%;
 }
    
 img{
@@ -51,3 +53,8 @@ button{
     padding:  0.5rem;
 }
 
+a{
+    text-decoration: none;
+    color: #001A33;
+
+}
