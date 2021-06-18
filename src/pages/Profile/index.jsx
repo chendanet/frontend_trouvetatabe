@@ -53,42 +53,51 @@ const Profile = () => {
 
     return (
         <>
-        <div>
-            <p>Bonjour, vous êtes connecté sous : <h3>{currentUser.email}</h3></p>
-        </div>
-          <div className="container d-flex align-items-center justify-content-center">
-          <div className="form-container">
-            <div className="form-container">
-              <h3>Mon profil</h3>
-              <p>Ici, vous pouvez modifier votre profil en entier :</p>
+            <div className="identityProfil">
+                <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>
             </div>
-            <form>
-              <div>
+            <div className="container d-flex align-items-center justify-content-center">
+            <div className="form-container">
+                <div className="form-container">
+                <h3>Mon profil</h3>
+                <p>Ici, vous pouvez modifier votre profil en entier :</p>
+                </div>
+                <form>
+                <div>
+                    <input
+                    type="text"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Modifier email"/>
+                <br/>
                 <input
-                  type="text"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Modifier email"/>
-              <br/>
-              <input
-                  type="password"
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Modifier MDP"/>
-                <br/>
-                    <button type="submit" onClick={updateCurrentUser} className="btn-signin">
-                        Modifier mon profil
-                        ['primary'].map((variant, idx) => (
-  <Alert>
-    This is a alert—check it out!
-  </Alert>
-
-                    </button>
-                <br/>
-              </div>
-            </form>
-          </div>
-        </div>  
+                    type="password"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Modifier MDP"/>
+                    <br/>
+                        <button type="submit" onClick={updateCurrentUser} className="btn-signin">
+                            Modifier mon profil
+                        </button>
+                    <br/>
+                </div>
+                </form>
+            </div>
+            </div>  
+            <div className="container d-flex align-items-center justify-content-center">
+                <div className="form-delete">
+                    
+                        <h3>Supprimer votre compte</h3>
+                        <br/>
+                        <p>ATTENTION: Vous êtes sur le point de supprimer votre compte : 😱 </p>
+                        <div>
+                            <button type="submit" onClick={updateCurrentUser} className="btn-alert">
+                                        SUPPRIMER
+                            </button>
+                        </div>
+                        <br/>
+                </div>  
+            </div> 
         </>
 
 
