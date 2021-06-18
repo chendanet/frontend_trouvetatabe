@@ -47,7 +47,7 @@ function ListVenues() {
             src={item.photo}
             alt=""
           />
-            <Link to={"/venues/" + item.id}>
+            <Link to={"/venues/" + item.id} >
             
           <div className="container-item">
               <h5>{item.name}</h5>

@@ -6,6 +6,8 @@ import Cookies from "js-cookie";
 import config from "config";
 import "pages/Venue/Venue.css";
 
+
+
 const Venue = ({ venues }) => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
@@ -16,6 +18,11 @@ const Venue = ({ venues }) => {
 
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
+  const [seat, setSeat] = useState()
+    const [time, setTime] = useState()
+    const [date, setDate] = useState()
+    const userId = useSelector(state => state.authReducer.id)
+
   const dataVenue = {
     venue: {
       name: name,
@@ -65,6 +72,50 @@ const Venue = ({ venues }) => {
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);
+
+  // ajout page /////////////////////////
+  
+
+
+    const dataBooking = {
+        booking: {
+            seat: seat,
+            time: time,
+            date: date,
+            user_id: userId,
+            venue_id: idVenue
+        }
+    }
+    const fetchBooking = async (e) => {
+        e.preventDefault()
+
+
+        console.log('token', token)
+
+        const response = await fetch(`http://localhost:3000/api/bookings`,
+            {
+                method: 'post',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataBooking)
+            })
+
+        if (response) {
+            history.push('/')
+            return
+        }
+
+        const data = await response.json()
+         console.log(data)
+    }
+
+
+    
+    console.log("token", token);
+    console.log("dataBooking", dataBooking);
+
 
   const body = (
     <div className="container d-flex align-items-center justify-content-center">
@@ -160,7 +211,60 @@ const Venue = ({ venues }) => {
                 </div>
               )}
             </div>
-          )}
+        )}
+        
+        <div className="container d-flex align-items-center justify-content-center">
+      <div className="form-container" align="center">
+      <h3> Make a Reservation </h3>
+            <form>
+          <label for="name">Your Name</label>
+          <input
+            type="text"
+            id="name"
+            name="visitor_name"
+            placeholder="John Doe"
+          
+            // onChange={(e) => setName(e.target.value)} 
+          />
+          <label for="phone">Your Phone</label>
+          <input type="tel" 
+          id="phone"
+          name="visitor_phone"
+          placeholder="498-348-3872"  
+          />
+          <label for="adult">Number of people</label>
+        <input 
+        type="number" 
+        id="people" 
+        name="total_people" 
+        placeholder="2" 
+        min="1" 
+      
+        onChange={(e) => setSeat(e.target.value)} 
+        />
+        <label for="checkin-date"> Reservation Date</label>
+         <input 
+         type="date" 
+         id="checkin-date" 
+         name="checkin" 
+         align="center" 
+         onChange={(e) => setDate(e.target.value)}
+         />
+         <br/>
+        <label for="appt" align="center">Select a time:</label>
+         <br/>
+         <input 
+         type="time" 
+         id="appt" 
+         name="appt"          
+         onChange={(e) => setTime(e.target.value)}
+        /> 
+            <button type="submit" onClick={fetchBooking} className="btn-signin"> Submit </button> 
+        </form>
+      </div>
+      </div>
+
+
         </div>
       </div>
     // </div>
