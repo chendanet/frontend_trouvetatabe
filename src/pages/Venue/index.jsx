@@ -62,8 +62,8 @@ const Venue = ({venues}) => {
   }, [idVenue]);
 
   const body = (
-    <div>
-      <div>
+    <div className="container d-flex align-items-center justify-content-center">
+      <div className="form-container">
         <h3>Edit Venue</h3>
       </div>
       <form>
