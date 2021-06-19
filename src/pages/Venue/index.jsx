@@ -20,7 +20,7 @@ const Venue = ({ venues }) => {
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
-  
+
   const dataVenue = {
     venue: {
       name: name,
@@ -28,12 +28,12 @@ const Venue = ({ venues }) => {
       cuisine: cuisine,
     },
   };
-  
+
   console.log(currentUser);
   const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `http://localhost:3000/api/venues/${idVenue}`,
+      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
       {
         method: "put",
         headers: {
@@ -54,7 +54,7 @@ const Venue = ({ venues }) => {
   };
   const fetchDeleteVenue = async () => {
     const response = await fetch(
-      `http://localhost:3000/api/venues/${idVenue}`,
+      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
       {
         method: "delete",
         headers: {
@@ -67,7 +67,7 @@ const Venue = ({ venues }) => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/venues/${idVenue}`)
+    fetch(`https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);

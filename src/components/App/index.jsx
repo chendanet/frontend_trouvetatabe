@@ -24,7 +24,7 @@ const App = () => {
 
   const [venues, setVenues] = useState([]);
 
-  const URL = "http://localhost:3000/api/venues";
+  const URL = "https://trouvetatableapi.herokuapp.com/api/venues";
 
   useEffect(() => {
     fetch(URL)
