@@ -31,7 +31,7 @@ const Booking = ({ modal, idVenue }) => {
 
     console.log("token", token);
 
-    const response = await fetch(`http://localhost:3000/api/bookings`, {
+    const response = await fetch(`https://trouvetatableapi.herokuapp.com/bookings`, {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
