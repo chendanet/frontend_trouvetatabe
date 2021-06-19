@@ -6,6 +6,20 @@ const ListVenues = () => {
   const [list, setList] = useState([]);
   const [searchTerme, setSearchTerme] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const price = [
+    {
+      "id": 1,
+      "name": "$$"
+    },
+    {
+      "id": 2,
+      "name": "$$$"
+    },
+    {
+      "id": 3,
+      "name": "$$$$"
+    }
+  ]
 
   useEffect(() => {
     fetch("http://localhost:3000/api/venues")
@@ -16,31 +30,44 @@ const ListVenues = () => {
   return (
     <div className="container-list">
       <div className="filter">
-        <ul>
-          <li>toto toto</li>
-          <li>toto toto</li>
-          <li>toto toto</li>
-        </ul>
-        <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
-        </ul>
-        <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
-        </ul>
-        <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
-        </ul>
-        <ul>
-          <li>toto toto</li>
-          <li>toto toto</li>
-          <li>toto toto</li>
-        </ul>
+        <div>
+          <div>Price</div>
+          <div>
+            <input type="checkbox" />
+            <label>$$</label>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label>$$$</label>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label>$$$$</label>
+          </div>
+        </div>
+        <div>
+          <div>Cuisine</div>
+          <div>
+            <input type="checkbox" />
+            <label>Italian</label>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label>French</label>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label>American</label>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label>Mexican</label>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label>Korean</label>
+          </div>
+        </div>
       </div>
       <div className="container-img-item">
         <form>
