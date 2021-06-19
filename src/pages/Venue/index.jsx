@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useHistory, Link} from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import config from "config";
@@ -72,42 +72,8 @@ const Venue = ({ venues }) => {
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);
 
-  // ajout page /////////////////////////
+  // ajout page ////////////////////////
 
-  const dataBooking = {
-    booking: {
-      seat: seat,
-      time: time,
-      date: date,
-      user_id: userId,
-      venue_id: idVenue,
-    },
-  };
-  const fetchBooking = async (e) => {
-    e.preventDefault();
-
-    console.log("token", token);
-
-    const response = await fetch(`http://localhost:3000/api/bookings`, {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataBooking),
-    });
-
-    if (response) {
-      history.push("/");
-      return;
-    }
-
-    const data = await response.json();
-    console.log(data);
-  };
-
-  console.log("token", token);
-  console.log("dataBooking", dataBooking);
 
   const body = (
     <div className="container d-flex align-items-center justify-content-center">
@@ -195,9 +161,9 @@ const Venue = ({ venues }) => {
                   <span>{currentVenue.price}</span>
                 </div>
                 <div>
-                
-                    <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
-                 
+
+                  <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
+
                 </div>
               </div>
             </div>
@@ -215,12 +181,12 @@ const Venue = ({ venues }) => {
           </div>
         )}
 
-       
+
       </div>
-      {modal && 
+      {modal &&
         (<>
-        
-        <Booking modal={toggleModal} />
+
+          <Booking modal={toggleModal} idVenue={idVenue} />
         </>)
       }
     </div>
@@ -229,8 +195,8 @@ const Venue = ({ venues }) => {
 };
 
 export default Venue;
-      
-        
-      
-    
-      
+
+
+
+
+
