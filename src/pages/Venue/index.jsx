@@ -14,14 +14,13 @@ const Venue = ({ venues }) => {
   const [name, setName] = useState();
   const [city, setCity] = useState();
   const [cuisine, setCuisine] = useState();
-
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
   const [seat, setSeat] = useState();
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
-
+  
   const dataVenue = {
     venue: {
       name: name,
@@ -29,6 +28,7 @@ const Venue = ({ venues }) => {
       cuisine: cuisine,
     },
   };
+  
   console.log(currentUser);
   const fetchEditVenue = async (e) => {
     e.preventDefault();
