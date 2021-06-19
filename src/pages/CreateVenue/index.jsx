@@ -12,7 +12,6 @@ const CreateVenue = ({ venues }) => {
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
   const userId = useSelector((state) => state.authReducer.id);
-
   const [name, setName] = useState();
   // const [address, setAdress] = useState();
   const [city, setCity] = useState();
@@ -24,40 +23,24 @@ const CreateVenue = ({ venues }) => {
   // const [description, setDescription] = useState();
   // const [seatnumber, setSeatnumber] = useState();
 
-  const dataVenue = {
-    venue: {
-      user_id: userId,
-      name: name,
-      // address: address,
-      city: city,
-      // price: price,
-      cuisine: cuisine,
-      // category: category,
-      // phone_number: phone_number,
-      // zipcode: zipcode,
-      // description: description,
-      // seatnumber: seatnumber,
-    },
-  };
-
   const fetchCreateVenue = async (e) => {
     e.preventDefault();
+    const dataVenue = new FormData(e.target);
     const response = await fetch(
       `https://trouvetatableapi.herokuapp.com/api/venues/`,
       {
         method: "post",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify(dataVenue),
+        body: dataVenue
       }
     );
 
     if (response) {
       history.push("/");
       return;
-    }
+    }else (alert('Erreur !'));
 
     const data = await response.json();
     console.log("data", data);
@@ -67,7 +50,7 @@ const CreateVenue = ({ venues }) => {
     <div className="container-page d-flex align-items-center justify-content-center  ">
       <div className="form-container">
         <h3> Create Venue</h3>
-        <form>
+        <form onSubmit={fetchCreateVenue}>
           <div>
             <label type="text" name="venuename">
               Name
@@ -99,7 +82,11 @@ const CreateVenue = ({ venues }) => {
             ></input>
           </div>
           <div>
-            <button type="submit" onClick={fetchCreateVenue}>
+          <label>Images</label>
+          <input name="images[]" type="file" multiple={true} />
+          </div>
+          <div>
+            <button type="submit" >
               Create Venue
           </button>
           </div>
@@ -135,8 +122,7 @@ const CreateVenue = ({ venues }) => {
 //   return (
 //     <div className="container">
 //       <form onSubmit={handleSubmit}>
-//         <label>Images</label>
-//         <input name="images[]" type="file" multiple={true} />
+//         
 //         <input type="submit" value="Send" />
 //       </form>
 //     </div>
