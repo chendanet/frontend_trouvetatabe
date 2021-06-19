@@ -49,6 +49,21 @@ const Profile = () => {
         }, token))
         history.push('/')
     }
+// add booking for profil####################################
+    const [myBooking, setMyBooking] = useState([]);
+    const URL = "http://localhost:3000/api/bookings";
+    
+    
+    
+    useEffect(() => {
+      fetch(URL)
+        .then((response) => response.json())
+        .then((data) => {
+          setMyBooking(data)
+          console.log("my booking",data)
+        });
+    }, [])
+   
 
 
     return (
@@ -97,7 +112,24 @@ const Profile = () => {
                         </div>
                         <br/>
                 </div>  
-            </div> 
+            </div>
+            <div className="container ">
+                <h3>My bookings</h3>
+            {myBooking.map((booking) => (
+                
+                booking.user_id == currentUser.id  && (
+                <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
+                        <h2>{ booking.venue.name}</h2>
+                    <h4>seat:</h4>
+                    <span>{booking.seat}</span>
+                    <h4>Date:</h4>
+                    <span>{booking.date}</span>
+                    <h4>Time:</h4>
+                    <span>{booking.time }</span>
+                    </div>
+                    ))
+            )}
+            </div>
         </>
 
 
@@ -106,5 +138,8 @@ const Profile = () => {
 
 
 export default Profile;
+            
+           
+                
 
 
