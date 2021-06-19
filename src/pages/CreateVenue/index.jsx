@@ -26,7 +26,7 @@ const CreateVenue = ({ venues }) => {
   const fetchCreateVenue = async (e) => {
     e.preventDefault();
     const dataVenue = new FormData(e.target);
-    const response = await fetch(
+    fetch(
       `https://trouvetatableapi.herokuapp.com/api/venues/`,
       {
         method: "post",
@@ -34,16 +34,13 @@ const CreateVenue = ({ venues }) => {
           Authorization: `Bearer ${token}`,
         },
         body: dataVenue
-      }
-    );
-
-    if (response) {
-      history.push("/");
-      return;
-    }else (alert('Erreur !'));
-
-    const data = await response.json();
-    console.log("data", data);
+      })
+      .then(response => {
+        if(response){
+          history.push('/');
+        }else (alert("Erreur !"));
+      })
+      .catch(error => console.log('error', error));
   };
 
   return (
@@ -97,36 +94,4 @@ const CreateVenue = ({ venues }) => {
 
   );
 };
-
-
-//  ***********  CODE DE CHARLES, PAS TOUCHE!!!    ******
-
-
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   const data = new FormData(e.target);
-
-//   fetch(`http://localhost:3000/api/venues`, {
-//     method: "post",
-//     body: data
-//   })
-//     .then(response => {
-//       if (response.ok) {
-//         console.log('Ok ça marche bro !');
-//       } else (alert('Erreur !'));
-//     })
-//     .catch(error => console.log('error', error));
-// }
-
-// function CreateVenue() {
-//   return (
-//     <div className="container">
-//       <form onSubmit={handleSubmit}>
-//         
-//         <input type="submit" value="Send" />
-//       </form>
-//     </div>
-//   );
-// }
-
 export default CreateVenue;
