@@ -17,29 +17,29 @@ const ListVenues = () => {
     <div className="container-list">
       <div className="filter">
         <ul>
-          <li>toto toto</li>
-          <li>toto toto</li>
-          <li>toto toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto toto</li>
-          <li>toto toto</li>
-          <li>toto toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
       </div>
       <div className="container-img-item">
