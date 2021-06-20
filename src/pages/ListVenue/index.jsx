@@ -64,7 +64,7 @@ const ListVenues = () => {
           })
           .map((item, index) => (
             <div className="image-item" key={index}>
-              <img src={item.photo} alt="" />
+              <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" />
               <Link to={"/venues/" + item.id}>
                 <div className="container-item">
                   <h5>{item.name}</h5>
