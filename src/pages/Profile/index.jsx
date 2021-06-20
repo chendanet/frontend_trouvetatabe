@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { authenticate } from 'store/actions'
 import { Link } from "react-router-dom"
 import "pages/Profile/Profile.css";
+import { logout } from "store/actions";
 
 
 const Profile = () => {
@@ -64,6 +65,25 @@ console.log(currentUser.is_manager);
             });
     }, [])
 
+        // ***************** add delete user *************
+
+
+    const fetchDeleteUser = async (e) => {
+        e.preventDefault()
+
+        const response = await fetch(
+          `https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
+          {
+            method: "delete",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        dispatch(logout())
+        history.push("/");
+      };
 
 
     return (
@@ -113,7 +133,7 @@ console.log(currentUser.is_manager);
                     <br />
                     <p>ATTENTION: Vous êtes sur le point de supprimer votre compte : 😱 </p>
                     <div>
-                        <button type="submit" onClick={updateCurrentUser} className="btn-alert">
+                        <button type="submit" onClick={fetchDeleteUser} className="btn-alert">
                             SUPPRIMER
                             </button>
                     </div>
