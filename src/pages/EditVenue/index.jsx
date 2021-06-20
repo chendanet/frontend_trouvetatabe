@@ -4,49 +4,38 @@ import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import config from "config";
+import "pages/Venue/Venue.css";
+import Booking from "pages/Booking";
 
-
-const CreateVenue = ({ venues }) => {
+const EditVenue = ({ venues,modal }) => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
+  const [name, setName] = useState();
+  const [city, setCity] = useState();
+  const [cuisine, setCuisine] = useState();
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
+  const [seat, setSeat] = useState();
+  const [time, setTime] = useState();
+  const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
-
-  const [name, setName] = useState();
-  // const [address, setAdress] = useState();
-  const [city, setCity] = useState();
-  // const [price, setPrice] = useState();
-  const [cuisine, setCuisine] = useState();
-  // const [category, setCategory] = useState();
-  // const [phone_number, setPhonenumber] = useState();
-  // const [zipcode, setZipcode] = useState();
-  // const [description, setDescription] = useState();
-  // const [seatnumber, setSeatnumber] = useState();
 
   const dataVenue = {
     venue: {
-      user_id: userId,
       name: name,
-      // address: address,
       city: city,
-      // price: price,
       cuisine: cuisine,
-      // category: category,
-      // phone_number: phone_number,
-      // zipcode: zipcode,
-      // description: description,
-      // seatnumber: seatnumber,
     },
   };
 
-  const fetchCreateVenue = async (e) => {
+  console.log(currentUser);
+  const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `https://trouvetatableapi.herokuapp.com/api/venues/`,
+      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
       {
-        method: "post",
+        method: "put",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -64,10 +53,18 @@ const CreateVenue = ({ venues }) => {
     console.log("data", data);
   };
 
+
+  useEffect(() => {
+    fetch(`https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`)
+      .then((response) => response.json())
+      .then((data) => setCurrentVenue(data));
+  }, [idVenue]);
+
   return (
     <div className="container-page d-flex align-items-center justify-content-center overlay ">
+      <button type="button" onClick={modal} className="close">X</button>
       <div className="form-container">
-        <h3> Create Venue</h3>
+        <h3> Edit Venue</h3>
         <form>
           <div>
             <label type="text" name="venuename">
@@ -99,49 +96,16 @@ const CreateVenue = ({ venues }) => {
               onChange={(e) => setCuisine(e.target.value)}
             ></input>
           </div>
-          <div>
-            <button type="submit" onClick={fetchCreateVenue}>
-              Create Venue
+          <div> <br />
+            <button type="submit" onClick={fetchEditVenue}>
+              Edit Venue
           </button>
           </div>
         </form>
       </div>
     </div>
-
-
+    
   );
 };
 
-
-//  ***********  CODE DE CHARLES, PAS TOUCHE!!!    ******
-
-
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   const data = new FormData(e.target);
-
-//   fetch(`http://localhost:3000/api/venues`, {
-//     method: "post",
-//     body: data
-//   })
-//     .then(response => {
-//       if (response.ok) {
-//         console.log('Ok ça marche bro !');
-//       } else (alert('Erreur !'));
-//     })
-//     .catch(error => console.log('error', error));
-// }
-
-// function CreateVenue() {
-//   return (
-//     <div className="container">
-//       <form onSubmit={handleSubmit}>
-//         <label>Images</label>
-//         <input name="images[]" type="file" multiple={true} />
-//         <input type="submit" value="Send" />
-//       </form>
-//     </div>
-//   );
-// }
-
-export default CreateVenue;
+export default EditVenue;
