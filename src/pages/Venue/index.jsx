@@ -88,6 +88,12 @@ const Venue = ({ venues }) => {
     setModal(!modal)
   }
 
+   // toggle modal editVenue
+   const [modal1, setModal1] = useState(false)
+   const toggleModal1 = () => {
+     setModal1(!modal)
+   }
+ 
 
   return (
     // <div className="container-page">
@@ -133,17 +139,15 @@ const Venue = ({ venues }) => {
             {currentVenue.user_id == currentUser.id && (
               <div className="d-flex justify-content-around m-3">
                 <div>
-                <Link to="/editvenues">
-                <button type="button" idVenue={idVenue}>
+                <button type="button" onClick={toggleModal1}  idVenue={idVenue}>
                     Edit
                   </button>
-                  </Link>
                 </div>
                 <button  onClick={fetchDeleteVenue}>Delete</button>
               </div>
             )}
 
-<div className="container-page d-flex align-items-center justify-content-center  ">
+{/* <div className="container-page d-flex align-items-center justify-content-center  ">
       <div className="form-container">
 <h3> Edit Venue</h3>
         <form>
@@ -184,7 +188,7 @@ const Venue = ({ venues }) => {
           </div>
         </form>
         </div>
-        </div>
+        </div> */}
           </div>
         )}
 
@@ -194,6 +198,13 @@ const Venue = ({ venues }) => {
         (<>
 
           <Booking modal={toggleModal} idVenue={idVenue} />
+        </>)
+      }
+
+      {modal1 &&
+        (<>
+
+          <EditVenue modal={toggleModal1} idVenue={idVenue} />
         </>)
       }
         </div>
