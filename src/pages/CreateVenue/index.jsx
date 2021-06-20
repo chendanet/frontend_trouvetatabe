@@ -1,65 +1,33 @@
 import React from 'react';
-import { useState } from 'react';
+import { useRef } from 'react';
+import Cookies from 'js-cookie';
+import config from 'config';
 
 
-const CreateVenue = () => {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [price, setPrice] = useState("");
-  const [cuisine, setCuisine] = useState("");
-  const [category, setCategory] = useState("");
-  const [seatNumber, setSeatNumber] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
-  };
+function CreateVenue() {
+  const nameRef = useRef();
+  const cityRef = useRef();
+  const addressRef = useRef();
+  const zipcodeRef = useRef();
+  const priceRef = useRef();
+  const cuisineRef = useRef();
+  const phoneNumberRef = useRef();
+  const terraceRef = useRef();
+  const seatNumberRef = useRef();
+  const descriptionRef = useRef();
+  const token = Cookies.get(config.COOKIE_STORAGE_KEY);
   
-  const handleCity = (e) => {
-    setCity(e.target.value);
-  };
   
-  const handleZipcode = (e) => {
-    setZipcode(e.target.value);
-  };
-
-  const handlePrice = (e) => {
-    e.target.valid ? setPrice(e.target.value) : alert("please insert number");
-  };
-
-  const handleCuisine = (e) => {
-    setCuisine(e.target.value)
-  };
-
-  const handleCategory = (e) => {
-    setCategory(e.target.value);
-  };
-
-  const handleSeatNumber = (e) => {
-    setSeatNumber(e.target.value);
-  };
-
-  const handlePhoneNumber = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-  
-  const handleDescription = (e) => {
-    setDescription(e.target.value);
-  };
-
+//`https://trouvetatableapi.herokuapp.com/api/venues`
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-  
-    fetch(`http://localhost:3000/api/venues`, {
+    
+    fetch(`http://127.0.0.1:3000/api/venues`, {
       method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
       body: data
     })
       .then(response => {
@@ -74,29 +42,22 @@ const CreateVenue = () => {
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">
         <div>
-          <h3>Sign Up</h3>
-          <p>Create your account</p>
+          <h3>Venue</h3>
+          <p>Create your venue.</p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <input
               type="text"
               name="name"
-              onChange={handleName}
+              ref={nameRef}
               placeholder="What is the name of your establishment ?"
-            />
-            <br />
-            <input
-              rows="4"
-              type="text"
-              name="address"
-              onChange={handleAddress}
-              placeholder="What is the address of your establishment ?"
+              required="required"
             />
             <br />
             <label>
               In what city?
-              <select value={city} onChange={handleCity}>
+              <select ref={cityRef} name="city">
                 <option value="Paris">Paris</option>
                 <option value="Marseille">Marseille</option>
                 <option value="Bruxelle">Bruxelle</option>
@@ -110,8 +71,17 @@ const CreateVenue = () => {
             <input
               rows="4"
               type="text"
+              name="address"
+              ref={addressRef}
+              placeholder="What is the address of your establishment ?"
+              required="required"
+            />
+            <br />
+            <input
+              rows="4"
+              type="text"
               name="zipcode"
-              onChange={handleZipcode}
+              ref={zipcodeRef}
               placeholder="What is the zipcode of your establishment ?"
             />{" "}
             <br />
@@ -120,7 +90,7 @@ const CreateVenue = () => {
               type="text"
               pattern="[0-9]*"
               name="price"
-              onChange={handlePrice}
+              ref={priceRef}
               placeholder="What is the average basket of your establishment ?"
             />{" "}
             <br />
@@ -128,36 +98,46 @@ const CreateVenue = () => {
               rows="4"
               type="text"
               name="cuisine"
-              onChange={handleCuisine}
+              ref={cuisineRef}
               placeholder="Do you cook ? If so, what kind ?"
             />{" "}
             <br />
             <input
               rows="4"
               type="text"
-              name="zipcode"
-              onChange={handleCity}
-              placeholder="What is the zipcode of your establishment ?"
+              pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+              name="phone_number"
+              ref={phoneNumberRef}
+              placeholder="The phone number of your establishment ?"
             />{" "}
             <br />
-            <button type="submit" onClick={fetchSignUp} className="btn-signin">
-              Sign up
-            </button>
+            <label>
+            Have a terrace ?
+            <input
+              rows="4"
+              type="checkbox"
+              name="terrace"
+              ref={terraceRef}
+            /></label>{" "}
             <br />
-            <Link to="/signin" className="link">
-              <button className="btn-login">I have account</button>
-            </Link>
+            <input
+              rows="4"
+              type="text"
+              pattern="[0-9]*"
+              name="seatnumber"
+              ref={seatNumberRef}
+              placeholder="How many seats do you have ?"
+            />{" "}
+            <br />
+            <textarea name="description" ref={descriptionRef} placeholder="Describe your establishment in a few words" required="required" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"/>{" "}
+            <input name="images[]"  type="file" multiple={true} />
+            <br />
+            <input type="submit" value="Create your Venue" className="btn-signin" />
+            <br />
           </div>
         </form>
       </div>
     </div>
-    // <div className="container">
-    //   <form onSubmit={handleSubmit}>
-    //     <label>Images</label>
-    //     <input name="images[]" type="file" multiple={true} />
-    //     <input type="submit" value="Send" />
-    //   </form>
-    //  </div>
   );
 }
 
