@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import config from "config";
 
+
 const CreateVenue = ({ venues }) => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
@@ -64,7 +65,7 @@ const CreateVenue = ({ venues }) => {
   };
 
   return (
-    <div className="container-page d-flex align-items-center justify-content-center  ">
+    <div className="container-page d-flex align-items-center justify-content-center overlay ">
       <div className="form-container">
         <h3> Create Venue</h3>
         <form>

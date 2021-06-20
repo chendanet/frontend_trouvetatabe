@@ -91,7 +91,7 @@ const Venue = ({ venues }) => {
    // toggle modal editVenue
    const [modal1, setModal1] = useState(false)
    const toggleModal1 = () => {
-     setModal1(!modal)
+     setModal1(!modal1)
    }
  
 

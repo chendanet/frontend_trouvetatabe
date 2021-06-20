@@ -7,7 +7,7 @@ import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 
-const EditVenue = ({ venues }) => {
+const EditVenue = ({ venues,modal }) => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
@@ -61,7 +61,8 @@ const EditVenue = ({ venues }) => {
   }, [idVenue]);
 
   return (
-    <div className="container-page d-flex align-items-center justify-content-center  ">
+    <div className="container-page d-flex align-items-center justify-content-center overlay ">
+      <button type="button" onClick={modal} className="close">X</button>
       <div className="form-container">
         <h3> Edit Venue</h3>
         <form>
@@ -95,7 +96,7 @@ const EditVenue = ({ venues }) => {
               onChange={(e) => setCuisine(e.target.value)}
             ></input>
           </div>
-          <div>
+          <div> <br />
             <button type="submit" onClick={fetchEditVenue}>
               Edit Venue
           </button>
