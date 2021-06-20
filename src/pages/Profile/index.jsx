@@ -17,7 +17,8 @@ const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)
     const history = useHistory()
     const token = Cookies.get(config.COOKIE_STORAGE_KEY)
-
+    
+      
 console.log(currentUser.is_manager);
     const updateCurrentUser = async (e) => {
         e.preventDefault()
@@ -39,8 +40,6 @@ console.log(currentUser.is_manager);
                 body: JSON.stringify(dataUser)
             })
 
-
-
         const data = await response.json()
         console.log(data)
         currentUser.email = email
@@ -50,11 +49,11 @@ console.log(currentUser.is_manager);
         }, token))
         history.push('/')
     }
-    // add booking for profil####################################
+    // ************* add booking for profil **************
+
     const [myBooking, setMyBooking] = useState([]);
     const URL = "https://trouvetatableapi.herokuapp.com/api/bookings";
-
-
+    
 
     useEffect(() => {
         fetch(URL)
@@ -64,6 +63,19 @@ console.log(currentUser.is_manager);
                 console.log("my booking", data)
             });
     }, [])
+
+            // ***************** add delete booking *************
+
+    const deleteBooking = async (id) =>{
+        fetch( `http://trouvetatableapi.herokuapp.com/api/bookings/${id}`, {
+            method: 'delete',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+        })
+        history.push("/");
+     }
 
         // ***************** add delete user *************
 
@@ -153,7 +165,13 @@ console.log(currentUser.is_manager);
                             <span>{booking.date}</span>
                             <h4>Time:</h4>
                             <span>{booking.time}</span>
-                        </div>
+                            <h4>Booking ID:</h4>
+                            <span>{booking.id}</span>
+                            <div className="delete-button">
+                           <button  alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>   
+                           
+                           </div>                      
+                            </div>
                     ))
                 )}
             </div>
