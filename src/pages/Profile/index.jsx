@@ -6,6 +6,7 @@ import config from 'config'
 import { useDispatch } from 'react-redux'
 import { authenticate } from 'store/actions'
 import "pages/Profile/Profile.css";
+import { logout } from "store/actions";
 
 
 const Profile = () => {
@@ -16,7 +17,6 @@ const Profile = () => {
     const history = useHistory()
     const token = Cookies.get(config.COOKIE_STORAGE_KEY)
 
-    console.log(currentUser.is_manager);
     const updateCurrentUser = async (e) => {
         e.preventDefault()
         const dataUser = {
@@ -37,8 +37,6 @@ const Profile = () => {
                 body: JSON.stringify(dataUser)
             })
 
-
-
         const data = await response.json()
         console.log(data)
         currentUser.email = email
@@ -48,10 +46,10 @@ const Profile = () => {
         }, token))
         history.push('/')
     }
-    // add booking for profil####################################
+    // ************* add booking for profil **************
+
     const [myBooking, setMyBooking] = useState([]);
     const URL = "https://trouvetatableapi.herokuapp.com/api/bookings";
-
 
 
     useEffect(() => {
@@ -63,6 +61,38 @@ const Profile = () => {
             });
     }, [])
 
+    // ***************** add delete booking *************
+
+    const deleteBooking = async (id) => {
+        fetch(`http://trouvetatableapi.herokuapp.com/api/bookings/${id}`, {
+            method: 'delete',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        })
+        history.push("/");
+    }
+
+    // ***************** add delete user *************
+
+
+    const fetchDeleteUser = async (e) => {
+        e.preventDefault()
+
+        const response = await fetch(
+            `https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
+            {
+                method: "delete",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        dispatch(logout())
+        history.push("/");
+    };
 
 
     return (
@@ -105,7 +135,7 @@ const Profile = () => {
                     <br />
                     <p>ATTENTION: Vous êtes sur le point de supprimer votre compte : 😱 </p>
                     <div>
-                        <button type="submit" onClick={updateCurrentUser} className="btn-alert">
+                        <button type="submit" onClick={fetchDeleteUser} className="btn-alert">
                             SUPPRIMER
                             </button>
                     </div>
@@ -125,6 +155,12 @@ const Profile = () => {
                             <span>{booking.date}</span>
                             <h4>Time:</h4>
                             <span>{booking.time}</span>
+                            <h4>Booking ID:</h4>
+                            <span>{booking.id}</span>
+                            <div className="delete-button">
+                                <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
+
+                            </div>
                         </div>
                     ))
                 )}

@@ -17,29 +17,29 @@ const ListVenues = () => {
     <div className="container-list">
       <div className="filter">
         <ul>
-          <li>toto toto</li>
-          <li>toto toto</li>
-          <li>toto toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto</li>
-          <li>toto</li>
-          <li>toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
         <ul>
-          <li>toto toto</li>
-          <li>toto toto</li>
-          <li>toto toto</li>
+          <li>categories</li>
+          <li>categories</li>
+          <li>categories</li>
         </ul>
       </div>
       <div className="container-img-item">
@@ -64,7 +64,7 @@ const ListVenues = () => {
           })
           .map((item, index) => (
             <div className="image-item" key={index}>
-              <img src={item.photo} alt="" />
+              <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" />
               <Link to={"/venues/" + item.id}>
                 <div className="container-item">
                   <h5>{item.name}</h5>
