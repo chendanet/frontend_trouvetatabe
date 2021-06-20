@@ -6,6 +6,8 @@ import Cookies from "js-cookie";
 import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
+import EditVenue from "pages/EditVenue";
+
 
 const Venue = ({ venues }) => {
   const { idVenue } = useParams();
@@ -20,7 +22,7 @@ const Venue = ({ venues }) => {
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
-  
+
   const dataVenue = {
     venue: {
       name: name,
@@ -28,12 +30,38 @@ const Venue = ({ venues }) => {
       cuisine: cuisine,
     },
   };
-  
+
+
+
+  // delete venue ////////////////////////
+
+  const fetchDeleteVenue = async () => {
+    const response = await fetch(
+      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
+      {
+        method: "delete",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    history.push("/");
+  };
+
+  useEffect(() => {
+    fetch(`https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`)
+      .then((response) => response.json())
+      .then((data) => setCurrentVenue(data));
+  }, [idVenue]);
+
+  // edit venue ////////////////////////
+
   console.log(currentUser);
   const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `http://localhost:3000/api/venues/${idVenue}`,
+      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
       {
         method: "put",
         headers: {
@@ -52,81 +80,21 @@ const Venue = ({ venues }) => {
     const data = await response.json();
     console.log("data", data);
   };
-  const fetchDeleteVenue = async () => {
-    const response = await fetch(
-      `http://localhost:3000/api/venues/${idVenue}`,
-      {
-        method: "delete",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    history.push("/");
-  };
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/venues/${idVenue}`)
-      .then((response) => response.json())
-      .then((data) => setCurrentVenue(data));
-  }, [idVenue]);
-
-  // ajout page ////////////////////////
 
 
-  const body = (
-    <div className="container d-flex align-items-center justify-content-center">
-      <div className="form-container">
-        <h3>Edit Venue</h3>
-      </div>
-      <form>
-        <div>
-          <label type="text" name="username">
-            Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label type="text" name="city">
-            {" "}
-            City{" "}
-          </label>
-          <textarea
-            rows="4"
-            type="text"
-            name="city"
-            onChange={(e) => setCity(e.target.value)}
-          ></textarea>
-        </div>
-        <div>
-          <label type="text" name="cuisine">
-            {" "}
-            Cuisine{" "}
-          </label>
-          <input
-            type="number"
-            name="cuisine"
-            onChange={(e) => setCuisine(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <button type="submit" onClick={fetchEditVenue}>
-            Update
-          </button>
-        </div>
-      </form>
-    </div>
-  );
   // toggle modal
   const [modal, setModal] = useState(false)
   const toggleModal = () => {
     setModal(!modal)
   }
+
+   // toggle modal editVenue
+   const [modal1, setModal1] = useState(false)
+   const toggleModal1 = () => {
+     setModal1(!modal1)
+   }
+ 
+
   return (
     // <div className="container-page">
     <div className="container-page d-flex align-items-center justify-content-center  ">
@@ -171,13 +139,56 @@ const Venue = ({ venues }) => {
             {currentVenue.user_id == currentUser.id && (
               <div className="d-flex justify-content-around m-3">
                 <div>
-                  <button type="button" onClick={fetchEditVenue}>
+                <button type="button" onClick={toggleModal1}  idVenue={idVenue}>
                     Edit
                   </button>
                 </div>
-                <button onClick={fetchDeleteVenue}>Delete</button>
+                <button  onClick={fetchDeleteVenue}>Delete</button>
               </div>
             )}
+
+{/* <div className="container-page d-flex align-items-center justify-content-center  ">
+      <div className="form-container">
+<h3> Edit Venue</h3>
+        <form>
+          <div>
+            <label type="text" name="venuename">
+              Name
+          </label>
+            <input
+              type="text"
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="city">
+              City
+          </label>
+            <input
+              type="text"
+              name="city"
+              onChange={(e) => setCity(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="cuisine">
+              Cuisine
+          </label>
+            <input
+              type="text"
+              name="cuisine"
+              onChange={(e) => setCuisine(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <button type="submit" onClick={fetchEditVenue}>
+              Edit Venue
+          </button>
+          </div>
+        </form>
+        </div>
+        </div> */}
           </div>
         )}
 
@@ -189,7 +200,15 @@ const Venue = ({ venues }) => {
           <Booking modal={toggleModal} idVenue={idVenue} />
         </>)
       }
-    </div>
+
+      {modal1 &&
+        (<>
+
+          <EditVenue modal={toggleModal1} idVenue={idVenue} />
+        </>)
+      }
+        </div>
+
     // </div>
   );
 };

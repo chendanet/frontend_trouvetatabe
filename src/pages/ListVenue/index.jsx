@@ -8,7 +8,7 @@ const ListVenues = () => {
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/venues")
+    fetch("https://trouvetatableapi.herokuapp.com/api/venues")
       .then((response) => response.json())
       .then((data) => setList(data));
   }, []);

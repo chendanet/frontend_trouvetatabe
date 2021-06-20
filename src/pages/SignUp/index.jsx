@@ -35,7 +35,7 @@ const SignUp = () => {
       },
     };
     e.preventDefault();
-    const response = await fetch("http://localhost:3000/api/signup", {
+    const response = await fetch("https://trouvetatableapi.herokuapp.com/api/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
