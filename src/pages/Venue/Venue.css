@@ -1,0 +1,16 @@
+.container-page{
+  margin: 50px 20% ;
+  
+}
+img{
+  max-height: 500px;
+}
+.card-border{
+  box-shadow:3px 5px 8px -2px #7F7F7F;
+}
+button:hover{
+  color: white;
+  background-color: #F53F3F;;
+  
+  
+}
