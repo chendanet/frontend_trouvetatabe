@@ -65,7 +65,7 @@ const CreateVenue = ({ venues }) => {
   };
 
   return (
-    <div className="container-page d-flex align-items-center justify-content-center overlay ">
+    <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">
         <h3> Create Venue</h3>
         <form>
@@ -99,7 +99,7 @@ const CreateVenue = ({ venues }) => {
               onChange={(e) => setCuisine(e.target.value)}
             ></input>
           </div>
-          <div>
+          <div> <br />
             <button type="submit" onClick={fetchCreateVenue}>
               Create Venue
           </button>
