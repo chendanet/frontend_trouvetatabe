@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Home from "pages/Home";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import "components/App/index.css";
 import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
-import Booking from "pages/Booking";
 import SignIn from "pages/SignIn";
 import Venue from "pages/Venue";
 import Profile from "pages/Profile";
@@ -31,7 +29,6 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setVenues(data)
-        console.log(data)
       });
   }, [])
 

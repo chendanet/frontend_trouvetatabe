@@ -51,7 +51,6 @@ const SignIn = () => {
     const userEmail = data.data.attributes.email
     const is_manager = data.data.attributes.is_manager
 
-    console.log("data", is_manager);
 
     dispatch(authenticate({
       id: userId,

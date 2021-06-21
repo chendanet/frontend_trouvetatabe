@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 
 function Navbar() {
   const currentUser = useSelector(state => state.authReducer)
-  console.log('currentUser', currentUser)
   const history = useHistory();
   const dispatch = useDispatch()
   const handleLogout = (e) => {
