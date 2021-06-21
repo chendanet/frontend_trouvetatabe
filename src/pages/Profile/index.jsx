@@ -16,6 +16,16 @@ const Profile = () => {
     const [firstName, setFirstName] = useState()
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.authReducer)
+    console.log(currentUser)
+    let currentEmail = currentUser.email
+    let currentLastName = currentUser.last_name
+    let currentFirstName = currentUser.first_name
+    let currentPassword = currentUser.password
+    const [email, setEmail] = useState(currentEmail)
+    const [password, setPassword] = useState(currentPassword)
+    const [lastName, setLastName] = useState(currentLastName)
+    const [firstName, setFirstName] = useState(currentFirstName)
+    const dispatch = useDispatch()
     const history = useHistory()
     const token = Cookies.get(config.COOKIE_STORAGE_KEY)
 
@@ -107,7 +117,6 @@ const Profile = () => {
         <>
             <div className="identityProfil text-center">
                 {currentUser.last_name ? <p>Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
-                
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
@@ -120,13 +129,13 @@ const Profile = () => {
                             <input
                                 type="text"
                                 name="email"
-
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Modifier email" />
                             <br />
                             <input
                                 type="password"
                                 name="password"
+                                value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Modifier MDP" />
                             <br />

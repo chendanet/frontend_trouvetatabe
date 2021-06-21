@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { authenticate } from 'store/actions'
 import "pages/SignIn/SignIn.css";
-import { Link } from "react-router-dom"
 
 const SignIn = () => {
 
@@ -50,12 +49,16 @@ const SignIn = () => {
     const userId = data.data.id
     const userEmail = data.data.attributes.email
     const is_manager = data.data.attributes.is_manager
+    const userFirstName = data.data.attributes.first_name;
+    const userLastName = data.data.attributes.last_name;
 
 
     dispatch(authenticate({
       id: userId,
       email: userEmail,
-      is_manager: is_manager
+      is_manager: is_manager,
+      first_name: userFirstName,
+      last_name: userLastName
     }, token))
 
     history.push('/')
