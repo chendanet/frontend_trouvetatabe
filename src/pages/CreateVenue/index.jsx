@@ -19,12 +19,11 @@ function CreateVenue() {
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
   const currentUser = useSelector((state) => state.authReducer.id);
   
-//`https://trouvetatableapi.herokuapp.com/api/venues`
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     console.log(currentUser);
-    fetch(`http://127.0.0.1:3000/api/venues`, {
+    fetch(`https://trouvetatableapi.herokuapp.com/api/venues`, {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`
