@@ -152,8 +152,6 @@ const Profile = () => {
                             <span>{booking.date}</span>
                             <h4>Time:</h4>
                             <span>{booking.time}</span>
-                            <h4>Booking ID:</h4>
-                            <span>{booking.id}</span>
                             <div className="delete-button">
                                 <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
 
