@@ -12,6 +12,8 @@ import { logout } from "store/actions";
 const Profile = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [lastName, setLastName] = useState()
+    const [firstName, setFirstName] = useState()
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state.authReducer)
     const history = useHistory()
@@ -22,7 +24,9 @@ const Profile = () => {
         const dataUser = {
             user: {
                 email: email,
-                password: password
+                password: password,
+                last_name: lastName,
+                first_name: firstName,
             }
         }
 
@@ -36,14 +40,21 @@ const Profile = () => {
                 body: JSON.stringify(dataUser)
             })
 
-        const data = await response.json()
+        // const data = await response.json()
         currentUser.email = email
         dispatch(authenticate({
             id: currentUser.id,
-            email: email,
+            email: email || localStorage.getItem(config.LOCAL_STORAGE_KEY).email,
+            last_name: lastName,
+            first_name: firstName,
         }, token))
+        
+        // console.log(data)
         history.push('/')
     }
+    console.log("currentUser:" , currentUser);
+    
+
     // ************* add booking for profil **************
 
     const [myBooking, setMyBooking] = useState([]);
@@ -94,8 +105,9 @@ const Profile = () => {
 
     return (
         <>
-            <div className="identityProfil">
-                <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>
+            <div className="identityProfil text-center">
+                {currentUser.last_name ? <p>Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
+                
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
@@ -108,6 +120,7 @@ const Profile = () => {
                             <input
                                 type="text"
                                 name="email"
+
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Modifier email" />
                             <br />
@@ -116,6 +129,18 @@ const Profile = () => {
                                 name="password"
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Modifier MDP" />
+                            <br />
+                            <input
+                                type="text"
+                                name="last-name"
+                                onChange={(e) => setLastName(e.target.value)}
+                                placeholder="Votre Prénon" />
+                            <br />
+                            <input
+                                type="text"
+                                name="first-name"
+                                onChange={(e) => setFirstName(e.target.value)}
+                                placeholder="Votre Nom" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
                                 Modifier mon profil
@@ -152,8 +177,6 @@ const Profile = () => {
                             <span>{booking.date}</span>
                             <h4>Time:</h4>
                             <span>{booking.time}</span>
-                            <h4>Booking ID:</h4>
-                            <span>{booking.id}</span>
                             <div className="delete-button">
                                 <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
 

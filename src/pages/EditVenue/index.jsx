@@ -29,7 +29,6 @@ const EditVenue = ({ venues,modal }) => {
     },
   };
 
-  console.log(currentUser);
   const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
@@ -50,7 +49,6 @@ const EditVenue = ({ venues,modal }) => {
     }
 
     const data = await response.json();
-    console.log("data", data);
   };
 
 

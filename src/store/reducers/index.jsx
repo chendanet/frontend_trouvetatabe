@@ -5,7 +5,9 @@ import config from 'config'
 const emptyState = {
     id: null,
     email: '',
-    is_manager: null
+    is_manager: null,
+    first_name: '',
+    last_name: '',
 }
 
 const getUser = () => {

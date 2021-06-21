@@ -22,6 +22,7 @@ const Venue = ({ venues }) => {
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
+  const [bookings, setBookings] = useState([])
 
   const dataVenue = {
     venue: {
@@ -57,7 +58,6 @@ const Venue = ({ venues }) => {
 
   // edit venue ////////////////////////
 
-  console.log(currentUser);
   const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
@@ -78,7 +78,6 @@ const Venue = ({ venues }) => {
     }
 
     const data = await response.json();
-    console.log("data", data);
   };
 
 
@@ -93,6 +92,23 @@ const Venue = ({ venues }) => {
   const toggleModal1 = () => {
     setModal1(!modal1)
   }
+
+
+
+  const fetchAllBookings = async () => {
+    const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/bookings`)
+    const data = await response.json()
+    setBookings(data)
+  }
+
+  useEffect(() => {
+    fetchAllBookings();
+  }, [bookings])
+
+
+
+
+
 
 
   return (
@@ -126,21 +142,19 @@ const Venue = ({ venues }) => {
               <div className="row">
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price} €</span></h4>
-
                 </div>
-
-                {currentUser.id ?
+                {currentUser.id && currentVenue.user_id != currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
-                  </div> :
+                  </div>}
+                {!currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <Link to="/register">
                       <button>
                         Sign or Login to Find a Table
                       </button>
                     </Link>
-                  </div>
-                }
+                  </div>}
 
               </div>
             </div>
@@ -151,53 +165,31 @@ const Venue = ({ venues }) => {
                   <button type="button" onClick={toggleModal1} idVenue={idVenue}>
                     Edit
                   </button>
+                  <button onClick={fetchDeleteVenue}>Delete</button>
                 </div>
-                <button onClick={fetchDeleteVenue}>Delete</button>
+
+                <h4>List des reservations</h4>
+                <div className="container ">
+                  {bookings &&
+                    bookings.filter(booking => booking.venue_id == currentVenue.id)
+                      .map((booking) => (
+                        <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
+                          <h2>{booking.venue.name}</h2>
+                          <h4>seat:</h4>
+                          <span>{booking.seat}</span>
+                          <h4>Date:</h4>
+                          <span>{booking.date}</span>
+                          <h4>Time:</h4>
+                          <span>{booking.time}</span>
+                          {/* <div className="delete-button">
+                              <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
+                            </div> */}
+                        </div>
+                      )
+                      )}
+                </div>
               </div>
             )}
-
-            {/* <div className="container-page d-flex align-items-center justify-content-center  ">
-      <div className="form-container">
-<h3> Edit Venue</h3>
-        <form>
-          <div>
-            <label type="text" name="venuename">
-              Name
-          </label>
-            <input
-              type="text"
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <label type="text" name="city">
-              City
-          </label>
-            <input
-              type="text"
-              name="city"
-              onChange={(e) => setCity(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <label type="text" name="cuisine">
-              Cuisine
-          </label>
-            <input
-              type="text"
-              name="cuisine"
-              onChange={(e) => setCuisine(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <button type="submit" onClick={fetchEditVenue}>
-              Edit Venue
-          </button>
-          </div>
-        </form>
-        </div>
-        </div> */}
           </div>
         )}
 
@@ -216,6 +208,7 @@ const Venue = ({ venues }) => {
           <EditVenue modal={toggleModal1} idVenue={idVenue} />
         </>)
       }
+
     </div>
 
     // </div>

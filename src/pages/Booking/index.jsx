@@ -29,7 +29,6 @@ const Booking = ({ modal, idVenue }) => {
   const fetchBooking = async (e) => {
     e.preventDefault();
 
-    console.log("token", token);
 
     const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/bookings`, {
       method: "post",
@@ -46,11 +45,9 @@ const Booking = ({ modal, idVenue }) => {
       history.push("/");
       return;
     }
-    console.log(data);
   };
 
-  console.log("token", token);
-  console.log("dataBooking", dataBooking);
+ 
 
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
