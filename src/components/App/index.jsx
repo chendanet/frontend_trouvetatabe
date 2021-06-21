@@ -16,6 +16,7 @@ import {
   Switch
 } from 'react-router-dom';
 import ListVenues from "pages/ListVenue";
+import MyVenues from 'pages/MyVenues';
 
 
 const App = () => {
@@ -39,7 +40,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <ListVenues venues={ venues}/>
+              <ListVenues venues={venues} />
             </Route>
             <Route path="/register">
               <SignUp />
@@ -53,7 +54,9 @@ const App = () => {
             <Route path="/venues/:idVenue" exact >
               <Venue venues={venues} />
             </Route>
-
+            <Route path="/myVenues" exact>
+              <MyVenues venues={venues} />
+            </Route>
             <Route path="/profile" exact>
               <Profile />
             </Route>
