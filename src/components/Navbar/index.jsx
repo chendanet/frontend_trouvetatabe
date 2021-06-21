@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 
 function Navbar() {
   const currentUser = useSelector(state => state.authReducer)
-  console.log('currentUser', currentUser)
   const history = useHistory();
   const dispatch = useDispatch()
   const handleLogout = (e) => {
@@ -97,11 +96,18 @@ function Navbar() {
                          </Link>
                   </li>
                   {currentUser.is_manager && (
-                    <li className="nav-item">
-                      <Link className="nav-list item-list" to="/venues">
-                        Créer un restau
+                    <div>
+                      <li className="nav-item">
+                        <Link className="nav-list item-list" to="/venues">
+                          Créer un restaurant
                       </Link>
-                    </li>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-list item-list" to="/myVenues">
+                          Mes restaurants
+                    </Link>
+                      </li>
+                    </div>
                   )}
                   <li className="nav-item">
                     <a className="nav-list item-list" href="#">

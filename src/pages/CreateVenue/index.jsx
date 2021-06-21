@@ -37,7 +37,7 @@ function CreateVenue() {
       })
       .catch(error => console.log('error', error));
   }
-  
+
   return (
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">

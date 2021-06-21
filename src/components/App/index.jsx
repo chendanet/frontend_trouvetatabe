@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Home from "pages/Home";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import "components/App/index.css";
 import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
-import Booking from "pages/Booking";
 import SignIn from "pages/SignIn";
 import Venue from "pages/Venue";
 import Profile from "pages/Profile";
@@ -18,6 +16,7 @@ import {
   Switch
 } from 'react-router-dom';
 import ListVenues from "pages/ListVenue";
+import MyVenues from 'pages/MyVenues';
 
 
 const App = () => {
@@ -31,7 +30,6 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setVenues(data)
-        console.log(data)
       });
   }, [])
 
@@ -42,7 +40,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <ListVenues />
+              <ListVenues venues={venues} />
             </Route>
             <Route path="/register">
               <SignUp />
@@ -56,7 +54,9 @@ const App = () => {
             <Route path="/venues/:idVenue" exact >
               <Venue venues={venues} />
             </Route>
-
+            <Route path="/myVenues" exact>
+              <MyVenues venues={venues} />
+            </Route>
             <Route path="/profile" exact>
               <Profile />
             </Route>

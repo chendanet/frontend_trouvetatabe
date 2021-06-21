@@ -1,17 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "pages/ListVenue/listVenue.css";
-import { useHistory, Link } from "react-router-dom";
-const ListVenues = () => {
-  const [list, setList] = useState([]);
+import { Link } from "react-router-dom";
+const ListVenues = ({ venues }) => {
   const [searchTerme, setSearchTerme] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
 
-  useEffect(() => {
-    fetch("https://trouvetatableapi.herokuapp.com/api/venues")
-      .then((response) => response.json())
-      .then((data) => setList(data));
-  }, []);
+  console.log()
 
   return (
     <div className="container-list">
@@ -52,7 +46,7 @@ const ListVenues = () => {
             className="search-bar"
           />
         </form>
-        {list
+        {venues
           .filter((value) => {
             if (searchTerme == "") {
               return value;
