@@ -32,7 +32,7 @@ const App = () => {
       .then((data) => {
         setVenues(data)
       });
-  }, [])
+  }, [venues])
 
   return (
     <Provider store={store}>
