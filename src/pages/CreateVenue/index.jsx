@@ -2,7 +2,7 @@ import React from 'react';
 import { useRef } from 'react';
 import Cookies from 'js-cookie';
 import config from 'config';
-import { useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 
 function CreateVenue() {
@@ -17,12 +17,11 @@ function CreateVenue() {
   const seatNumberRef = useRef();
   const descriptionRef = useRef();
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
-  const currentUser = useSelector((state) => state.authReducer.id);
+  const history = useHistory();
   
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    console.log(currentUser);
     fetch(`https://trouvetatableapi.herokuapp.com/api/venues`, {
       method: "post",
       headers: {
@@ -32,7 +31,8 @@ function CreateVenue() {
     })
       .then(response => {
         if (response.ok) {
-          console.log('Ok ça marche bro !');
+          alert('Your Venue as been created with success !');
+          history.push('/');
         } else (alert('Erreur !'));
       })
       .catch(error => console.log('error', error));
