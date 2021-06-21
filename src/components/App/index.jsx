@@ -17,6 +17,7 @@ import {
 } from 'react-router-dom';
 import ListVenues from "pages/ListVenue";
 import MyVenues from 'pages/MyVenues';
+import Booking from "pages/Booking";
 
 
 const App = () => {
