@@ -39,7 +39,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <ListVenues />
+              <ListVenues venues={ venues}/>
             </Route>
             <Route path="/register">
               <SignUp />
