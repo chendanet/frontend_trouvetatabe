@@ -6,23 +6,27 @@ const ListVenues = () => {
   const [list, setList] = useState([]);
   const [searchTerme, setSearchTerme] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const price = [
+  const cuisine = [
     {
       "id": 1,
-      "name": "$$"
+      "name": "Steak"
     },
     {
       "id": 2,
-      "name": "$$$"
+      "name": "Seafood"
     },
     {
       "id": 3,
-      "name": "$$$$"
-    }
+      "name": "French"
+    },
+    {
+      "id": 4,
+      "name": "Asian"
+    },
   ]
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/venues")
+    fetch("https://trouvetatableapi.herokuapp.com/api/venues")
       .then((response) => response.json())
       .then((data) => setList(data));
   }, []);
@@ -49,7 +53,11 @@ const ListVenues = () => {
           <div>Cuisine</div>
           <div>
             <input type="checkbox" />
-            <label>Italian</label>
+            <label>Steak</label>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label>Seafood</label>
           </div>
           <div>
             <input type="checkbox" />
@@ -57,15 +65,7 @@ const ListVenues = () => {
           </div>
           <div>
             <input type="checkbox" />
-            <label>American</label>
-          </div>
-          <div>
-            <input type="checkbox" />
-            <label>Mexican</label>
-          </div>
-          <div>
-            <input type="checkbox" />
-            <label>Korean</label>
+            <label>Asian</label>
           </div>
         </div>
       </div>
