@@ -2,14 +2,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "pages/ListVenue/listVenue.css";
 import { Link } from "react-router-dom";
-const ListVenues = ({venues}) => {
-  const [list, setList] = useState([]);
+const ListVenues = ({ venues }) => {
   const [searchTerme, setSearchTerme] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
 
-  useEffect(() => {
-    setList(venues)
-  }, []);
+  console.log()
 
   return (
     <div className="container-list">
@@ -50,7 +46,7 @@ const ListVenues = ({venues}) => {
             className="search-bar"
           />
         </form>
-        {list
+        {venues
           .filter((value) => {
             if (searchTerme == "") {
               return value;
