@@ -5,7 +5,6 @@ import Cookies from 'js-cookie'
 import config from 'config'
 import { useDispatch } from 'react-redux'
 import { authenticate } from 'store/actions'
-import { Link } from "react-router-dom"
 import "pages/Profile/Profile.css";
 import { logout } from "store/actions";
 
@@ -17,9 +16,7 @@ const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)
     const history = useHistory()
     const token = Cookies.get(config.COOKIE_STORAGE_KEY)
-    
-      
-console.log(currentUser.is_manager);
+
     const updateCurrentUser = async (e) => {
         e.preventDefault()
         const dataUser = {
@@ -28,7 +25,6 @@ console.log(currentUser.is_manager);
                 password: password
             }
         }
-        console.log('token', token)
 
         const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
             {
@@ -41,7 +37,6 @@ console.log(currentUser.is_manager);
             })
 
         const data = await response.json()
-        console.log(data)
         currentUser.email = email
         dispatch(authenticate({
             id: currentUser.id,
@@ -53,49 +48,48 @@ console.log(currentUser.is_manager);
 
     const [myBooking, setMyBooking] = useState([]);
     const URL = "https://trouvetatableapi.herokuapp.com/api/bookings";
-    
+
 
     useEffect(() => {
         fetch(URL)
             .then((response) => response.json())
             .then((data) => {
                 setMyBooking(data)
-                console.log("my booking", data)
             });
     }, [])
 
-            // ***************** add delete booking *************
+    // ***************** add delete booking *************
 
-    const deleteBooking = async (id) =>{
-        fetch( `http://trouvetatableapi.herokuapp.com/api/bookings/${id}`, {
+    const deleteBooking = async (id) => {
+        fetch(`https://trouvetatableapi.herokuapp.com/api/bookings/${id}`, {
             method: 'delete',
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
-              },
+            },
         })
         history.push("/");
-     }
+    }
 
-        // ***************** add delete user *************
+    // ***************** add delete user *************
 
 
     const fetchDeleteUser = async (e) => {
         e.preventDefault()
 
         const response = await fetch(
-          `https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
-          {
-            method: "delete",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
+            `https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
+            {
+                method: "delete",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            }
         );
         dispatch(logout())
         history.push("/");
-      };
+    };
 
 
     return (
@@ -103,13 +97,6 @@ console.log(currentUser.is_manager);
             <div className="identityProfil">
                 <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>
             </div>
-            {currentUser.is_manager && (
-                <Link to="/venues">
-            <button className="btn-add-venue">
-                Créer un restau
-            </button>
-                </Link>
-            )}
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
                     <div className="form-container">
@@ -168,10 +155,10 @@ console.log(currentUser.is_manager);
                             <h4>Booking ID:</h4>
                             <span>{booking.id}</span>
                             <div className="delete-button">
-                           <button  alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>   
-                           
-                           </div>                      
+                                <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
+
                             </div>
+                        </div>
                     ))
                 )}
             </div>

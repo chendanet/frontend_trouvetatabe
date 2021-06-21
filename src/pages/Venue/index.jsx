@@ -88,12 +88,12 @@ const Venue = ({ venues }) => {
     setModal(!modal)
   }
 
-   // toggle modal editVenue
-   const [modal1, setModal1] = useState(false)
-   const toggleModal1 = () => {
-     setModal1(!modal1)
-   }
- 
+  // toggle modal editVenue
+  const [modal1, setModal1] = useState(false)
+  const toggleModal1 = () => {
+    setModal1(!modal1)
+  }
+
 
   return (
     // <div className="container-page">
@@ -112,42 +112,51 @@ const Venue = ({ venues }) => {
               <p>{currentVenue.description}</p>
             </div>
             <div className="card mt-3 p-4 card-border">
-              <div className="d-flex justify-content-around mb-5">
-                <div>
+              <div className="row mb-5">
+                <div className="col-md-6 col-sm-12">
                   <h2>Adresse: </h2>
                   <span>{currentVenue.address}</span>
                 </div>
-                <div>
+                <div className="col-md-6 col-sm-12">
                   <h2>Phone number</h2>
                   <span>{currentVenue.phone_number}</span>
                 </div>
               </div>
 
-              <div className="d-flex justify-content-around align-items-center mb-3">
-                <div>
-                  <h4>Price:</h4>
-                  <span>{currentVenue.price}</span>
-                </div>
-                <div>
-
-                  <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
+              <div className="row">
+                <div className="col-md-6 col-sm-12">
+                  <h4>Price: <span className="text-dark fs-5">{currentVenue.price} €</span></h4>
 
                 </div>
+
+                {currentUser.id ?
+                  <div className="col-md-6 col-sm-12">
+                    <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
+                  </div> :
+                  <div className="col-md-6 col-sm-12">
+                    <Link to="/register">
+                      <button>
+                        Sign or Login to Find a Table
+                      </button>
+                    </Link>
+                  </div>
+                }
+
               </div>
             </div>
 
             {currentVenue.user_id == currentUser.id && (
               <div className="d-flex justify-content-around m-3">
                 <div>
-                <button type="button" onClick={toggleModal1}  idVenue={idVenue}>
+                  <button type="button" onClick={toggleModal1} idVenue={idVenue}>
                     Edit
                   </button>
                 </div>
-                <button  onClick={fetchDeleteVenue}>Delete</button>
+                <button onClick={fetchDeleteVenue}>Delete</button>
               </div>
             )}
 
-{/* <div className="container-page d-flex align-items-center justify-content-center  ">
+            {/* <div className="container-page d-flex align-items-center justify-content-center  ">
       <div className="form-container">
 <h3> Edit Venue</h3>
         <form>
@@ -207,7 +216,7 @@ const Venue = ({ venues }) => {
           <EditVenue modal={toggleModal1} idVenue={idVenue} />
         </>)
       }
-        </div>
+    </div>
 
     // </div>
   );
