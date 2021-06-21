@@ -10,6 +10,11 @@ import { logout } from "store/actions";
 
 
 const Profile = () => {
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+    const [lastName, setLastName] = useState()
+    const [firstName, setFirstName] = useState()
+    const dispatch = useDispatch()
     const currentUser = useSelector(state => state.authReducer)
     console.log(currentUser)
     let currentEmail = currentUser.email
@@ -44,27 +49,21 @@ const Profile = () => {
                 },
                 body: JSON.stringify(dataUser)
             })
-        const data = await response.json()
-        const userId = data.id
-        const userEmail = data.email
-        const is_manager = data.is_manager
-        const userFirstName = data.first_name
-        const userLastName = data.last_name
 
-
+        // const data = await response.json()
+        currentUser.email = email
         dispatch(authenticate({
-            id: userId,
-            is_manager: is_manager,
-            email: userEmail,
-            first_name: userFirstName,
-            last_name: userLastName,
+            id: currentUser.id,
+            email: email || localStorage.getItem(config.LOCAL_STORAGE_KEY).email,
+            last_name: lastName,
+            first_name: firstName,
         }, token))
-
+        
         // console.log(data)
         history.push('/')
     }
-    console.log("currentUser:", currentUser);
-
+    console.log("currentUser:" , currentUser);
+    
 
     // ************* add booking for profil **************
 
@@ -118,7 +117,6 @@ const Profile = () => {
         <>
             <div className="identityProfil text-center">
                 {currentUser.last_name ? <p>Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
-
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
@@ -131,7 +129,6 @@ const Profile = () => {
                             <input
                                 type="text"
                                 name="email"
-                                value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Modifier email" />
                             <br />
@@ -145,14 +142,12 @@ const Profile = () => {
                             <input
                                 type="text"
                                 name="last-name"
-                                value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                                 placeholder="Votre Prénon" />
                             <br />
                             <input
                                 type="text"
                                 name="first-name"
-                                value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="Votre Nom" />
                             <br />

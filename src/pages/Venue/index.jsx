@@ -143,7 +143,7 @@ const Venue = ({ venues }) => {
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price} €</span></h4>
                 </div>
-                {currentUser.id && currentVenue.user_id != currentUser.id &&
+                {currentUser.id && currentVenue.user_id !== currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
                   </div>}
@@ -159,7 +159,7 @@ const Venue = ({ venues }) => {
               </div>
             </div>
 
-            {currentVenue.user_id == currentUser.id && (
+            {currentVenue.user_id === currentUser.id && (
               <div className="d-flex justify-content-around m-3">
                 <div>
                   <button type="button" onClick={toggleModal1} idVenue={idVenue}>
@@ -171,7 +171,7 @@ const Venue = ({ venues }) => {
                 <h4>List des reservations</h4>
                 <div className="container ">
                   {bookings &&
-                    bookings.filter(booking => booking.venue_id == currentVenue.id)
+                    bookings.filter(booking => booking.venue_id === currentVenue.id)
                       .map((booking) => (
                         <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
                           <h2>{booking.venue.name}</h2>

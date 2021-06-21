@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import config from "config";
@@ -12,11 +11,8 @@ const Booking = ({ modal, idVenue }) => {
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const currentUser = useSelector((state) => state.authReducer);
-
-
   const history = useHistory();
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
-
   const dataBooking = {
     booking: {
       seat: seat,
