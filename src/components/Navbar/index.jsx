@@ -96,6 +96,13 @@ function Navbar() {
                       Profil
                          </Link>
                   </li>
+                  {currentUser.is_manager && (
+                    <li className="nav-item">
+                      <Link className="nav-list item-list" to="/venues">
+                        Créer un restau
+                      </Link>
+                    </li>
+                  )}
                   <li className="nav-item">
                     <a className="nav-list item-list" href="#">
                       Blog
