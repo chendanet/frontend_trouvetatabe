@@ -57,7 +57,6 @@ const Venue = ({ venues }) => {
 
   // edit venue ////////////////////////
 
-  console.log(currentUser);
   const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
@@ -78,7 +77,6 @@ const Venue = ({ venues }) => {
     }
 
     const data = await response.json();
-    console.log("data", data);
   };
 
 
@@ -156,48 +154,7 @@ const Venue = ({ venues }) => {
               </div>
             )}
 
-            {/* <div className="container-page d-flex align-items-center justify-content-center  ">
-      <div className="form-container">
-<h3> Edit Venue</h3>
-        <form>
-          <div>
-            <label type="text" name="venuename">
-              Name
-          </label>
-            <input
-              type="text"
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <label type="text" name="city">
-              City
-          </label>
-            <input
-              type="text"
-              name="city"
-              onChange={(e) => setCity(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <label type="text" name="cuisine">
-              Cuisine
-          </label>
-            <input
-              type="text"
-              name="cuisine"
-              onChange={(e) => setCuisine(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <button type="submit" onClick={fetchEditVenue}>
-              Edit Venue
-          </button>
-          </div>
-        </form>
-        </div>
-        </div> */}
+            
           </div>
         )}
 

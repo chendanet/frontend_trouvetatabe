@@ -25,7 +25,6 @@ const Profile = () => {
                 password: password
             }
         }
-        console.log('token', token)
 
         const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
             {
@@ -38,7 +37,6 @@ const Profile = () => {
             })
 
         const data = await response.json()
-        console.log(data)
         currentUser.email = email
         dispatch(authenticate({
             id: currentUser.id,
@@ -57,14 +55,13 @@ const Profile = () => {
             .then((response) => response.json())
             .then((data) => {
                 setMyBooking(data)
-                console.log("my booking", data)
             });
     }, [])
 
     // ***************** add delete booking *************
 
     const deleteBooking = async (id) => {
-        fetch(`http://trouvetatableapi.herokuapp.com/api/bookings/${id}`, {
+        fetch(`https://trouvetatableapi.herokuapp.com/api/bookings/${id}`, {
             method: 'delete',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -155,8 +152,6 @@ const Profile = () => {
                             <span>{booking.date}</span>
                             <h4>Time:</h4>
                             <span>{booking.time}</span>
-                            <h4>Booking ID:</h4>
-                            <span>{booking.id}</span>
                             <div className="delete-button">
                                 <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
 
