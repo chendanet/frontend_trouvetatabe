@@ -52,6 +52,10 @@ const SignUp = () => {
     const userId = data.data.id;
     const userEmail = data.data.attributes.email;
     const isManager = data.data.attributes.is_manager;
+    const userFirstName = data.data.attributes.first_name;
+    const userLastName = data.data.attributes.last_name;
+
+
 
     dispatch(
       authenticate(
@@ -59,6 +63,8 @@ const SignUp = () => {
           id: userId,
           email: userEmail,
           is_manager: isManager,
+          first_name: userFirstName,
+          last_name: userLastName
         },
         token
       )
