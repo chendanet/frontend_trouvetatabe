@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
+import { PROD_EDIT_VENUE  } from 'api/apiHandler'
 
 const EditVenue = ({ venues,modal }) => {
   const { idVenue } = useParams();
@@ -31,8 +32,7 @@ const EditVenue = ({ venues,modal }) => {
 
   const fetchEditVenue = async (e) => {
     e.preventDefault();
-    const response = await fetch(
-      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
+    const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`,
       {
         method: "put",
         headers: {
@@ -53,7 +53,7 @@ const EditVenue = ({ venues,modal }) => {
 
 
   useEffect(() => {
-    fetch(`https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`)
+    fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);

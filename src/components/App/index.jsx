@@ -18,16 +18,15 @@ import {
 import ListVenues from "pages/ListVenue";
 import MyVenues from 'pages/MyVenues';
 import Booking from "pages/Booking";
+import { PROD_EDIT_VENUE } from 'api/apiHandler';
 
 
 const App = () => {
 
   const [venues, setVenues] = useState([]);
 
-  const URL = "https://trouvetatableapi.herokuapp.com/api/venues";
-
   useEffect(() => {
-    fetch(URL)
+    fetch(PROD_EDIT_VENUE)
       .then((response) => response.json())
       .then((data) => {
         setVenues(data)
