@@ -182,7 +182,7 @@ const Profile = () => {
                 <h3>My bookings</h3>
                 {myBooking.map((booking) => (
 
-                    booking.user_id == currentUser.id && (
+                    booking.user_id === currentUser.id && (
                         <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
                             <h2>{booking.venue.name}</h2>
                             <h4>seat:</h4>

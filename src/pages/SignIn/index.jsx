@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { authenticate } from 'store/actions'
 import "pages/SignIn/SignIn.css";
-import { DEV_SIGNIN } from 'api/apiHandler';
+import { PROD_SIGNIN } from 'api/apiHandler';
 
 const SignIn = () => {
 
@@ -31,7 +31,7 @@ const SignIn = () => {
       }
     }
     e.preventDefault();
-    const response = await fetch(DEV_SIGNIN, {
+    const response = await fetch(PROD_SIGNIN, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
