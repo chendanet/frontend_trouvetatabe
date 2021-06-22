@@ -8,8 +8,9 @@ const ListVenues = ({ venues }) => {
   console.log()
 
   return (
-    <div className="container-list">
-      <div className="filter">
+    <div className="container ">
+      <div className="row w-100">
+      <div className="col-md-3 col-sm-12 filter ">
         <ul>
           <li>categories</li>
           <li>categories</li>
@@ -36,14 +37,14 @@ const ListVenues = ({ venues }) => {
           <li>categories</li>
         </ul>
       </div>
-      <div className="container-img-item">
-        <form>
+      <div className="col-md-9 col-sm-12  ">
+        <form className="text-center">
           <input
             type="text"
             name="search"
             onChange={(e) => setSearchTerme(e.target.value)}
             placeholder="Search your restaurant"
-            className="search-bar"
+            className="search-bar "
           />
         </form>
         {venues
@@ -57,10 +58,10 @@ const ListVenues = ({ venues }) => {
             }
           })
           .map((item, index) => (
-            <div className="image-item" key={index}>
-              <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" />
-              <Link to={"/venues/" + item.id}>
-                <div className="container-item">
+            <div className="image-item w-100 row" key={index}>
+              <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" className="col-md-5 img-fluid p-0"/>
+              <Link to={"/venues/" + item.id} className="col-md-6">
+                <div className="container-item ">
                   <h5>{item.name}</h5>
                   <p>{item.city}</p>
                   <p>{item.cuisine}</p>
@@ -70,6 +71,7 @@ const ListVenues = ({ venues }) => {
             </div>
           ))}
       </div>
+    </div>
     </div>
   );
 };

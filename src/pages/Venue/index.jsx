@@ -156,15 +156,11 @@ const Venue = ({ venues }) => {
             </div>
 
             {currentVenue.user_id == currentUser.id && (
-              <div className="d-flex justify-content-around m-3">
+              <div className="d-flex  flex-column m-3 justify-content-center">
+              
                 <div>
-                  <button type="button" onClick={toggleModal1} idVenue={idVenue}>
-                    Edit
-                  </button>
-                  <button onClick={fetchDeleteVenue}>Delete</button>
-                </div>
 
-                <h4>List des reservations</h4>
+                <h4 className="text-center">List des reservations:</h4>
                 <div className="container ">
                   {bookings &&
                     bookings.filter(booking => booking.venue_id == currentVenue.id)
@@ -183,6 +179,13 @@ const Venue = ({ venues }) => {
                         </div>
                       )
                       )}
+                </div>
+                </div>
+                <div className="text-center">
+                  <button type="button" onClick={toggleModal1} idVenue={idVenue} className="m-2">
+                    Edit
+                  </button>
+                  <button onClick={fetchDeleteVenue} className="m-2">Delete</button>
                 </div>
               </div>
             )}
