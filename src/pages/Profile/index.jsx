@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { authenticate } from 'store/actions'
 import "pages/Profile/Profile.css";
 import { logout } from "store/actions";
+import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
 
 
 const Profile = () => {
@@ -35,7 +36,7 @@ const Profile = () => {
             }
         }
 
-        const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
+        const response = await fetch(`${PROD_PROFILE}/${currentUser.id}`,
             {
                 method: 'put',
                 headers: {
@@ -69,11 +70,10 @@ const Profile = () => {
     // ************* add booking for profil **************
 
     const [myBooking, setMyBooking] = useState([]);
-    const URL = "https://trouvetatableapi.herokuapp.com/api/bookings";
 
 
     useEffect(() => {
-        fetch(URL)
+        fetch(PROD_BOOKINGS)
             .then((response) => response.json())
             .then((data) => {
                 setMyBooking(data)
@@ -83,7 +83,7 @@ const Profile = () => {
     // ***************** add delete booking *************
 
     const deleteBooking = async (id) => {
-        fetch(`https://trouvetatableapi.herokuapp.com/api/bookings/${id}`, {
+        fetch(`${PROD_BOOKINGS}/${id}`, {
             method: 'delete',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ const Profile = () => {
         e.preventDefault()
 
         const response = await fetch(
-            `https://trouvetatableapi.herokuapp.com/api/users/${currentUser.id}`,
+            `${PROD_PROFILE}/${currentUser.id}`,
             {
                 method: "delete",
                 headers: {
@@ -182,7 +182,7 @@ const Profile = () => {
                 <h3>My bookings</h3>
                 {myBooking.map((booking) => (
 
-                    booking.user_id == currentUser.id && (
+                    booking.user_id === currentUser.id && (
                         <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
                             <h2>{booking.venue.name}</h2>
                             <h4>seat:</h4>

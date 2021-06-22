@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { authenticate } from 'store/actions'
 import { Link } from "react-router-dom"
 import "pages/SignIn/SignIn.css";
+import { PROD_SIGNIN } from 'api/apiHandler';
 
 const SignIn = () => {
 
@@ -31,7 +32,7 @@ const SignIn = () => {
       }
     }
     e.preventDefault();
-    const response = await fetch("https://trouvetatableapi.herokuapp.com/api/login", {
+    const response = await fetch(PROD_SIGNIN, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'

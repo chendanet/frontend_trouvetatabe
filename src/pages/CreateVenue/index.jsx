@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import Cookies from 'js-cookie';
 import config from 'config';
 import { useHistory } from 'react-router-dom';
+import { PROD_CREATE_VENUE} from 'api/apiHandler'
 
 
 function CreateVenue() {
@@ -22,7 +23,7 @@ function CreateVenue() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    fetch(`https://trouvetatableapi.herokuapp.com/api/venues`, {
+    fetch(PROD_CREATE_VENUE, {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`

@@ -7,6 +7,7 @@ import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 import EditVenue from "pages/EditVenue";
+import { PROD_EDIT_VENUE,  PROD_BOOKINGS } from 'api/apiHandler';
 
 
 const Venue = ({ venues }) => {
@@ -38,7 +39,7 @@ const Venue = ({ venues }) => {
 
   const fetchDeleteVenue = async () => {
     const response = await fetch(
-      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
+      `${PROD_EDIT_VENUE}/${idVenue}`,
       {
         method: "delete",
         headers: {
@@ -51,7 +52,7 @@ const Venue = ({ venues }) => {
   };
 
   useEffect(() => {
-    fetch(`https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`)
+    fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
   }, [idVenue, currentVenue]);
@@ -61,7 +62,7 @@ const Venue = ({ venues }) => {
   const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `https://trouvetatableapi.herokuapp.com/api/venues/${idVenue}`,
+      `${PROD_EDIT_VENUE}/${idVenue}`,
       {
         method: "put",
         headers: {
@@ -91,7 +92,7 @@ const Venue = ({ venues }) => {
 
 
   const fetchAllBookings = async () => {
-    const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/bookings`)
+    const response = await fetch(PROD_BOOKINGS)
     const data = await response.json()
     setBookings(data)
   }
@@ -113,8 +114,8 @@ const Venue = ({ venues }) => {
         {currentVenue && (
           <div>
             <img
-              src={currentVenue.photo}
-              alt=""
+              src={currentVenue.images}
+              alt={`${currentVenue.name}_image`}
               className="img-fluid card-border"
             />
             <div className="card mt-3 p-4 card-border">
