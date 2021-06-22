@@ -97,9 +97,9 @@ const Venue = ({ venues }) => {
     setBookings(data)
   }
 
-  useEffect(() => {
-    fetchAllBookings();
-  }, [bookings])
+  // useEffect(() => {
+  //   fetchAllBookings();
+  // }, [bookings])
 
 
 

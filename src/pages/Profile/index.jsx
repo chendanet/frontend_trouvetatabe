@@ -12,7 +12,6 @@ import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
 
 const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)
-    console.log(currentUser)
     let currentEmail = currentUser.email
     let currentLastName = currentUser.last_name
     let currentFirstName = currentUser.first_name
@@ -61,10 +60,8 @@ const Profile = () => {
             last_name: userLastName,
         }, token))
 
-        // console.log(data)
         history.push('/')
     }
-    console.log("currentUser:", currentUser);
 
 
     // ************* add booking for profil **************

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const ListVenues = ({ venues }) => {
   const [searchTerme, setSearchTerme] = useState("");
 
-  console.log()
 
   return (
     <div className="container-list">

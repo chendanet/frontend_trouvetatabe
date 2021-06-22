@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 const MyVenues = ({ venues }) => {
 
     const currentManager = useSelector((state) => state.authReducer)
-    console.log(currentManager.id)
 
     return (
         <div>
