@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { authenticate } from 'store/actions'
+import { Link } from "react-router-dom"
 import "pages/SignIn/SignIn.css";
 
 const SignIn = () => {
@@ -91,6 +92,7 @@ const SignIn = () => {
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
               Login
               </button>
+              <Link to="/password/forgot" className="link-tertiary">Mot de passe oublié</Link>
             <br />
           </div>
         </form>
