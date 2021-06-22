@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import config from "config";
 import "pages/Booking/Booking.css";
 import { useSelector } from "react-redux";
-
+import { PROD_BOOKINGS } from 'api/apiHandler';
 
 const Booking = ({ modal, idVenue }) => {
   const [seat, setSeat] = useState();
@@ -26,7 +26,7 @@ const Booking = ({ modal, idVenue }) => {
     e.preventDefault();
 
 
-    const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/bookings`, {
+    const response = await fetch(PROD_BOOKINGS, {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
