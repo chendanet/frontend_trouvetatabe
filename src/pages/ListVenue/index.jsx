@@ -49,17 +49,19 @@ const ListVenues = ({ venues }) => {
   }
 
   return (
-    <div className="w-75 mx-auto ">
-      <form className="text-center ">
-        <input
-          type="text"
-          name="search"
-          onChange={(e) => setSearchTerme(e.target.value)}
-          placeholder="Search your restaurant"
-          className="search-bar "
-        />
-      </form>
-      <div className="row w-100 m-2">
+    <div className=" mx-5">
+      <div className="text-center">
+        <form >
+          <input
+            type="text"
+            name="search"
+            onChange={(e) => setSearchTerme(e.target.value)}
+            placeholder="Search your restaurant"
+            className="search-bar "
+          />
+        </form>
+      </div>
+      <div className="row my-4">
         <div className="col-md-2 col-sm-12 filter mx-1 ">
           <div>
             {CUISINES.map((c, index) => (
@@ -162,9 +164,20 @@ const ListVenues = ({ venues }) => {
               }
             })
             .map((item, index) => (
-              <div className="image-item w-100 row" key={index}>
-                
-                <img src={item.photo === "" ? item.images : `https://source.unsplash.com/600x600/?dish&sig=${index}`} alt={item.name + " dish"} className="col-md-5 img-fluid p-0" />
+
+              <div className="image-item w-50 row" key={index}>
+                {!item.images[0] ?
+                  <img
+                    src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
+                    alt={`${item.name}_image`}
+                    className="img-fluid card-border"
+                  />
+                  : <img
+                    src={item.images[0]}
+                    alt={`${item.name}_image`}
+                    className="img-fluid card-border"
+                  />}
+
                 <Link to={"/venues/" + item.id} className="col-md-6">
                   <div className="container-item ">
                     <h5>{item.name}</h5>

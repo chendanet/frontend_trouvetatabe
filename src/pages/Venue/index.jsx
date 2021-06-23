@@ -7,7 +7,7 @@ import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 import EditVenue from "pages/EditVenue";
-import { PROD_EDIT_VENUE,  PROD_BOOKINGS } from 'api/apiHandler';
+import { PROD_EDIT_VENUE, PROD_BOOKINGS } from 'api/apiHandler';
 
 
 const Venue = ({ venues }) => {
@@ -107,6 +107,7 @@ const Venue = ({ venues }) => {
 
 
 
+  currentVenue && console.log('length', currentVenue.images[0])
 
   return (
     // <div className="container-page">
@@ -114,11 +115,17 @@ const Venue = ({ venues }) => {
       <div>
         {currentVenue && (
           <div>
-            <img
-              src={currentVenue.photo === "" ? currentVenue.images : currentVenue.photo}
-              alt={`${currentVenue.name} dish`}
-              className="img-fluid card-border"
-            />
+            {!currentVenue.images[0] ?
+              <img
+                src={currentVenue.photo}
+                alt={`${currentVenue.name}_dish`}
+                className="img-fluid card-border"
+              />
+              : <img
+                src={currentVenue.images[0]}
+                alt={`${currentVenue.name}_dish`}
+                className="img-fluid card-border"
+              />}
             <div className="card mt-3 p-4 card-border">
               <h2>{currentVenue.name}</h2>
               <h6>{currentVenue.cuisine}</h6>
@@ -155,7 +162,7 @@ const Venue = ({ venues }) => {
 
               </div>
             </div>
-
+            
             {currentVenue.user_id === currentUser.id && (
               <div className="d-flex justify-content-around m-3">
                 <div>
@@ -174,12 +181,13 @@ const Venue = ({ venues }) => {
                           <h4>Time:</h4>
                           <span>{booking.time}</span>
                           {/* <div className="delete-button">
+
                               <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
                             </div> */}
-                        </div>
-                      )
-                      )}
-                </div>
+                          </div>
+                        )
+                        )}
+                  </div>
                 </div>
                 <div className="text-center">
                   <button type="button" onClick={toggleModal1} idVenue={idVenue} className="m-2">
