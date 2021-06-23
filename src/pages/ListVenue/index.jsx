@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React from "react";
 import { useState } from "react";
 import "pages/ListVenue/listVenue.css";
@@ -8,9 +9,8 @@ import { Link } from "react-router-dom";
 
 const ListVenues = ({ venues }) => {
   const [searchTerme, setSearchTerme] = useState("");
-  const [cuisines, setCuisines] = useState([])
-  const [prices, setPrices] = useState([])
-
+  const [cuisines, setCuisines] = useState([]);
+  const [prices, setPrices] = useState([]);
   const CUISINES = [
     "Steak",
     "Seafood",
@@ -32,7 +32,7 @@ const ListVenues = ({ venues }) => {
 
   const handleChangeCuisine = (e) => {
     let { name } = e.target
-    if (cuisines.indexOf(name) == -1) {
+    if (cuisines.indexOf(name) === -1) {
       setCuisines([...cuisines, name])
     } else {
       setCuisines(cuisines.filter((p) => p !== name))
@@ -41,7 +41,7 @@ const ListVenues = ({ venues }) => {
 
   const handleChangePrice = (e) => {
     let { name } = e.target
-    if (prices.indexOf(name) == -1) {
+    if (prices.indexOf(name) === -1) {
       setPrices([...prices, name])
     } else {
       setPrices(prices.filter((p) => p !== name))
@@ -92,8 +92,8 @@ const ListVenues = ({ venues }) => {
         <div className="col-md-8  col-sm-12  ">
           {venues
             .filter((value) => {
-              if (cuisines.length == 0 && prices.length == 0) {
-                if (searchTerme == "") {
+              if (cuisines.length === 0 && prices.length === 0) {
+                if (searchTerme === "") {
                   return value;
                 }
                 if (value.name.toLowerCase().includes(searchTerme.toLowerCase())) {
@@ -102,7 +102,7 @@ const ListVenues = ({ venues }) => {
               }
 
               if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.length === 0) {
-                if (prices.length != 0) {
+                if (prices.length !== 0) {
                   if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
                     return value
                   }
@@ -115,11 +115,11 @@ const ListVenues = ({ venues }) => {
                 }
               }
 
-              if (searchTerme == "" && cuisines.indexOf(value.cuisine) >= 0) {
-                if (prices.length == 0) {
+              if (searchTerme === "" && cuisines.indexOf(value.cuisine) >= 0) {
+                if (prices.length === 0) {
                   return value;
                 }
-                if (prices.length != 0) {
+                if (prices.length !== 0) {
                   if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
                     return value
                   }
@@ -131,8 +131,8 @@ const ListVenues = ({ venues }) => {
                   }
                 }
               }
-              if (searchTerme == "" && cuisines.indexOf(value.cuisine) == 0) {
-                if (prices.length != 0) {
+              if (searchTerme === "" && cuisines.indexOf(value.cuisine) === 0) {
+                if (prices.length !== 0) {
                   if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
                     return value
                   }
@@ -145,10 +145,10 @@ const ListVenues = ({ venues }) => {
                 }
               }
               if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.indexOf(value.cuisine) >= 0) {
-                if (prices.length == 0) {
+                if (prices.length === 0) {
                   return value;
                 }
-                if (prices.length != 0) {
+                if (prices.length !== 0) {
                   if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
                     return value
                   }
@@ -163,7 +163,8 @@ const ListVenues = ({ venues }) => {
             })
             .map((item, index) => (
               <div className="image-item w-100 row" key={index}>
-                <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" className="col-md-5 img-fluid p-0" />
+                
+                <img src={item.photo === "" ? item.images : `https://source.unsplash.com/600x600/?dish&sig=${index}`} alt={item.name + " dish"} className="col-md-5 img-fluid p-0" />
                 <Link to={"/venues/" + item.id} className="col-md-6">
                   <div className="container-item ">
                     <h5>{item.name}</h5>
