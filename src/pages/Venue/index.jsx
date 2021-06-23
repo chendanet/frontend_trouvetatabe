@@ -137,7 +137,7 @@ const Venue = ({ venues }) => {
 
               <div className="row">
                 <div className="col-md-6 col-sm-12">
-                  <h4>Price: <span className="text-dark fs-5">{currentVenue.price} €</span></h4>
+                  <h4>Price: <span className="text-dark fs-5">{currentVenue.price*0.90} €</span></h4>
                 </div>
                 {currentUser.id && currentVenue.user_id != currentUser.id &&
                   <div className="col-md-6 col-sm-12">

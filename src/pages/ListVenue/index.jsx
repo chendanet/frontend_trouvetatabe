@@ -118,6 +118,7 @@ export const ListVenues = ({ venues }) => {
                     <h5 className="card_name" title={item.name}>{item.name}</h5>
                     <div className="card_city">{item.city}</div>
                     <div className="card_cuisine">{item.cuisine}</div>
+                    <div className="card_price">{item.price*0.90} € au lieu de {item.price} €</div>
                     <button className="card_btn">valider</button>
                   </div>
                 </div>
