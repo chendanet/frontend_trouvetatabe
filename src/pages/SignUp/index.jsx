@@ -84,6 +84,7 @@ const SignUp = () => {
               name="email"
               onChange={handleEmail}
               placeholder="Enter Your Email"
+              className="form-control"
             />
             <br />
             <input
@@ -92,6 +93,7 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Enter your Password"
+              className="form-control"
             />
             <br />
             <input
@@ -100,6 +102,7 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Confirm your Password"
+              className="form-control"
             />{" "}
             <br />
             <div className="check-manager">

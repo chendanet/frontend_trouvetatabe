@@ -57,7 +57,7 @@ const Booking = ({ modal, idVenue }) => {
             name="visitor_name"
             placeholder="Your Name"
             required
-            className="input"
+            className="form-control mb-2"
           // onChange={(e) => setName(e.target.value)}
           />
 
@@ -67,7 +67,7 @@ const Booking = ({ modal, idVenue }) => {
             name="visitor_phone"
             placeholder="Your Phone"
             required
-            className="input"
+            className="form-control mb-2"
           />
 
           <input
@@ -77,7 +77,7 @@ const Booking = ({ modal, idVenue }) => {
             placeholder="Number of people"
             min="1"
             required
-            className="input"
+            className="form-control mb-2"
             onChange={(e) => setSeat(e.target.value)}
           />
           <label for="checkin-date"> Reservation Date</label>
@@ -87,7 +87,7 @@ const Booking = ({ modal, idVenue }) => {
             name="checkin"
             align="center"
             required
-            className="input"
+            className="form-control"
             onChange={(e) => setDate(e.target.value)}
           />
           <br />
@@ -96,7 +96,7 @@ const Booking = ({ modal, idVenue }) => {
           </label>
           <br />
           <input
-            className="input"
+            className="form-control mb-4"
             type="time"
             id="appt"
             name="appt"

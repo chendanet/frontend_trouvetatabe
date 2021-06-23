@@ -51,130 +51,132 @@ const ListVenues = ({ venues }) => {
   console.log('prices', prices)
   console.log(prices.length)
   return (
-    <div className="container-list">
-      <div className="filter">
-        <div>
-          {CUISINES.map((c, index) => (
-            <div key={index}>
-              <input type="checkbox"
-                name={c}
-                value={c}
-                onChange={handleChangeCuisine}
-                checked={cuisines.includes(c) ? "checked" : ""}
-              />
-              <label>{c}</label>
-            </div>
-          ))}
+    <div className="w-75 mx-auto ">
+      <form className="text-center ">
+        <input
+          type="text"
+          name="search"
+          onChange={(e) => setSearchTerme(e.target.value)}
+          placeholder="Search your restaurant"
+          className="search-bar "
+        />
+      </form>
+      <div className="row w-100 m-2">
+        <div className="col-md-2 col-sm-12 filter mx-1 ">
+          <div>
+            {CUISINES.map((c, index) => (
+              <div key={index}>
+                <input type="checkbox"
+                  name={c}
+                  value={c}
+                  onChange={handleChangeCuisine}
+                  checked={cuisines.includes(c) ? "checked" : ""}
+                />
+                <label>{c}</label>
+              </div>
+            ))}
+          </div>
+          <br />
+          <div>
+            {PRICES.map((p, index) => (
+              <div key={index}>
+                <input type="checkbox"
+                  name={p}
+                  value={p}
+                  onChange={handleChangePrice}
+                  checked={prices.includes(p) ? "checked" : ""}
+                />
+                <label>{p}</label>
+              </div>
+            ))}
+          </div>
         </div>
-        <br />
-        <div>
-          {PRICES.map((p, index) => (
-            <div key={index}>
-              <input type="checkbox"
-                name={p}
-                value={p}
-                onChange={handleChangePrice}
-                checked={prices.includes(p) ? "checked" : ""}
-              />
-              <label>{p}</label>
-            </div>
-          ))}
+        <div className="col-md-8  col-sm-12  ">
+          {venues
+            .filter((value) => {
+              if (cuisines.length == 0 && prices.length == 0) {
+                if (searchTerme == "") {
+                  return value;
+                }
+                if (value.name.toLowerCase().includes(searchTerme.toLowerCase())) {
+                  return value;
+                }
+              }
+
+              if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.length === 0) {
+                if (prices.length != 0) {
+                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
+                    return value
+                  }
+                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
+                    return value
+                  }
+                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
+                    return value
+                  }
+                }
+              }
+
+              if (searchTerme == "" && cuisines.indexOf(value.cuisine) >= 0) {
+                if (prices.length == 0) {
+                  return value;
+                }
+                if (prices.length != 0) {
+                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
+                    return value
+                  }
+                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
+                    return value
+                  }
+                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
+                    return value
+                  }
+                }
+              }
+              if (searchTerme == "" && cuisines.indexOf(value.cuisine) == 0) {
+                if (prices.length != 0) {
+                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
+                    return value
+                  }
+                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
+                    return value
+                  }
+                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
+                    return value
+                  }
+                }
+              }
+              if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.indexOf(value.cuisine) >= 0) {
+                if (prices.length == 0) {
+                  return value;
+                }
+                if (prices.length != 0) {
+                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
+                    return value
+                  }
+                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
+                    return value
+                  }
+                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
+                    return value
+                  }
+                }
+              }
+            })
+            .map((item, index) => (
+              <div className="image-item w-100 row" key={index}>
+                <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" className="col-md-5 img-fluid p-0" />
+                <Link to={"/venues/" + item.id} className="col-md-6">
+                  <div className="container-item ">
+                    <h5>{item.name}</h5>
+                    <p>{item.city}</p>
+                    <p>{item.cuisine}</p>
+                    <button>valider</button>
+                  </div>
+                </Link>
+              </div>
+            ))}
         </div>
-      </div>
-      <div className="container-img-item">
-        <form>
-          <input
-            type="text"
-            name="search"
-            onChange={(e) => setSearchTerme(e.target.value)}
-            placeholder="Search your restaurant"
-            className="search-bar"
-          />
-        </form>
-        {venues
-          .filter((value) => {
-            if (cuisines.length == 0 && prices.length == 0) {
-              if (searchTerme == "") {
-                return value;
-              }
-              if (value.name.toLowerCase().includes(searchTerme.toLowerCase())) {
-                return value;
-              }
-            }
-
-            if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.length === 0) {
-              if (prices.length != 0) {
-                if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                  return value
-                }
-                if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                  return value
-                }
-                if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                  return value
-                }
-              }
-            }
-
-            if (searchTerme == "" && cuisines.indexOf(value.cuisine) >= 0) {
-              if (prices.length == 0) {
-                return value;
-              }
-              if (prices.length != 0) {
-                if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                  return value
-                }
-                if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                  return value
-                }
-                if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                  return value
-                }
-              }
-            }
-            if (searchTerme == "" && cuisines.indexOf(value.cuisine) == 0) {
-              if (prices.length != 0) {
-                if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                  return value
-                }
-                if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                  return value
-                }
-                if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                  return value
-                }
-              }
-            }
-            if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.indexOf(value.cuisine) >= 0) {
-              if (prices.length == 0) {
-                return value;
-              }
-              if (prices.length != 0) {
-                if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                  return value
-                }
-                if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                  return value
-                }
-                if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                  return value
-                }
-              }
-            }
-          })
-          .map((item, index) => (
-            <div className="image-item" key={index}>
-              <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" />
-              <Link to={"/venues/" + item.id}>
-                <div className="container-item">
-                  <h5>{item.name}</h5>
-                  <p>{item.city}</p>
-                  <p>{item.cuisine}</p>
-                  <button>valider</button>
-                </div>
-              </Link>
-            </div>
-          ))}
       </div>
     </div>
   );

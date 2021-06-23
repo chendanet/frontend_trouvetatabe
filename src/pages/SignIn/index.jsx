@@ -79,6 +79,7 @@ const SignIn = () => {
               name="email"
               onChange={handleEmail}
               placeholder="Enter Your Email"
+              className="form-control"
             />
             <br />
             <input
@@ -87,6 +88,7 @@ const SignIn = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Enter your Password"
+              className="form-control"
             />
             <br />
 
