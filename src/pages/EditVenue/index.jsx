@@ -46,7 +46,7 @@ const EditVenue = ({ venues, modal }) => {
       return;
     }
 
-    const data = await response.json();
+   // const data = await response.json();
   };
 
 
