@@ -115,7 +115,7 @@ const Venue = ({ venues }) => {
         {currentVenue && (
           <div>
             <img
-              src={currentVenue.photo.empty ? currentVenue.images : currentVenue.photo}
+              src={currentVenue.photo === "" ? currentVenue.images : currentVenue.photo}
               alt={`${currentVenue.name} dish`}
               className="img-fluid card-border"
             />
