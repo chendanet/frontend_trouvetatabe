@@ -164,7 +164,7 @@ const ListVenues = ({ venues }) => {
               }
             })
             .map((item, index) => (
-<<<<<<< HEAD
+
               <div className="image-item w-50 row" key={index}>
                 {!item.images[0] ?
                   <img
@@ -177,11 +177,7 @@ const ListVenues = ({ venues }) => {
                     alt={`${item.name}_image`}
                     className="img-fluid card-border"
                   />}
-=======
-              <div className="image-item w-100 row" key={index}>
-                
-                <img src={item.photo === "" ? item.images : `https://source.unsplash.com/600x600/?dish&sig=${index}`} alt={item.name + " dish"} className="col-md-5 img-fluid p-0" />
->>>>>>> develop
+
                 <Link to={"/venues/" + item.id} className="col-md-6">
                   <div className="container-item ">
                     <h5>{item.name}</h5>

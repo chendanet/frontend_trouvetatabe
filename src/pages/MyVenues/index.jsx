@@ -12,7 +12,7 @@ const MyVenues = ({ venues }) => {
             {venues
                 .filter((value) => value.user_id === currentManager.id)
                 .map((item, index) => (
-<<<<<<< HEAD
+
                     <div className="image-item row w-25 " key={index}>
                         {!item.images[0] ?
                             <img
@@ -25,12 +25,8 @@ const MyVenues = ({ venues }) => {
                                 alt={`${item.name}_image`}
                                 className="img-fluid card-border"
                             />}
+
                         <Link to={"/venues/" + item.id} className="col-md-5">
-=======
-                    <div className="image-item" key={index}>
-                        <img src={item.photo === "" ? item.images : `https://source.unsplash.com/600x600/?dish&sig=${index}`} alt={venues.name + " dish"} />
-                        <Link to={"/venues/" + item.id}>
->>>>>>> develop
                             <div className="container-item">
                                 <h5>{item.name}</h5>
                                 <p>{item.city}</p>
