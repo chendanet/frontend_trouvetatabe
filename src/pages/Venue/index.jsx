@@ -7,7 +7,7 @@ import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 import EditVenue from "pages/EditVenue";
-import { PROD_EDIT_VENUE,  PROD_BOOKINGS } from 'api/apiHandler';
+import { DEV_EDIT_VENUE,  DEV_BOOKINGS } from 'api/apiHandler';
 
 
 const Venue = ({ venues }) => {
@@ -39,7 +39,7 @@ const Venue = ({ venues }) => {
 
   const fetchDeleteVenue = async () => {
     const response = await fetch(
-      `${PROD_EDIT_VENUE}/${idVenue}`,
+      `${DEV_EDIT_VENUE}/${idVenue}`,
       {
         method: "delete",
         headers: {
@@ -52,7 +52,7 @@ const Venue = ({ venues }) => {
   };
 
   useEffect(() => {
-    fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
+    fetch(`${DEV_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
   }, [idVenue, currentVenue]);
@@ -62,7 +62,7 @@ const Venue = ({ venues }) => {
   const fetchEditVenue = async (e) => {
     e.preventDefault();
     const response = await fetch(
-      `${PROD_EDIT_VENUE}/${idVenue}`,
+      `${DEV_EDIT_VENUE}/${idVenue}`,
       {
         method: "put",
         headers: {
@@ -92,7 +92,7 @@ const Venue = ({ venues }) => {
 
 
   const fetchAllBookings = async () => {
-    const response = await fetch(PROD_BOOKINGS)
+    const response = await fetch(DEV_BOOKINGS)
     const data = await response.json()
     setBookings(data)
   }
