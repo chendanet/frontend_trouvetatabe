@@ -55,7 +55,7 @@ const Venue = ({ venues }) => {
     fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
-  }, []);
+  }, [idVenue]);
 
   // edit venue ////////////////////////
 
