@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
-import { PROD_EDIT_VENUE  } from 'api/apiHandler'
+import { DEV_EDIT_VENUE  } from 'api/apiHandler'
 
 const EditVenue = ({ venues,modal }) => {
   const { idVenue } = useParams();
@@ -32,7 +32,7 @@ const EditVenue = ({ venues,modal }) => {
 
   const fetchEditVenue = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`,
+    const response = await fetch(`${DEV_EDIT_VENUE}/${idVenue}`,
       {
         method: "put",
         headers: {
@@ -48,12 +48,12 @@ const EditVenue = ({ venues,modal }) => {
       return;
     }
 
-    const data = await response.json();
+   // const data = await response.json();
   };
 
 
   useEffect(() => {
-    fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
+    fetch(`${DEV_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);
