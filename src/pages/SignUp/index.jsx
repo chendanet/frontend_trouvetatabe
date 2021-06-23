@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
 import { Link } from "react-router-dom";
+import { PROD_SIGNUP } from 'api/apiHandler';
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -21,9 +22,7 @@ const SignUp = () => {
   };
 
   const handleOnChange = () => {
-    {
       setIsManager(!is_manager);
-    }
   };
 
   const fetchSignUp = async (e) => {
@@ -35,7 +34,7 @@ const SignUp = () => {
       },
     };
     e.preventDefault();
-    const response = await fetch("https://trouvetatableapi.herokuapp.com/api/signup", {
+    const response = await fetch(PROD_SIGNUP, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -52,6 +51,9 @@ const SignUp = () => {
     const userId = data.data.id;
     const userEmail = data.data.attributes.email;
     const isManager = data.data.attributes.is_manager;
+    const userFirstName = data.data.attributes.first_name;
+    const userLastName = data.data.attributes.last_name;
+
 
     dispatch(
       authenticate(
@@ -59,6 +61,8 @@ const SignUp = () => {
           id: userId,
           email: userEmail,
           is_manager: isManager,
+          first_name: userFirstName,
+          last_name: userLastName
         },
         token
       )
@@ -80,6 +84,7 @@ const SignUp = () => {
               name="email"
               onChange={handleEmail}
               placeholder="Enter Your Email"
+              className="form-control"
             />
             <br />
             <input
@@ -88,6 +93,7 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Enter your Password"
+              className="form-control"
             />
             <br />
             <input
@@ -96,6 +102,7 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Confirm your Password"
+              className="form-control"
             />{" "}
             <br />
             <div className="check-manager">

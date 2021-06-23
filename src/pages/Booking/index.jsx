@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import config from "config";
 import "pages/Booking/Booking.css";
 import { useSelector } from "react-redux";
-
+import { PROD_BOOKINGS } from 'api/apiHandler';
 
 const Booking = ({ modal, idVenue }) => {
   const [seat, setSeat] = useState();
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const currentUser = useSelector((state) => state.authReducer);
-
-
   const history = useHistory();
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
-
   const dataBooking = {
     booking: {
       seat: seat,
@@ -30,7 +26,7 @@ const Booking = ({ modal, idVenue }) => {
     e.preventDefault();
 
 
-    const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/bookings`, {
+    const response = await fetch(PROD_BOOKINGS, {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -61,7 +57,7 @@ const Booking = ({ modal, idVenue }) => {
             name="visitor_name"
             placeholder="Your Name"
             required
-            className="input"
+            className="form-control mb-2"
           // onChange={(e) => setName(e.target.value)}
           />
 
@@ -71,7 +67,7 @@ const Booking = ({ modal, idVenue }) => {
             name="visitor_phone"
             placeholder="Your Phone"
             required
-            className="input"
+            className="form-control mb-2"
           />
 
           <input
@@ -81,7 +77,7 @@ const Booking = ({ modal, idVenue }) => {
             placeholder="Number of people"
             min="1"
             required
-            className="input"
+            className="form-control mb-2"
             onChange={(e) => setSeat(e.target.value)}
           />
           <label for="checkin-date"> Reservation Date</label>
@@ -91,7 +87,7 @@ const Booking = ({ modal, idVenue }) => {
             name="checkin"
             align="center"
             required
-            className="input"
+            className="form-control"
             onChange={(e) => setDate(e.target.value)}
           />
           <br />
@@ -100,7 +96,7 @@ const Booking = ({ modal, idVenue }) => {
           </label>
           <br />
           <input
-            className="input"
+            className="form-control mb-4"
             type="time"
             id="appt"
             name="appt"
