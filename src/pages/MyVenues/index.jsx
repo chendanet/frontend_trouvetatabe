@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 const MyVenues = ({ venues }) => {
 
     const currentManager = useSelector((state) => state.authReducer)
-
+    console.log('venues', venues)
+    console.log('venues', currentManager)
     return (
         <div className="container text-center ">
             <h2 className="m-5">Mes restaurants:</h2>
-            {venues
-                .filter((value) => value.user_id === currentManager.id)
+            {venues && venues
+                .filter((value) => value.user_id === parseInt(currentManager.id))
                 .map((item, index) => (
 
                     <div className="image-item row w-25 " key={index}>
@@ -25,7 +26,8 @@ const MyVenues = ({ venues }) => {
                                 alt={`${item.name}_image`}
                                 className="img-fluid card-border"
                             />}
-                        <Link to={"/venues/" + item.id} className="col-md-5">                
+
+                        <Link to={"/venues/" + item.id} className="col-md-5">
                             <div className="container-item">
                                 <h5>{item.name}</h5>
                                 <p>{item.city}</p>
