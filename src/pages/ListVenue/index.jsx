@@ -45,7 +45,17 @@ export const ListVenues = ({ venues }) => {
     }
   }
 
+  
   return (
+    <>
+      <div className="container-fofo">
+        <br/>
+        <p><center>C'est enfin l'été ! 😎☀️</center></p>
+        <p><center>Nous pouvons enfin nous retrouver au restaurant ou au bar sans masque ! 🍧</center></p>
+        <p><center>Avec Trouvetatable, réservez rapidement votre place en quelques clics ! 🖱 </center></p>
+      </div>
+    
+    
     <div className="w-75 mx-auto ">
       <form className="text-center ">
         <input
@@ -130,5 +140,6 @@ export const ListVenues = ({ venues }) => {
           </div>
         </div>
       </div>
+    </>
   );
 };
