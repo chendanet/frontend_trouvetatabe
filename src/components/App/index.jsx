@@ -20,6 +20,7 @@ import MyVenues from 'pages/MyVenues';
 import Booking from "pages/Booking";
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import ForgotPassword from 'pages/ForgotPassword';
+import ResetPassword from 'pages/ResetPassword';
 
 const App = () => {
 
@@ -61,8 +62,11 @@ const App = () => {
               <Profile />
             </Route>
             <Route path="/password/forgot">
-          <ForgotPassword />
-        </Route>
+              <ForgotPassword />
+            </Route>
+            <Route path="/password/reset/:token">
+              <ResetPassword />
+            </Route>
           </Switch>
           <Footer />
         </div>

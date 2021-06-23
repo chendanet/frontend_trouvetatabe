@@ -113,7 +113,7 @@ const Profile = () => {
 
     return (
         <>
-            <div className="identityProfil text-center">
+            <div className="identityProfil text-center m-3">
                 {currentUser.last_name ? <p>Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
 
             </div>
@@ -130,28 +130,32 @@ const Profile = () => {
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Modifier email" />
+                                placeholder="Modifier email"
+                                class="form-control" />
                             <br />
                             <input
                                 type="password"
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Modifier MDP" />
+                                placeholder="Modifier MDP"
+                                class="form-control" />
                             <br />
                             <input
                                 type="text"
                                 name="last-name"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
-                                placeholder="Votre Prénon" />
+                                placeholder="Votre Prénon"
+                                class="form-control" />
                             <br />
                             <input
                                 type="text"
                                 name="first-name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                placeholder="Votre Nom" />
+                                placeholder="Votre Nom"
+                                class="form-control" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
                                 Modifier mon profil
@@ -162,7 +166,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className="container d-flex align-items-center justify-content-center">
-                <div className="form-delete">
+                <div className="form-delete mb-5">
 
                     <h3>Supprimer votre compte</h3>
                     <br />
@@ -176,10 +180,12 @@ const Profile = () => {
                 </div>
             </div>
             <div className="container ">
+
                 <h3>My bookings</h3>
                 {myBooking.map((booking) => (
 
-                    booking.user_id === currentUser.id && (
+                    booking.user_id === parseInt(currentUser.id) && (
+
                         <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
                             <h2>{booking.venue.name}</h2>
                             <h4>seat:</h4>
@@ -193,6 +199,7 @@ const Profile = () => {
 
                             </div>
                         </div>
+
                     ))
                 )}
             </div>
