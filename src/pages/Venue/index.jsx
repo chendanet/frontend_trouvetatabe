@@ -19,9 +19,9 @@ const Venue = ({ venues }) => {
   const [cuisine, setCuisine] = useState();
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
-  const [seat, setSeat] = useState();
-  const [time, setTime] = useState();
-  const [date, setDate] = useState();
+  // const [seat, setSeat] = useState();
+  // const [time, setTime] = useState();
+  // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([])
 
@@ -55,6 +55,7 @@ const Venue = ({ venues }) => {
     fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // edit venue ////////////////////////
@@ -105,6 +106,7 @@ const Venue = ({ venues }) => {
 
 
 
+
   currentVenue && console.log('length', currentVenue.images[0])
 
   return (
@@ -145,7 +147,7 @@ const Venue = ({ venues }) => {
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price} €</span></h4>
                 </div>
-                {currentUser.id && currentVenue.user_id != currentUser.id &&
+                {currentUser.id && currentVenue.user_id !== currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
                   </div>}
@@ -160,26 +162,26 @@ const Venue = ({ venues }) => {
 
               </div>
             </div>
-
-            {currentVenue.user_id == currentUser.id && (
-              <div className="d-flex  flex-column m-3 justify-content-center">
-
+            
+            {currentVenue.user_id === currentUser.id && (
+              <div className="d-flex justify-content-around m-3">
                 <div>
 
-                  <h4 className="text-center">List des reservations:</h4>
-                  <div className="container ">
-                    {bookings &&
-                      bookings.filter(booking => booking.venue_id == currentVenue.id)
-                        .map((booking) => (
-                          <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
-                            <h2>{booking.venue.name}</h2>
-                            <h4>seat:</h4>
-                            <span>{booking.seat}</span>
-                            <h4>Date:</h4>
-                            <span>{booking.date}</span>
-                            <h4>Time:</h4>
-                            <span>{booking.time}</span>
-                            {/* <div className="delete-button">
+                <h4 className="text-center">List des reservations:</h4>
+                <div className="container ">
+                  {bookings &&
+                    bookings.filter(booking => booking.venue_id === currentVenue.id)
+                      .map((booking) => (
+                        <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
+                          <h2>{booking.venue.name}</h2>
+                          <h4>seat:</h4>
+                          <span>{booking.seat}</span>
+                          <h4>Date:</h4>
+                          <span>{booking.date}</span>
+                          <h4>Time:</h4>
+                          <span>{booking.time}</span>
+                          {/* <div className="delete-button">
+
                               <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
                             </div> */}
                           </div>
