@@ -115,8 +115,8 @@ const Venue = ({ venues }) => {
         {currentVenue && (
           <div>
             <img
-              src={currentVenue.images}
-              alt={`${currentVenue.name}_image`}
+              src={currentVenue.photo.empty ? currentVenue.images : currentVenue.photo}
+              alt={`${currentVenue.name} dish`}
               className="img-fluid card-border"
             />
             <div className="card mt-3 p-4 card-border">
@@ -156,20 +156,14 @@ const Venue = ({ venues }) => {
               </div>
             </div>
 
-<<<<<<< HEAD
             {currentVenue.user_id === currentUser.id && (
               <div className="d-flex justify-content-around m-3">
-=======
-            {currentVenue.user_id == currentUser.id && (
-              <div className="d-flex  flex-column m-3 justify-content-center">
-              
->>>>>>> develop
                 <div>
 
                 <h4 className="text-center">List des reservations:</h4>
                 <div className="container ">
                   {bookings &&
-                    bookings.filter(booking => booking.venue_id == currentVenue.id)
+                    bookings.filter(booking => booking.venue_id === currentVenue.id)
                       .map((booking) => (
                         <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
                           <h2>{booking.venue.name}</h2>
