@@ -8,9 +8,18 @@ const ListVenues = ({ venues }) => {
   console.log()
 
   return (
-    <div className="container ">
-      <div className="row w-100">
-      <div className="col-md-3 col-sm-12 filter ">
+    <div className="w-75 mx-auto ">
+        <form className="text-center ">
+          <input
+            type="text"
+            name="search"
+            onChange={(e) => setSearchTerme(e.target.value)}
+            placeholder="Search your restaurant"
+            className="search-bar "
+          />
+        </form>
+      <div className="row w-100 m-2">
+      <div className="col-md-2 col-sm-12 filter mx-1 ">
         <ul>
           <li>categories</li>
           <li>categories</li>
@@ -37,16 +46,8 @@ const ListVenues = ({ venues }) => {
           <li>categories</li>
         </ul>
       </div>
-      <div className="col-md-9 col-sm-12  ">
-        <form className="text-center">
-          <input
-            type="text"
-            name="search"
-            onChange={(e) => setSearchTerme(e.target.value)}
-            placeholder="Search your restaurant"
-            className="search-bar "
-          />
-        </form>
+      <div className="col-md-8  col-sm-12  ">
+      
         {venues
           .filter((value) => {
             if (searchTerme == "") {
