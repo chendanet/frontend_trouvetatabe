@@ -36,7 +36,7 @@ function CreateVenue() {
           history.push('/');
         } else (alert('Erreur !'));
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.error('error', error));
   }
   
   return (

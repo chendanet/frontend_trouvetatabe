@@ -6,9 +6,9 @@ import Cookies from "js-cookie";
 import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
-import { PROD_EDIT_VENUE  } from 'api/apiHandler'
+import { PROD_EDIT_VENUE } from 'api/apiHandler'
 
-const EditVenue = ({ venues,modal }) => {
+const EditVenue = ({ venues, modal }) => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
@@ -23,11 +23,9 @@ const EditVenue = ({ venues,modal }) => {
   const userId = useSelector((state) => state.authReducer.id);
 
   const dataVenue = {
-    venue: {
-      name: name,
-      city: city,
-      cuisine: cuisine,
-    },
+    name: name,
+    city: city,
+    cuisine: cuisine,
   };
 
   const fetchEditVenue = async (e) => {
@@ -48,7 +46,7 @@ const EditVenue = ({ venues,modal }) => {
       return;
     }
 
-    const data = await response.json();
+   // const data = await response.json();
   };
 
 
@@ -102,7 +100,7 @@ const EditVenue = ({ venues,modal }) => {
         </form>
       </div>
     </div>
-    
+
   );
 };
 

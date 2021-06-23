@@ -62,11 +62,11 @@ const App = () => {
               <Profile />
             </Route>
             <Route path="/password/forgot">
-          <ForgotPassword />
-        </Route>
-        <Route path="/password/reset/:token">
-        <ResetPassword />
-        </Route>
+              <ForgotPassword />
+            </Route>
+            <Route path="/password/reset/:token">
+              <ResetPassword />
+            </Route>
           </Switch>
           <Footer />
         </div>

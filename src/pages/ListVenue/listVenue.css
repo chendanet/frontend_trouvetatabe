@@ -16,15 +16,14 @@
 
 
 .container-item {
-  padding: 5rem;
- 
+  padding: 5rem; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 25rem;
-  box-shadow: 3px 5px 8px -2px #7f7f7f;
+  box-shadow: 1px 1px 1px 1px #7f7f7f;
 }
 
 img {
