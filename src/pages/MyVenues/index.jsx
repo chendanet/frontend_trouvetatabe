@@ -13,7 +13,7 @@ const MyVenues = ({ venues }) => {
                 .filter((value) => value.user_id === currentManager.id)
                 .map((item, index) => (
                     <div className="image-item" key={index}>
-                        <img src={venues.photo === "" ? venues.image : `https://source.unsplash.com/600x600/?dish&sig=${index}`} alt={venues.name + " dish"} />
+                        <img src={item.photo === "" ? item.images : `https://source.unsplash.com/600x600/?dish&sig=${index}`} alt={venues.name + " dish"} />
                         <Link to={"/venues/" + item.id}>
                             <div className="container-item">
                                 <h5>{item.name}</h5>
