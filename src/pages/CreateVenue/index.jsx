@@ -54,6 +54,7 @@ function CreateVenue() {
               ref={nameRef}
               placeholder="What is the name of your establishment ?"
               required="required"
+              class="form-control"
             />
             <br />
             <label>
@@ -76,6 +77,7 @@ function CreateVenue() {
               ref={addressRef}
               placeholder="What is the address of your establishment ?"
               required="required"
+              class="form-control"
             />
             <br />
             <input
@@ -84,6 +86,7 @@ function CreateVenue() {
               name="zipcode"
               ref={zipcodeRef}
               placeholder="What is the zipcode of your establishment ?"
+              class="form-control"
             />{" "}
             <br />
             <input
@@ -93,6 +96,7 @@ function CreateVenue() {
               name="price"
               ref={priceRef}
               placeholder="What is the average basket of your establishment ?"
+              class="form-control"
             />{" "}
             <br />
             <input
@@ -101,6 +105,7 @@ function CreateVenue() {
               name="cuisine"
               ref={cuisineRef}
               placeholder="Do you cook ? If so, what kind ?"
+              class="form-control"
             />{" "}
             <br />
             <input
@@ -110,6 +115,7 @@ function CreateVenue() {
               name="phone_number"
               ref={phoneNumberRef}
               placeholder="The phone number of your establishment ?"
+              class="form-control"
             />{" "}
             <br />
             <label>
@@ -118,7 +124,8 @@ function CreateVenue() {
               rows="4"
               type="checkbox"
               name="terrace"
-              ref={terraceRef}
+                ref={terraceRef}
+                className="form-check-label m-2"
             /></label>{" "}
             <br />
             <input
@@ -128,10 +135,13 @@ function CreateVenue() {
               name="seatnumber"
               ref={seatNumberRef}
               placeholder="How many seats do you have ?"
+              class="form-control"
             />{" "}
             <br />
-            <textarea name="description" ref={descriptionRef} placeholder="Describe your establishment in a few words" required="required" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5"/>{" "}
-            <input name="images[]"  type="file" multiple={true} />
+            <textarea name="description" ref={descriptionRef} placeholder="Describe your establishment in a few words" required="required" className="form-control" />
+            {" "}
+            <br />
+            <input name="images[]"  type="file" multiple={true} className="form-control-file" />
             <br />
             <input type="submit" value="Create your Venue" className="btn-signin" />
             <br />
