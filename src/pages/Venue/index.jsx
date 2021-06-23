@@ -104,7 +104,7 @@ const Venue = ({ venues }) => {
 
 
 
-  currentVenue && console.log('length', currentVenue.images[0])
+
 
   return (
     // <div className="container-page">
