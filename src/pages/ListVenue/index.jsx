@@ -3,10 +3,7 @@ import { useState } from "react";
 import "pages/ListVenue/listVenue.css";
 import { Link } from "react-router-dom";
 
-
-
-
-const ListVenues = ({ venues }) => {
+export const ListVenues = ({ venues }) => {
   const [searchTerme, setSearchTerme] = useState("");
   const [cuisines, setCuisines] = useState([])
   const [prices, setPrices] = useState([])
@@ -90,94 +87,47 @@ const ListVenues = ({ venues }) => {
           </div>
         </div>
         <div className="col-md-8  col-sm-12  ">
-          {venues
-            .filter((value) => {
-              if (cuisines.length == 0 && prices.length == 0) {
-                if (searchTerme == "") {
-                  return value;
-                }
-                if (value.name.toLowerCase().includes(searchTerme.toLowerCase())) {
-                  return value;
-                }
+          <div class="row">
+          {venues === undefined ? (
+            <div className="spinner spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : venues
+            .filter(value => cuisines.length === 0 || cuisines.indexOf(value.cuisine) > -1)
+            .filter(value => {
+              if(prices.length === 0) {
+                return true;
               }
-
-              if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.length === 0) {
-                if (prices.length != 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
+              if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
+                return true
               }
-
-              if (searchTerme == "" && cuisines.indexOf(value.cuisine) >= 0) {
-                if (prices.length == 0) {
-                  return value;
-                }
-                if (prices.length != 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
+              if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
+                return true
               }
-              if (searchTerme == "" && cuisines.indexOf(value.cuisine) == 0) {
-                if (prices.length != 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
-              }
-              if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.indexOf(value.cuisine) >= 0) {
-                if (prices.length == 0) {
-                  return value;
-                }
-                if (prices.length != 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
+              if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
+                return true
               }
             })
+            .filter(value => value.name.toLowerCase().includes(searchTerme.toLowerCase()))
             .map((item, index) => (
-              <div className="image-item w-100 row" key={index}>
-                <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" className="col-md-5 img-fluid p-0" />
+              <div className="col-3 col-md-4 col-sm-6">
                 <Link to={"/venues/" + item.id} className="col-md-6">
-                  <div className="container-item ">
-                    <h5>{item.name}</h5>
-                    <p>{item.city}</p>
-                    <p>{item.cuisine}</p>
-                    <button>valider</button>
+                <div className="card" key={index}>
+                  <img className="card_img" src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt=""/>
+                  <div className="card_desc">
+                    <h5 className="card_name" title={item.name}>{item.name}</h5>
+                    <div className="card_city">{item.city}</div>
+                    <div className="card_cuisine">{item.cuisine}</div>
+                    <button className="card_btn">valider</button>
                   </div>
+                </div>
                 </Link>
               </div>
-            ))}
+            ))
+          }
+          </div>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
-
-export default ListVenues;
