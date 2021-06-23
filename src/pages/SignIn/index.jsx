@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { authenticate } from 'store/actions'
-import "pages/SignIn/SignIn.css";
 import { Link } from "react-router-dom"
+import "pages/SignIn/SignIn.css";
+import { PROD_SIGNIN } from 'api/apiHandler';
 
 const SignIn = () => {
 
@@ -31,7 +32,7 @@ const SignIn = () => {
       }
     }
     e.preventDefault();
-    const response = await fetch("https://trouvetatableapi.herokuapp.com/api/login", {
+    const response = await fetch(PROD_SIGNIN, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
@@ -50,13 +51,16 @@ const SignIn = () => {
     const userId = data.data.id
     const userEmail = data.data.attributes.email
     const is_manager = data.data.attributes.is_manager
+    const userFirstName = data.data.attributes.first_name;
+    const userLastName = data.data.attributes.last_name;
 
-    console.log("data", is_manager);
 
     dispatch(authenticate({
       id: userId,
       email: userEmail,
-      is_manager: is_manager
+      is_manager: is_manager,
+      first_name: userFirstName,
+      last_name: userLastName
     }, token))
 
     history.push('/')
@@ -89,6 +93,7 @@ const SignIn = () => {
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
               Login
               </button>
+              <Link to="/password/forgot" className="link-tertiary">Mot de passe oublié</Link>
             <br />
           </div>
         </form>

@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import config from "config";
 import "pages/Booking/Booking.css";
 import { useSelector } from "react-redux";
-
+import { PROD_BOOKINGS } from 'api/apiHandler';
 
 const Booking = ({ modal, idVenue }) => {
   const [seat, setSeat] = useState();
   const [time, setTime] = useState();
   const [date, setDate] = useState();
   const currentUser = useSelector((state) => state.authReducer);
-
-
   const history = useHistory();
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
-
   const dataBooking = {
     booking: {
       seat: seat,
@@ -29,9 +25,8 @@ const Booking = ({ modal, idVenue }) => {
   const fetchBooking = async (e) => {
     e.preventDefault();
 
-    console.log("token", token);
 
-    const response = await fetch(`https://trouvetatableapi.herokuapp.com/api/bookings`, {
+    const response = await fetch(PROD_BOOKINGS, {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -46,11 +41,9 @@ const Booking = ({ modal, idVenue }) => {
       history.push("/");
       return;
     }
-    console.log(data);
   };
 
-  console.log("token", token);
-  console.log("dataBooking", dataBooking);
+ 
 
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
