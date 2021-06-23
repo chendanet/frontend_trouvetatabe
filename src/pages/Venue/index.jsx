@@ -19,9 +19,9 @@ const Venue = ({ venues }) => {
   const [cuisine, setCuisine] = useState();
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
-  const [seat, setSeat] = useState();
-  const [time, setTime] = useState();
-  const [date, setDate] = useState();
+  // const [seat, setSeat] = useState();
+  // const [time, setTime] = useState();
+  // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([])
 
