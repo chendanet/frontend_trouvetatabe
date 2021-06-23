@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { authenticate } from 'store/actions'
 import "pages/Profile/Profile.css";
 import { logout } from "store/actions";
-import { DEV_PROFILE, DEV_BOOKINGS } from 'api/apiHandler';
+import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
 
 
 const Profile = () => {
@@ -35,7 +35,7 @@ const Profile = () => {
             }
         }
 
-        const response = await fetch(`${DEV_PROFILE}/${currentUser.id}`,
+        const response = await fetch(`${PROD_PROFILE}/${currentUser.id}`,
             {
                 method: 'put',
                 headers: {
@@ -70,7 +70,7 @@ const Profile = () => {
 
 
     useEffect(() => {
-        fetch(DEV_BOOKINGS)
+        fetch(PROD_BOOKINGS)
             .then((response) => response.json())
             .then((data) => {
                 setMyBooking(data)
@@ -80,7 +80,7 @@ const Profile = () => {
     // ***************** add delete booking *************
 
     const deleteBooking = async (id) => {
-        fetch(`${DEV_BOOKINGS}/${id}`, {
+        fetch(`${PROD_BOOKINGS}/${id}`, {
             method: 'delete',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ const Profile = () => {
         e.preventDefault()
 
         const response = await fetch(
-            `${DEV_PROFILE}/${currentUser.id}`,
+            `${PROD_PROFILE}/${currentUser.id}`,
             {
                 method: "delete",
                 headers: {

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
 import { Link } from "react-router-dom";
-import { DEV_SIGNUP } from 'api/apiHandler';
+import { PROD_SIGNUP } from 'api/apiHandler';
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -34,7 +34,7 @@ const SignUp = () => {
       },
     };
     e.preventDefault();
-    const response = await fetch(DEV_SIGNUP, {
+    const response = await fetch(PROD_SIGNUP, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
