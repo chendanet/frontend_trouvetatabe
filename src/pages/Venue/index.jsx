@@ -55,7 +55,8 @@ const Venue = ({ venues }) => {
     fetch(`${DEV_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
-  }, [idVenue, currentVenue]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // edit venue ////////////////////////
 
@@ -97,9 +98,9 @@ const Venue = ({ venues }) => {
     setBookings(data)
   }
 
-  // useEffect(() => {
-  //   fetchAllBookings();
-  // }, [bookings])
+  useEffect(() => {
+    fetchAllBookings();
+  }, [])
 
 
 
@@ -139,7 +140,7 @@ const Venue = ({ venues }) => {
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price} €</span></h4>
                 </div>
-                {currentUser.id && currentVenue.user_id != currentUser.id &&
+                {currentUser.id && currentVenue.user_id !== currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
                   </div>}
@@ -155,7 +156,7 @@ const Venue = ({ venues }) => {
               </div>
             </div>
 
-            {currentVenue.user_id == currentUser.id && (
+            {currentVenue.user_id === currentUser.id && (
               <div className="d-flex justify-content-around m-3">
                 <div>
                   <button type="button" onClick={toggleModal1} idVenue={idVenue}>

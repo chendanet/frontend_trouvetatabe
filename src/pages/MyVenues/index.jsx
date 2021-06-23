@@ -12,7 +12,7 @@ const MyVenues = ({ venues }) => {
     return (
         <div>
             {venues
-                .filter((value) => value.user_id == currentManager.id)
+                .filter((value) => value.user_id === currentManager.id)
                 .map((item, index) => (
                     <div className="image-item" key={index}>
                         <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" />
