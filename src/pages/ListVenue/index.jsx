@@ -48,8 +48,6 @@ const ListVenues = ({ venues }) => {
     }
   }
 
-  console.log('prices', prices)
-  console.log(prices.length)
   return (
     <div className="w-75 mx-auto ">
       <form className="text-center ">
