@@ -9,9 +9,6 @@ import { Link } from "react-router-dom";
 const ListVenues = ({ venues }) => {
   const [searchTerme, setSearchTerme] = useState("");
   const [cuisines, setCuisines] = useState([])
-
-<<<<<<< HEAD
-=======
   const CUISINES = [
     "Steak",
     "Seafood",
@@ -24,7 +21,6 @@ const ListVenues = ({ venues }) => {
     "Californian",
     "Korean"
   ]
->>>>>>> develop
 
   const handleChangeCuisine = (e) => {
     let { name } = e.target
