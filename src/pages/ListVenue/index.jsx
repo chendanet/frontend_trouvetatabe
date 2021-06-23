@@ -36,9 +36,19 @@ const ListVenues = ({ venues }) => {
 
   console.log('cuisines', cuisines.length)
   return (
-    <div className="container-list">
-      <div className="filter">
-        {CUISINES.map((c, index) => (
+    <div className="w-75 mx-auto ">
+        <form className="text-center ">
+          <input
+            type="text"
+            name="search"
+            onChange={(e) => setSearchTerme(e.target.value)}
+            placeholder="Search your restaurant"
+            className="search-bar "
+          />
+        </form>
+      <div className="row w-100 m-2">
+      <div className="col-md-2 col-sm-12 filter mx-1 ">
+      {CUISINES.map((c, index) => (
           <div key={index}>
             <input type="checkbox"
               name={c}
@@ -49,17 +59,10 @@ const ListVenues = ({ venues }) => {
             <label>{c}</label>
           </div>
         ))}
+   
       </div>
-      <div className="container-img-item">
-        <form>
-          <input
-            type="text"
-            name="search"
-            onChange={(e) => setSearchTerme(e.target.value)}
-            placeholder="Search your restaurant"
-            className="search-bar"
-          />
-        </form>
+      <div className="col-md-8  col-sm-12  ">
+      
         {venues
           .filter((value) => {
             if (searchTerme == "") {
@@ -83,10 +86,10 @@ const ListVenues = ({ venues }) => {
 
           })
           .map((item, index) => (
-            <div className="image-item" key={index}>
-              <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" />
-              <Link to={"/venues/" + item.id}>
-                <div className="container-item">
+            <div className="image-item w-100 row" key={index}>
+              <img src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt="" className="col-md-5 img-fluid p-0"/>
+              <Link to={"/venues/" + item.id} className="col-md-6">
+                <div className="container-item ">
                   <h5>{item.name}</h5>
                   <p>{item.city}</p>
                   <p>{item.cuisine}</p>
@@ -96,6 +99,7 @@ const ListVenues = ({ venues }) => {
             </div>
           ))}
       </div>
+    </div>
     </div>
   );
 };
