@@ -24,7 +24,7 @@ const Venue = ({ venues }) => {
   const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([])
-
+  
   const dataVenue = {
     venue: {
       name: name,
@@ -55,7 +55,8 @@ const Venue = ({ venues }) => {
     fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
       .then((response) => response.json())
       .then((data) => setCurrentVenue(data));
-  }, [idVenue, currentVenue]);
+  }, []);
+
 
   // edit venue ////////////////////////
 
@@ -99,12 +100,25 @@ const Venue = ({ venues }) => {
 
   useEffect(() => {
     fetchAllBookings();
-  }, [bookings])
+  }, [])
+
+  
 
 
-
-
-
+  
+    console.log("seat total:",currentVenue.seatnumber)
+    const seatNumberBooking = (bookings &&
+      bookings.filter(booking => booking.venue_id == currentVenue.id)
+        .map((booking) => 
+             booking.seat
+          
+      ))
+    const sumSeatNumber = seatNumberBooking.reduce((a, b) => a + b, 0);
+    console.log(sumSeatNumber);
+    
+    const currentSeatNumber = currentVenue.seatnumber -sumSeatNumber
+      console.log("seat reservé:",seatNumberBooking);
+      console.log("seat actuel:", currentSeatNumber);
 
 
   return (
@@ -159,13 +173,19 @@ const Venue = ({ venues }) => {
               <div className="d-flex  flex-column m-3 justify-content-center">
               
                 <div>
-
+                  <h4>Place restante:</h4>
+                 
+                  {currentSeatNumber>0? currentSeatNumber: 0} / {currentVenue.seatnumber}
+                          
+                  
+                
+                        
                 <h4 className="text-center">List des reservations:</h4>
                 <div className="container ">
                   {bookings &&
                     bookings.filter(booking => booking.venue_id == currentVenue.id)
-                      .map((booking) => (
-                        <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
+                      .map((booking,index) => (
+                        <div key={ index}className="card m-2 p-2 d-flex align-items-center justify-content-center">
                           <h2>{booking.venue.name}</h2>
                           <h4>seat:</h4>
                           <span>{booking.seat}</span>
