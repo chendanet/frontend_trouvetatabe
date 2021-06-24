@@ -146,7 +146,7 @@ const Venue = ({ venues }) => {
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price*0.90} €</span></h4>
                 </div>
-                {currentUser.id && currentVenue.user_id !== currentUser.id &&
+                {currentUser.id && currentVenue.user_id != currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
                   </div>}
