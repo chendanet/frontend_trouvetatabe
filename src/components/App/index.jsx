@@ -15,7 +15,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import ListVenues from "pages/ListVenue";
+import {ListVenues} from "pages/ListVenue";
 import MyVenues from 'pages/MyVenues';
 import Booking from "pages/Booking";
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
@@ -24,7 +24,7 @@ import ResetPassword from 'pages/ResetPassword';
 
 const App = () => {
 
-  const [venues, setVenues] = useState([]);
+  const [venues, setVenues] = useState(undefined);
 
   useEffect(() => {
     fetch(PROD_EDIT_VENUE)
