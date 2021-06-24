@@ -10,16 +10,16 @@ export const ListVenues = () => {
   const [cuisines, setCuisines] = useState([]);
   const [prices, setPrices] = useState([]);
   const CUISINES = [
-    "Steak",
-    "Seafood",
-    "French",
-    "Asian",
-    "Indian",
-    "Italian",
+    "Steak 🥩",
+    "Seefood 🍤",
+    "French 🥐",
+    "Asian 🍜",
+    "Indian 🍛",
+    "Italian 🍝",
     "American",
-    "Mexican",
+    "Mexican 🌮",
     "Californian",
-    "Korean"
+    "Korean 🥟"
   ]
 
   const PRICES = [
@@ -60,16 +60,14 @@ export const ListVenues = () => {
   
   return (
     <>
-      <div className="container-fofo">
+    <div className="container-banner">
         <br/>
         <p><center>C'est enfin l'été ! 😎☀️</center></p>
         <p><center>Nous pouvons enfin nous retrouver au restaurant ou au bar sans masque ! 🍧</center></p>
         <p><center>Avec Trouvetatable, réservez rapidement votre place en quelques clics ! 🖱 </center></p>
       </div>
-    
-    
-    <div className="w-75 mx-auto ">
-      <form className="text-center ">
+   
+         <form className="text-center my-3 ">
         <input
           type="text"
           name="search"
@@ -78,8 +76,14 @@ export const ListVenues = () => {
           className="search-bar "
         />
       </form>
-      <div className="row w-100 m-2">
-        <div className="col-md-2 col-sm-12 filter mx-1 ">
+   
+
+    <div className="container">
+      
+
+    <div className="w-100 mx-5">
+      <div className="row w-100 flex-row-center">
+        <div className="col-md-2 col-sm-12 filter mt-1 me-4">
           <div>
             {CUISINES.map((c, index) => (
               <div key={index}>
@@ -108,7 +112,7 @@ export const ListVenues = () => {
             ))}
           </div>
         </div>
-        <div className="col-md-8  col-sm-12  ">
+        <div className="col-md-9  col-sm-12 ms-1 ">
           <div class="row">
           {venues === undefined ? (
             <div className="spinner spinner-border" role="status">
@@ -132,7 +136,7 @@ export const ListVenues = () => {
             })
             .filter(value => value.name.toLowerCase().includes(searchTerme.toLowerCase()))
             .map((item, index) => (
-              <div className="col-3 col-md-4 col-sm-6">
+              <div className="col-md-4 col-sm-6">
                 <Link to={"/venues/" + item.id} className="col-md-6">
                 <div className="card" key={index}>
                 {!item.images[0] ?
@@ -162,6 +166,7 @@ export const ListVenues = () => {
           </div>
         </div>
       </div>
+    </div>
     </>
   );
 };
