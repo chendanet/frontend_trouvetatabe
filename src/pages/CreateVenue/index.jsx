@@ -33,7 +33,7 @@ function CreateVenue() {
       .then(response => {
         if (response.ok) {
           alert('Your Venue as been created with success !');
-          history.push('/');
+          history.push('/myVenues');
         } else (alert('Erreur !'));
       })
       .catch(error => console.error('error', error));

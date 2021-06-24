@@ -12,7 +12,7 @@ import Ratings from "pages/Ratings";
 import { PROD_EDIT_VENUE, PROD_BOOKINGS } from 'api/apiHandler';
 
 
-const Venue = ({ venues }) => {
+const Venue = () => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
@@ -34,7 +34,15 @@ const Venue = ({ venues }) => {
       cuisine: cuisine,
     },
   };
+  const [venues, setVenues] = useState(undefined);
 
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
 
 
   // delete venue ////////////////////////
@@ -59,24 +67,7 @@ const Venue = ({ venues }) => {
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);
 
-  // edit venue ////////////////////////
 
-  const fetchEditVenue = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `${PROD_EDIT_VENUE}/${idVenue}`,
-      {
-        method: "put",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataVenue),
-      }
-    );
-    history.push("/myVenues");
-    const data = await response.json();
-  };
 
 
   // toggle modal

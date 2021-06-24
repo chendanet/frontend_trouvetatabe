@@ -1,8 +1,22 @@
-import { useSelector } from "react-redux";
+import { useSelector} from "react-redux";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { PROD_EDIT_VENUE } from 'api/apiHandler';
 
 
-const MyVenues = ({ venues }) => {
+
+
+const MyVenues = () => {
+
+    const [venues, setVenues] = useState(undefined);
+
+useEffect(() => {
+  fetch(PROD_EDIT_VENUE)
+    .then((response) => response.json())
+    .then((data) => {
+      setVenues(data)
+    });
+}, [])
 
     const currentManager = useSelector((state) => state.authReducer)
     console.log('venues', venues)

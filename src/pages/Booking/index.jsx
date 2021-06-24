@@ -38,7 +38,7 @@ const Booking = ({ modal, idVenue }) => {
     const data = await response.json();
 
     if (response) {
-      history.push("/");
+      history.push("/profile");
       return;
     }
   };

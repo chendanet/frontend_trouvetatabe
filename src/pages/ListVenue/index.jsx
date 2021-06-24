@@ -1,10 +1,11 @@
 /* eslint-disable array-callback-return */
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "pages/ListVenue/listVenue.css";
 import { Link } from "react-router-dom";
+import { PROD_EDIT_VENUE } from 'api/apiHandler';
 
-export const ListVenues = ({ venues }) => {
+export const ListVenues = () => {
   const [searchTerme, setSearchTerme] = useState("");
   const [cuisines, setCuisines] = useState([]);
   const [prices, setPrices] = useState([]);
@@ -26,6 +27,17 @@ export const ListVenues = ({ venues }) => {
     "35-50",
     "More than 50"
   ]
+
+  const [venues, setVenues] = useState(undefined);
+
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
+
 
   const handleChangeCuisine = (e) => {
     let { name } = e.target
@@ -123,7 +135,17 @@ export const ListVenues = ({ venues }) => {
               <div className="col-3 col-md-4 col-sm-6">
                 <Link to={"/venues/" + item.id} className="col-md-6">
                 <div className="card" key={index}>
-                  <img className="card_img" src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt=""/>
+                {!item.images[0] ?
+                            <img
+                                src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />
+                            : <img
+                                src={item.images[0]}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />}
                   <div className="card_desc">
                     <h5 className="card_name" title={item.name}>{item.name}</h5>
                     <div className="card_city">{item.city}</div>
