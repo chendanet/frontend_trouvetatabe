@@ -26,6 +26,9 @@ const Venue = () => {
   // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([])
+  const [ratings, setRatings] = useState([])
+
+
 
   const dataVenue = {
     venue: {
@@ -69,7 +72,6 @@ const Venue = () => {
 
 
 
-
   // toggle modal
   const [modal, setModal] = useState(false)
   const toggleModal = () => {
@@ -82,11 +84,6 @@ const Venue = () => {
     setModal1(!modal1)
   }
 
-  // toggle modal Rating
-  const [modalRating, setModalRating] = useState(false)
-  const toggleModalRating = () => {
-    setModalRating(!modalRating)
-  }
 
 
   const fetchAllBookings = async () => {
@@ -99,7 +96,24 @@ const Venue = () => {
     fetchAllBookings();
   }, [])
 
+  /* ********************************** RATINGS ********************************** */
 
+  const fetchAllRatings = async () => {
+    const response = await fetch('https://trouvetatableapi.herokuapp.com/api/ratings')
+    const data = await response.json()
+    setRatings(data)
+  }
+
+  useEffect(() => {
+    fetchAllRatings();
+  }, [])
+
+  // toggle modal Rating
+  const [modalRating, setModalRating] = useState(false)
+  const toggleModalRating = () => {
+    setModalRating(!modalRating)
+  }
+/* ********************************** RATINGS ********************************** */
 
   return (
     // <div className="container-page">
@@ -140,6 +154,22 @@ const Venue = () => {
               <div className="row">
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price*0.90} €</span></h4>
+
+                  <div className="col-md-6 col-sm-12">
+                  <h4> Review </h4>
+{/* ********************************** RATINGS ********************************** */}
+{ratings &&
+                      ratings.filter(rating => rating.venue_id == currentVenue.id)
+                        .map((rating) => (
+                          <div class="rating">
+                            <span>{rating.score}/5 - {rating.review} </span>
+                            </div>
+                        )
+                        )}
+
+{/* ********************************** RATINGS ********************************** */}
+</div>
+
                 </div>
                 {currentUser.id && currentVenue.user_id != currentUser.id &&
                   <div className="col-md-6 col-sm-12">
