@@ -21,6 +21,8 @@ import Booking from "pages/Booking";
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import ForgotPassword from 'pages/ForgotPassword';
 import ResetPassword from 'pages/ResetPassword';
+import Ratings from 'pages/Ratings';
+
 
 const App = () => {
 
@@ -66,6 +68,9 @@ const App = () => {
             </Route>
             <Route path="/password/reset/:token">
               <ResetPassword />
+            </Route>
+            <Route path="/ratings">
+              <Ratings />
             </Route>
           </Switch>
           <Footer />
