@@ -28,24 +28,7 @@ const Venue = () => {
   const [bookings, setBookings] = useState([])
   const [ratings, setRatings] = useState([])
 
-/* ********************************** RATINGS ********************************** */
-  function getScore(){
-    let overallScore = this.rating.score
 
-    const score = []
-    for (var i = 0; i < overallScore; i++ ){
-        score.push(
-            <i key={i} className="fas fa-chair fa-lg chair-filled"></i>
-        ) 
-    }
-    for (var i = overallScore; i < 5 ; i++ ){
-        score.push(    
-            <i key={i} className="fas fa-chair fa-sm chair-open"></i>
-            ) 
-    }
-    return score;
-}
-/* ********************************** RATINGS ********************************** */
 
   const dataVenue = {
     venue: {
@@ -130,8 +113,9 @@ const Venue = () => {
     fetchAllRatings();
   }, [])
 
-/* ********************************** RATINGS ********************************** */
+ 
 
+/* ********************************** RATINGS ********************************** */
   return (
     // <div className="container-page">
     <div className="container-page d-flex align-items-center justify-content-center  ">
@@ -172,21 +156,21 @@ const Venue = () => {
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price*0.90} €</span></h4>
 
+                  <div className="col-md-6 col-sm-12">
+                  <h4> Review </h4>
 {/* ********************************** RATINGS ********************************** */}
 {ratings &&
                       ratings.filter(rating => rating.venue_id == currentVenue.id)
                         .map((rating) => (
-                          <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
-                             <h4>Review</h4>
-                            <span>{rating.review}</span>
-                            <h4>Score</h4>
-                            <span>{rating.score}</span>
-                  
-                          </div>
+                          <div class="rating">
+                          {/* <span>{rating.review}</span>  */}
+                            <span>{rating.score}/5 - {rating.review} </span>
+                            </div>
                         )
                         )}
 
 {/* ********************************** RATINGS ********************************** */}
+</div>
 
                 </div>
                 {currentUser.id && currentVenue.user_id != currentUser.id &&
