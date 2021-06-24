@@ -1,13 +1,11 @@
 /* eslint-disable array-callback-return */
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "pages/ListVenue/listVenue.css";
 import { Link } from "react-router-dom";
+import { PROD_EDIT_VENUE } from 'api/apiHandler';
 
-
-
-
-const ListVenues = ({ venues }) => {
+export const ListVenues = () => {
   const [searchTerme, setSearchTerme] = useState("");
   const [cuisines, setCuisines] = useState([]);
   const [prices, setPrices] = useState([]);
@@ -30,6 +28,17 @@ const ListVenues = ({ venues }) => {
     "More than 50"
   ]
 
+  const [venues, setVenues] = useState(undefined);
+
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
+
+
   const handleChangeCuisine = (e) => {
     let { name } = e.target
     if (cuisines.indexOf(name) === -1) {
@@ -48,20 +57,28 @@ const ListVenues = ({ venues }) => {
     }
   }
 
+  
   return (
-    <div className=" mx-5">
-      <div className="text-center">
-        <form >
-          <input
-            type="text"
-            name="search"
-            onChange={(e) => setSearchTerme(e.target.value)}
-            placeholder="Search your restaurant"
-            className="search-bar "
-          />
-        </form>
+    <>
+      <div className="container-fofo">
+        <br/>
+        <p><center>C'est enfin l'été ! 😎☀️</center></p>
+        <p><center>Nous pouvons enfin nous retrouver au restaurant ou au bar sans masque ! 🍧</center></p>
+        <p><center>Avec Trouvetatable, réservez rapidement votre place en quelques clics ! 🖱 </center></p>
       </div>
-      <div className="row my-4">
+    
+    
+    <div className="w-75 mx-auto ">
+      <form className="text-center ">
+        <input
+          type="text"
+          name="search"
+          onChange={(e) => setSearchTerme(e.target.value)}
+          placeholder="Search your restaurant"
+          className="search-bar "
+        />
+      </form>
+      <div className="row w-100 m-2">
         <div className="col-md-2 col-sm-12 filter mx-1 ">
           <div>
             {CUISINES.map((c, index) => (
@@ -92,106 +109,59 @@ const ListVenues = ({ venues }) => {
           </div>
         </div>
         <div className="col-md-8  col-sm-12  ">
-          {venues
-            .filter((value) => {
-              if (cuisines.length === 0 && prices.length === 0) {
-                if (searchTerme === "") {
-                  return value;
-                }
-                if (value.name.toLowerCase().includes(searchTerme.toLowerCase())) {
-                  return value;
-                }
+          <div class="row">
+          {venues === undefined ? (
+            <div className="spinner spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : venues
+            .filter(value => cuisines.length === 0 || cuisines.indexOf(value.cuisine) > -1)
+            .filter(value => {
+              if(prices.length === 0) {
+                return true;
               }
-
-              if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.length === 0) {
-                if (prices.length !== 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
+              if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
+                return true
               }
-
-              if (searchTerme === "" && cuisines.indexOf(value.cuisine) >= 0) {
-                if (prices.length === 0) {
-                  return value;
-                }
-                if (prices.length !== 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
+              if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
+                return true
               }
-              if (searchTerme === "" && cuisines.indexOf(value.cuisine) === 0) {
-                if (prices.length !== 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
-              }
-              if (value.name.toLowerCase().includes(searchTerme.toLowerCase()) && cuisines.indexOf(value.cuisine) >= 0) {
-                if (prices.length === 0) {
-                  return value;
-                }
-                if (prices.length !== 0) {
-                  if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                    return value
-                  }
-                  if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                    return value
-                  }
-                  if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                    return value
-                  }
-                }
+              if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
+                return true
               }
             })
+            .filter(value => value.name.toLowerCase().includes(searchTerme.toLowerCase()))
             .map((item, index) => (
-
-              <div className="image-item w-50 row" key={index}>
-                {!item.images[0] ?
-                  <img
-                    src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
-                    alt={`${item.name}_image`}
-                    className="img-fluid card-border"
-                  />
-                  : <img
-                    src={item.images[0]}
-                    alt={`${item.name}_image`}
-                    className="img-fluid card-border"
-                  />}
-
+              <div className="col-3 col-md-4 col-sm-6">
                 <Link to={"/venues/" + item.id} className="col-md-6">
-                  <div className="container-item ">
-                    <h5>{item.name}</h5>
-                    <p>{item.city}</p>
-                    <p>{item.cuisine}</p>
-                    <button>valider</button>
+                <div className="card" key={index}>
+                {!item.images[0] ?
+                            <img
+                                src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />
+                            : <img
+                                src={item.images[0]}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />}
+                  <div className="card_desc">
+                    <h5 className="card_name" title={item.name}>{item.name}</h5>
+                    <div className="card_city">{item.city}</div>
+                    <div className="card_cuisine">{item.cuisine}</div>
+                    <div className="card_price">{Math.floor(item.price*0.90)} € au lieu de {item.price} €</div>
+                    <button className="card_btn">valider</button>
                   </div>
+                </div>
                 </Link>
               </div>
-            ))}
+            ))
+          }
+          </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
-
-export default ListVenues;
