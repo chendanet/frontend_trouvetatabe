@@ -12,7 +12,6 @@ import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
 
 const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)
-    console.log(currentUser)
     let currentEmail = currentUser.email
     let currentLastName = currentUser.last_name
     let currentFirstName = currentUser.first_name
@@ -61,10 +60,8 @@ const Profile = () => {
             last_name: userLastName,
         }, token))
 
-        // console.log(data)
         history.push('/')
     }
-    console.log("currentUser:", currentUser);
 
 
     // ************* add booking for profil **************
@@ -134,7 +131,7 @@ const Profile = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Modifier email"
-                                class="form-control"/>
+                                class="form-control" />
                             <br />
                             <input
                                 type="password"
@@ -142,7 +139,7 @@ const Profile = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Modifier MDP"
-                                class="form-control"/>
+                                class="form-control" />
                             <br />
                             <input
                                 type="text"
@@ -150,7 +147,7 @@ const Profile = () => {
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                                 placeholder="Votre Prénon"
-                                class="form-control"/>
+                                class="form-control" />
                             <br />
                             <input
                                 type="text"
@@ -158,7 +155,7 @@ const Profile = () => {
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="Votre Nom"
-                                class="form-control"/>
+                                class="form-control" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
                                 Modifier mon profil
@@ -183,12 +180,12 @@ const Profile = () => {
                 </div>
             </div>
             <div className="container ">
-              
+
                 <h3>My bookings</h3>
                 {myBooking.map((booking) => (
 
-                    booking.user_id === currentUser.id && (
-                        
+                    booking.user_id === parseInt(currentUser.id) && (
+
                         <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
                             <h2>{booking.venue.name}</h2>
                             <h4>seat:</h4>
@@ -202,7 +199,7 @@ const Profile = () => {
 
                             </div>
                         </div>
-                        
+
                     ))
                 )}
             </div>

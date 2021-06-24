@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React from "react";
 import { useState } from "react";
 import "pages/ListVenue/listVenue.css";
@@ -5,9 +6,8 @@ import { Link } from "react-router-dom";
 
 export const ListVenues = ({ venues }) => {
   const [searchTerme, setSearchTerme] = useState("");
-  const [cuisines, setCuisines] = useState([])
-  const [prices, setPrices] = useState([])
-
+  const [cuisines, setCuisines] = useState([]);
+  const [prices, setPrices] = useState([]);
   const CUISINES = [
     "Steak",
     "Seafood",
@@ -29,7 +29,7 @@ export const ListVenues = ({ venues }) => {
 
   const handleChangeCuisine = (e) => {
     let { name } = e.target
-    if (cuisines.indexOf(name) == -1) {
+    if (cuisines.indexOf(name) === -1) {
       setCuisines([...cuisines, name])
     } else {
       setCuisines(cuisines.filter((p) => p !== name))
@@ -38,7 +38,7 @@ export const ListVenues = ({ venues }) => {
 
   const handleChangePrice = (e) => {
     let { name } = e.target
-    if (prices.indexOf(name) == -1) {
+    if (prices.indexOf(name) === -1) {
       setPrices([...prices, name])
     } else {
       setPrices(prices.filter((p) => p !== name))
