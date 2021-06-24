@@ -101,8 +101,24 @@ const Venue = ({ venues }) => {
     fetchAllBookings();
   }, [])
 
+  
+// map leaflet whit nominatim
+ 
 
+  const [currentAddress, setCurrentAddress] = useState(null)
+    
+ 
+  useEffect(() => {
+    fetch("https://nominatim.openstreetmap.org/search.php?q=rue+vent+paris&format=jsonv2")
+      .then((response) => response.json())
+      .then((data) => {
+       console.log(data);
+      });
+  
+    }, [])
+    
 
+  // console.log(currentAddress);
 
 
 
