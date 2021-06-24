@@ -48,7 +48,7 @@ const Venue = ({ venues }) => {
         },
       }
     );
-    history.push("/myVenues");
+    history.push("/");
   };
 
   useEffect(() => {
@@ -57,24 +57,7 @@ const Venue = ({ venues }) => {
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);
 
-  // edit venue ////////////////////////
 
-  const fetchEditVenue = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `${PROD_EDIT_VENUE}/${idVenue}`,
-      {
-        method: "put",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataVenue),
-      }
-    );
-    history.push("/myVenues");
-    const data = await response.json();
-  };
 
 
   // toggle modal

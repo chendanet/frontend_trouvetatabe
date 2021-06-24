@@ -123,7 +123,17 @@ export const ListVenues = ({ venues }) => {
               <div className="col-3 col-md-4 col-sm-6">
                 <Link to={"/venues/" + item.id} className="col-md-6">
                 <div className="card" key={index}>
-                  <img className="card_img" src={`https://source.unsplash.com/600x600/?dish&sig=${index}}`} alt=""/>
+                {!item.images[0] ?
+                            <img
+                                src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />
+                            : <img
+                                src={item.images[0]}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />}
                   <div className="card_desc">
                     <h5 className="card_name" title={item.name}>{item.name}</h5>
                     <div className="card_city">{item.city}</div>
