@@ -1,10 +1,11 @@
 /* eslint-disable array-callback-return */
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "pages/ListVenue/listVenue.css";
 import { Link } from "react-router-dom";
+import { PROD_EDIT_VENUE } from 'api/apiHandler';
 
-export const ListVenues = ({ venues }) => {
+export const ListVenues = () => {
   const [searchTerme, setSearchTerme] = useState("");
   const [cuisines, setCuisines] = useState([]);
   const [prices, setPrices] = useState([]);
@@ -26,6 +27,17 @@ export const ListVenues = ({ venues }) => {
     "35-50",
     "More than 50"
   ]
+
+  const [venues, setVenues] = useState(undefined);
+
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
+
 
   const handleChangeCuisine = (e) => {
     let { name } = e.target

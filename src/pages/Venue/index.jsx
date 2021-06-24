@@ -10,7 +10,7 @@ import EditVenue from "pages/EditVenue";
 import { PROD_EDIT_VENUE, PROD_BOOKINGS } from 'api/apiHandler';
 
 
-const Venue = ({ venues }) => {
+const Venue = () => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
@@ -32,7 +32,15 @@ const Venue = ({ venues }) => {
       cuisine: cuisine,
     },
   };
+  const [venues, setVenues] = useState(undefined);
 
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
 
 
   // delete venue ////////////////////////
@@ -48,7 +56,7 @@ const Venue = ({ venues }) => {
         },
       }
     );
-    history.push("/");
+    history.push("/myVenues");
   };
 
   useEffect(() => {
