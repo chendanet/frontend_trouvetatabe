@@ -84,11 +84,6 @@ const Venue = () => {
     setModal1(!modal1)
   }
 
-  // toggle modal Rating
-  const [modalRating, setModalRating] = useState(false)
-  const toggleModalRating = () => {
-    setModalRating(!modalRating)
-  }
 
 
   const fetchAllBookings = async () => {
@@ -113,9 +108,13 @@ const Venue = () => {
     fetchAllRatings();
   }, [])
 
- 
-
+  // toggle modal Rating
+  const [modalRating, setModalRating] = useState(false)
+  const toggleModalRating = () => {
+    setModalRating(!modalRating)
+  }
 /* ********************************** RATINGS ********************************** */
+
   return (
     // <div className="container-page">
     <div className="container-page d-flex align-items-center justify-content-center  ">
@@ -163,7 +162,6 @@ const Venue = () => {
                       ratings.filter(rating => rating.venue_id == currentVenue.id)
                         .map((rating) => (
                           <div class="rating">
-                          {/* <span>{rating.review}</span>  */}
                             <span>{rating.score}/5 - {rating.review} </span>
                             </div>
                         )
