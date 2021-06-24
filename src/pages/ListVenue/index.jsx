@@ -10,16 +10,16 @@ export const ListVenues = () => {
   const [cuisines, setCuisines] = useState([]);
   const [prices, setPrices] = useState([]);
   const CUISINES = [
-    "Steak 🥩",
-    "Seefood 🍤",
-    "French 🥐",
-    "Asian 🍜",
-    "Indian 🍛",
-    "Italian 🍝",
+    "Steak",
+    "Seefood",
+    "French",
+    "Asian",
+    "Indian",
+    "Italian",
     "American",
-    "Mexican 🌮",
+    "Mexican",
     "Californian",
-    "Korean 🥟"
+    "Korean"
   ]
 
   const PRICES = [
@@ -57,116 +57,114 @@ export const ListVenues = () => {
     }
   }
 
-  
+
   return (
     <>
-    <div className="container-banner">
-        <br/>
-        <p><center>C'est enfin l'été ! 😎☀️</center></p>
-        <p><center>Nous pouvons enfin nous retrouver au restaurant ou au bar sans masque ! 🍧</center></p>
-        <p><center>Avec Trouvetatable, réservez rapidement votre place en quelques clics ! 🖱 </center></p>
+      <div class="container-banner">
+        <img className="image-banner" src="https://blobsvc.wort.lu/picture/d194915d6e522612578eb1ec0c695666/1600/600/crop/0/173/3147/1356/wortv3/b71afae820044a8e4eba107a27492392c4a1abba" alt="restaurant" />
+        <div className="text-banner">
+          <h1><center>C'est enfin l'été ! 😎☀️</center></h1>
+          <p><center>Nous pouvons enfin nous retrouver au restaurant ou au bar sans masque ! 🍧</center></p>
+          <p><center>Avec Trouvetatable, réservez rapidement votre place en quelques clics ! 🖱 </center></p>
+        </div>
       </div>
-   
-         <form className="text-center my-3 ">
+      <form className="form-searchBar">
         <input
           type="text"
           name="search"
           onChange={(e) => setSearchTerme(e.target.value)}
           placeholder="Search your restaurant"
-          className="search-bar "
+          className="search-bar"
         />
       </form>
-   
-
-    <div className="container">
-      
-
-    <div className="w-100 mx-5">
-      <div className="row w-100 flex-row-center">
-        <div className="col-md-2 col-sm-12 filter mt-1 me-4">
-          <div>
-            {CUISINES.map((c, index) => (
-              <div key={index}>
-                <input type="checkbox"
-                  name={c}
-                  value={c}
-                  onChange={handleChangeCuisine}
-                  checked={cuisines.includes(c) ? "checked" : ""}
-                />
-                <label>{c}</label>
+      <div className="container">
+        <div className="w-100 mx-5">
+          <div className="row w-100 flex-row-center">
+            <div className="col-md-2 col-sm-12 filter mt-1 me-4 filter-column">
+              <div>
+                <h5 className="text-center fw-bold mt-1 mb-4">Filter</h5>
+                {CUISINES.map((c, index) => (
+                  <div key={index}>
+                    <input type="checkbox"
+                      name={c}
+                      value={c}
+                      onChange={handleChangeCuisine}
+                      checked={cuisines.includes(c) ? "checked" : ""}
+                    />
+                    <label className="fw-bold">{c}</label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <br />
-          <div>
-            {PRICES.map((p, index) => (
-              <div key={index}>
-                <input type="checkbox"
-                  name={p}
-                  value={p}
-                  onChange={handleChangePrice}
-                  checked={prices.includes(p) ? "checked" : ""}
-                />
-                <label>{p}</label>
+              <br />
+              <div>
+                {PRICES.map((p, index) => (
+                  <div key={index}>
+                    <input type="checkbox"
+                      name={p}
+                      value={p}
+                      onChange={handleChangePrice}
+                      checked={prices.includes(p) ? "checked" : ""}
+                    />
+                    <label className="fw-bold">{p}</label>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="col-md-9  col-sm-12 ms-1 ">
-          <div class="row">
-          {venues === undefined ? (
-            <div className="spinner spinner-border" role="status">
-              <span className="visually-hidden">Loading...</span>
             </div>
-          ) : venues
-            .filter(value => cuisines.length === 0 || cuisines.indexOf(value.cuisine) > -1)
-            .filter(value => {
-              if(prices.length === 0) {
-                return true;
-              }
-              if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
-                return true
-              }
-              if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
-                return true
-              }
-              if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
-                return true
-              }
-            })
-            .filter(value => value.name.toLowerCase().includes(searchTerme.toLowerCase()))
-            .map((item, index) => (
-              <div className="col-md-4 col-sm-6">
-                <Link to={"/venues/" + item.id} className="col-md-6">
-                <div className="card" key={index}>
-                {!item.images[0] ?
+            <div className="col-md-9  col-sm-12 ms-1 ">
+              <div class="row">
+                {venues === undefined ? (
+                  <div className="spinner spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : venues
+                  .filter(value => cuisines.length === 0 || cuisines.indexOf(value.cuisine) > -1)
+                  .filter(value => {
+                    if (prices.length === 0) {
+                      return true;
+                    }
+                    if (prices.indexOf("Under than 35") >= 0 && value.price < 35) {
+                      return true
+                    }
+                    if (prices.indexOf("35-50") >= 0 && value.price >= 35 && value.price <= 50) {
+                      return true
+                    }
+                    if (prices.indexOf("More than 50") >= 0 && value.price > 50) {
+                      return true
+                    }
+                  })
+                  .filter(value => value.name.toLowerCase().includes(searchTerme.toLowerCase()))
+                  .map((item, index) => (
+                    <div className="col-md-4 col-sm-6">
+                      <Link to={"/venues/" + item.id} className="col-md-6">
+                        <div className="card" key={index}>
+                          {!item.images[0] ?
                             <img
-                                src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
-                                alt={`${item.name}_image`}
-                                className="img-fluid card-border"
+                              src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
+                              alt={`${item.name}_image`}
+                              className="img-fluid card-border"
                             />
                             : <img
-                                src={item.images[0]}
-                                alt={`${item.name}_image`}
-                                className="img-fluid card-border"
+                              src={item.images[0]}
+                              alt={`${item.name}_image`}
+                              className="img-fluid card-border image-imported"
                             />}
-                  <div className="card_desc">
-                    <h5 className="card_name" title={item.name}>{item.name}</h5>
-                    <div className="card_city">{item.city}</div>
-                    <div className="card_cuisine">{item.cuisine}</div>
-                    <div className="card_price">{Math.floor(item.price*0.90)} € au lieu de {item.price} €</div>
-                    <button className="card_btn">valider</button>
-                  </div>
-                </div>
-                </Link>
+                          <div className="card_desc">
+                            <h5 className="card_name" title={item.name}>{item.name}</h5>
+                            <div className="card_city">{item.city}</div>
+                            <div className="card_cuisine">{item.cuisine}</div>
+                            <div className="card_price">{Math.floor(item.price * 0.90)} € au lieu de {item.price} €</div>
+                            <button className="card_btn">valider</button>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
               </div>
-            ))
-          }
-          </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
