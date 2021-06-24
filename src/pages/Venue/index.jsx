@@ -26,6 +26,26 @@ const Venue = () => {
   // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([])
+  const [ratings, setRatings] = useState([])
+
+/* ********************************** RATINGS ********************************** */
+  function getScore(){
+    let overallScore = this.rating.score
+
+    const score = []
+    for (var i = 0; i < overallScore; i++ ){
+        score.push(
+            <i key={i} className="fas fa-chair fa-lg chair-filled"></i>
+        ) 
+    }
+    for (var i = overallScore; i < 5 ; i++ ){
+        score.push(    
+            <i key={i} className="fas fa-chair fa-sm chair-open"></i>
+            ) 
+    }
+    return score;
+}
+/* ********************************** RATINGS ********************************** */
 
   const dataVenue = {
     venue: {
@@ -69,7 +89,6 @@ const Venue = () => {
 
 
 
-
   // toggle modal
   const [modal, setModal] = useState(false)
   const toggleModal = () => {
@@ -99,7 +118,19 @@ const Venue = () => {
     fetchAllBookings();
   }, [])
 
+  /* ********************************** RATINGS ********************************** */
 
+  const fetchAllRatings = async () => {
+    const response = await fetch('https://trouvetatableapi.herokuapp.com/api/ratings')
+    const data = await response.json()
+    setRatings(data)
+  }
+
+  useEffect(() => {
+    fetchAllRatings();
+  }, [])
+
+/* ********************************** RATINGS ********************************** */
 
   return (
     // <div className="container-page">
@@ -140,6 +171,23 @@ const Venue = () => {
               <div className="row">
                 <div className="col-md-6 col-sm-12">
                   <h4>Price: <span className="text-dark fs-5">{currentVenue.price*0.90} €</span></h4>
+
+{/* ********************************** RATINGS ********************************** */}
+{ratings &&
+                      ratings.filter(rating => rating.venue_id == currentVenue.id)
+                        .map((rating) => (
+                          <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
+                             <h4>Review</h4>
+                            <span>{rating.review}</span>
+                            <h4>Score</h4>
+                            <span>{rating.score}</span>
+                  
+                          </div>
+                        )
+                        )}
+
+{/* ********************************** RATINGS ********************************** */}
+
                 </div>
                 {currentUser.id && currentVenue.user_id != currentUser.id &&
                   <div className="col-md-6 col-sm-12">
