@@ -7,6 +7,8 @@ import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 import EditVenue from "pages/EditVenue";
+import Ratings from "pages/Ratings";
+
 import { PROD_EDIT_VENUE, PROD_BOOKINGS } from 'api/apiHandler';
 
 
@@ -89,6 +91,11 @@ const Venue = ({ venues }) => {
     setModal1(!modal1)
   }
 
+  // toggle modal Rating
+  const [modalRating, setModalRating] = useState(false)
+  const toggleModalRating = () => {
+    setModalRating(!modalRating)
+  }
 
 
   const fetchAllBookings = async () => {
@@ -100,9 +107,6 @@ const Venue = ({ venues }) => {
   useEffect(() => {
     fetchAllBookings();
   }, [])
-
-
-
 
 
 
@@ -149,6 +153,8 @@ const Venue = ({ venues }) => {
                 {currentUser.id && currentVenue.user_id !== currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
+                    <button type="button" onClick={toggleModalRating}> Leave a Review</button>{" "}
+
                   </div>}
                 {!currentUser.id &&
                   <div className="col-md-6 col-sm-12">
@@ -214,6 +220,13 @@ const Venue = ({ venues }) => {
         (<>
 
           <EditVenue modal={toggleModal1} idVenue={idVenue} />
+        </>)
+      }
+
+    {modalRating &&
+        (<>
+
+          <Ratings modal={toggleModalRating} idVenue={idVenue} />
         </>)
       }
 
