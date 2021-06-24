@@ -51,11 +51,15 @@ const Venue = ({ venues }) => {
     history.push("/myVenues");
   };
 
+  const fetchVenue = async () => {
+    const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
+    const data = await response.json()
+    setCurrentVenue(data)
+  }
+
   useEffect(() => {
-    fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
-      .then((response) => response.json())
-      .then((data) => setCurrentVenue(data));
-  }, [idVenue]);
+    fetchVenue()
+  }, []);
 
   // edit venue ////////////////////////
 
@@ -104,21 +108,22 @@ const Venue = ({ venues }) => {
   
 // map leaflet whit nominatim
  
+const [currentAddress, setCurrentAddress] = useState(null)
 
-  const [currentAddress, setCurrentAddress] = useState(null)
     
  
-  useEffect(() => {
-    fetch("https://nominatim.openstreetmap.org/search.php?q=rue+vent+paris&format=jsonv2")
-      .then((response) => response.json())
-      .then((data) => {
-       console.log(data);
-      });
-  
-    }, [])
+  // useEffect(() => {
+  //   fetch("https://nominatim.openstreetmap.org/search.php?q=rue+vent+paris&format=jsonv2")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //      console.log(data);
+  //     });
+      
+  //   }, [])
     
+    // currentVenue && setCurrentAddress(currentVenue.address)
+    currentVenue &&  console.log(currentVenue.address);
 
-  // console.log(currentAddress);
 
 
 
@@ -128,7 +133,6 @@ const Venue = ({ venues }) => {
       <div>
         {currentVenue && (
           <div>
-
             {!currentVenue.images[0] ?
               <img
                 src={currentVenue.photo}
