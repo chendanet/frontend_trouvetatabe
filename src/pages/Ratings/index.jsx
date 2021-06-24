@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import config from "config";
 import "pages/Booking/Booking.css";
 import { useSelector } from "react-redux";
 import { PROD_BOOKINGS } from 'api/apiHandler';
+import { PROD_EDIT_VENUE } from 'api/apiHandler';
 
 const Ratings = ({ modal, idVenue }) => {
+
+  const [venues, setVenues] = useState(undefined);
+
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
+
+
   const [score, setScore] = useState();
   const [review, setReview] = useState();
   const currentUser = useSelector((state) => state.authReducer);
@@ -24,7 +37,7 @@ const Ratings = ({ modal, idVenue }) => {
     e.preventDefault();
 
 
-    const response = await fetch('http://localhost:3000/api/ratings', {
+    const response = await fetch('https://trouvetatableapi.herokuapp.com/api/ratings', {
       method: "post",
       headers: {
         Authorization: `Bearer ${token}`,
