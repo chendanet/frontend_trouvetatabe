@@ -62,7 +62,7 @@ const SignIn = () => {
       first_name: userFirstName,
       last_name: userLastName
     }, token))
-
+    alert("Welcome back! You are connected 😋");
     history.push('/')
   }
   return (
