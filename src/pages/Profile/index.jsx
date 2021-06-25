@@ -111,18 +111,19 @@ const Profile = () => {
     };
 
 
-    return (
-        <>
-            <div className="identityProfil text-center m-3">
-                {currentUser.last_name ? <p>Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
 
+
+    return (
+        <div className="container-profil">
+            <div className="row justify-content-md-center justify-content-sm-center justify-content-xs-center">
+                <div className=" col-md-6 col-sm-6 mt-4 text-center ">
+                    {currentUser.last_name ? <p className="text-center">Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
+                </div>
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
-                    <div className="form-container">
-                        <h3>Mon profil</h3>
-                        <p>Ici, vous pouvez modifier votre profil en entier :</p>
-                    </div>
+                    <h3>Mon profil</h3>
+                    <p>Ici, vous pouvez modifier votre profil en entier</p>
                     <form>
                         <div>
                             <input
@@ -179,31 +180,31 @@ const Profile = () => {
                     <br />
                 </div>
             </div>
+
             <div className="container ">
-
-                <h3>My bookings</h3>
-                {myBooking.map((booking) => (
-
-                    booking.user_id === parseInt(currentUser.id) && (
-
-                        <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
-                            <h2>{booking.venue.name}</h2>
-                            <h4>seat:</h4>
-                            <span>{booking.seat}</span>
-                            <h4>Date:</h4>
-                            <span>{booking.date}</span>
-                            <h4>Time:</h4>
-                            <span>{booking.time}</span>
-                            <div className="delete-button">
-                                <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
-
+                <div className="row justify-content-md-center">
+                    <h4 className="col-md-2 ">My bookings</h4>
+                </div>
+                <div className="row justify-content-center">
+                    {myBooking.map((booking) => (
+                        booking.user_id === parseInt(currentUser.id) && (
+                            <div className="card col-md-4 rounded-5 p-3 m-4">
+                                <h5 className="card-title">{booking.venue.name.toUpperCase()}</h5>
+                                <h6>seat: <span className="text-dark">{booking.seat}</span></h6>
+                                <h6>Date: <span className="text-dark">{booking.date}</span></h6>
+                                <h6>Time: <span className="text-dark">{booking.time}</span></h6>
+                                <div className="delete-button">
+                                    <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
+                                </div>
                             </div>
-                        </div>
 
-                    ))
-                )}
+                        ))
+                    )}
+                </div>
             </div>
-        </>
+
+
+        </div>
 
 
     )
