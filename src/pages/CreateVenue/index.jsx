@@ -54,7 +54,7 @@ function CreateVenue() {
               ref={nameRef}
               placeholder="What is the name of your establishment ?"
               required="required"
-              class="form-control"
+              className="form-control"
             />
             <br />
             <label>
@@ -77,7 +77,7 @@ function CreateVenue() {
               ref={addressRef}
               placeholder="What is the address of your establishment ?"
               required="required"
-              class="form-control"
+              className="form-control"
             />
             <br />
             <input
@@ -86,7 +86,7 @@ function CreateVenue() {
               name="zipcode"
               ref={zipcodeRef}
               placeholder="What is the zipcode of your establishment ?"
-              class="form-control"
+              className="form-control"
             />{" "}
             <br />
             <input
@@ -96,7 +96,7 @@ function CreateVenue() {
               name="price"
               ref={priceRef}
               placeholder="What is the average basket of your establishment ?"
-              class="form-control"
+              className="form-control"
             />{" "}
             <br />
             <input
@@ -105,7 +105,7 @@ function CreateVenue() {
               name="cuisine"
               ref={cuisineRef}
               placeholder="Do you cook ? If so, what kind ?"
-              class="form-control"
+              className="form-control"
             />{" "}
             <br />
             <input
@@ -115,7 +115,7 @@ function CreateVenue() {
               name="phone_number"
               ref={phoneNumberRef}
               placeholder="The phone number of your establishment ?"
-              class="form-control"
+              className="form-control"
             />{" "}
             <br />
             <label>
@@ -135,7 +135,7 @@ function CreateVenue() {
               name="seatnumber"
               ref={seatNumberRef}
               placeholder="How many seats do you have ?"
-              class="form-control"
+              className="form-control"
             />{" "}
             <br />
             <textarea name="description" ref={descriptionRef} placeholder="Describe your establishment in a few words" required="required" className="form-control" />
