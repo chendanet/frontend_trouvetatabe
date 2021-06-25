@@ -24,14 +24,22 @@ const Blog = () => {
 
   return (
     <div className="col">
-      {events && events.map((item) =>
+      {events && events.map((item, index) =>
         <div className="row" align="center">
        <div className="col-md-6 col-sm-12">      
-            <p><img src={item.cover}></img></p>
-           <span> {item.title} </span> 
+            <p><img
+            //  src={item.cover.filename}
+              src={`https://source.unsplash.com/300x300/?event&sig=${index}`}
+
+            
+            ></img></p>
+           <span> Name: {item.title} </span> 
             <p>   Evenement -  
         { item.price_type}</p> 
         <p> Date: {item.date_start}</p>
+        <p>  
+        <a href={item.url}>Link Event</a></p>
+
 
 </div>
 </div>
