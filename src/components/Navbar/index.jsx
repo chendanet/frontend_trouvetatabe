@@ -110,9 +110,9 @@ function Navbar() {
                     </div>
                   )}
                   <li className="nav-item">
-                    <a className="nav-list item-list" href="#">
-                      Blog
-                         </a>
+                  <Link className="nav-list item-list" to="/blog">
+                                          Blog
+                                          </Link>
                   </li>
                 </div>
               }

@@ -7,28 +7,29 @@ import { useSelector } from "react-redux";
 import { PROD_BOOKINGS } from 'api/apiHandler';
 
 const Blog = () => {
-  const [records, setRecords] = useState();
-  const currentUser = useSelector((state) => state.authReducer);
-  const history = useHistory();
-  const token = Cookies.get(config.COOKIE_STORAGE_KEY);
-     
-      const fetchBlog= async () => {
-        const response = await fetch('https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=restaurant+paris')
-        const data = await response.json();
-        
-        }
 
-        useEffect(() => {
-          fetchBlog();
-        }, [])
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    fetch(`https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records?rows=3`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setData(data)
+      });
+  }, [])
+
+  const events = data&&data.records.map(record => record.record.fields);
+  console.log(events)
 
   return (
-      <div className="form-container" >
-    <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
-       <span>{data.records}  </span>
-       </div>
-       </div>
+    <div className="col">
+      {events && events.map((item) =>
+      <p>  {item.address_name} </p>
+      )}
+    </div>
   );
-};
+  
+} 
 
-export default Blog;
+export default Blog
