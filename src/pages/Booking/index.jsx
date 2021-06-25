@@ -43,7 +43,7 @@ const Booking = ({ modal, idVenue }) => {
     }
   };
 
- 
+
 
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
@@ -95,13 +95,12 @@ const Booking = ({ modal, idVenue }) => {
             Select a time:
           </label>
           <br />
-          <input
-            className="form-control mb-4"
+          <input className="form-control mb-4"
             type="time"
             id="appt"
             name="appt"
-            onChange={(e) => setTime(e.target.value)}
-          />
+            required
+            onChange={(e) => setTime(e.target.value)} />
           <button type="submit" onClick={fetchBooking} className="btn-signin">
             {" "}
             Submit{" "}
