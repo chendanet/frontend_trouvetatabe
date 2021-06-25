@@ -51,13 +51,12 @@ const Ratings = ({ modal, idVenue }) => {
     const data = await response.json();
 
     if (response) {
+      alert('Thank\'s for the review !');
       history.push("/");
-      return;
+    } else {
+      alert('Something was wrong !');
     }
   };
-
-  
-  
 
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
