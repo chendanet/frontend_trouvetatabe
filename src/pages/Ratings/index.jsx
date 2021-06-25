@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -72,7 +73,8 @@ const Ratings = ({ modal, idVenue }) => {
             id="name"
             name="review"
             placeholder="Your Review 🧐"
-            required
+            required="required"
+            pattern="^(?!\s*$).+"
             className="form-control mb-2"
              onChange={(e) => setReview(e.target.value)}
           />
@@ -83,6 +85,7 @@ const Ratings = ({ modal, idVenue }) => {
             placeholder="Score 1 to 5"
             min="1"
             max="5"
+            pattern="^([1-5]|1[005])$"
             className="form-control mb-2"
             onChange={(e) => setScore(e.target.value)}
           />
