@@ -77,7 +77,7 @@ function Navbar() {
                       </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-list item-list" href="#">
+                  <Link className="nav-list item-list" to="/blog">
                       Blog
                       </Link>
                   </li>
@@ -110,9 +110,9 @@ function Navbar() {
                     </>
                   )}
                   <li className="nav-item">
-                    <a className="nav-list item-list" href="#">
+                  <Link className="nav-list item-list" to="/blog">
                       Blog
-                         </a>
+                      </Link>
                   </li>
                 </div>
               }
