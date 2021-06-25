@@ -10,16 +10,16 @@ export const ListVenues = () => {
   const [cuisines, setCuisines] = useState([]);
   const [prices, setPrices] = useState([]);
   const CUISINES = [
-    "Steak",
-    "Seefood",
-    "French",
+    "American",
     "Asian",
+    "Californian",
+    "French",
     "Indian",
     "Italian",
-    "American",
+    "Korean",
     "Mexican",
-    "Californian",
-    "Korean"
+    "Seefood",
+    "Steak",
   ]
 
   const PRICES = [
