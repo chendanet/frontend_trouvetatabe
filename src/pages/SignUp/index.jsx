@@ -83,7 +83,8 @@ const SignUp = () => {
               type="text"
               name="email"
               onChange={handleEmail}
-              placeholder="Enter Your Email"
+              placeholder="Email: example@example.com"
+              pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
               className="form-control"
             />
             <br />
@@ -92,7 +93,8 @@ const SignUp = () => {
               type="password"
               name="password"
               onChange={handlePassword}
-              placeholder="Enter your Password"
+              placeholder="Enter Password"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$"
               className="form-control"
             />
             <br />
@@ -102,6 +104,7 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Confirm your Password"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$"
               className="form-control"
             />{" "}
             <br />
