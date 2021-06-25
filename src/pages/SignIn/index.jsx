@@ -41,9 +41,8 @@ const SignIn = () => {
     })
 
 
-    if (response.status !== 200) {
-
-      return
+    if (response.status != 200) {
+        alert('Incorrect password, please try again !');
     }
 
     const token = response.headers.get('Authorization').split('Bearer ')[1]
@@ -95,7 +94,7 @@ const SignIn = () => {
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
               Login
               </button>
-              <Link to="/password/forgot" className="link-tertiary">Mot de passe oublié</Link>
+              <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
             <br />
           </div>
         </form>
