@@ -8,9 +8,9 @@ import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 import EditVenue from "pages/EditVenue";
 import Ratings from "pages/Ratings";
-
-import { PROD_EDIT_VENUE, PROD_BOOKINGS } from 'api/apiHandler';
-
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { PROD_EDIT_VENUE, PROD_BOOKINGS } from "api/apiHandler";
+import MapOpen from "pages/Map";
 
 const Venue = () => {
   const { idVenue } = useParams();
@@ -20,12 +20,15 @@ const Venue = () => {
   const [city, setCity] = useState();
   const [cuisine, setCuisine] = useState();
   const history = useHistory();
+  const [currentAddress, setCurrentAddress] = useState(null);
+  const [currentCity, setCurrentCity] = useState(null);
+  const [dataGeo, setDataGeo]= useState(null);
   const currentUser = useSelector((state) => state.authReducer);
   // const [seat, setSeat] = useState();
   // const [time, setTime] = useState();
   // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
-  const [bookings, setBookings] = useState([])
+  const [bookings, setBookings] = useState([]);
 
   const dataVenue = {
     venue: {
@@ -40,87 +43,84 @@ const Venue = () => {
     fetch(PROD_EDIT_VENUE)
       .then((response) => response.json())
       .then((data) => {
-        setVenues(data)
+        setVenues(data);
       });
-  }, [])
-
+  }, []);
 
   // delete venue ////////////////////////
 
   const fetchDeleteVenue = async () => {
-    const response = await fetch(
-      `${PROD_EDIT_VENUE}/${idVenue}`,
-      {
-        method: "delete",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`, {
+      method: "delete",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
     history.push("/myVenues");
   };
 
   const fetchVenue = async () => {
-    const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`)
-    const data = await response.json()
-    setCurrentVenue(data)
-  }
+    const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`);
+    const data = await response.json();
+    setCurrentVenue(data);
+    
+    setCurrentAddress(data.address.replaceAll(" ", "+"));
+    setCurrentCity(data.city);
+  };
 
   useEffect(() => {
-    fetchVenue()
+    fetchVenue();
   }, []);
-
-
+  
 
 
   // toggle modal
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
   const toggleModal = () => {
-    setModal(!modal)
-  }
+    setModal(!modal);
+  };
 
   // toggle modal editVenue
-  const [modal1, setModal1] = useState(false)
+  const [modal1, setModal1] = useState(false);
   const toggleModal1 = () => {
-    setModal1(!modal1)
-  }
+    setModal1(!modal1);
+  };
 
   // toggle modal Rating
-  const [modalRating, setModalRating] = useState(false)
+  const [modalRating, setModalRating] = useState(false);
   const toggleModalRating = () => {
-    setModalRating(!modalRating)
-  }
-
+    setModalRating(!modalRating);
+  };
 
   const fetchAllBookings = async () => {
-    const response = await fetch(PROD_BOOKINGS)
-    const data = await response.json()
-    setBookings(data)
-  }
+    const response = await fetch(PROD_BOOKINGS);
+    const data = await response.json();
+    setBookings(data);
+  };
 
   useEffect(() => {
     fetchAllBookings();
-  }, [])
+  }, []);
+
+  // map leaflet whit nominatim
 
   
-// map leaflet whit nominatim
- 
-const [currentAddress, setCurrentAddress] = useState(null)
+  console.log("dataGeo: ", dataGeo);
+  console.log("adresse: ", currentAddress);
+  console.log("city: ", currentCity);
 
-    
- 
-  // useEffect(() => {
-  //   fetch("https://nominatim.openstreetmap.org/search.php?q=rue+vent+paris&format=jsonv2")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //      console.log(data);
-  //     });
-      
-  //   }, [])
-    
-    // currentVenue && setCurrentAddress(currentVenue.address)
-    currentVenue &&  console.log(currentVenue.address);
+  const fetchNominatimAdresse = async () => {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search.php?q=${currentAddress}+${currentCity}&format=jsonv2`
+    );
+    const data = await response.json();
+   
+    setDataGeo(data[0])
+  };
+  useEffect(() => {
+    fetchNominatimAdresse();
+  }, []);
 
   return (
     // <div className="container-page">
@@ -128,17 +128,19 @@ const [currentAddress, setCurrentAddress] = useState(null)
       <div>
         {currentVenue && (
           <div>
-            {!currentVenue.images[0] ?
+            {!currentVenue.images[0] ? (
               <img
                 src={currentVenue.photo}
                 alt={`${currentVenue.name}_dish`}
                 className="img-fluid card-border"
               />
-              : <img
+            ) : (
+              <img
                 src={currentVenue.images[0]}
                 alt={`${currentVenue.name}_dish`}
                 className="img-fluid card-border"
-              />}
+              />
+            )}
 
             <div className="card mt-3 p-4 card-border">
               <h2>{currentVenue.name}</h2>
@@ -159,35 +161,44 @@ const [currentAddress, setCurrentAddress] = useState(null)
 
               <div className="row">
                 <div className="col-md-6 col-sm-12">
-                  <h4>Price: <span className="text-dark fs-5">{currentVenue.price*0.90} €</span></h4>
+                  <h4>
+                    Price:{" "}
+                    <span className="text-dark fs-5">
+                      {currentVenue.price * 0.9} €
+                    </span>
+                  </h4>
                 </div>
-                {currentUser.id && currentVenue.user_id != currentUser.id &&
+                {currentUser.id && currentVenue.user_id != currentUser.id && (
                   <div className="col-md-6 col-sm-12">
-                    <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
-                    <button type="button" onClick={toggleModalRating}> Leave a Review</button>{" "}
-
-                  </div>}
-                {!currentUser.id &&
+                    <button type="button" onClick={toggleModal}>
+                      Find a Table
+                    </button>{" "}
+                    <button type="button" onClick={toggleModalRating}>
+                      {" "}
+                      Leave a Review
+                    </button>{" "}
+                  </div>
+                )}
+                {!currentUser.id && (
                   <div className="col-md-6 col-sm-12">
                     <Link to="/register">
-                      <button>
-                        Sign or Login to Find a Table
-                      </button>
+                      <button>Sign or Login to Find a Table</button>
                     </Link>
-                  </div>}
-
+                  </div>
+                )}
               </div>
             </div>
 
             {currentVenue.user_id == currentUser.id && (
               <div className="d-flex  flex-column m-3 justify-content-center">
-
                 <div>
-
                   <h4 className="text-center">List des reservations:</h4>
                   <div className="container ">
                     {bookings &&
-                      bookings.filter(booking => booking.venue_id == currentVenue.id)
+                      bookings
+                        .filter(
+                          (booking) => booking.venue_id == currentVenue.id
+                        )
                         .map((booking) => (
                           <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
                             <h2>{booking.venue.name}</h2>
@@ -203,44 +214,51 @@ const [currentAddress, setCurrentAddress] = useState(null)
                               <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
                             </div> } */}
                           </div>
-                        )
-                        )}
+                        ))}
                   </div>
                 </div>
                 <div className="text-center">
-                  <button type="button" onClick={toggleModal1} idVenue={idVenue} className="m-2">
+                  <button
+                    type="button"
+                    onClick={toggleModal1}
+                    idVenue={idVenue}
+                    className="m-2"
+                  >
                     Edit
                   </button>
-                  <button onClick={fetchDeleteVenue} className="m-2">Delete</button>
+                  <button onClick={fetchDeleteVenue} className="m-2">
+                    Delete
+                  </button>
                 </div>
               </div>
             )}
+           
+            {currentVenue && dataGeo &&
+            
+            <MapOpen lattitude={dataGeo.lat} longitude={dataGeo.lon} currentVenue={currentVenue}/>
+            }
+         
           </div>
         )}
-
-
       </div>
-      {modal &&
-        (<>
 
+      {modal && (
+        <>
           <Booking modal={toggleModal} idVenue={idVenue} />
-        </>)
-      }
+        </>
+      )}
 
-      {modal1 &&
-        (<>
-
+      {modal1 && (
+        <>
           <EditVenue modal={toggleModal1} idVenue={idVenue} />
-        </>)
-      }
+        </>
+      )}
 
-    {modalRating &&
-        (<>
-
+      {modalRating && (
+        <>
           <Ratings modal={toggleModalRating} idVenue={idVenue} />
-        </>)
-      }
-
+        </>
+      )}
     </div>
 
     // </div>
