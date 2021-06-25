@@ -24,14 +24,18 @@ const Blog = () => {
 
   return (
     <div className="col">
-      {events && events.map((item) =>
+      {events && events.map((item, index) =>
         <div className="row" align="center">
        <div className="col-md-6 col-sm-12">      
-            <p><img src={item.cover}></img></p>
-           <span> {item.title} </span> 
-            <p>   Evenement -  
-        { item.price_type}</p> 
+            <p><img
+             src={item.cover.url}          
+            ></img></p>
+           <span> Name: {item.title} </span> 
+            <p>  Evenement -{ item.price_type}</p> 
         <p> Date: {item.date_start}</p>
+        <button> <a href={item.url}>Link Event</a></button>
+
+
 
 </div>
 </div>
