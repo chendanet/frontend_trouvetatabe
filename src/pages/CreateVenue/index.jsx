@@ -32,8 +32,9 @@ function CreateVenue() {
     })
       .then(response => {
         if (response.ok) {
-          alert('Your Venue as been created with success !');
+          alert('Génial ! Votre établissement a été créer avec succès 🍹');
           history.push('/myVenues');
+
         } else (alert('Erreur !'));
       })
       .catch(error => console.error('error', error));
@@ -43,8 +44,8 @@ function CreateVenue() {
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">
         <div>
-          <h3>Venue</h3>
-          <p>Create your venue.</p>
+          <h3>Creer votre etablissement.</h3>
+          <hr />
         </div>
         <form onSubmit={handleSubmit}>
           <div>
@@ -52,21 +53,62 @@ function CreateVenue() {
               type="text"
               name="name"
               ref={nameRef}
-              placeholder="What is the name of your establishment ?"
+              placeholder="ex: Le chiquito"
               required="required"
-              class="form-control"
+              className="form-control"
             />
             <br />
             <label>
-              In what city?
-              <select ref={cityRef} name="city">
+              <select ref={cityRef} name="city" required>
                 <option value="Paris">Paris</option>
+                <option value="Nice">Nice</option>
+                <option value="Toulouse">Toulouse</option>
                 <option value="Marseille">Marseille</option>
-                <option value="Bruxelle">Bruxelle</option>
+                <option value="Rennes">Rennes</option>
+                <option value="Grenoble">Grenoble</option>
+                <option value="Nantes">Nantes</option>
+                <option value="Montpellier">Montpellier</option>
                 <option value="Lyon">Lyon</option>
+                <option value="Rouen">Rouen</option>
+                <option value="Strasbourg">Strasbourg</option>
+                <option value="Nancy">Nancy</option>
+                <option value="Metz">Metz</option>
+                <option value="Brest">Brest</option>
+                <option value="Mulhouse">Mulhouse</option>
+                <option value="Limoges">Limoges</option>
+                <option value="Orleans">Orleans</option>
                 <option value="Bordeaux">Bordeaux</option>
-                <option value="Lisbonne">Lisbonne</option>
-                <option value="London">London</option>
+                <option value="Lille">Lille</option>
+                <option value="Le Havre">Le Havre</option>
+                <option value="Reims">Reims</option>
+                <option value="Saint-Etienne">Saint-Etienne</option>
+                <option value="Toulon">Toulon</option>
+                <option value="Angers">Angers</option>
+                <option value="Nimes">Nimes</option>
+                <option value="Clermont-Ferrand">Clermont-Ferrand</option>
+                <option value="Le Mans">Le Mans</option>
+                <option value="Aix-en-Provence">Aix-en-Provence</option>
+                <option value="Amiens">Amiens</option>
+                <option value="Tours">Tours</option>
+                <option value="Annecy">Annecy</option>
+                <option value="Perpignan">Perpignan</option>
+                <option value="Besançon">Besançon</option>
+                <option value="Pau">Pau</option>
+                <option value="La Rochelle">La Rochelle</option>
+                <option value="Cannes">Cannes</option>
+                <option value="Antibes">Antibes</option>
+                <option value="Ajaccio">Ajaccio</option>
+                <option value="Quimper">Quimper</option>
+                <option value="Clamart">Clamart</option>
+                <option value="Frejus">Frejus</option>
+                <option value="Bayonne">Bayonne</option>
+                <option value="Saint-Malo">Saint-Malo</option>
+                <option value="Bastia">Bastia</option>
+                <option value="Angouleme">Angouleme</option>
+                <option value="Chartres">Chartres</option>
+                <option value="Auxerre">Auxerre</option>
+                <option value="Orange">Orange</option>
+                <option value="Evreux">Evreux</option>
               </select>
               </label>{" "}
             <br />
@@ -75,9 +117,10 @@ function CreateVenue() {
               type="text"
               name="address"
               ref={addressRef}
-              placeholder="What is the address of your establishment ?"
+              placeholder="ex: 42 rue du bar"
               required="required"
-              class="form-control"
+              pattern=".\d{1,3}\s\w{3,11}\s[A-Za-z']+( [A-Za-z']+)*$"
+              className="form-control"
             />
             <br />
             <input
@@ -85,18 +128,19 @@ function CreateVenue() {
               type="text"
               name="zipcode"
               ref={zipcodeRef}
-              placeholder="What is the zipcode of your establishment ?"
-              class="form-control"
+              placeholder="ex: 75001"
+              pattern="^(\d{5})"
+              className="form-control"
             />{" "}
             <br />
             <input
               rows="4"
               type="text"
-              pattern="[0-9]*"
+              pattern="^(\d{1,3}\€)"
               name="price"
               ref={priceRef}
-              placeholder="What is the average basket of your establishment ?"
-              class="form-control"
+              placeholder="Panier moyen ? ex: 33€"
+              className="form-control"
             />{" "}
             <br />
             <input
@@ -104,28 +148,29 @@ function CreateVenue() {
               type="text"
               name="cuisine"
               ref={cuisineRef}
-              placeholder="Do you cook ? If so, what kind ?"
-              class="form-control"
+              pattern="\w+[A-Za-zÀ-ȕ]*"
+              placeholder="ex: Française"
+              className="form-control"
             />{" "}
             <br />
             <input
               rows="4"
               type="text"
-              pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+              pattern="^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$"
               name="phone_number"
               ref={phoneNumberRef}
-              placeholder="The phone number of your establishment ?"
-              class="form-control"
+              placeholder="ex: +331.23 45-6789"
+              className="form-control"
             />{" "}
             <br />
             <label>
-            Have a terrace ?
+            Une terrasse ?
             <input
               rows="4"
               type="checkbox"
               name="terrace"
-                ref={terraceRef}
-                className="form-check-label m-2"
+              ref={terraceRef}
+              className="form-check-label m-2"
             /></label>{" "}
             <br />
             <input
@@ -134,16 +179,16 @@ function CreateVenue() {
               pattern="[0-9]*"
               name="seatnumber"
               ref={seatNumberRef}
-              placeholder="How many seats do you have ?"
-              class="form-control"
+              placeholder="Combien de place assise ? ex: 42"
+              className="form-control"
             />{" "}
             <br />
-            <textarea name="description" ref={descriptionRef} placeholder="Describe your establishment in a few words" required="required" className="form-control" />
+            <textarea name="description" ref={descriptionRef} placeholder="Description de votre etablissement…" required="required" className="form-control" />
             {" "}
             <br />
             <input name="images[]"  type="file" multiple={true} className="form-control-file" />
             <br />
-            <input type="submit" value="Create your Venue" className="btn-signin" />
+            <input type="submit" value="Creer votre etablissement" className="btn-signin" />
             <br />
           </div>
         </form>
