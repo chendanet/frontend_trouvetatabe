@@ -87,6 +87,7 @@ const Profile = () => {
                 "Content-Type": "application/json",
             },
         })
+        alert("Your TrouveTaTable account is deleted. We are very sad to see you go! Perhaps soon? 👋🏼");
         history.push("/");
     }
 
