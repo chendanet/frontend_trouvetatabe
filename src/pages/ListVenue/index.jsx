@@ -68,18 +68,19 @@ export const ListVenues = () => {
           <p><center>Avec Trouvetatable, réservez rapidement votre place en quelques clics ! 🖱 </center></p>
         </div>
       </div>
-      <form className="form-searchBar">
+      <div className="container">
+      <form className="form-searchBar ">
         <input
           type="text"
           name="search"
           onChange={(e) => setSearchTerme(e.target.value)}
           placeholder="Search your restaurant"
-          className="search-bar"
+            className="search-bar "
+            
         />
       </form>
-      <div className="container">
         <div className="w-100 mx-5">
-          <div className="row w-100 flex-row-center">
+          <div className="row w-100 flex-row-center ">
             <div className="col-md-2 col-sm-12 filter mt-1 me-4 filter-column">
               <div>
                 <h5 className="text-center fw-bold mt-1 mb-4">Filter</h5>

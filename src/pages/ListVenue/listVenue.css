@@ -16,16 +16,19 @@ a {
   color: #454749;
 } 
 .form-searchBar{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 682px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+ 
+  width: 100%;
+
 }
 .search-bar { 
-  max-width: 250px;
+  width: 100%;
   border: 1px solid #f53f3f;
   height: 50px;
   padding: 1rem;
   box-shadow: 3px 5px 8px -2px #7f7f7f; 
+  
 } 
  .spinner {
   margin: 60px auto;
@@ -84,7 +87,7 @@ a {
   font-family: 'Poppins', sans-serif;
   position: absolute;
   top: 30%;
-  left:10%;
+  left:22%;
   background-color: #00010241;
   padding:1rem;
 }
