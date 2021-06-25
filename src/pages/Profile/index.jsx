@@ -107,6 +107,7 @@ const Profile = () => {
             }
         );
         dispatch(logout())
+        alert("Goodbye see you soon !");
         history.push("/");
     };
 
