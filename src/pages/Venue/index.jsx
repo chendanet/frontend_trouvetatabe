@@ -28,6 +28,7 @@ const Venue = () => {
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([])
   const [ratings, setRatings] = useState([])
+  const star = "⭐️"
 
 
 
@@ -163,11 +164,11 @@ const Venue = () => {
                       ratings.filter(rating => rating.venue_id == currentVenue.id)
                         .map((rating) => (
                           <div class="rating">
-                            <span>{rating.score}/5 - {rating.review} </span>
+                            <span>{`${star.repeat(rating.score) + " - " +rating.review}`}</span>
                             </div>
                         )
                         )}
-<StarRating/>
+
 {/* ********************************** RATINGS ********************************** */}
 </div>
 

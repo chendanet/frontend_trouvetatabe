@@ -57,6 +57,7 @@ const Ratings = ({ modal, idVenue }) => {
   };
 
   
+  
 
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
@@ -66,13 +67,12 @@ const Ratings = ({ modal, idVenue }) => {
    
     </div>
         <button type="button" onClick={modal} className="close">✖️</button>
-        <StarRating/>
         <form>
           <input
             type="text"
             id="name"
             name="review"
-            placeholder="Your Review"
+            placeholder="Your Review 🧐"
             required
             className="form-control mb-2"
              onChange={(e) => setReview(e.target.value)}
@@ -81,8 +81,9 @@ const Ratings = ({ modal, idVenue }) => {
             type="number"
             id="score"
             name="score"
-            placeholder="Score"
+            placeholder="Score 1 to 5"
             min="1"
+            max="5"
             className="form-control mb-2"
             onChange={(e) => setScore(e.target.value)}
           />
