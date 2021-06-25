@@ -7,10 +7,12 @@ import config from "config";
 import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 import EditVenue from "pages/EditVenue";
+import Ratings from "pages/Ratings";
+
 import { PROD_EDIT_VENUE, PROD_BOOKINGS } from 'api/apiHandler';
 
 
-const Venue = ({ venues }) => {
+const Venue = () => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
@@ -24,6 +26,9 @@ const Venue = ({ venues }) => {
   // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([])
+  const [ratings, setRatings] = useState([])
+
+
 
   const dataVenue = {
     venue: {
@@ -32,7 +37,15 @@ const Venue = ({ venues }) => {
       cuisine: cuisine,
     },
   };
+  const [venues, setVenues] = useState(undefined);
 
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
 
 
   // delete venue ////////////////////////
@@ -57,24 +70,6 @@ const Venue = ({ venues }) => {
       .then((data) => setCurrentVenue(data));
   }, [idVenue]);
 
-  // edit venue ////////////////////////
-
-  const fetchEditVenue = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `${PROD_EDIT_VENUE}/${idVenue}`,
-      {
-        method: "put",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataVenue),
-      }
-    );
-    history.push("/myVenues");
-    const data = await response.json();
-  };
 
 
   // toggle modal
@@ -101,10 +96,24 @@ const Venue = ({ venues }) => {
     fetchAllBookings();
   }, [])
 
+  /* ********************************** RATINGS ********************************** */
 
+  const fetchAllRatings = async () => {
+    const response = await fetch('https://trouvetatableapi.herokuapp.com/api/ratings')
+    const data = await response.json()
+    setRatings(data)
+  }
 
+  useEffect(() => {
+    fetchAllRatings();
+  }, [])
 
-
+  // toggle modal Rating
+  const [modalRating, setModalRating] = useState(false)
+  const toggleModalRating = () => {
+    setModalRating(!modalRating)
+  }
+/* ********************************** RATINGS ********************************** */
 
   return (
     // <div className="container-page">
@@ -144,11 +153,29 @@ const Venue = ({ venues }) => {
 
               <div className="row">
                 <div className="col-md-6 col-sm-12">
-                  <h4>Price: <span className="text-dark fs-5">{currentVenue.price} €</span></h4>
+                  <h4>Price: <span className="text-dark fs-5">{currentVenue.price*0.90} €</span></h4>
+
+                  <div className="col-md-6 col-sm-12">
+                  <h4> Review </h4>
+{/* ********************************** RATINGS ********************************** */}
+{ratings &&
+                      ratings.filter(rating => rating.venue_id == currentVenue.id)
+                        .map((rating) => (
+                          <div class="rating">
+                            <span>{rating.score}/5 - {rating.review} </span>
+                            </div>
+                        )
+                        )}
+
+{/* ********************************** RATINGS ********************************** */}
+</div>
+
                 </div>
-                {currentUser.id && currentVenue.user_id !== currentUser.id &&
+                {currentUser.id && currentVenue.user_id != currentUser.id &&
                   <div className="col-md-6 col-sm-12">
                     <button type="button" onClick={toggleModal}>Find a Table</button>{" "}
+                    <button type="button" onClick={toggleModalRating}> Leave a Review</button>{" "}
+
                   </div>}
                 {!currentUser.id &&
                   <div className="col-md-6 col-sm-12">
@@ -214,6 +241,13 @@ const Venue = ({ venues }) => {
         (<>
 
           <EditVenue modal={toggleModal1} idVenue={idVenue} />
+        </>)
+      }
+
+    {modalRating &&
+        (<>
+
+          <Ratings modal={toggleModalRating} idVenue={idVenue} />
         </>)
       }
 
