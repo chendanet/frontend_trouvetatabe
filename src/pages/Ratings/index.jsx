@@ -6,6 +6,8 @@ import "pages/Booking/Booking.css";
 import { useSelector } from "react-redux";
 import { PROD_BOOKINGS } from 'api/apiHandler';
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
+import { FaStar } from "react-icons/fa";
+import { StarRating } from "components/Star/Star";
 
 const Ratings = ({ modal, idVenue }) => {
 
@@ -54,30 +56,34 @@ const Ratings = ({ modal, idVenue }) => {
     }
   };
 
- 
+  
+  
 
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
       <div className="form-container " align="center">
         <h3> Leave your ratings </h3>
-        <button type="button" onClick={modal} className="close">X</button>
+        <div>
+   
+    </div>
+        <button type="button" onClick={modal} className="close">✖️</button>
         <form>
           <input
             type="text"
             id="name"
             name="review"
-            placeholder="Your Review"
+            placeholder="Your Review 🧐"
             required
             className="form-control mb-2"
              onChange={(e) => setReview(e.target.value)}
           />
-
            <input
             type="number"
             id="score"
             name="score"
-            placeholder="Score"
+            placeholder="Score 1 to 5"
             min="1"
+            max="5"
             className="form-control mb-2"
             onChange={(e) => setScore(e.target.value)}
           />
@@ -92,3 +98,4 @@ const Ratings = ({ modal, idVenue }) => {
 };
 
 export default Ratings;
+

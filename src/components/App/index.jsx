@@ -24,6 +24,7 @@ import ResetPassword from 'pages/ResetPassword';
 import Ratings from 'pages/Ratings';
 
 
+
 const App = () => {
 
   const [venues, setVenues] = useState(undefined);
