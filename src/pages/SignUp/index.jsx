@@ -44,6 +44,7 @@ const SignUp = () => {
     });
 
     if (response.status !== 200) {
+      alert("Something was wrong");
       return;
     }
 
@@ -68,7 +69,7 @@ const SignUp = () => {
         token
       )
     );
-
+    alert("Awesome ! Your account has been successfully created 🍹");
     history.push("/");
   };
   return (
