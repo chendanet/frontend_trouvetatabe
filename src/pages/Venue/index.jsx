@@ -10,7 +10,6 @@ import EditVenue from "pages/EditVenue";
 import Ratings from "pages/Ratings";
 
 import { PROD_EDIT_VENUE, PROD_BOOKINGS } from 'api/apiHandler';
-import { StarRating } from "components/Star/Star";
 
 
 const Venue = () => {

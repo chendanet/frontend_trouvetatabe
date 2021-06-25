@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { PROD_BOOKINGS } from 'api/apiHandler';
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import { FaStar } from "react-icons/fa";
-import { StarRating } from "components/Star/Star";
 
 const Ratings = ({ modal, idVenue }) => {
 
