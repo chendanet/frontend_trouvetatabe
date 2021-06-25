@@ -38,6 +38,7 @@ const Booking = ({ modal, idVenue }) => {
     const data = await response.json();
 
     if (response) {
+      alert("Your reservation has been taken into account 😉");
       history.push("/profile");
       return;
     }
