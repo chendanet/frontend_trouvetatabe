@@ -191,8 +191,7 @@ const Venue = () => {
               <div className="row">
                 <div className="col-md-6 col-sm-12">
 
-                  <h4>Price: <span className="text-dark fs-5">{currentVenue.price * 0.90} €</span></h4>
-
+                  <h4>Price: <span className="text-dark fs-5">{Math.floor(currentVenue.price * 0.90)} €</span></h4>
                   <div className="col-md-6 col-sm-12">
                     <h4> Review </h4>
                     {/* ********************************** RATINGS ********************************** */}
