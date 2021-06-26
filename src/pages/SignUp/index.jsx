@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link  } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
-import { Link } from "react-router-dom";
 import { PROD_SIGNUP } from 'api/apiHandler';
 
 const SignUp = () => {
@@ -14,6 +13,7 @@ const SignUp = () => {
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [alert, setAlert] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -56,9 +56,6 @@ const SignUp = () => {
       body: JSON.stringify(dataUser),
     });
  
-    if (response.status !== 200) {
-      return;
-    }
 
     const token = response.headers.get("Authorization").split("Bearer ")[1];
     const data = await response.json();
@@ -81,9 +78,10 @@ const SignUp = () => {
         token
       )
     );
-
+    setAlert(false);
     history.push("/");
   }
+  setAlert(true);
   };
   return (
     <div className="container d-flex align-items-center justify-content-center">
@@ -143,6 +141,16 @@ const SignUp = () => {
             <Link to="/signin" className="link">
               <button className="btn-login">I have account</button>
             </Link>
+            {
+              alert && setAlert() === true ?
+                (<div className="alert alert-danger" role="alert">
+                  Whoops something was wrong. Please try again
+                </div>)
+              :
+                (<div classname="alert alert-success" role="alert">
+                  Awesome ! Your account has been successfully created 🍹
+                </div>)
+            }
           </div>
         </form>
       </div>
