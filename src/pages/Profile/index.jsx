@@ -8,7 +8,7 @@ import { authenticate } from 'store/actions'
 import "pages/Profile/Profile.css";
 import { logout } from "store/actions";
 import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
-
+import strftime from 'strftime'
 
 const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)
@@ -193,7 +193,7 @@ const Profile = () => {
                             <h4>Date:</h4>
                             <span>{booking.date}</span>
                             <h4>Time:</h4>
-                            <span>{booking.time}</span>
+                            <span>{strftime('%H:%M:%S', booking.time)}</span>
                             <div className="delete-button">
                                 <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
 

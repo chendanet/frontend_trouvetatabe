@@ -8,7 +8,6 @@ import "pages/Venue/Venue.css";
 import Booking from "pages/Booking";
 import EditVenue from "pages/EditVenue";
 import Ratings from "pages/Ratings";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { PROD_EDIT_VENUE, PROD_BOOKINGS } from "api/apiHandler";
 import MapOpen from "pages/Map";
 
@@ -22,14 +21,14 @@ const Venue = () => {
   const history = useHistory();
   const [currentAddress, setCurrentAddress] = useState(null);
   const [currentCity, setCurrentCity] = useState(null);
-  const [dataGeo, setDataGeo]= useState(null);
   const currentUser = useSelector((state) => state.authReducer);
   // const [seat, setSeat] = useState();
   // const [time, setTime] = useState();
   // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [bookings, setBookings] = useState([]);
-
+  const [lat, setLat] = useState()
+  const [lon, setLon] = useState()
   const dataVenue = {
     venue: {
       name: name,
@@ -64,16 +63,35 @@ const Venue = () => {
     const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`);
     const data = await response.json();
     setCurrentVenue(data);
-    
     setCurrentAddress(data.address.replaceAll(" ", "+"));
     setCurrentCity(data.city);
   };
 
-  useEffect(() => {
-    fetchVenue();
-  }, []);
-  
+  const fetchCordinatesFromAdresse = async () => {
 
+    if (currentAddress && currentCity) {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search.php?q=${currentAddress}+${currentCity}&format=jsonv2`
+      );
+      const data = await response.json();
+      if (Object.entries(data).length !== 0) {
+        setLat(data[0].lat)
+        setLon(data[0].lon)
+      }
+      else {
+        setLat(currentVenue.lat)
+        setLon(currentVenue.lng)
+      }
+    }
+    else {
+      return
+    }
+  }
+
+  useEffect(() => {
+    fetchVenue()
+    fetchCordinatesFromAdresse()
+  }, [currentCity, currentAddress]);
 
   // toggle modal
   const [modal, setModal] = useState(false);
@@ -103,27 +121,9 @@ const Venue = () => {
     fetchAllBookings();
   }, []);
 
-  // map leaflet whit nominatim
 
-  
-  console.log("dataGeo: ", dataGeo);
-  console.log("adresse: ", currentAddress);
-  console.log("city: ", currentCity);
-
-  const fetchNominatimAdresse = async () => {
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/search.php?q=${currentAddress}+${currentCity}&format=jsonv2`
-    );
-    const data = await response.json();
-   
-    setDataGeo(data[0])
-  };
-  useEffect(() => {
-    fetchNominatimAdresse();
-  }, []);
 
   return (
-    // <div className="container-page">
     <div className="container-page d-flex align-items-center justify-content-center  ">
       <div>
         {currentVenue && (
@@ -135,12 +135,12 @@ const Venue = () => {
                 className="img-fluid card-border"
               />
             ) : (
-              <img
-                src={currentVenue.images[0]}
-                alt={`${currentVenue.name}_dish`}
-                className="img-fluid card-border"
-              />
-            )}
+                <img
+                  src={currentVenue.images[0]}
+                  alt={`${currentVenue.name}_dish`}
+                  className="img-fluid card-border"
+                />
+              )}
 
             <div className="card mt-3 p-4 card-border">
               <h2>{currentVenue.name}</h2>
@@ -232,16 +232,12 @@ const Venue = () => {
                 </div>
               </div>
             )}
-           
-            {currentVenue && dataGeo &&
-            
-            <MapOpen lattitude={dataGeo.lat} longitude={dataGeo.lon} currentVenue={currentVenue}/>
+            {lat && lon &&
+              <MapOpen latitude={lat} longitude={lon} currentVenue={currentVenue} />
             }
-         
           </div>
         )}
       </div>
-
       {modal && (
         <>
           <Booking modal={toggleModal} idVenue={idVenue} />
@@ -260,8 +256,6 @@ const Venue = () => {
         </>
       )}
     </div>
-
-    // </div>
   );
 };
 
