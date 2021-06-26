@@ -77,7 +77,7 @@ function Navbar() {
                       </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-list item-list" href="#">
+                  <Link className="nav-list item-list" to="/blog">
                       Blog
                       </Link>
                   </li>
@@ -96,7 +96,7 @@ function Navbar() {
                          </Link>
                   </li>
                   {currentUser.is_manager && (
-                    <div>
+                    <>
                       <li className="nav-item">
                         <Link className="nav-list item-list" to="/venues">
                           Créer un restaurant
@@ -107,12 +107,12 @@ function Navbar() {
                           Mes restaurants
                     </Link>
                       </li>
-                    </div>
+                    </>
                   )}
                   <li className="nav-item">
-                    <a className="nav-list item-list" href="#">
+                  <Link className="nav-list item-list" to="/blog">
                       Blog
-                         </a>
+                      </Link>
                   </li>
                 </div>
               }

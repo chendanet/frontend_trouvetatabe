@@ -22,6 +22,8 @@ import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import ForgotPassword from 'pages/ForgotPassword';
 import ResetPassword from 'pages/ResetPassword';
 import Ratings from 'pages/Ratings';
+import Blog from 'pages/Blog';
+
 
 
 const App = () => {
@@ -71,6 +73,9 @@ const App = () => {
             </Route>
             <Route path="/ratings">
               <Ratings />
+            </Route>
+            <Route path="/blog">
+              <Blog />
             </Route>
           </Switch>
           <Footer />
