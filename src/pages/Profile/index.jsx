@@ -180,27 +180,6 @@ const Profile = () => {
                     <br />
                 </div>
             </div>
-<<<<<<< HEAD
-            <div className="container ">
-
-                <h3>My bookings</h3>
-                {myBooking.map((booking) => (
-
-                    booking.user_id === parseInt(currentUser.id) && (
-
-                        <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
-                            <h2>{booking.venue.name}</h2>
-                            <h4>seat:</h4>
-                            <span>{booking.seat}</span>
-                            <h4>Date:</h4>
-                            <span>{booking.date}</span>
-                            <h4>Time:</h4>
-                            <span>{strftime('%H:%M:%S', booking.time)}</span>
-                            <div className="delete-button">
-                                <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
-=======
->>>>>>> develop
-
             <div className="container ">
                 <div className="row justify-content-md-center">
                     <h4 className="col-md-2 ">My bookings</h4>
