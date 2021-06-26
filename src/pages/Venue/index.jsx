@@ -137,7 +137,17 @@ const Venue = () => {
     fetchAllRatings();
   }, [])
 
-  /* ********************************** RATINGS ********************************** */
+  /* ********************************** Method Time ********************************** */
+
+  const DisplayTimeOnly = (UTCDateTime) => {
+    var date = new Date(UTCDateTime.slice(0, -1));
+    var hour = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var formattedDate = hour + ':' + minutes.substr(-2);
+    return formattedDate;
+  }
+    /* **********************************  Method Time ********************************** */
+
 
   return (
     <div className="container-page d-flex align-items-center justify-content-center  ">
@@ -239,8 +249,8 @@ const Venue = () => {
                               <h4>Date:</h4>
                               <span>{booking.date}</span>
                               <h4>Time:</h4>
-                              <span>{booking.time}</span>
-                              {/* {<div className="delete-button">
+                              <span>{DisplayTimeOnly(booking.time)}</span>            
+                               {/* {<div className="delete-button">
 
             
                               <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
