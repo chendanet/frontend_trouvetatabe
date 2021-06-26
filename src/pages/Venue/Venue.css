@@ -10,7 +10,12 @@ img{
 }
 button:hover{
   color: white;
-  background-color: #F53F3F;;
+  background-color: #F53F3F;
   
   
 }
+
+.title-venue{
+  color: #F53F3F;
+}
+

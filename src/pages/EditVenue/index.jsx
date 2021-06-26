@@ -17,15 +17,19 @@ const EditVenue = ({ venues, modal }) => {
   const [cuisine, setCuisine] = useState();
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
-  const [seat, setSeat] = useState();
-  const [time, setTime] = useState();
-  const [date, setDate] = useState();
+  const [seatnumber, setSeatnumber] = useState();
+  const [address, setAddress] = useState();
+  const [description, setDescription] = useState();
+
   const userId = useSelector((state) => state.authReducer.id);
 
   const dataVenue = {
     name: name,
     city: city,
     cuisine: cuisine,
+    seatnumber: seatnumber,
+    address: address,
+    description: description,
   };
 
   const fetchEditVenue = async (e) => {
@@ -90,6 +94,36 @@ const EditVenue = ({ venues, modal }) => {
               type="text"
               name="cuisine"
               onChange={(e) => setCuisine(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="cuisine">
+              Number of seats
+          </label>
+            <input
+              type="text"
+              name="cuisine"
+              onChange={(e) => setSeatnumber(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="cuisine">
+            Address       
+               </label>
+            <input
+              type="text"
+              name="cuisine"
+              onChange={(e) => setAddress(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="cuisine">
+             Description      
+               </label>
+            <input
+              type="text"
+              name="cuisine"
+              onChange={(e) => setDescription(e.target.value)}
             ></input>
           </div>
           <div> <br />
