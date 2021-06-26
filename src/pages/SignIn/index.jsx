@@ -13,6 +13,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
   const history = useHistory();
+  const [alert, setAlert] = useState(false); 
 
 
   const handleEmail = (e) => {
@@ -43,7 +44,8 @@ const SignIn = () => {
 
 
     if (response.status != 200) {
-        alert('Incorrect password, please try again !');
+      setAlert(true); 
+      return
     }
 
     const token = response.headers.get('Authorization').split('Bearer ')[1]
@@ -96,6 +98,9 @@ const SignIn = () => {
               Login
               </button>
               <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
+              {alert && (<div class="alert alert-primary" role="alert">
+              Oppsss, wrong email or password. Try again</div>
+                  )}
             <br />
           </div>
         </form>
