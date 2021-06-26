@@ -137,8 +137,8 @@ export const ListVenues = () => {
                   .map((item, index) => (
                     <div className="col-md-4 col-sm-6">
                       <Link to={"/venues/" + item.id} className="col-md-6">
-                        <div className="card"  key={index}>
-                          <div className="card_img-container ">
+                        <div className="card" key={index}>
+                          <div className="card_img">
                             {!item.images[0] ?
                               <img
                                 src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}

@@ -110,6 +110,16 @@ const Profile = () => {
         history.push("/");
     };
 
+/* ********************************** Method Time ********************************** */
+
+const DisplayTimeOnly = (UTCDateTime) => {
+    var date = new Date(UTCDateTime.slice(0, -1));
+    var hour = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var formattedDate = hour + ':' + minutes.substr(-2);
+    return formattedDate;
+  }
+    /* **********************************  Method Time ********************************** */
 
 
 
@@ -191,7 +201,8 @@ const Profile = () => {
                                 <h5 className="card-title">{booking.venue.name.toUpperCase()}</h5>
                                 <h6>seat: <span className="text-dark">{booking.seat}</span></h6>
                                 <h6>Date: <span className="text-dark">{booking.date}</span></h6>
-                                <h6>Time: <span className="text-dark">{booking.time}</span></h6>
+                                <h6>Time: <span>{DisplayTimeOnly(booking.time)}</span>            
+</h6>
                                 <div className="delete-button">
                                     <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
                                 </div>
