@@ -140,7 +140,7 @@ const Venue = () => {
   /* ********************************** Method Time ********************************** */
 
   const DisplayTimeOnly = (UTCDateTime) => {
-    var date = new Date(UTCDateTime);
+    var date = new Date(UTCDateTime.slice(0, -1));
     var hour = date.getHours();
     var minutes = "0" + date.getMinutes();
     var formattedDate = hour + ':' + minutes.substr(-2);
