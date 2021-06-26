@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import Card from 'react-bootstrap/Card';
-import { SameValueZero } from "es-abstract/es2019";
+// import { SameValueZero } from "es-abstract/es2019";
 
 
 
 
-const MyVenues = (item, index) => {
+const MyVenues = () => {
 
     const [venues, setVenues] = useState(undefined);
 
@@ -25,32 +25,39 @@ useEffect(() => {
     console.log('venues', currentManager)
 
     return (
-        <Card style={{ width: '50rem' }} key={index}>
-          
-            {!item.images[0] ?
-                <img
-                    src={`https://source.unsplash.com/600*600/?dish&sig=${index}`}
-                    alt={`${item.name}_image`}
-                />
-                :
-                <img
-                    src={item.images[0]}
-                    alt={`${item.name}_image`}
-                />
-            }
-            <Card.Body>
-                <Card.Title>{item.name}</Card.Title>
-                <Card.Text>
-                   <Link to={"/venues/" + item.id}>
-                       <p>{item.city}</p>
-                       <p>{item.cuisine}</p>
+        
+       <Card>
+                       {venues && venues
+                .filter((value) => value.user_id === parseInt(currentManager.id))
+                .map((item, index) => (
 
-                   </Link>
-                </Card.Text>
-            </Card.Body>
-        </Card>
+                     
+                        {!item.images[0] ?
+                            <img
+                                src={`https://source.unsplash.com/600*600/?dish&sig=${index}`}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />
+                            
+                            : <img
+                                src={item.images[0]}
+                                alt={`${item.name}_image`}
+                                className="img-fluid card-border"
+                            />}
+                ))}
+                
+            </Card>   
 
+
+                          
+               
+    
     )
+                    
+                   
+                      
+    
+    
 }
 
 export default MyVenues;
