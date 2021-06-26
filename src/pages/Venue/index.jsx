@@ -137,11 +137,6 @@ const Venue = () => {
     fetchAllRatings();
   }, [])
 
-  // toggle modal Rating
-  const [modalRating, setModalRating] = useState(false)
-  const toggleModalRating = () => {
-    setModalRating(!modalRating)
-  }
   /* ********************************** RATINGS ********************************** */
 
   return (
