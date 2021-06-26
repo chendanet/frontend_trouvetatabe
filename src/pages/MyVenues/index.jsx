@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import Card from 'react-bootstrap/Card';
+import { SameValueZero } from "es-abstract/es2019";
 
 
 
 
-const MyVenues = () => {
+const MyVenues = (venue, item, index) => {
 
     const [venues, setVenues] = useState(undefined);
 
@@ -24,40 +25,37 @@ useEffect(() => {
     console.log('venues', currentManager)
 
     return (
-        <Card style={{ width: '180rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+        {venues && venues
+            .filter((value) => value.user_id === parseInt(currentManager.id))
+            .map((item, index) => (
+        <Card>
+            {!item.images[0] ?
+                <img
+                    src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
+                    alt={`${item.name}_image`}
+                    className="img-fluid card-border"
+                />
+                : <img
+                    src={item.images[0]}
+                    alt={`${item.name}_image`}
+                    className="img-fluid card-border"
+                />
+            }
+           
             <Card.Body>
                 <Card.Title>Your venue(s)</Card.Title>
                 <Card.Text>
-                    Here, your information the customers can see :
-                </Card.Text>
-                {venues && venues
-                    .filter((value) => value.user_id === parseInt(currentManager.id))
-                    .map((item, index) => (
-
-                        
-                            {!item.images[0] ?
-                                <img
-                                    src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
-                                    alt={`${item.name}_image`}
-                                    className="img-fluid card-border"
-                                />
-                                : <img
-                                    src={item.images[0]}
-                                    alt={`${item.name}_image`}
-                                    className="img-fluid card-border"
-                                />}
-
+                    
                             <Link to={"/venues/" + item.id} className="col-md-5">
-                               
-                                    <h5>{item.name}</h5>
-                                    <p>{item.city}</p>
-                                    <p>{item.cuisine}</p>
-                                
+                                <h5>{venue.name}</h5>
+                                <p>{venue.city}</p>
+                                <p>{venue.cuisine}</p>
                             </Link>
-                    ))}
+                       
+                </Card.Text>
             </Card.Body>
         </Card> 
+         ))}
     )
 }
 
