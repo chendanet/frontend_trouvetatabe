@@ -8,7 +8,7 @@ import { SameValueZero } from "es-abstract/es2019";
 
 
 
-const MyVenues = (venue, item, index) => {
+const MyVenues = (item, index) => {
 
     const [venues, setVenues] = useState(undefined);
 
@@ -25,37 +25,31 @@ useEffect(() => {
     console.log('venues', currentManager)
 
     return (
-        {venues && venues
-            .filter((value) => value.user_id === parseInt(currentManager.id))
-            .map((item, index) => (
-        <Card>
+        <Card style={{ width: '50rem' }} key={index}>
+          
             {!item.images[0] ?
                 <img
-                    src={`https://source.unsplash.com/600x600/?dish&sig=${index}`}
+                    src={`https://source.unsplash.com/600*600/?dish&sig=${index}`}
                     alt={`${item.name}_image`}
-                    className="img-fluid card-border"
                 />
-                : <img
+                :
+                <img
                     src={item.images[0]}
                     alt={`${item.name}_image`}
-                    className="img-fluid card-border"
                 />
             }
-           
             <Card.Body>
-                <Card.Title>Your venue(s)</Card.Title>
+                <Card.Title>{item.name}</Card.Title>
                 <Card.Text>
-                    
-                            <Link to={"/venues/" + item.id} className="col-md-5">
-                                <h5>{venue.name}</h5>
-                                <p>{venue.city}</p>
-                                <p>{venue.cuisine}</p>
-                            </Link>
-                       
+                   <Link to={"/venues/" + item.id}>
+                       <p>{item.city}</p>
+                       <p>{item.cuisine}</p>
+
+                   </Link>
                 </Card.Text>
             </Card.Body>
-        </Card> 
-         ))}
+        </Card>
+
     )
 }
 
