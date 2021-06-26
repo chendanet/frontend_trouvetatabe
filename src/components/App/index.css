@@ -5,3 +5,7 @@
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto; */
 }
+.leaflet-container {
+  width: 50vw;
+  height: 50vh;
+}
