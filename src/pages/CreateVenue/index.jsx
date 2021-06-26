@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Cookies from 'js-cookie';
 import config from 'config';
 import { useHistory } from 'react-router-dom';
@@ -19,6 +18,7 @@ function CreateVenue() {
   const descriptionRef = useRef();
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
   const history = useHistory();
+  const [alert, setAlert] = useState(false);
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,10 +32,13 @@ function CreateVenue() {
     })
       .then(response => {
         if (response.ok) {
-          alert('Génial ! Votre établissement a été créer avec succès 🍹');
+          setAlert(false);
           history.push('/myVenues');
 
-        } else (alert('Erreur !'));
+        } else {
+          setAlert(true);
+          return;
+        }
       })
       .catch(error => console.error('error', error));
   }
@@ -64,55 +67,55 @@ function CreateVenue() {
             <label>
             In what city ?
               <select ref={cityRef} name="city" required>
-                <option value="Paris">Paris</option>
-                <option value="Nice">Nice</option>
-                <option value="Toulouse">Toulouse</option>
-                <option value="Marseille">Marseille</option>
-                <option value="Rennes">Rennes</option>
-                <option value="Grenoble">Grenoble</option>
-                <option value="Nantes">Nantes</option>
-                <option value="Montpellier">Montpellier</option>
-                <option value="Lyon">Lyon</option>
-                <option value="Rouen">Rouen</option>
-                <option value="Strasbourg">Strasbourg</option>
-                <option value="Nancy">Nancy</option>
-                <option value="Metz">Metz</option>
-                <option value="Brest">Brest</option>
-                <option value="Mulhouse">Mulhouse</option>
-                <option value="Limoges">Limoges</option>
-                <option value="Orleans">Orleans</option>
-                <option value="Bordeaux">Bordeaux</option>
-                <option value="Lille">Lille</option>
-                <option value="Le Havre">Le Havre</option>
-                <option value="Reims">Reims</option>
-                <option value="Saint-Etienne">Saint-Etienne</option>
-                <option value="Toulon">Toulon</option>
-                <option value="Angers">Angers</option>
-                <option value="Nimes">Nimes</option>
-                <option value="Clermont-Ferrand">Clermont-Ferrand</option>
-                <option value="Le Mans">Le Mans</option>
-                <option value="Aix-en-Provence">Aix-en-Provence</option>
-                <option value="Amiens">Amiens</option>
-                <option value="Tours">Tours</option>
-                <option value="Annecy">Annecy</option>
-                <option value="Perpignan">Perpignan</option>
-                <option value="Besançon">Besançon</option>
-                <option value="Pau">Pau</option>
-                <option value="La Rochelle">La Rochelle</option>
-                <option value="Cannes">Cannes</option>
-                <option value="Antibes">Antibes</option>
-                <option value="Ajaccio">Ajaccio</option>
-                <option value="Quimper">Quimper</option>
-                <option value="Clamart">Clamart</option>
-                <option value="Frejus">Frejus</option>
-                <option value="Bayonne">Bayonne</option>
-                <option value="Saint-Malo">Saint-Malo</option>
-                <option value="Bastia">Bastia</option>
-                <option value="Angouleme">Angouleme</option>
-                <option value="Chartres">Chartres</option>
+              <option value="Aix-en-Provence">Aix-en-Provence</option>
+              <option value="Ajaccio">Ajaccio</option>
                 <option value="Auxerre">Auxerre</option>
-                <option value="Orange">Orange</option>
+                <option value="Amiens">Amiens</option>
+                <option value="Angers">Angers</option>
+                <option value="Angouleme">Angouleme</option>
+                <option value="Annecy">Annecy</option>
+                <option value="Antibes">Antibes</option>
+                <option value="Bastia">Bastia</option>
+                <option value="Bayonne">Bayonne</option>
+                <option value="Besançon">Besançon</option>
+                <option value="Bordeaux">Bordeaux</option>
+                <option value="Brest">Brest</option>
+                <option value="Cannes">Cannes</option>
+                <option value="Chartres">Chartres</option>
+                <option value="Clamart">Clamart</option>
+                <option value="Clermont-Ferrand">Clermont-Ferrand</option>
                 <option value="Evreux">Evreux</option>
+                <option value="Frejus">Frejus</option>
+                <option value="Grenoble">Grenoble</option>
+                <option value="La Rochelle">La Rochelle</option>
+                <option value="Le Havre">Le Havre</option>
+                <option value="Le Mans">Le Mans</option>
+                <option value="Lille">Lille</option>
+                <option value="Limoges">Limoges</option>
+                <option value="Lyon">Lyon</option>
+                <option value="Marseille">Marseille</option>
+                <option value="Metz">Metz</option>
+                <option value="Montpellier">Montpellier</option>
+                <option value="Mulhouse">Mulhouse</option>
+                <option value="Nancy">Nancy</option>
+                <option value="Nantes">Nantes</option>
+                <option value="Nice">Nice</option>
+                <option value="Nimes">Nimes</option>
+                <option value="Orange">Orange</option>
+                <option value="Orleans">Orleans</option>
+                <option value="Paris">Paris</option>
+                <option value="Pau">Pau</option>
+                <option value="Perpignan">Perpignan</option>
+                <option value="Quimper">Quimper</option>
+                <option value="Reims">Reims</option>
+                <option value="Rennes">Rennes</option>
+                <option value="Rouen">Rouen</option>
+                <option value="Saint-Etienne">Saint-Etienne</option>
+                <option value="Saint-Malo">Saint-Malo</option>
+                <option value="Strasbourg">Strasbourg</option>
+                <option value="Toulon">Toulon</option>
+                <option value="Toulouse">Toulouse</option>
+                <option value="Tours">Tours</option>
               </select>
               </label>{" "}
             <br />
@@ -140,6 +143,7 @@ function CreateVenue() {
               ref={zipcodeRef}
               placeholder="ex: 75001"
               pattern="^(\d{5})"
+              required="required"
               className="form-control"
             />{" "}
             <br />
@@ -153,6 +157,7 @@ function CreateVenue() {
               name="price"
               ref={priceRef}
               placeholder="ex: 33€"
+              required="required"
               className="form-control"
             />{" "}
             <br />
@@ -180,6 +185,7 @@ function CreateVenue() {
               name="phone_number"
               ref={phoneNumberRef}
               placeholder="ex: +331.23 45-6789"
+              required="required"
               className="form-control"
             />{" "}
             <br />
@@ -203,20 +209,32 @@ function CreateVenue() {
               name="seatnumber"
               ref={seatNumberRef}
               placeholder="ex: 42"
+              required="required"
               className="form-control"
             />{" "}
             <br />
             <label>
             What do you offer in your establishment ?
             </label>
-            <textarea name="description" ref={descriptionRef} placeholder="Description de votre etablissement…" required="required" className="form-control" />
+            <textarea name="description" ref={descriptionRef} placeholder="Craft cocktails with the freshest seasonal ingredients…" required="required" className="form-control" />
             {" "}
             <br />
             <label>Some pictures of your establishment ?<hr /></label>
-            <input name="images[]"  type="file" multiple={true} className="form-control-file" />
+            <input name="images[]"  type="file" multiple={true} className="form-control-file" required />
             <br /><br />
-            <input type="submit" value="Creer votre etablissement" className="btn-signin" />
+            <input type="submit" value="Create your establishment" className="btn-signin" />
             <br />
+            {
+              alert && setAlert() === true ? 
+                (<div className="alert alert-primary" role="alert">
+                  Whoops, something was wrong, please check try again 
+                </div>)
+              :
+                (<div className="alert alert-success" role="alert">
+                  Awesome ! Your etablishment has been successfully created 🍹
+                </div>
+                )
+            }
           </div>
         </form>
       </div>
