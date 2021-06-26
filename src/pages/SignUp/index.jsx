@@ -10,6 +10,7 @@ import { PROD_SIGNUP } from 'api/apiHandler';
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,11 +23,23 @@ const SignUp = () => {
     setPassword(e.target.value);
   };
 
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  }
+
   const handleOnChange = () => {
       setIsManager(!is_manager);
   };
 
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  const fieldsIsValid = (
+    password.length > 5 && confirmPassword === password && emailRegex.test(email)
+  );
+
+
   const fetchSignUp = async (e) => {
+    if (fieldsIsValid) {
     const dataUser = {
       user: {
         email: email,
@@ -42,7 +55,7 @@ const SignUp = () => {
       },
       body: JSON.stringify(dataUser),
     });
-
+ 
     if (response.status !== 200) {
       return;
     }
@@ -70,6 +83,7 @@ const SignUp = () => {
     );
 
     history.push("/");
+  }
   };
   return (
     <div className="container d-flex align-items-center justify-content-center">
@@ -85,7 +99,7 @@ const SignUp = () => {
               name="email"
               onChange={handleEmail}
               placeholder="Email: example@example.com"
-              pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+              pattern=""
               className="form-control"
             />
             <br />
@@ -95,7 +109,6 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Enter Password"
-              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$"
               className="form-control"
             />
             <br />
@@ -103,9 +116,8 @@ const SignUp = () => {
               rows="4"
               type="password"
               name="password"
-              onChange={handlePassword}
+              onChange={handleConfirmPassword}
               placeholder="Confirm your Password"
-              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$"
               className="form-control"
             />{" "}
             <br />
