@@ -15,8 +15,6 @@ const SignUp = () => {
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [success, setSuccess] = useState(false);
-  const [failed, setFailed] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -59,7 +57,9 @@ const SignUp = () => {
       body: JSON.stringify(dataUser),
     });
     if (response.status != 200){
-      setFailed(true);
+      return (
+        <AlertDismissibleDanger />
+      );
     }
 
     const token = response.headers.get("Authorization").split("Bearer ")[1];
@@ -83,13 +83,11 @@ const SignUp = () => {
         token
       )
     );
-    setSuccess(true);
     return (
       <AlertDismissibleSuccess />,
       history.push("/profile")
     );
   }
-  setFailed(true);
   return (
     <AlertDismissibleDanger />
   );
@@ -101,14 +99,14 @@ const SignUp = () => {
           <h3>Sign Up</h3>
           <p>Create your account</p>
         </div>
-        <form>
+        <form onSubmit={fetchSignUp}>
           <div>
             <input
               type="text"
               name="email"
               onChange={handleEmail}
               placeholder="Email: example@example.com"
-              pattern=""
+              required="required"
               className="form-control"
             />
             <br />
@@ -118,6 +116,7 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Enter Password"
+              required="required"
               className="form-control"
             />
             <br />
@@ -127,6 +126,7 @@ const SignUp = () => {
               name="password"
               onChange={handleConfirmPassword}
               placeholder="Confirm your Password"
+              required="required"
               className="form-control"
             />{" "}
             <br />
@@ -146,9 +146,7 @@ const SignUp = () => {
               </label>
             </div>{" "}
             <br />
-            <button type="submit" onClick={fetchSignUp} className="btn-signin">
-              Sign up
-            </button>
+            <input type="submit" value="Sign up" className="btn-signin" />
             <br />
             <Link to="/signin" className="link">
               <button className="btn-login">I have account</button>
