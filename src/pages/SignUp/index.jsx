@@ -1,10 +1,12 @@
-/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable eqeqeq */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link  } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
 import { PROD_SIGNUP } from 'api/apiHandler';
+import { AlertDismissibleSuccess } from 'components/SignUpAlert/successAlertSignup';
+import AlertDismissibleDanger from "components/SignUpAlert/dangerAlertSignup";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +15,8 @@ const SignUp = () => {
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [alert, setAlert] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -55,7 +58,9 @@ const SignUp = () => {
       },
       body: JSON.stringify(dataUser),
     });
- 
+    if (response.status != 200){
+      setFailed(true);
+    }
 
     const token = response.headers.get("Authorization").split("Bearer ")[1];
     const data = await response.json();
@@ -78,10 +83,16 @@ const SignUp = () => {
         token
       )
     );
-    setAlert(false);
-    history.push("/");
+    setSuccess(true);
+    return (
+      <AlertDismissibleSuccess />,
+      history.push("/profile")
+    );
   }
-  setAlert(true);
+  setFailed(true);
+  return (
+    <AlertDismissibleDanger />
+  );
   };
   return (
     <div className="container d-flex align-items-center justify-content-center">
@@ -127,6 +138,7 @@ const SignUp = () => {
                 value=""
                 checked={is_manager}
                 onChange={handleOnChange}
+                // eslint-disable-next-line react/jsx-no-duplicate-props
                 id="flexCheckDefault"
               />
               <label class="form-check-label" for="flexCheckDefault">
@@ -141,16 +153,6 @@ const SignUp = () => {
             <Link to="/signin" className="link">
               <button className="btn-login">I have account</button>
             </Link>
-            {
-              alert && setAlert() === true ?
-                (<div className="alert alert-danger" role="alert">
-                  Whoops something was wrong. Please try again
-                </div>)
-              :
-                (<div classname="alert alert-success" role="alert">
-                  Awesome ! Your account has been successfully created 🍹
-                </div>)
-            }
           </div>
         </form>
       </div>
