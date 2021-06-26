@@ -15,3 +15,13 @@ button {
   top: 20px;
   right: 20px;
 }
+.card_img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card_img {
+  height: 300px;
+  background: rgba(0, 0, 0, .08);
+  width: auto; 
+}
