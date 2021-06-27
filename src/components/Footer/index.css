@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* height: 50px;
+    margin-top: -50px; */
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 .content-left{
     display: flex;
@@ -20,4 +24,9 @@ svg{
 }
 .content-right span{
     margin: 0 1rem;
+}
+@media only screen and (max-width: 600px){
+	.content-left{
+        display: none;
+    }
 }
