@@ -5,8 +5,8 @@ import { useHistory, Link  } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
 import { PROD_SIGNUP } from 'api/apiHandler';
-import { AlertDismissibleSuccess } from 'components/SignUpAlert/successAlertSignup';
-import AlertDismissibleDanger from "components/SignUpAlert/dangerAlertSignup";
+import { AlertDismissibleSuccess } from 'components/SignUpAlert/AlertDismissibleSuccess';
+import {AlertDismissibleDanger } from "components/SignUpAlert/AlertDismissibleDanger";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -58,7 +58,9 @@ const SignUp = () => {
     });
     if (response.status != 200){
       return (
+        <>
         <AlertDismissibleDanger />
+        </>
       );
     }
 
@@ -84,12 +86,17 @@ const SignUp = () => {
       )
     );
     return (
-      <AlertDismissibleSuccess />,
+      <>
+      <AlertDismissibleSuccess />
+      </>,
+      console.log('Alert ?'),
       history.push("/profile")
     );
   }
   return (
+    <>
     <AlertDismissibleDanger />
+    </>
   );
   };
   return (
@@ -99,7 +106,7 @@ const SignUp = () => {
           <h3>Sign Up</h3>
           <p>Create your account</p>
         </div>
-        <form onSubmit={fetchSignUp}>
+        <form onSubmit={fetchSignUp} keyboard={false} dblClick={false}>
           <div>
             <input
               type="text"
