@@ -134,7 +134,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Change your email"
+                                placeholder="Change your Email"
                                 className="form-control" />
                             <br />
                             <input

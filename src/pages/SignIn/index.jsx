@@ -114,6 +114,7 @@ const SignIn = () => {
         </div>
       </Modal>
        </>
+       <br />
               <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
            <br />
           </div>
