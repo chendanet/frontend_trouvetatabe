@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory, useParams} from 'react-router-dom'
 
 const ResetPassword = () => {
@@ -44,6 +43,8 @@ const ResetPassword = () => {
               name="email"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter Your new password"
+              className="form-control"
+
             />
             <br />
             <button type="submit" onClick={fetchResetPassword} className="btn-signin">

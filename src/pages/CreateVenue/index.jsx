@@ -4,6 +4,11 @@ import Cookies from 'js-cookie';
 import config from 'config';
 import { useHistory } from 'react-router-dom';
 import { PROD_CREATE_VENUE} from 'api/apiHandler'
+import { useState } from 'react'
+
+import { Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 
 function CreateVenue() {
@@ -19,7 +24,9 @@ function CreateVenue() {
   const descriptionRef = useRef();
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
   const history = useHistory();
-  
+  const [show, setShow] = useState(false);
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -32,10 +39,12 @@ function CreateVenue() {
     })
       .then(response => {
         if (response.ok) {
-          alert('Génial ! Votre établissement a été créer avec succès 🍹');
           history.push('/myVenues');
 
-        } else (alert('Erreur !'));
+        } else {
+          setShow(true); 
+          return
+        }
       })
       .catch(error => console.error('error', error));
   }
@@ -220,7 +229,24 @@ function CreateVenue() {
           </div>
         </form>
       </div>
+      {/* ****************************** Alert ********************** */}
+      <>
+      <Modal show={show} variant="success" align="center">
+      <div className="card rounded-5 p-3 m-4" align="center">
+
+        <Alert.Heading> Ops, something went wrong </Alert.Heading>
+        <hr />
+        <p> Could not create your restaurant. Please try again   </p>
+          <Button onClick={() => setShow(false)} variant="outline-danger">
+Close      </Button>
+</div>
+
+      </Modal>
+       </>
+
+       {/* ****************************** Alert ********************** */}
     </div>
+    
   );
 }
 

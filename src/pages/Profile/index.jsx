@@ -8,7 +8,6 @@ import { authenticate } from 'store/actions'
 import "pages/Profile/Profile.css";
 import { logout } from "store/actions";
 import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
-import strftime from 'strftime'
 
 const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)

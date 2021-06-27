@@ -17,7 +17,6 @@ import {
 } from 'react-router-dom';
 import {ListVenues} from "pages/ListVenue";
 import MyVenues from 'pages/MyVenues';
-import Booking from "pages/Booking";
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import ForgotPassword from 'pages/ForgotPassword';
 import ResetPassword from 'pages/ResetPassword';

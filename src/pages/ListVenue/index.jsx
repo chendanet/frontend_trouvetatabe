@@ -62,8 +62,7 @@ export const ListVenues = () => {
   return (
     <>
       <div className="container-banner">
-        <img className="image-banner" src="https://blobsvc.wort.lu/picture/d194915d6e522612578eb1ec0c695666/1600/600/crop/0/173/3147/1356/wortv3/b71afae820044a8e4eba107a27492392c4a1abba" alt="restaurant" />
-        <div className="text-banner">
+        <div className="row py-lg-5 text-banner">
           <h1><center>It's finally summer ! 😎☀️</center></h1>
           <p><center>We can finally meet at the restaurant of bar without a mask ! 🍧</center></p>
           <p><center>With TrouveTaTable, we can easily reserve a place in just a few clicks ! 🖱 </center></p>
