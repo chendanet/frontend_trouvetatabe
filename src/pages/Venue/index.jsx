@@ -142,8 +142,8 @@ const Venue = () => {
   }, [])
 
 
-  let emptyRate = emptyRatings && emptyRatings.filter(rating => rating.venue_id == currentVenue.id)
-  let emptyBooking = emptyBookings && currentVenue && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
+  let emptyRate = emptyRatings && currentVenue && emptyRatings.filter(rating => rating.venue_id === currentVenue.id)
+  let emptyBooking = emptyBookings && currentVenue && emptyBookings.filter((booking) => booking.venue_id === currentVenue.id)
 
   /* ********************************** RATINGS ********************************** */
 
