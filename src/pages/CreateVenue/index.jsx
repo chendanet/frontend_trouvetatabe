@@ -44,13 +44,13 @@ function CreateVenue() {
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">
         <div>
-          <h3>Create your Venue</h3>
+          <h3>Create your venue</h3>
           <hr />
         </div>
         <form onSubmit={handleSubmit}>
           <div>
             <label>
-              Name of the restaurant ?
+              Venue name
             </label>
             <input
               type="text"
@@ -62,7 +62,7 @@ function CreateVenue() {
             />
             <br />
             <label>
-            In what city ?
+            City
               <select ref={cityRef} name="city" required>
                 <option value="Paris">Paris</option>
                 <option value="Nice">Nice</option>
@@ -117,7 +117,7 @@ function CreateVenue() {
               </label>{" "}
             <br />
             <label>
-            At what address ?
+            Address
             </label>
             <input
               rows="4"
@@ -131,7 +131,7 @@ function CreateVenue() {
             />
             <br />
             <label>
-            What is the zipcode ?
+            Zipcode
             </label>
             <input
               rows="4"
@@ -144,7 +144,7 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            What is the average basket ?
+            Average price
             </label>
             <input
               rows="4"
@@ -157,7 +157,7 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            What cuisine ?
+            Cuisine
             <hr />
             </label>
             <input
@@ -171,7 +171,7 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            What is the phone number ?
+            Phone number
             </label>
             <input
               rows="4"
@@ -184,7 +184,7 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            Have a terrace ?
+            Your place has a terrace?
             <input
               rows="4"
               type="checkbox"
@@ -194,7 +194,7 @@ function CreateVenue() {
             /></label>{" "}
             <br />
             <label>
-            How much seating space do you have ?
+            Number of couvert
             </label>
             <input
               rows="4"
@@ -207,12 +207,12 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            What do you offer in your establishment ?
+            Add a short description of your venue
             </label>
-            <textarea name="description" ref={descriptionRef} placeholder="Description de votre etablissement…" required="required" className="form-control" />
+            <textarea name="description" ref={descriptionRef} placeholder="describe your venue" required="required" className="form-control" />
             {" "}
             <br />
-            <label>Some pictures of your establishment ?<hr /></label>
+            <label> Please add one or more photos of your venue<hr /></label>
             <input name="images[]"  type="file" multiple={true} className="form-control-file" />
             <br /><br />
             <input type="submit" value="Create your Venue" className="btn-signin" />

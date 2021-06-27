@@ -61,7 +61,7 @@ const Ratings = ({ modal, idVenue }) => {
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
       <div className="form-container " align="center">
-        <h3> Leave your ratings </h3>
+        <h3> Leave your review </h3>
         <div>
    
     </div>

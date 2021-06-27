@@ -100,7 +100,6 @@ const SignIn = () => {
               Login
               </button>
 
-{/* ****************************** Alert ********************** */}
               <>
       <Modal show={show} variant="success">
         <Alert.Heading> OPPPsss you did it again </Alert.Heading>
@@ -115,9 +114,6 @@ const SignIn = () => {
         </div>
       </Modal>
        </>
-
-       {/* ****************************** Alert ********************** */}
-            <br />
               <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
            <br />
           </div>

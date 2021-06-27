@@ -64,8 +64,6 @@ const Profile = () => {
     }
 
 
-    // ************* add booking for profil **************
-
     const [myBooking, setMyBooking] = useState([]);
 
 
@@ -77,7 +75,6 @@ const Profile = () => {
             });
     }, [])
 
-    // ***************** add delete booking *************
 
     const deleteBooking = async (id) => {
         fetch(`${PROD_BOOKINGS}/${id}`, {
@@ -89,8 +86,6 @@ const Profile = () => {
         })
         history.push("/");
     }
-
-    // ***************** add delete user *************
 
 
     const fetchDeleteUser = async (e) => {
@@ -110,7 +105,6 @@ const Profile = () => {
         history.push("/");
     };
 
-/* ********************************** Method Time ********************************** */
 
 const DisplayTimeOnly = (UTCDateTime) => {
     var date = new Date(UTCDateTime.slice(0, -1));
@@ -119,7 +113,6 @@ const DisplayTimeOnly = (UTCDateTime) => {
     var formattedDate = hour + ':' + minutes.substr(-2);
     return formattedDate;
   }
-    /* **********************************  Method Time ********************************** */
 
 
 
@@ -127,13 +120,13 @@ const DisplayTimeOnly = (UTCDateTime) => {
         <div className="container-profil">
             <div className="row justify-content-md-center justify-content-sm-center justify-content-xs-center">
                 <div className=" col-md-6 col-sm-6 mt-4 text-center ">
-                    {currentUser.last_name ? <p className="text-center">Hello,<h4>{currentUser.last_name}</h4></p> : <p>Hello, you are log with <h4>{currentUser.email}</h4></p>}
+                    {currentUser.last_name ? <p className="text-center"> Hello <h4>{currentUser.last_name}</h4></p> : <p> Hello, you are connected with: <h4>{currentUser.email}</h4></p>}
                 </div>
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
-                    <h3>My profil</h3>
-                    <p>Here, you can modify your profil</p>
+                    <h3> Your profile</h3>
+                    <p> Here, you can update your profile</p>
                     <form>
                         <div>
                             <input
@@ -141,7 +134,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Modify email"
+                                placeholder="Change your email"
                                 className="form-control" />
                             <br />
                             <input
@@ -149,7 +142,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Change Password"
+                                placeholder="Change your Password"
                                 className="form-control" />
                             <br />
                             <input
@@ -181,7 +174,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                     <h4>Delete my account</h4>
                     <br />
                     <div className="textDelete">
-                        <p>Do you want to delete your account? 😱</p>
+                        <p>Warning: you are about to delete your account : 😱</p>
                            <p> Are you sure ? Deleting your account is permanent and will remove all your advantages and history.</p>
                            <p>Any Bookings you booked will not be deleted automatically. Please go to Restaurants you booked and clic DELETE before deleting your account.</p>
                     </div>
@@ -202,10 +195,9 @@ const DisplayTimeOnly = (UTCDateTime) => {
                         booking.user_id === parseInt(currentUser.id) && (
                             <div className="card col-md-4 rounded-5 p-3 m-4">
                                 <h5 className="card-title">{booking.venue.name.toUpperCase()}</h5>
-                                <h6>seat: <span className="text-dark">{booking.seat}</span></h6>
-                                <h6>Date: <span className="text-dark">{booking.date}</span></h6>
-                                <h6>Time: <span>{DisplayTimeOnly(booking.time)}</span>            
-</h6>
+                                <h6> Number of people: <span className="text-dark">{booking.seat}</span></h6>
+                                <h6> Date: <span className="text-dark">{booking.date}</span></h6>
+                                <h6> Time: <span>{DisplayTimeOnly(booking.time)}</span></h6>
                                 <div className="delete-button">
                                     <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Delete </button>
                                 </div>

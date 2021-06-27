@@ -13,7 +13,7 @@ function Main() {
                     </p>
                </div>
                 <div>
-                <input type="text" placeholder="Ville, Adresse, Restau" />
+                <input type="text" placeholder="City, Address" />
                 <button className=" btn-go">Let's go</button>
                </div>
             </div>

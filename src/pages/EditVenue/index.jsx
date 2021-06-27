@@ -49,8 +49,6 @@ const EditVenue = ({ venues, modal }) => {
       history.push("/");
       return;
     }
-
-   // const data = await response.json();
   };
 
 
@@ -98,7 +96,7 @@ const EditVenue = ({ venues, modal }) => {
           </div>
           <div>
             <label type="text" name="cuisine">
-              Number of seats
+              Number of couvert
           </label>
             <input
               type="text"

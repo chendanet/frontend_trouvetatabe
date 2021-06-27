@@ -92,19 +92,19 @@ function Navbar() {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-list item-list" to="/profile">
-                      Profil
+                      Profile
                          </Link>
                   </li>
                   {currentUser.is_manager && (
                     <>
                       <li className="nav-item">
                         <Link className="nav-list item-list" to="/venues">
-                          Create my Venue
+                          Create a Venue
                       </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-list item-list" to="/myVenues">
-                          My Venue
+                          My venues
                     </Link>
                       </li>
                     </>
