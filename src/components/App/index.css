@@ -8,7 +8,9 @@ body {
   width: 100%;
   
 }
-
+.leaflet-container{
+  z-index: 0;
+}
 @media only screen and (min-width: 1400px){
   .leaflet-container {
     width: 640px;
@@ -144,7 +146,7 @@ body {
 
 
 .overlay{
-
+  z-index: 100;
   border:2px solid;
   min-width: 50vw;
   max-width:80vw;
