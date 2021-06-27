@@ -48,7 +48,7 @@ const Booking = ({ modal, idVenue }) => {
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
       <div className="form-container " align="center">
-        <h3> Make a Reservation </h3>
+        <h3> Book a table </h3>
         <button type="button" onClick={modal} className="close">X</button>
         <form>
           <input
@@ -80,7 +80,7 @@ const Booking = ({ modal, idVenue }) => {
             className="form-control mb-2"
             onChange={(e) => setSeat(e.target.value)}
           />
-          <label for="checkin-date"> Reservation Date</label>
+          <label for="checkin-date"> Booking Date</label>
           <input
             type="date"
             id="checkin-date"

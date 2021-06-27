@@ -137,7 +137,7 @@ const SignUp = () => {
             <div className="check-manager">
               <input
                 id="checkbox"
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value=""
                 checked={is_manager}
@@ -145,7 +145,7 @@ const SignUp = () => {
                 // eslint-disable-next-line react/jsx-no-duplicate-props
                 id="flexCheckDefault"
               />
-              <label class="form-check-label" for="flexCheckDefault">
+              <label className="form-check-label" for="flexCheckDefault">
                 Are you a manager ?
               </label>
             </div>{" "}

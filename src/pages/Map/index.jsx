@@ -20,6 +20,23 @@ function MapOpen({ latitude, longitude, currentVenue }) {
             </Popup>
           </Marker>
         </MapContainer>}
+      {!latitude && !longitude && currentVenue &&
+        <MapContainer
+          center={["48.8566969", "2.3514616"]}
+          zoom={13}
+          scrollWheelZoom={true}
+          className=""
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={["48.8566969", "2.3514616"]}>
+            <Popup>
+              {currentVenue.address} <br /> {currentVenue.phone_number}
+            </Popup>
+          </Marker>
+        </MapContainer>}
     </>
   )
 }

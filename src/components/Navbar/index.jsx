@@ -4,17 +4,24 @@ import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "store/actions";
 import { useHistory } from "react-router-dom";
+import { useState } from 'react'
+import { Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+
 
 function Navbar() {
   const currentUser = useSelector(state => state.authReducer)
   const history = useHistory();
+  const [show, setShow] = useState(false);
+
   const dispatch = useDispatch()
   const handleLogout = (e) => {
     e.preventDefault()
     dispatch(logout())
     history.push('/')
-    window.alert("Disconnecting...see you soon!")
-
+    setShow(true); 
+    return
   }
 
   return (
@@ -92,19 +99,19 @@ function Navbar() {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-list item-list" to="/profile">
-                      Profil
+                      Profile
                          </Link>
                   </li>
                   {currentUser.is_manager && (
                     <>
                       <li className="nav-item">
                         <Link className="nav-list item-list" to="/venues">
-                          Créer un restaurant
+                          Create a Venue
                       </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-list item-list" to="/myVenues">
-                          Mes restaurants
+                          My venues
                     </Link>
                       </li>
                     </>
@@ -114,9 +121,25 @@ function Navbar() {
                       Blog
                       </Link>
                   </li>
+                  
                 </div>
               }
+{/* ****************************** Alert ********************** */}
+<>
+      <Modal show={show} variant="success" align="center">
+      <div className="card rounded-5 p-3 m-4" align="center">
 
+        <Alert.Heading> Disconnecting... </Alert.Heading>
+        <hr />
+        <p> Hope to see you soon at TrouveTaTable  </p>
+          <Button onClick={() => setShow(false)} variant="outline-danger">
+Close      </Button>
+</div>
+
+      </Modal>
+       </>
+
+       {/* ****************************** Alert ********************** */}
 
 
             </ul>

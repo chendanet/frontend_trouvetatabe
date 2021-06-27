@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { authenticate } from 'store/actions'
 import "pages/SignIn/SignIn.css";
 
 const ForgotPassword = () => {
@@ -43,6 +41,8 @@ const ForgotPassword = () => {
               name="email"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter Your Email"
+              className="form-control"
+
             />
             <br />
             <button type="submit" onClick={fetchForgotPassword} className="btn-signin">

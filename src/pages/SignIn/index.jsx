@@ -6,6 +6,9 @@ import { authenticate } from 'store/actions'
 import { Link } from "react-router-dom"
 import "pages/SignIn/SignIn.css";
 import { PROD_SIGNIN } from 'api/apiHandler';
+import { Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const SignIn = () => {
 
@@ -13,8 +16,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
   const history = useHistory();
-  const [alert, setAlert] = useState(false); 
-
+  const [show, setShow] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -44,7 +46,7 @@ const SignIn = () => {
 
 
     if (response.status != 200) {
-      setAlert(true); 
+      setShow(true); 
       return
     }
 
@@ -97,17 +99,29 @@ const SignIn = () => {
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
               Login
               </button>
+
+              <>
+      <Modal show={show} variant="success" align="center">
+      <div className="card rounded-5 p-3 m-4" align="center">
+
+        <Alert.Heading> Ops, sorry </Alert.Heading>
+        <hr />
+        <p> Could not find email or password. Please try again   </p>
+          <Button onClick={() => setShow(false)} variant="outline-danger">
+Close      </Button>
+</div>
+
+      </Modal>
+       </>
+
+              
               <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
-              {alert && (<div class="alert alert-primary" role="alert">
-              Oppsss, wrong email or password. Try again</div>
-                  )}
-            <br />
+           <br />
           </div>
         </form>
       </div>
     </div>
   )
 }
-
 
 export default SignIn

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import config from "config";
 import "pages/Venue/Venue.css";
-import Booking from "pages/Booking";
 import { PROD_EDIT_VENUE } from 'api/apiHandler'
 
 const EditVenue = ({ venues, modal }) => {
@@ -49,8 +48,6 @@ const EditVenue = ({ venues, modal }) => {
       history.push("/");
       return;
     }
-
-   // const data = await response.json();
   };
 
 
@@ -98,7 +95,7 @@ const EditVenue = ({ venues, modal }) => {
           </div>
           <div>
             <label type="text" name="cuisine">
-              Number of seats
+              Number of couvert
           </label>
             <input
               type="text"
