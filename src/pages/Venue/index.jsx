@@ -143,7 +143,7 @@ const Venue = () => {
 
 
   let emptyRate = emptyRatings && emptyRatings.filter(rating => rating.venue_id == currentVenue.id)
-  let emptyBooking = emptyBookings && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
+  let emptyBooking = emptyBookings && currentVenue && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
 
   /* ********************************** RATINGS ********************************** */
 
@@ -167,22 +167,16 @@ const Venue = () => {
             <div className="col-md-5">
               <div className="card">
                 {!currentVenue.images[0] ?
-                  <div className="">
-                    <img
-                      src={currentVenue.photo}
-                      alt={`${currentVenue.name}_dish`}
-                      className="card-img-top card_img w-100"
-                    />
-                  </div>
-                  : <div>
-                    <img
-                      src={currentVenue.images[0]}
-                      alt={`${currentVenue.name}_dish`}
-                      className="card-img-top card_img w-100"
-                    />
-                  </div>
-                }
-
+                  <img
+                    src={`https://source.unsplash.com/600x600/?dish`}
+                    alt={`${currentVenue.name}_image`}
+                    className="card_img"
+                  />
+                  : <img
+                    src={currentVenue.images[0]}
+                    alt={`${currentVenue.name}_image`}
+                    className="card_img"
+                  />}
                 <div className="px-3 pt-2">
                   <h2 className="title-venue">{currentVenue.name}</h2>
                   <h6>{currentVenue.cuisine}</h6>
@@ -247,7 +241,7 @@ const Venue = () => {
               </div>
             </div>
             <div className="col-md-6">
-              {lat && lon &&
+              {
                 <MapOpen latitude={lat} longitude={lon} currentVenue={currentVenue} />
               }
             </div>
