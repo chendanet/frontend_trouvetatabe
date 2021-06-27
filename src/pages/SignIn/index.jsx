@@ -97,7 +97,7 @@ const SignIn = () => {
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
               Login
               </button>
-              <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
+              <Link to="/password/forgot" className="link-tertiary m-3">Forgot password ?</Link>
               {alert && (<div class="alert alert-primary" role="alert">
               Oppsss, wrong email or password. Try again</div>
                   )}
