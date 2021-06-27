@@ -66,7 +66,7 @@ const Ratings = ({ modal, idVenue }) => {
    
     </div>
         <button type="button" onClick={modal} className="close">✖️</button>
-        <form>
+        <form onSubmit={fetchRating} keyboard={false} dblClick={false}>
           <input
             type="text"
             id="name"
@@ -88,7 +88,7 @@ const Ratings = ({ modal, idVenue }) => {
             className="form-control mb-2"
             onChange={(e) => setScore(e.target.value)}
           />
-          <button type="submit" onClick={fetchRating} className="btn-signin">
+          <button type="submit" className="btn-signin">
             {" "}
             Submit{" "}
           </button>
