@@ -8,7 +8,6 @@ import { authenticate } from 'store/actions'
 import "pages/Profile/Profile.css";
 import { logout } from "store/actions";
 import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
-import strftime from 'strftime'
 
 const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)
@@ -64,8 +63,6 @@ const Profile = () => {
     }
 
 
-    // ************* add booking for profil **************
-
     const [myBooking, setMyBooking] = useState([]);
 
 
@@ -77,7 +74,6 @@ const Profile = () => {
             });
     }, [])
 
-    // ***************** add delete booking *************
 
     const deleteBooking = async (id) => {
         fetch(`${PROD_BOOKINGS}/${id}`, {
@@ -89,8 +85,6 @@ const Profile = () => {
         })
         history.push("/");
     }
-
-    // ***************** add delete user *************
 
 
     const fetchDeleteUser = async (e) => {
@@ -110,7 +104,6 @@ const Profile = () => {
         history.push("/");
     };
 
-/* ********************************** Method Time ********************************** */
 
 const DisplayTimeOnly = (UTCDateTime) => {
     var date = new Date(UTCDateTime.slice(0, -1));
@@ -119,7 +112,6 @@ const DisplayTimeOnly = (UTCDateTime) => {
     var formattedDate = hour + ':' + minutes.substr(-2);
     return formattedDate;
   }
-    /* **********************************  Method Time ********************************** */
 
 
 
@@ -127,13 +119,13 @@ const DisplayTimeOnly = (UTCDateTime) => {
         <div className="container-profil">
             <div className="row justify-content-md-center justify-content-sm-center justify-content-xs-center">
                 <div className=" col-md-6 col-sm-6 mt-4 text-center ">
-                    {currentUser.last_name ? <p className="text-center">Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
+                    {currentUser.last_name ? <p className="text-center"> Hello <h4>{currentUser.last_name}</h4></p> : <p> Hello, you are connected with: <h4>{currentUser.email}</h4></p>}
                 </div>
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
-                    <h3>Mon profil</h3>
-                    <p>Ici, vous pouvez modifier votre profil en entier</p>
+                    <h3> Your profile</h3>
+                    <p> Here, you can update your profile</p>
                     <form>
                         <div>
                             <input
@@ -141,35 +133,35 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Modifier email"
-                                class="form-control" />
+                                placeholder="Change your email"
+                                className="form-control" />
                             <br />
                             <input
                                 type="password"
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Modifier MDP"
-                                class="form-control" />
+                                placeholder="Change your password"
+                                className="form-control" />
                             <br />
                             <input
                                 type="text"
                                 name="last-name"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
-                                placeholder="Votre Prénon"
-                                class="form-control" />
+                                placeholder="Your name"
+                                className="form-control" />
                             <br />
                             <input
                                 type="text"
                                 name="first-name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                placeholder="Votre Nom"
-                                class="form-control" />
+                                placeholder="Your surname"
+                                className="form-control" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
-                                Modifier mon profil
+                                Update my profile
                         </button>
                             <br />
                         </div>
@@ -179,12 +171,12 @@ const DisplayTimeOnly = (UTCDateTime) => {
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-delete mb-5">
 
-                    <h3>Supprimer votre compte</h3>
+                    <h3> Delete your account</h3>
                     <br />
-                    <p>ATTENTION: Vous êtes sur le point de supprimer votre compte : 😱 </p>
+                    <p> Warning: you are about to delete your account : 😱 </p>
                     <div>
                         <button type="submit" onClick={fetchDeleteUser} className="btn-alert">
-                            SUPPRIMER
+                            DELETE
                             </button>
                     </div>
                     <br />
@@ -199,12 +191,12 @@ const DisplayTimeOnly = (UTCDateTime) => {
                         booking.user_id === parseInt(currentUser.id) && (
                             <div className="card col-md-4 rounded-5 p-3 m-4">
                                 <h5 className="card-title">{booking.venue.name.toUpperCase()}</h5>
-                                <h6>seat: <span className="text-dark">{booking.seat}</span></h6>
-                                <h6>Date: <span className="text-dark">{booking.date}</span></h6>
-                                <h6>Time: <span>{DisplayTimeOnly(booking.time)}</span>            
+                                <h6> Number of people: <span className="text-dark">{booking.seat}</span></h6>
+                                <h6> Date: <span className="text-dark">{booking.date}</span></h6>
+                                <h6> Time: <span>{DisplayTimeOnly(booking.time)}</span>            
 </h6>
                                 <div className="delete-button">
-                                    <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
+                                    <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Delete </button>
                                 </div>
                             </div>
 

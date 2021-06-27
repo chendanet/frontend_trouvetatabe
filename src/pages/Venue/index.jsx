@@ -22,9 +22,6 @@ const Venue = () => {
   const [currentAddress, setCurrentAddress] = useState(null);
   const [currentCity, setCurrentCity] = useState(null);
   const currentUser = useSelector((state) => state.authReducer);
-  // const [seat, setSeat] = useState();
-  // const [time, setTime] = useState();
-  // const [date, setDate] = useState();
   const userId = useSelector((state) => state.authReducer.id);
   const [lat, setLat] = useState()
   const [lon, setLon] = useState()
@@ -51,7 +48,6 @@ const Venue = () => {
       });
   }, []);
 
-  // delete venue ////////////////////////
 
   const fetchDeleteVenue = async () => {
     const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`, {
@@ -99,19 +95,16 @@ const Venue = () => {
   }, [currentCity, currentAddress]);
 
 
-  // toggle modal
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
   };
 
-  // toggle modal editVenue
-  const [modal1, setModal1] = useState(false);
+  const [modalEditVenue, setModalEditVenue] = useState(false);
   const toggleModal1 = () => {
-    setModal1(!modal1);
+    setModalEditVenue(!modalEditVenue);
   };
 
-  // toggle modal Rating
   const [modalRating, setModalRating] = useState(false);
   const toggleModalRating = () => {
     setModalRating(!modalRating);
@@ -128,7 +121,6 @@ const Venue = () => {
     fetchAllBookings();
   }, []);
 
-  /* ********************************** RATINGS ********************************** */
 
   const fetchAllRatings = async () => {
     const response = await fetch('https://trouvetatableapi.herokuapp.com/api/ratings')
@@ -142,12 +134,10 @@ const Venue = () => {
   }, [])
 
 
-  let emptyRate = emptyRatings && emptyRatings.filter(rating => rating.venue_id == currentVenue.id)
-  let emptyBooking = emptyBookings && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
+  let emptyRate = emptyRatings && currentVenue && emptyRatings.filter(rating => rating.venue_id === currentVenue.id)
+  let emptyBooking = emptyBookings && currentVenue && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
 
-  /* ********************************** RATINGS ********************************** */
-
-  /* ********************************** Method Time ********************************** */
+  
 
   const DisplayTimeOnly = (UTCDateTime) => {
     var date = new Date(UTCDateTime.slice(0, -1));
@@ -156,7 +146,6 @@ const Venue = () => {
     var formattedDate = hour + ':' + minutes.substr(-2);
     return formattedDate;
   }
-  /* **********************************  Method Time ********************************** */
 
 
   return (
@@ -167,22 +156,16 @@ const Venue = () => {
             <div className="col-md-5">
               <div className="card">
                 {!currentVenue.images[0] ?
-                  <div className="">
-                    <img
-                      src={currentVenue.photo}
-                      alt={`${currentVenue.name}_dish`}
-                      className="card-img-top card_img w-100"
-                    />
-                  </div>
-                  : <div>
-                    <img
-                      src={currentVenue.images[0]}
-                      alt={`${currentVenue.name}_dish`}
-                      className="card-img-top card_img w-100"
-                    />
-                  </div>
-                }
-
+                  <img
+                    src={`https://source.unsplash.com/600x600/?dish`}
+                    alt={`${currentVenue.name}_image`}
+                    className="card_img"
+                  />
+                  : <img
+                    src={currentVenue.images[0]}
+                    alt={`${currentVenue.name}_image`}
+                    className="card_img"
+                  />}
                 <div className="px-3 pt-2">
                   <h2 className="title-venue">{currentVenue.name}</h2>
                   <h6>{currentVenue.cuisine}</h6>
@@ -204,7 +187,7 @@ const Venue = () => {
                   <div className="row">
                     <div className="col-md-12 col-sm-12">
                       <h6>Price</h6>
-                      <span className="text-dark h6 fw-normal">{Math.floor(currentVenue.price * 0.90)} € au lieu de {currentVenue.price} €</span>
+                      <span className="text-dark h6 fw-normal">{Math.floor(currentVenue.price * 0.90)} € instead of {currentVenue.price} €</span>
 
                     </div>
 
@@ -247,7 +230,7 @@ const Venue = () => {
               </div>
             </div>
             <div className="col-md-6">
-              {lat && lon &&
+              {
                 <MapOpen latitude={lat} longitude={lon} currentVenue={currentVenue} />
               }
             </div>
@@ -258,20 +241,18 @@ const Venue = () => {
               <h5> Reviews </h5>
               <div className="">
 
-                {/* ********************************** RATINGS ********************************** */}
                 {ratings &&
                   ratings.filter(rating => rating.venue_id == currentVenue.id)
                     .map((rating) => (
-                      <div class="col-md-12 col-sm-12 col-xs-12 my-2">
+                      <div className="col-md-12 col-sm-12 col-xs-12 my-2">
                         <span>{`${star.repeat(Math.abs(rating.score)) + " - " + rating.review}`}</span>
                       </div>
                     )
 
                     )}
-                {/* ********************************** RATINGS ********************************** */}
 
                 {emptyRate && emptyRate.length == 0 &&
-                  <p>This restaurant doesn't have any review yet</p>}
+                  <p>This venue doesn't have any review yet</p>}
 
               </div>
 
@@ -290,7 +271,7 @@ const Venue = () => {
           {currentVenue.user_id == currentUser.id && (
 
             <div className="row my-5 d-flex justify-content-center w-100">
-              <h4 className="text-center">List des reservation dans le restaurant {currentVenue.name}</h4>
+              <h4 className="text-center"> {currentVenue.name} list of all bookings </h4>
               {bookings &&
                 bookings
                   .filter(
@@ -300,7 +281,7 @@ const Venue = () => {
                     <div className="col-md-5 col-xs-12 ms-4 my-2" key={booking.id}>
                       <div className="card m-2 p-2">
                         <h6>{booking.venue.name}</h6>
-                        <h6>seat: <span className=" h6 fw-normal">{booking.seat}</span></h6>
+                        <h6> Number of people: <span className=" h6 fw-normal">{booking.seat}</span></h6>
 
                         <h6>Date: <span className=" h6 fw-normal">{booking.date}</span></h6>
 
@@ -311,7 +292,7 @@ const Venue = () => {
                   )}
 
               {emptyBooking && emptyBooking.length == 0 &&
-                <p className="text-center">This restaurant doesn't have any reservation yet</p>}
+                <p className="text-center">This venue doesn't have any booking yet</p>}
             </div>
           )}
 
@@ -323,7 +304,7 @@ const Venue = () => {
         </>
       )}
 
-      {modal1 && (
+      {modalEditVenue && (
         <>
           <EditVenue modal={toggleModal1} idVenue={idVenue} />
         </>
