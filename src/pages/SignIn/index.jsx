@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -5,6 +6,9 @@ import { authenticate } from 'store/actions'
 import { Link } from "react-router-dom"
 import "pages/SignIn/SignIn.css";
 import { PROD_SIGNIN } from 'api/apiHandler';
+import { Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const SignIn = () => {
 
@@ -12,7 +16,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
   const history = useHistory();
-
+  const [show, setShow] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -41,8 +45,8 @@ const SignIn = () => {
     })
 
 
-    if (response.status !== 200) {
-
+    if (response.status != 200) {
+      setShow(true); 
       return
     }
 
@@ -70,7 +74,7 @@ const SignIn = () => {
       <div className="form-container">
         <div>
           <h3>Login</h3>
-
+          <br />
         </div>
         <form>
           <div>
@@ -95,14 +99,28 @@ const SignIn = () => {
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
               Login
               </button>
-              <Link to="/password/forgot" className="link-tertiary">Mot de passe oublié</Link>
-            <br />
+
+              <>
+      <Modal show={show} variant="success" align="center">
+      <div className="card rounded-5 p-3 m-4" align="center">
+
+        <Alert.Heading> Ops, sorry </Alert.Heading>
+        <hr />
+        <p> Could not find email or password. Please try again   </p>
+          <Button onClick={() => setShow(false)} variant="outline-danger">
+Close      </Button>
+</div>
+
+      </Modal>
+       </>
+       <br />
+              <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
+           <br />
           </div>
         </form>
       </div>
     </div>
   )
 }
-
 
 export default SignIn

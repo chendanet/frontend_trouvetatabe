@@ -1,7 +1,167 @@
+body {
+  min-height: 100vh;
+}
 .App {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  width: 100vw;
-  display: grid; 
-  /* grid-template-columns: 1fr; */
-  /* grid-template-rows: auto 1fr auto; */
+  width: 100%;
+  
+}
+.leaflet-container{
+  z-index: 0;
+}
+@media only screen and (min-width: 1400px){
+  .leaflet-container {
+    width: 640px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px){
+  .leaflet-container {
+    width: 550px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){
+  .leaflet-container {
+    width: 450px;
+    height:710px;
+  }  
+}
+
+@media only screen and (min-width: 768px) and (max-width:991px){
+  .leaflet-container {
+    width: 340px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 576px) and (max-width:767px){
+  .leaflet-container {
+    width: 516px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 565px) and (max-width:575px){
+  .leaflet-container {
+    width: 545px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 550px) and (max-width:564px){
+  .leaflet-container {
+    width: 530px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 525px) and (max-width:549px){
+  .leaflet-container {
+    width: 510px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 510px) and (max-width:524px){
+  .leaflet-container {
+    width: 490px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 490px) and (max-width:509px){
+  .leaflet-container {
+    width: 470px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 470px) and (max-width:489px){
+  .leaflet-container {
+    width: 450px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 420px) and (max-width:469px){
+  .leaflet-container {
+    width: 400px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 414px) and (max-width:419px){
+  .leaflet-container {
+    width: 387px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 400px) and (max-width:413px){
+  .leaflet-container {
+    width: 380px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 380px) and (max-width:399px){
+  .leaflet-container {
+    width: 360px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 375px) and (max-width:379px){
+  .leaflet-container {
+    width: 355px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 355px) and (max-width:374px){
+  .leaflet-container {
+    width: 340px;
+    height:700px;
+  }  
+}
+
+@media only screen and (min-width: 320px) and (max-width:354px){
+  .leaflet-container {
+    width: 300px;
+    height:700px;
+  }  
+}
+
+@media only screen and (max-width:319px){
+  .leaflet-container {
+    width: 250px;
+    height:700px;
+  }  
+}
+
+
+.overlay{
+  z-index: 100;
+  border:2px solid;
+  min-width: 50vw;
+  max-width:80vw;
+  min-height: 50vh;
+  max-height: 80vh;
+  position: fixed;
+  top: 50%; 
+  left: 50%;
+  transform:translate(-50%,-50%);
+  background: white;
+  display:flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  z-index: 2; 
+  box-shadow: 0 0 0 100vw rgba(0,0,0,0.5);
 }

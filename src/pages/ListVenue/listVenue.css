@@ -1,53 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,900&display=swap');
 
 .filter {
- 
-  box-shadow: 3px 5px 8px -2px #7f7f7f;
-  
-}
-.image-item {
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-
-  /* border: transparent; */
-  /* width: 50%; */
-  
+  box-shadow: 0 5px 6px 0px #ccc;
 }
 
+.filter-column {
+  height: 500px;
+}
 
-.container-item {
-  padding: 5rem; 
+.text-banner{
+  color: #ffffff;
+  font-size: 25px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container-banner{
+  position: relative;
+  background-image: linear-gradient(black, black), url(https://blobsvc.wort.lu/picture/d194915d6e522612578eb1ec0c695666/1600/600/crop/0/173/3147/1356/wortv3/b71afae820044a8e4eba107a27492392c4a1abba);
+  background-size: cover;
+  background-blend-mode: saturation;
+  padding: 100px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 25rem;
-  box-shadow: 1px 1px 1px 1px #7f7f7f;
+  flex-direction: column;
 }
 
-img {
-  /* width: 100%;
-  height: 23.2rem; */
-  margin-right: 1rem;
-  box-shadow: 3px 5px 8px -2px #7f7f7f;
+.advantageText {
+color: rgb(197, 105, 105);
+font-weight: bold;
+margin-top: 15px;
+align-items: center;
+justify-content: center;
 }
+
 button {
   color: #f53f3f;
   background-color: white;
   border: 1px solid #f53f3f;
   padding: 0.5rem;
-}
+} 
 
 a {
   text-decoration: none;
   color: #454749;
+} 
+
+.detailsSearchbar {
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
-.search-bar {
-  border: 1px solid #f53f3f;
-  margin: 1rem;
-  /* width: 80%; */
-  height: 50px;
-  padding: 1rem;
-  box-shadow: 3px 5px 8px -2px #7f7f7f;
+
+ .spinner {
+  margin: 60px auto;
 }
+
+.card {
+  overflow: hidden;
+  border: none;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  margin-bottom: 16px;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.card:hover {
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%);
+}
+
+.card_img {
+  height: 300px;
+  background: rgba(0, 0, 0, .08);
+  width: auto; 
+}
+
+.card_img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_desc {
+  padding: 12px;
+}
+
+.card_name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.card_city,
+.card_cuisine {
+  color: rgba(0, 0, 0, .54);
+}
+
+.card_btn {
+  margin-top: 8px;
+  border-radius: 4px;
+}
+
+.card_price {
+  font-weight: bold;
+  color:rgb(26, 26, 106);
+}
+ 

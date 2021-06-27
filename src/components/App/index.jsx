@@ -15,16 +15,19 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import ListVenues from "pages/ListVenue";
+import {ListVenues} from "pages/ListVenue";
 import MyVenues from 'pages/MyVenues';
-import Booking from "pages/Booking";
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import ForgotPassword from 'pages/ForgotPassword';
 import ResetPassword from 'pages/ResetPassword';
+import Ratings from 'pages/Ratings';
+import Blog from 'pages/Blog';
+
+
 
 const App = () => {
 
-  const [venues, setVenues] = useState([]);
+  const [venues, setVenues] = useState(undefined);
 
   useEffect(() => {
     fetch(PROD_EDIT_VENUE)
@@ -41,7 +44,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <ListVenues venues={venues} />
+              <ListVenues />
             </Route>
             <Route path="/register">
               <SignUp />
@@ -53,10 +56,10 @@ const App = () => {
               <CreateVenue />
             </Route>
             <Route path="/venues/:idVenue" exact >
-              <Venue venues={venues} />
+              <Venue />
             </Route>
             <Route path="/myVenues" exact>
-              <MyVenues venues={venues} />
+              <MyVenues />
             </Route>
             <Route path="/profile" exact>
               <Profile />
@@ -66,6 +69,12 @@ const App = () => {
             </Route>
             <Route path="/password/reset/:token">
               <ResetPassword />
+            </Route>
+            <Route path="/ratings">
+              <Ratings />
+            </Route>
+            <Route path="/blog">
+              <Blog />
             </Route>
           </Switch>
           <Footer />

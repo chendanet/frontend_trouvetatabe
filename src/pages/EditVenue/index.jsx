@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import config from "config";
 import "pages/Venue/Venue.css";
-import Booking from "pages/Booking";
 import { PROD_EDIT_VENUE } from 'api/apiHandler'
 
 const EditVenue = ({ venues, modal }) => {
@@ -17,15 +16,19 @@ const EditVenue = ({ venues, modal }) => {
   const [cuisine, setCuisine] = useState();
   const history = useHistory();
   const currentUser = useSelector((state) => state.authReducer);
-  const [seat, setSeat] = useState();
-  const [time, setTime] = useState();
-  const [date, setDate] = useState();
+  const [seatnumber, setSeatnumber] = useState();
+  const [address, setAddress] = useState();
+  const [description, setDescription] = useState();
+
   const userId = useSelector((state) => state.authReducer.id);
 
   const dataVenue = {
     name: name,
     city: city,
     cuisine: cuisine,
+    seatnumber: seatnumber,
+    address: address,
+    description: description,
   };
 
   const fetchEditVenue = async (e) => {
@@ -45,8 +48,6 @@ const EditVenue = ({ venues, modal }) => {
       history.push("/");
       return;
     }
-
-   // const data = await response.json();
   };
 
 
@@ -57,7 +58,7 @@ const EditVenue = ({ venues, modal }) => {
   }, [idVenue]);
 
   return (
-    <div className="container-page d-flex align-items-center justify-content-center overlay ">
+    <div className="container d-flex align-items-center justify-content-center overlay ">
       <button type="button" onClick={modal} className="close">X</button>
       <div className="form-container">
         <h3> Edit Venue</h3>
@@ -90,6 +91,36 @@ const EditVenue = ({ venues, modal }) => {
               type="text"
               name="cuisine"
               onChange={(e) => setCuisine(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="cuisine">
+              Number of couvert
+          </label>
+            <input
+              type="text"
+              name="cuisine"
+              onChange={(e) => setSeatnumber(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="cuisine">
+            Address       
+               </label>
+            <input
+              type="text"
+              name="cuisine"
+              onChange={(e) => setAddress(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label type="text" name="cuisine">
+             Description      
+               </label>
+            <input
+              type="text"
+              name="cuisine"
+              onChange={(e) => setDescription(e.target.value)}
             ></input>
           </div>
           <div> <br />

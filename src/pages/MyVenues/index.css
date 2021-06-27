@@ -1,0 +1,29 @@
+.card:hover {
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%);
+}
+  
+.card_img {
+  height: 250px;
+  width: 100%; 
+  background: rgba(0, 0, 0, .08);
+  object-fit: cover;
+}
+
+.card_name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+  
+.card_desc {
+  padding: 12px;
+}
+
+.card_city,
+.card_cuisine {
+  color: rgba(0, 0, 0, .54);
+}
+

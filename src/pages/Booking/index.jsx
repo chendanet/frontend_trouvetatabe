@@ -38,17 +38,17 @@ const Booking = ({ modal, idVenue }) => {
     const data = await response.json();
 
     if (response) {
-      history.push("/");
+      history.push("/profile");
       return;
     }
   };
 
- 
+
 
   return (
     <div className="container d-flex align-items-center justify-content-center overlay">
       <div className="form-container " align="center">
-        <h3> Make a Reservation </h3>
+        <h3> Book a table </h3>
         <button type="button" onClick={modal} className="close">X</button>
         <form>
           <input
@@ -80,7 +80,7 @@ const Booking = ({ modal, idVenue }) => {
             className="form-control mb-2"
             onChange={(e) => setSeat(e.target.value)}
           />
-          <label for="checkin-date"> Reservation Date</label>
+          <label for="checkin-date"> Booking Date</label>
           <input
             type="date"
             id="checkin-date"
@@ -95,13 +95,12 @@ const Booking = ({ modal, idVenue }) => {
             Select a time:
           </label>
           <br />
-          <input
-            className="form-control mb-4"
+          <input className="form-control mb-4"
             type="time"
             id="appt"
             name="appt"
-            onChange={(e) => setTime(e.target.value)}
-          />
+            required
+            onChange={(e) => setTime(e.target.value)} />
           <button type="submit" onClick={fetchBooking} className="btn-signin">
             {" "}
             Submit{" "}
