@@ -4,6 +4,14 @@
   box-shadow: 0 5px 6px 0px #ccc;
 }
 
+.advantageText {
+color: rgb(197, 105, 105);
+font-weight: bold;
+margin-top: 15px;
+align-items: center;
+justify-content: center;
+}
+
 button {
   color: #f53f3f;
   background-color: white;
@@ -15,21 +23,28 @@ a {
   text-decoration: none;
   color: #454749;
 } 
-.form-searchBar{
+
+.detailsSearchbar {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+
+/* .form-searchBar{
   margin-top: 25px;
   margin-bottom: 25px;
  
   width: 100%;
 
-}
-.search-bar { 
+} */
+/* .search-bar { 
   width: 100%;
   border: 1px solid #f53f3f;
   height: 50px;
   padding: 1rem;
   box-shadow: 3px 5px 8px -2px #7f7f7f; 
-  
-} 
+
+}  */
  .spinner {
   margin: 60px auto;
 }
@@ -76,6 +91,7 @@ a {
 
 .card_btn {
   margin-top: 8px;
+  border-radius: 4px;
 }
 
 .card_price {
@@ -109,5 +125,5 @@ a {
 }
  
 .filter-column {
-  height: 400px;
+  height: 500px;
 }
