@@ -61,7 +61,7 @@ const EditVenue = ({ venues, modal }) => {
   }, [idVenue]);
 
   return (
-    <div className="container-page d-flex align-items-center justify-content-center overlay ">
+    <div className="container d-flex align-items-center justify-content-center overlay ">
       <button type="button" onClick={modal} className="close">X</button>
       <div className="form-container">
         <h3> Edit Venue</h3>
