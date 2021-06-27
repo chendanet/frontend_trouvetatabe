@@ -9,7 +9,6 @@ import { PROD_BOOKINGS } from "api/apiHandler";
 const Blog = () => {
   const [data, setData] = useState();
 
-  /* ********************************** Function Time ********************************** */
   const DisplayDate = (UTCDateTime) => {
     var date = new Date(UTCDateTime);
     var day = date.getDate();
@@ -19,7 +18,6 @@ const Blog = () => {
     return formattedDate ;
   }
 
-  /* **********************************  Function Time ********************************** */
 
 
   
@@ -29,13 +27,11 @@ const Blog = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setData(data);
       });
   }, []);
 
   const events = data && data.records.map((record) => record.record.fields);
-  console.log(events);
 
   return (
     <div className="w-100 mx-5">
@@ -59,10 +55,7 @@ const Blog = () => {
 
 
               <button className="btn-events">
-                {" "}
-                {/* <a href={item.url}>Link Event</a> */}
-
-                <a href={item.url}>Link Event</a>
+               <a href={item.url}>Link Event</a>
 
               </button>
             </div>

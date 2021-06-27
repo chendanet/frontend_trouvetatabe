@@ -19,11 +19,10 @@ const MyVenues = () => {
     }, [])
 
     const currentManager = useSelector((state) => state.authReducer)
-    console.log('venues', venues)
-    console.log('venues', currentManager)
+   
     return (
         <div className="container w-100">
-            <h2 className="my-5 text-center fw-bold">Mes restaurants</h2>
+            <h2 className="my-5 text-center fw-bold">My venues</h2>
             <div className="row w-100 d-flex justify-content-center" >
                 {venues && venues
                     .filter((value) => value.user_id === parseInt(currentManager.id))
