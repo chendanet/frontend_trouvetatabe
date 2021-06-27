@@ -7,7 +7,6 @@ const ResetPassword = () => {
   const { token } = useParams()
   const history = useHistory();
   const [password, setPassword] = useState();
-  console.log(token)
 
   const data  = {
     password: password,
