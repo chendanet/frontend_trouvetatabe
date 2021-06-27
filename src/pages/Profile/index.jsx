@@ -60,7 +60,7 @@ const Profile = () => {
             last_name: userLastName,
         }, token))
 
-        history.push('/')
+        history.push('/profile')
     }
 
 
