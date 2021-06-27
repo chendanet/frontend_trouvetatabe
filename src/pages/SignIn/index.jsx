@@ -74,7 +74,7 @@ const SignIn = () => {
       <div className="form-container">
         <div>
           <h3>Login</h3>
-
+          <br />
         </div>
         <form>
           <div>
@@ -113,8 +113,7 @@ Close      </Button>
 
       </Modal>
        </>
-
-              
+       <br />
               <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
            <br />
           </div>

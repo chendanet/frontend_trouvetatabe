@@ -5,8 +5,8 @@ import {  Link, useHistory } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
 import { PROD_SIGNUP } from 'api/apiHandler';
-// import { Modal, Alert, Button} from 'react-bootstrap';
-//import "pages/Ratings/ratings.css"
+import { Modal, Alert, Button} from 'react-bootstrap';
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +14,8 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
-  // const history = useHistory();
-  // const [showSuccess, setShowSuccess] = useState(false);
-  // const [showFailed, setShowFailed] = useState(false);
+   const history = useHistory();
+   const [show, setShow] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -39,14 +38,7 @@ const SignUp = () => {
   const fieldsIsValid = (
     password.length > 5 && confirmPassword === password && emailRegex.test(email)
   );
-  // const closeSuccess = () => {
-  //   setShowSuccess(false);
-  //   history.push("/profile");
-  // }
-  // const closeFailed = () => {
-  //   setShowFailed(false);
-  //   return;
-  // }
+
 
 
   const fetchSignUp = async (e) => {
@@ -67,7 +59,8 @@ const SignUp = () => {
       body: JSON.stringify(dataUser),
     });
     if (response.status != 200){
-     setShowFailed(true);
+     setShow(true);
+     return
     }
 
     const token = response.headers.get("Authorization").split("Bearer ")[1];
@@ -91,9 +84,10 @@ const SignUp = () => {
         token
       )
     );
-    setShowSuccess(true);
+    history.push("/profile");
   } else {
-    setShowFailed(true);
+    setShow(true);
+    return;
   }
   };
   return (
@@ -109,8 +103,8 @@ const SignUp = () => {
               type="text"
               name="email"
               onChange={handleEmail}
-              placeholder="Email: example@example.com"
               required="required"
+              placeholder="Ex: ted@example.com"
               className="form-control"
             />
             <br />
@@ -153,50 +147,23 @@ const SignUp = () => {
             <input type="submit" value="Sign up" className="btn-signin" />
             <br />
             <Link to="/login" className="link">
-              <button className="btn-login">I have account</button>
+              <button className="btn-login">Go to my account</button>
             </Link>
           </div>
         </form>
       </div>
-      {/* ************************ Success Alert ********************
-       <>
-      <div className="alert container">
-        <Modal show={showSuccess} variant="success">
-          <Alert variant="success">
-              <Alert.Heading>Awesome !</Alert.Heading>
-              <p>
-                We are happy to see you in our website!
-              </p>
-              <hr />
-              <div className="d-flex justify-content-end">
-                <Button onClick={closeSuccess} variant="outline-success">
-                  Close me y'all!
-                </Button>
-              </div>
-          </Alert>
-        </Modal>
-        </div>
-        </>
-
-        {/* ***************************** Error Alert ******************************** *
       <>
-      <div className="alert container">
-        <Modal show={showFailed} variant="danger">
-          <Alert variant="danger">
-              <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-              <p>
-                Be sure to put the correct email, and be sure to have the same password.
-              </p>
-              <hr />
-              <div className="d-flex justify-content-end">
-                <Button onClick={closeFailed} variant="outline-danger">
-                  Close me y'all!
-                </Button>
-              </div>
-          </Alert>
+        <Modal show={show} variant="success" align="center">
+          <div className="card rounded-5 p-3 m-4" align="center">
+            <Alert.Heading> Ops, sorry </Alert.Heading>
+            <hr />
+            <p> Could not register your account. Please try again   </p>
+            <Button onClick={() => setShow(false)} variant="outline-danger">
+              Close
+            </Button>
+          </div>
         </Modal>
-        </div>
-      </> */}
+      </>
     </div>
   );
 };
