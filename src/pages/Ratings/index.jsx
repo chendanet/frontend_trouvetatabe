@@ -5,13 +5,16 @@ import Cookies from "js-cookie";
 import config from "config";
 import "pages/Booking/Booking.css";
 import { useSelector } from "react-redux";
-import { PROD_BOOKINGS } from 'api/apiHandler';
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
-import { FaStar } from "react-icons/fa";
+import {Modal, Alert, Button } from 'react-bootstrap';
+import "./ratings.css";
 
 const Ratings = ({ modal, idVenue }) => {
 
   const [venues, setVenues] = useState(undefined);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  
 
   useEffect(() => {
     fetch(PROD_EDIT_VENUE)
@@ -35,7 +38,24 @@ const Ratings = ({ modal, idVenue }) => {
       venue_id: idVenue,
     },
   };
+  
+  const reviewRegex = /^(?!\s*$).+/;
+  const scoreRegex = /^([1-5]|1[005])$/;
+
+  const fieldIsValid = (
+    reviewRegex.test(review) && scoreRegex.test(score)
+  );
+  const closeSuccess = () => {
+    setShowSuccess(false);
+    history.push("/");
+  }
+
+  const closeError = () => {
+    setShowError(false);
+  }
+
   const fetchRating = async (e) => {
+    if (fieldIsValid){
     e.preventDefault();
 
 
@@ -51,11 +71,12 @@ const Ratings = ({ modal, idVenue }) => {
     const data = await response.json();
 
     if (response) {
-      alert('Thank\'s for the review !');
-      history.push("/");
-    } else {
-      alert('Something was wrong !');
+      setShowSuccess(true);
+      return;
     }
+  }else { setShowError(true); 
+    return;
+  }
   };
 
   return (
@@ -73,7 +94,6 @@ const Ratings = ({ modal, idVenue }) => {
             name="review"
             placeholder="Your Review 🧐"
             required="required"
-            pattern="^(?!\s*$).+"
             className="form-control mb-2"
              onChange={(e) => setReview(e.target.value)}
           />
@@ -84,16 +104,51 @@ const Ratings = ({ modal, idVenue }) => {
             placeholder="Score 1 to 5"
             min="1"
             max="5"
-            pattern="^([1-5]|1[005])$"
             className="form-control mb-2"
             onChange={(e) => setScore(e.target.value)}
           />
-          <button type="submit" className="btn-signin">
-            {" "}
-            Submit{" "}
-          </button>
+          <input type="submit" value="Submit your review" className="btn-signin" />
         </form>
       </div>
+
+      {/* **************  Success Alert ******************************** */}
+      <>
+      <div className="alert container">
+        <Modal show={showSuccess} variant="success">
+          <Alert variant="success">
+              <Alert.Heading>Thank's for the review !</Alert.Heading>
+              <p>
+                We are happy with the feedback you bring to our restaurants.
+              </p>
+              <hr />
+              <div className="d-flex justify-content-end">
+                <Button onClick={closeSuccess} variant="outline-success">
+                  Close me y'all!
+                </Button>
+              </div>
+          </Alert>
+        </Modal>
+        </div>
+      </>
+      {/* ********* Error Alert ******************************** */}
+      <>
+      <div className="alert container">
+        <Modal show={showError} variant="danger">
+          <Alert variant="danger">
+              <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+              <p>
+                Be sure to write you're reviews in the block, and don't forget to choose a score between 1 - 5.
+              </p>
+              <hr />
+              <div className="d-flex justify-content-end">
+                <Button onClick={closeError} variant="outline-danger">
+                  Close me y'all!
+                </Button>
+              </div>
+          </Alert>
+        </Modal>
+        </div>
+      </>
     </div>
   );
 };
