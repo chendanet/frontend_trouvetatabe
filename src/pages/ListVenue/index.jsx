@@ -16,6 +16,7 @@ export const ListVenues = () => {
     "French",
     "Indian",
     "Italian",
+    "Japanese",
     "Korean",
     "Mexican",
     "Seefood",
@@ -60,30 +61,33 @@ export const ListVenues = () => {
 
   return (
     <>
-      <div class="container-banner">
+      <div className="container-banner">
         <img className="image-banner" src="https://blobsvc.wort.lu/picture/d194915d6e522612578eb1ec0c695666/1600/600/crop/0/173/3147/1356/wortv3/b71afae820044a8e4eba107a27492392c4a1abba" alt="restaurant" />
         <div className="text-banner">
-          <h1><center>C'est enfin l'été ! 😎☀️</center></h1>
-          <p><center>Nous pouvons enfin nous retrouver au restaurant ou au bar sans masque ! 🍧</center></p>
-          <p><center>Avec Trouvetatable, réservez rapidement votre place en quelques clics ! 🖱 </center></p>
+          <h1><center>It's finally summer ! 😎☀️</center></h1>
+          <p><center>We can finally meet at the restaurant of bar without a mask ! 🍧</center></p>
+          <p><center>With TrouveTaTable, we can easily reserve a place in just a few clicks ! 🖱 </center></p>
         </div>
       </div>
       <div className="container">
-      <form className="form-searchBar ">
-        <input
-          type="text"
-          name="search"
-          onChange={(e) => setSearchTerme(e.target.value)}
-          placeholder="Search your restaurant"
-            className="search-bar "
-            
-        />
-      </form>
+        <center><div className="detailsSearchbar input-group w-50">
+            <span className="input-group-text" id="basic-addon1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-funnel btn-outline-danger" viewBox="0 0 16 16">
+                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"></path>
+              </svg>
+            </span>
+            <input type="text" name="search" className="form-control" placeholder="Search your restaurant   Ex: Chez Dupont" aria-label="SearchBarFilter" aria-describedby="basic-addon1" onChange={(e) => setSearchTerme(e.target.value)} />
+          </div></center>
+        <center><div className="advantageText">Registered clients get an exclusive 10% discount for every booking 😋 </div></center>
+        <br />
         <div className="w-100 mx-5">
           <div className="row w-100 flex-row-center ">
             <div className="col-md-2 col-sm-12 filter mt-1 me-4 filter-column">
               <div>
                 <h5 className="text-center fw-bold mt-1 mb-4">Filter</h5>
+                <div className="fs-6 mb-1 fw-bold">
+                  Cuisine : 🍽️
+                </div>
                 {CUISINES.map((c, index) => (
                   <div key={index}>
                     <input type="checkbox"
@@ -97,6 +101,12 @@ export const ListVenues = () => {
                 ))}
               </div>
               <br />
+              <div className="fs-6 mb-1 fw-bold">
+                Price :
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" className="bi bi-currency-euro" viewBox="0 0 16 16">
+                  <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z" />
+                </svg>
+              </div>
               <div>
                 {PRICES.map((p, index) => (
                   <div key={index}>
@@ -111,8 +121,8 @@ export const ListVenues = () => {
                 ))}
               </div>
             </div>
-            <div className="col-md-9  col-sm-12 ms-1 ">
-              <div class="row">
+            <div className="col-md-9 col-sm-12 ms-1 ">
+              <div className="row">
                 {venues === undefined ? (
                   <div className="spinner spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
@@ -155,8 +165,8 @@ export const ListVenues = () => {
                             <h5 className="card_name" title={item.name}>{item.name}</h5>
                             <div className="card_city">{item.city}</div>
                             <div className="card_cuisine">{item.cuisine}</div>
-                            <div className="card_price">{Math.floor(item.price * 0.90)} € au lieu de {item.price} €</div>
-                            <button className="card_btn">valider</button>
+                            <div className="card_price">{Math.floor(item.price * 0.90)} € instead of {item.price} €</div>
+                            <button className="card_btn">View details</button>
                           </div>
                         </div>
                       </Link>

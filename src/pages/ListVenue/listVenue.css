@@ -4,6 +4,38 @@
   box-shadow: 0 5px 6px 0px #ccc;
 }
 
+.filter-column {
+  height: 500px;
+}
+
+.image-banner {
+  height: 500px;
+  object-fit: cover;
+  width: 100%;
+}
+.text-banner{
+  color: #ffffff;
+  font-size: 25px;
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  top: 30%;
+  left:22%;
+  background-color: #00010241;
+  padding:1rem;
+}
+
+.container-banner{
+  position: relative;
+}
+
+.advantageText {
+color: rgb(197, 105, 105);
+font-weight: bold;
+margin-top: 15px;
+align-items: center;
+justify-content: center;
+}
+
 button {
   color: #f53f3f;
   background-color: white;
@@ -15,24 +47,16 @@ a {
   text-decoration: none;
   color: #454749;
 } 
-.form-searchBar{
+
+.detailsSearchbar {
   margin-top: 25px;
   margin-bottom: 25px;
- 
-  width: 100%;
-
 }
-.search-bar { 
-  width: 100%;
-  border: 1px solid #f53f3f;
-  height: 50px;
-  padding: 1rem;
-  box-shadow: 3px 5px 8px -2px #7f7f7f; 
-  
-} 
+
  .spinner {
   margin: 60px auto;
 }
+
 .card {
   overflow: hidden;
   border: none;
@@ -76,38 +100,11 @@ a {
 
 .card_btn {
   margin-top: 8px;
+  border-radius: 4px;
 }
 
 .card_price {
   font-weight: bold;
   color:rgb(26, 26, 106);
 }
-.image-banner {
-  height: 500px;
-  object-fit: cover;
-  width: 100%;
-}
-.text-banner{
-  color: #ffffff;
-  font-size: 25px;
-  font-family: 'Poppins', sans-serif;
-  position: absolute;
-  top: 30%;
-  left:22%;
-  background-color: #00010241;
-  padding:1rem;
-}
-
-.container-banner{
-  position: relative;
-}
-
-.image-imported{
-  height:255.1px !important;
-  width:100% !important;
-  object-fit: cover;
-}
  
-.filter-column {
-  height: 400px;
-}
