@@ -6,10 +6,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* height: 50px;
-    margin-top: -50px; */
-    grid-row-start: 2;
-    grid-row-end: 3;
+    height: 50px;
+    margin-top: auto;
+    /* position: inherit;
+    bottom: 0; */
+  
 }
 .content-left{
     display: flex;
