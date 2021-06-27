@@ -1,18 +1,21 @@
-/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable eqeqeq */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import {  Link, useHistory } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
-import { Link } from "react-router-dom";
 import { PROD_SIGNUP } from 'api/apiHandler';
+import { Modal, Alert, Button} from 'react-bootstrap';
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
+   const history = useHistory();
+   const [show, setShow] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -22,11 +25,24 @@ const SignUp = () => {
     setPassword(e.target.value);
   };
 
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+  }
+
   const handleOnChange = () => {
       setIsManager(!is_manager);
   };
 
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  const fieldsIsValid = (
+    password.length > 5 && confirmPassword === password && emailRegex.test(email)
+  );
+
+
+
   const fetchSignUp = async (e) => {
+    if (fieldsIsValid) {
     const dataUser = {
       user: {
         email: email,
@@ -42,9 +58,9 @@ const SignUp = () => {
       },
       body: JSON.stringify(dataUser),
     });
-
-    if (response.status !== 200) {
-      return;
+    if (response.status != 200){
+     setShow(true);
+     return
     }
 
     const token = response.headers.get("Authorization").split("Bearer ")[1];
@@ -68,8 +84,11 @@ const SignUp = () => {
         token
       )
     );
-
-    history.push("/");
+    history.push("/profile");
+  } else {
+    setShow(true);
+    return;
+  }
   };
   return (
     <div className="container d-flex align-items-center justify-content-center">
@@ -78,14 +97,14 @@ const SignUp = () => {
           <h3>Sign Up</h3>
           <p>Create your account</p>
         </div>
-        <form>
+        <form onSubmit={fetchSignUp} keyboard={false} dblClick={false}>
           <div>
             <input
               type="text"
               name="email"
               onChange={handleEmail}
+              required="required"
               placeholder="Ex: ted@example.com"
-              pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
               className="form-control"
             />
             <br />
@@ -95,7 +114,7 @@ const SignUp = () => {
               name="password"
               onChange={handlePassword}
               placeholder="Enter Password"
-              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$"
+              required="required"
               className="form-control"
             />
             <br />
@@ -103,9 +122,9 @@ const SignUp = () => {
               rows="4"
               type="password"
               name="password"
-              onChange={handlePassword}
+              onChange={handleConfirmPassword}
               placeholder="Confirm your Password"
-              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$"
+              required="required"
               className="form-control"
             />{" "}
             <br />
@@ -117,6 +136,7 @@ const SignUp = () => {
                 value=""
                 checked={is_manager}
                 onChange={handleOnChange}
+                // eslint-disable-next-line react/jsx-no-duplicate-props
                 id="flexCheckDefault"
               />
               <label className="form-check-label" for="flexCheckDefault">
@@ -124,9 +144,7 @@ const SignUp = () => {
               </label>
             </div>{" "}
             <br />
-            <button type="submit" onClick={fetchSignUp} className="btn-signin">
-              Sign up
-            </button>
+            <input type="submit" value="Sign up" className="btn-signin" />
             <br />
             <Link to="/login" className="link">
               <button className="btn-login">Go to my account</button>
@@ -134,6 +152,18 @@ const SignUp = () => {
           </div>
         </form>
       </div>
+      <>
+        <Modal show={show} variant="success" align="center">
+          <div className="card rounded-5 p-3 m-4" align="center">
+            <Alert.Heading> Ops, sorry </Alert.Heading>
+            <hr />
+            <p> Could not register your account. Please try again   </p>
+            <Button onClick={() => setShow(false)} variant="outline-danger">
+              Close
+            </Button>
+          </div>
+        </Modal>
+      </>
     </div>
   );
 };
