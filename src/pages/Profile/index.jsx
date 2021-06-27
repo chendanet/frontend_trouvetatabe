@@ -8,7 +8,6 @@ import { authenticate } from 'store/actions'
 import "pages/Profile/Profile.css";
 import { logout } from "store/actions";
 import { PROD_PROFILE, PROD_BOOKINGS } from 'api/apiHandler';
-import strftime from 'strftime'
 
 const Profile = () => {
     const currentUser = useSelector(state => state.authReducer)
@@ -134,8 +133,8 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Chage your email"
-                                class="form-control" />
+                                placeholder="Change your email"
+                                className="form-control" />
                             <br />
                             <input
                                 type="password"
@@ -143,7 +142,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Change your password"
-                                class="form-control" />
+                                className="form-control" />
                             <br />
                             <input
                                 type="text"
@@ -151,7 +150,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                                 placeholder="Your name"
-                                class="form-control" />
+                                className="form-control" />
                             <br />
                             <input
                                 type="text"
@@ -159,7 +158,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="Your surname"
-                                class="form-control" />
+                                className="form-control" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
                                 Update my profile

@@ -244,7 +244,7 @@ const Venue = () => {
                 {ratings &&
                   ratings.filter(rating => rating.venue_id == currentVenue.id)
                     .map((rating) => (
-                      <div class="col-md-12 col-sm-12 col-xs-12 my-2">
+                      <div className="col-md-12 col-sm-12 col-xs-12 my-2">
                         <span>{`${star.repeat(Math.abs(rating.score)) + " - " + rating.review}`}</span>
                       </div>
                     )

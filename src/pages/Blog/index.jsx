@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import Cookies from "js-cookie";
-import config from "config";
 import "pages/Booking/Booking.css";
-import { useSelector } from "react-redux";
-import { PROD_BOOKINGS } from "api/apiHandler";
+
 
 const Blog = () => {
   const [data, setData] = useState();
