@@ -1,12 +1,12 @@
 /* eslint-disable eqeqeq */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {  Link } from "react-router-dom";
+import {  Link, useHistory } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
 import { PROD_SIGNUP } from 'api/apiHandler';
-import { AlertDismissibleSuccess } from 'components/SignUpAlert/AlertDismissibleSuccess';
-import {AlertDismissibleDanger } from "components/SignUpAlert/AlertDismissibleDanger";
+// import { Modal, Alert, Button} from 'react-bootstrap';
+//import "pages/Ratings/ratings.css"
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +14,9 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
-  const [success, setSuccess] = useState(false);
-  const [failed, setFailed] = useState(false);
+  // const history = useHistory();
+  // const [showSuccess, setShowSuccess] = useState(false);
+  // const [showFailed, setShowFailed] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -38,6 +39,14 @@ const SignUp = () => {
   const fieldsIsValid = (
     password.length > 5 && confirmPassword === password && emailRegex.test(email)
   );
+  // const closeSuccess = () => {
+  //   setShowSuccess(false);
+  //   history.push("/profile");
+  // }
+  // const closeFailed = () => {
+  //   setShowFailed(false);
+  //   return;
+  // }
 
 
   const fetchSignUp = async (e) => {
@@ -58,7 +67,7 @@ const SignUp = () => {
       body: JSON.stringify(dataUser),
     });
     if (response.status != 200){
-     setFailed(true);
+     setShowFailed(true);
     }
 
     const token = response.headers.get("Authorization").split("Bearer ")[1];
@@ -82,21 +91,13 @@ const SignUp = () => {
         token
       )
     );
-    setSuccess(true);
+    setShowSuccess(true);
   } else {
-    setFailed(true);
+    setShowFailed(true);
   }
   };
   return (
     <div className="container d-flex align-items-center justify-content-center">
-      {failed && 
-        <>
-          <AlertDismissibleDanger />
-        </>}
-      {success && 
-        <>
-          <AlertDismissibleSuccess />
-        </>}
       <div className="form-container">
         <div>
           <h3>Sign Up</h3>
@@ -157,6 +158,45 @@ const SignUp = () => {
           </div>
         </form>
       </div>
+      {/* ************************ Success Alert ********************
+       <>
+      <div className="alert container">
+        <Modal show={showSuccess} variant="success">
+          <Alert variant="success">
+              <Alert.Heading>Awesome !</Alert.Heading>
+              <p>
+                We are happy to see you in our website!
+              </p>
+              <hr />
+              <div className="d-flex justify-content-end">
+                <Button onClick={closeSuccess} variant="outline-success">
+                  Close me y'all!
+                </Button>
+              </div>
+          </Alert>
+        </Modal>
+        </div>
+        </>
+
+        {/* ***************************** Error Alert ******************************** *
+      <>
+      <div className="alert container">
+        <Modal show={showFailed} variant="danger">
+          <Alert variant="danger">
+              <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+              <p>
+                Be sure to put the correct email, and be sure to have the same password.
+              </p>
+              <hr />
+              <div className="d-flex justify-content-end">
+                <Button onClick={closeFailed} variant="outline-danger">
+                  Close me y'all!
+                </Button>
+              </div>
+          </Alert>
+        </Modal>
+        </div>
+      </> */}
     </div>
   );
 };
