@@ -6,6 +6,9 @@ import { authenticate } from 'store/actions'
 import { Link } from "react-router-dom"
 import "pages/SignIn/SignIn.css";
 import { PROD_SIGNIN } from 'api/apiHandler';
+import { Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const SignIn = () => {
 
@@ -13,8 +16,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
   const history = useHistory();
-  const [alert, setAlert] = useState(false); 
-
+  const [show, setShow] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
@@ -44,7 +46,7 @@ const SignIn = () => {
 
 
     if (response.status != 200) {
-      setAlert(true); 
+      setShow(true); 
       return
     }
 
@@ -97,17 +99,32 @@ const SignIn = () => {
             <button type="submit" onClick={fetchSignIn} className="btn-signin">
               Login
               </button>
-              <Link to="/password/forgot" className="link-tertiary m-3">Forgot password ?</Link>
-              {alert && (<div class="alert alert-primary" role="alert">
-              Oppsss, wrong email or password. Try again</div>
-                  )}
-            <br />
+
+{/* ****************************** Alert ********************** */}
+              <>
+      <Modal show={show} variant="success">
+        <Alert.Heading> OPPPsss you did it again </Alert.Heading>
+        <p>
+        Error error     
+           </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setShow(false)} variant="outline-success">
+            Close me ya'll!
+          </Button>
+        </div>
+      </Modal>
+       </>
+
+       {/* ****************************** Alert ********************** */}
+              
+              <Link to="/password/forgot" className="link-tertiary">Forgot password ?</Link>
+           <br />
           </div>
         </form>
       </div>
     </div>
   )
 }
-
 
 export default SignIn
