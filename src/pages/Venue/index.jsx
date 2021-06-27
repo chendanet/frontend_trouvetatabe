@@ -298,8 +298,7 @@ const Venue = () => {
 
                         <h6>Date: <span className=" h6 fw-normal">{booking.date}</span></h6>
 
-                        <h6>Time: <span className=" h6 fw-normal">{booking.time}</span></h6>
-
+                        <h6>Time: <span>{DisplayTimeOnly(booking.time)}</span></h6>
                       </div>
                     </div>
                   )
