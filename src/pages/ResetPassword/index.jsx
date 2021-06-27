@@ -44,6 +44,8 @@ const ResetPassword = () => {
               name="email"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter Your new password"
+              className="form-control"
+
             />
             <br />
             <button type="submit" onClick={fetchResetPassword} className="btn-signin">

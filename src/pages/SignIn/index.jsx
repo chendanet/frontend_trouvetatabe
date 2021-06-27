@@ -101,17 +101,16 @@ const SignIn = () => {
               </button>
 
               <>
-      <Modal show={show} variant="success">
-        <Alert.Heading> OPPPsss you did it again </Alert.Heading>
-        <p>
-        Error error     
-           </p>
+      <Modal show={show} variant="success" align="center">
+      <div className="card rounded-5 p-3 m-4" align="center">
+
+        <Alert.Heading> Ops, sorry </Alert.Heading>
         <hr />
-        <div className="d-flex justify-content-end">
-          <Button onClick={() => setShow(false)} variant="outline-success">
-            Close me ya'll!
-          </Button>
-        </div>
+        <p> Could not find email or password. Please try again   </p>
+          <Button onClick={() => setShow(false)} variant="outline-danger">
+Close      </Button>
+</div>
+
       </Modal>
        </>
 
