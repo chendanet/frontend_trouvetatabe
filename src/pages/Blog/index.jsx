@@ -9,6 +9,20 @@ import { PROD_BOOKINGS } from "api/apiHandler";
 const Blog = () => {
   const [data, setData] = useState();
 
+  /* ********************************** Function Time ********************************** */
+  const DisplayDate = (UTCDateTime) => {
+    var date = new Date(UTCDateTime);
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    var formattedDate = day + "-" + month + "-" + year
+    return formattedDate ;
+  }
+
+  /* **********************************  Function Time ********************************** */
+
+
+  
   useEffect(() => {
     fetch(
       `https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records?rows=10`
@@ -26,21 +40,29 @@ const Blog = () => {
   return (
     <div className="w-100 mx-5">
       <div className="row w-100 justify-content-center ">
-        <h2 className="text-center m-5">Le blog Trouve Ta Table</h2>
+      <h2 className="my-5 text-center fw-bold"> Blog TrouveTaTable ...</h2>
+      <h6 className=" text-center fw-bold"> ...soon with new features</h6>
+
       {events &&
         events.map((item, index) => (
           
-            <div className="card col-md-3 rounded-5 p-3 m-4">
+            <div className="card col-md-3 rounded-5 p-3 m-4" align="center">
               <div className="card_img-container mb-3">
-                <img src={item.cover.url} alt="events paris" className="card_img rounded-2"/>
+                <img src={item.cover.url} alt="events paris" className="card_img rounded-2" />
               </div>
-            <h5 className="card-title m-2"> {item.title} </h5>
+            <h5 className="card-title m-2" > {item.title} </h5>
             
-              <p className="m-2"> Evenement -{item.price_type}</p>
-              <p className="m-2"> Date: {item.date_start}</p>
+              <p className="m-2"> Event: {item.price_type}</p>
+              <p className="m-2"> Date: {DisplayDate(item.date_start)}</p>
+              
+
+
               <button>
                 {" "}
+                {/* <a href={item.url}>Link Event</a> */}
+
                 <a href={item.url}>Link Event</a>
+
               </button>
             </div>
          
