@@ -133,7 +133,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Change your email"
+                                placeholder="Change your Email"
                                 className="form-control" />
                             <br />
                             <input
@@ -141,15 +141,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Change your password"
-                                className="form-control" />
-                            <br />
-                            <input
-                                type="text"
-                                name="last-name"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                                placeholder="Your name"
+                                placeholder="Change your Password"
                                 className="form-control" />
                             <br />
                             <input
@@ -157,11 +149,19 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="first-name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                placeholder="Your surname"
+                                placeholder="Your First name"
+                                className="form-control" />
+                            <br />
+                             <input
+                                type="text"
+                                name="last-name"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                placeholder="Your Last name"
                                 className="form-control" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
-                                Update my profile
+                                Modify my profile
                         </button>
                             <br />
                         </div>
@@ -170,21 +170,24 @@ const DisplayTimeOnly = (UTCDateTime) => {
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-delete mb-5">
-
-                    <h3> Delete your account</h3>
+                    <h4>Delete my account</h4>
                     <br />
-                    <p> Warning: you are about to delete your account : 😱 </p>
+                    <div className="textDelete">
+                        <p>Warning: you are about to delete your account : 😱</p>
+                           <p> Are you sure ? Deleting your account is permanent and will remove all your advantages and history.</p>
+                           <p>Any Bookings you booked will not be deleted automatically. Please go to Restaurants you booked and clic DELETE before deleting your account.</p>
+                    </div>
                     <div>
                         <button type="submit" onClick={fetchDeleteUser} className="btn-alert">
                             DELETE
-                            </button>
+                        </button>
                     </div>
                     <br />
                 </div>
             </div>
             <div className="container ">
                 <div className="row justify-content-md-center">
-                    <h4 className="col-md-2 ">My bookings</h4>
+                    <h4 className="bloc-bookings col-md-2 ">My bookings : 🍽️ </h4>
                 </div>
                 <div className="row justify-content-center">
                     {myBooking.map((booking) => (
@@ -193,8 +196,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 <h5 className="card-title">{booking.venue.name.toUpperCase()}</h5>
                                 <h6> Number of people: <span className="text-dark">{booking.seat}</span></h6>
                                 <h6> Date: <span className="text-dark">{booking.date}</span></h6>
-                                <h6> Time: <span>{DisplayTimeOnly(booking.time)}</span>            
-</h6>
+                                <h6> Time: <span>{DisplayTimeOnly(booking.time)}</span></h6>
                                 <div className="delete-button">
                                     <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Delete </button>
                                 </div>

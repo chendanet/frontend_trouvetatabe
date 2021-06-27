@@ -84,7 +84,7 @@ const SignUp = () => {
               type="text"
               name="email"
               onChange={handleEmail}
-              placeholder="Email: example@example.com"
+              placeholder="Ex: ted@example.com"
               pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
               className="form-control"
             />
@@ -129,7 +129,7 @@ const SignUp = () => {
             </button>
             <br />
             <Link to="/login" className="link">
-              <button className="btn-login">I have account</button>
+              <button className="btn-login">Go to my account</button>
             </Link>
           </div>
         </form>

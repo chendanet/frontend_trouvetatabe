@@ -224,7 +224,7 @@ function CreateVenue() {
             <label> Please add one or more photos of your venue<hr /></label>
             <input name="images[]"  type="file" multiple={true} className="form-control-file" />
             <br /><br />
-            <input type="submit" value="Create your venue" className="btn-signin" />
+            <input type="submit" value="Create your Venue" className="btn-signin" />
             <br />
           </div>
         </form>
