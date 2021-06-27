@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { authenticate } from 'store/actions'
 import "pages/SignIn/SignIn.css";
 
 const ForgotPassword = () => {

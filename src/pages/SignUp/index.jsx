@@ -112,14 +112,14 @@ const SignUp = () => {
             <div className="check-manager">
               <input
                 id="checkbox"
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value=""
                 checked={is_manager}
                 onChange={handleOnChange}
                 id="flexCheckDefault"
               />
-              <label class="form-check-label" for="flexCheckDefault">
+              <label className="form-check-label" for="flexCheckDefault">
                 Are you a manager ?
               </label>
             </div>{" "}
