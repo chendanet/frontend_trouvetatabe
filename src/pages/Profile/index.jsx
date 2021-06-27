@@ -150,7 +150,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="last-name"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
-                                placeholder="Your First name"
+                                placeholder="Your Last name"
                                 className="form-control" />
                             <br />
                             <input
@@ -158,7 +158,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="first-name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                placeholder="Your Last name"
+                                placeholder="Your First name"
                                 className="form-control" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
