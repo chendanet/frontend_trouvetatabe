@@ -31,6 +31,8 @@ const Venue = () => {
   const [bookings, setBookings] = useState([])
   const [ratings, setRatings] = useState([])
   const star = "⭐️"
+  const [emptyRatings, setEmptyRatings] = useState()
+  const [emptyBookings, setEmptyBookings] = useState()
 
   const dataVenue = {
     venue: {
@@ -119,6 +121,7 @@ const Venue = () => {
     const response = await fetch(PROD_BOOKINGS);
     const data = await response.json();
     setBookings(data);
+    setEmptyBookings(data)
   };
 
   useEffect(() => {
@@ -131,11 +134,18 @@ const Venue = () => {
     const response = await fetch('https://trouvetatableapi.herokuapp.com/api/ratings')
     const data = await response.json()
     setRatings(data)
+    setEmptyRatings(data)
   }
 
   useEffect(() => {
     fetchAllRatings();
   }, [])
+
+
+  let emptyRate = emptyRatings && emptyRatings.filter(rating => rating.venue_id == currentVenue.id)
+  let emptyBooking = emptyBookings && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
+
+  /* ********************************** RATINGS ********************************** */
 
   /* ********************************** Method Time ********************************** */
 
@@ -146,144 +156,167 @@ const Venue = () => {
     var formattedDate = hour + ':' + minutes.substr(-2);
     return formattedDate;
   }
-    /* **********************************  Method Time ********************************** */
+  /* **********************************  Method Time ********************************** */
 
 
   return (
-    <div className="container-page d-flex align-items-center justify-content-center  ">
-      <div >
-        {currentVenue && (
-          <div className="d-flex  justify-content-center  flex-column">
+    <div className="container w-100  ">
+      {currentVenue && (
+        <div className="w-100 justify-content-center">
+          <div className="row my-5 d-flex justify-content-center">
+            <div className="col-md-5">
+              <div className="card">
+                {!currentVenue.images[0] ?
+                  <div className="">
+                    <img
+                      src={currentVenue.photo}
+                      alt={`${currentVenue.name}_dish`}
+                      className="card-img-top card_img w-100"
+                    />
+                  </div>
+                  : <div>
+                    <img
+                      src={currentVenue.images[0]}
+                      alt={`${currentVenue.name}_dish`}
+                      className="card-img-top card_img w-100"
+                    />
+                  </div>
+                }
 
-            {!currentVenue.images[0] ?
-              <div className="text-center">
-                <img
-                  src={currentVenue.photo}
-                  alt={`${currentVenue.name}_dish`}
-                  className="img-fluid card-border "
-                />
+                <div className="px-3 pt-2">
+                  <h2 className="title-venue">{currentVenue.name}</h2>
+                  <h6>{currentVenue.cuisine}</h6>
+                  <p className="text-justify">{currentVenue.description}</p>
+
+                  <div className="">
+                    <div className="row mb-3">
+                      <div className="col-md-6 col-sm-12">
+                        <h6>Adresse: </h6>
+                        <span>{currentVenue.address}</span>
+                      </div>
+                      <div className="col-md-6 col-sm-12">
+                        <h6>Phone number</h6>
+                        <span>{currentVenue.phone_number}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-12 col-sm-12">
+                      <h6>Price</h6>
+                      <span className="text-dark h6 fw-normal">{Math.floor(currentVenue.price * 0.90)} € au lieu de {currentVenue.price} €</span>
+
+                    </div>
+
+                    <div className="col-md-12 col-sm-12 my-2">
+                      {currentUser.id && currentVenue.user_id != currentUser.id && (
+                        <div>
+                          <button type="button" onClick={toggleModal}>
+                            Find a Table
+                              </button>{" "}
+                        </div>
+                      )}
+
+                      {!currentUser.id && (
+                        <div>
+                          <Link to="/register">
+                            <button>Sign or Login to Find a Table</button>
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {currentVenue.user_id == currentUser.id && (
+                    <div>
+                      <div className="text-center">
+                        <button
+                          type="button"
+                          onClick={toggleModal1}
+                          idVenue={idVenue}
+                          className="m-2"
+                        >
+                          Edit
+                    </button>
+                        <button onClick={fetchDeleteVenue} className="m-2">
+                          Delete
+                    </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-              : <div>
-                <img
-                  src={currentVenue.images[0]}
-                  alt={`${currentVenue.name}_dish`}
-                  className="img-fluid card-border"
-                />
-              </div>
-            }
-            <div className="card mt-3 p-4 card-border">
-              <h2 className="title-venue">{currentVenue.name}</h2>
-              <h6>{currentVenue.cuisine}</h6>
-              <p>{currentVenue.description}</p>
             </div>
-            <div className="card mt-3 p-4 card-border">
-              <div className="row mb-5">
-                <div className="col-md-6 col-sm-12">
-                  <h2>Adresse: </h2>
-                  <span>{currentVenue.address}</span>
-                </div>
-                <div className="col-md-6 col-sm-12">
-                  <h2>Phone number</h2>
-                  <span>{currentVenue.phone_number}</span>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-6 col-sm-12">
-
-                  <h4>Price: <span className="text-dark fs-5">{Math.floor(currentVenue.price * 0.90)} €</span></h4>
-                  <div className="col-md-6 col-sm-12">
-                    <h4> Review </h4>
-                    {/* ********************************** RATINGS ********************************** */}
-                    {ratings &&
-                      ratings.filter(rating => rating.venue_id == currentVenue.id)
-                        .map((rating) => (
-                          <div class="rating">
-                            <span>{`${star.repeat(Math.abs(rating.score)) + " - " + rating.review}`}</span>
-                          </div>
-                        )
-                        )}
-
-                    {/* ********************************** RATINGS ********************************** */}
-                  </div>
-                </div>
-                {currentUser.id && currentVenue.user_id != currentUser.id && (
-                  <div className="col-md-6 col-sm-12">
-                    <button type="button" onClick={toggleModal}>
-                      Find a Table
-                    </button>{" "}
-                    <button type="button" onClick={toggleModalRating}>
-                      {" "}
-                      Leave a Review
-                    </button>{" "}
-                  </div>
-                )}
-                {!currentUser.id && (
-                  <div className="col-md-6 col-sm-12">
-                    <Link to="/register">
-                      <button>Sign or Login to Find a Table</button>
-                    </Link>
-                  </div>
-                )}
-              </div>
+            <div className="col-md-6">
+              {lat && lon &&
+                <MapOpen latitude={lat} longitude={lon} currentVenue={currentVenue} />
+              }
             </div>
-
-            {currentVenue.user_id == currentUser.id && (
-
-              <div className="d-flex  flex-column m-3 justify-content-center">
-                <div>
-                  <h4 className="text-center">List des reservations:</h4>
-                  <div className="container row">
-                    {bookings &&
-                      bookings
-                        .filter(
-                          (booking) => booking.venue_id == currentVenue.id
-                        )
-                        .map((booking) => (
-                          <div className="col-md-4 col-sm-12" key={booking.id}>
-                            <div className="card m-2 p-2 d-flex align-items-center justify-content-center">
-                              <h2>{booking.venue.name}</h2>
-                              <h4>seat:</h4>
-                              <span>{booking.seat}</span>
-                              <h4>Date:</h4>
-                              <span>{booking.date}</span>
-                              <h4>Time:</h4>
-                              <span>{DisplayTimeOnly(booking.time)}</span>            
-                               {/* {<div className="delete-button">
-
-            
-                              <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
-                            </div> } */}
-                            </div>
-                          </div>
-
-                        )
-                        )}
-
-                  </div>
-
-                </div>
-                <div className="text-center">
-                  <button
-                    type="button"
-                    onClick={toggleModal1}
-                    idVenue={idVenue}
-                    className="m-2"
-                  >
-                    Edit
-                  </button>
-                  <button onClick={fetchDeleteVenue} className="m-2">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            )}
-            {lat && lon &&
-              <MapOpen latitude={lat} longitude={lon} currentVenue={currentVenue} />
-            }
           </div>
-        )}
-      </div>
+          <div className="row my-5 d-flex justify-content-center">
+
+            <div className="card w-75 px-3 pt-2">
+              <h5> Reviews </h5>
+              <div className="">
+
+                {/* ********************************** RATINGS ********************************** */}
+                {ratings &&
+                  ratings.filter(rating => rating.venue_id == currentVenue.id)
+                    .map((rating) => (
+                      <div class="col-md-12 col-sm-12 col-xs-12 my-2">
+                        <span>{`${star.repeat(Math.abs(rating.score)) + " - " + rating.review}`}</span>
+                      </div>
+                    )
+
+                    )}
+                {/* ********************************** RATINGS ********************************** */}
+
+                {emptyRate && emptyRate.length == 0 &&
+                  <p>This restaurant doesn't have any review yet</p>}
+
+              </div>
+
+              {currentUser.id && currentVenue.user_id != currentUser.id && (
+                <div className="mb-2">
+                  <button type="button" onClick={toggleModalRating}>
+                    {" "}
+                        Leave a Review
+                      </button>{" "}
+                </div>
+              )}
+            </div>
+          </div>
+
+
+          {currentVenue.user_id == currentUser.id && (
+
+            <div className="row my-5 d-flex justify-content-center w-100">
+              <h4 className="text-center">List des reservation dans le restaurant {currentVenue.name}</h4>
+              {bookings &&
+                bookings
+                  .filter(
+                    (booking) => booking.venue_id == currentVenue.id
+                  )
+                  .map((booking) => (
+                    <div className="col-md-5 col-xs-12 ms-4 my-2" key={booking.id}>
+                      <div className="card m-2 p-2">
+                        <h6>{booking.venue.name}</h6>
+                        <h6>seat: <span className=" h6 fw-normal">{booking.seat}</span></h6>
+
+                        <h6>Date: <span className=" h6 fw-normal">{booking.date}</span></h6>
+
+                        <h6>Time: <span>{DisplayTimeOnly(booking.time)}</span></h6>
+                      </div>
+                    </div>
+                  )
+                  )}
+
+              {emptyBooking && emptyBooking.length == 0 &&
+                <p className="text-center">This restaurant doesn't have any reservation yet</p>}
+            </div>
+          )}
+
+        </div>
+      )}
       {modal && (
         <>
           <Booking modal={toggleModal} idVenue={idVenue} />
