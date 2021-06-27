@@ -1,3 +1,9 @@
+
+body {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
 .App {
   height: 100vh;
   width: 100%;
@@ -6,4 +12,24 @@
 .leaflet-container {
   width: 50vw;
   height: 50vh;
+}
+.overlay{
+
+  border:2px solid;
+  min-width: 50vw;
+  max-width:80vw;
+  min-height: 50vh;
+  max-height: 80vh;
+  position: fixed;
+  top: 50%; 
+  left: 50%;
+  transform:translate(-50%,-50%);
+  background: white;
+  display:flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  z-index: 2; 
+  box-shadow: 0 0 0 100vw rgba(0,0,0,0.5);
 }
