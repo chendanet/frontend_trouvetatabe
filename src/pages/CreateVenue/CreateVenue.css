@@ -1,0 +1,21 @@
+.form-control-file {
+  background: transparent;
+  border: none;
+  outline: 0;
+  display: block;
+  height: 100px;
+  width: 200px;
+  cursor: pointer;
+  font-size: 0;
+}
+
+.btn-amazon {
+  color: white;
+  background-color: #001a33;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem;
+  width: 100%;
+  height: 50px;
+  font-weight: 900;
+}

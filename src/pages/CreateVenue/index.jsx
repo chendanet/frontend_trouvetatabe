@@ -4,7 +4,8 @@ import Cookies from 'js-cookie';
 import config from 'config';
 import { useHistory } from 'react-router-dom';
 import { PROD_CREATE_VENUE} from 'api/apiHandler'
-
+import { Button } from 'react-bootstrap';
+import "pages/CreateVenue/CreateVenue.css";
 
 function CreateVenue() {
   const nameRef = useRef();
@@ -213,8 +214,9 @@ function CreateVenue() {
             {" "}
             <br />
             <label>Some pictures of your establishment ?<hr /></label>
-            <input name="images[]"  type="file" multiple={true} className="form-control-file" />
-            <br /><br />
+            <button className="btn-amazon"> Upload Your picture
+            <input name="images[]"  type="file" multiple={true} className="form-control-file" /></button>
+            <br /><br />  
             <input type="submit" value="Creer votre etablissement" className="btn-signin" />
             <br />
           </div>
