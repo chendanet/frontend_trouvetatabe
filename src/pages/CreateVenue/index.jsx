@@ -44,7 +44,7 @@ function CreateVenue() {
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">
         <div>
-          <h3>Create your establishment.</h3>
+          <h3>Create your Venue</h3>
           <hr />
         </div>
         <form onSubmit={handleSubmit}>
@@ -215,7 +215,7 @@ function CreateVenue() {
             <label>Some pictures of your establishment ?<hr /></label>
             <input name="images[]"  type="file" multiple={true} className="form-control-file" />
             <br /><br />
-            <input type="submit" value="Creer votre etablissement" className="btn-signin" />
+            <input type="submit" value="Create your Venue" className="btn-signin" />
             <br />
           </div>
         </form>

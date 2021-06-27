@@ -84,7 +84,7 @@ const SignUp = () => {
               type="text"
               name="email"
               onChange={handleEmail}
-              placeholder="Email: example@example.com"
+              placeholder="Ex: ted@example.com"
               pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
               className="form-control"
             />
@@ -112,14 +112,14 @@ const SignUp = () => {
             <div className="check-manager">
               <input
                 id="checkbox"
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value=""
                 checked={is_manager}
                 onChange={handleOnChange}
                 id="flexCheckDefault"
               />
-              <label class="form-check-label" for="flexCheckDefault">
+              <label className="form-check-label" for="flexCheckDefault">
                 Are you a manager ?
               </label>
             </div>{" "}
@@ -129,7 +129,7 @@ const SignUp = () => {
             </button>
             <br />
             <Link to="/login" className="link">
-              <button className="btn-login">I have account</button>
+              <button className="btn-login">Go to my account</button>
             </Link>
           </div>
         </form>

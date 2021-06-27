@@ -23,7 +23,7 @@ const MyVenues = () => {
     console.log('venues', currentManager)
     return (
         <div className="container w-100">
-            <h2 className="my-5 text-center fw-bold">Mes restaurants</h2>
+            <h2 className="my-5 text-center fw-bold">My Venue(s)</h2>
             <div className="row w-100 d-flex justify-content-center" >
                 {venues && venues
                     .filter((value) => value.user_id === parseInt(currentManager.id))

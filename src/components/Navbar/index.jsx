@@ -99,12 +99,12 @@ function Navbar() {
                     <>
                       <li className="nav-item">
                         <Link className="nav-list item-list" to="/venues">
-                          Créer un restaurant
+                          Create my Venue
                       </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-list item-list" to="/myVenues">
-                          Mes restaurants
+                          My Venue
                     </Link>
                       </li>
                     </>

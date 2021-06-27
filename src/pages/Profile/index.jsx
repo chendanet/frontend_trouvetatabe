@@ -127,13 +127,13 @@ const DisplayTimeOnly = (UTCDateTime) => {
         <div className="container-profil">
             <div className="row justify-content-md-center justify-content-sm-center justify-content-xs-center">
                 <div className=" col-md-6 col-sm-6 mt-4 text-center ">
-                    {currentUser.last_name ? <p className="text-center">Bonjour,<h4>{currentUser.last_name}</h4></p> : <p>Bonjour, vous êtes connecté sous : <h4>{currentUser.email}</h4></p>}
+                    {currentUser.last_name ? <p className="text-center">Hello,<h4>{currentUser.last_name}</h4></p> : <p>Hello, you are log with <h4>{currentUser.email}</h4></p>}
                 </div>
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-container">
-                    <h3>Mon profil</h3>
-                    <p>Ici, vous pouvez modifier votre profil en entier</p>
+                    <h3>My profil</h3>
+                    <p>Here, you can modify your profil</p>
                     <form>
                         <div>
                             <input
@@ -141,35 +141,35 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Modifier email"
-                                class="form-control" />
+                                placeholder="Modify email"
+                                className="form-control" />
                             <br />
                             <input
                                 type="password"
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Modifier MDP"
-                                class="form-control" />
+                                placeholder="Change Password"
+                                className="form-control" />
                             <br />
                             <input
                                 type="text"
                                 name="last-name"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
-                                placeholder="Votre Prénon"
-                                class="form-control" />
+                                placeholder="Your First name"
+                                className="form-control" />
                             <br />
                             <input
                                 type="text"
                                 name="first-name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                placeholder="Votre Nom"
-                                class="form-control" />
+                                placeholder="Your Last name"
+                                className="form-control" />
                             <br />
                             <button type="submit" onClick={updateCurrentUser} className="btn-signin">
-                                Modifier mon profil
+                                Modify my profil
                         </button>
                             <br />
                         </div>
@@ -178,21 +178,24 @@ const DisplayTimeOnly = (UTCDateTime) => {
             </div>
             <div className="container d-flex align-items-center justify-content-center">
                 <div className="form-delete mb-5">
-
-                    <h3>Supprimer votre compte</h3>
+                    <h4>Delete my account</h4>
                     <br />
-                    <p>ATTENTION: Vous êtes sur le point de supprimer votre compte : 😱 </p>
+                    <div className="textDelete">
+                        <p>Do you want to delete your account? 😱</p>
+                           <p> Are you sure ? Deleting your account is permanent and will remove all your advantages and history.</p>
+                           <p>Any Bookings you booked will not be deleted automatically. Please go to Restaurants you booked and clic DELETE before deleting your account.</p>
+                    </div>
                     <div>
                         <button type="submit" onClick={fetchDeleteUser} className="btn-alert">
-                            SUPPRIMER
-                            </button>
+                            DELETE
+                        </button>
                     </div>
                     <br />
                 </div>
             </div>
             <div className="container ">
                 <div className="row justify-content-md-center">
-                    <h4 className="col-md-2 ">My bookings</h4>
+                    <h4 className="bloc-bookings col-md-2 ">My bookings : 🍽️ </h4>
                 </div>
                 <div className="row justify-content-center">
                     {myBooking.map((booking) => (
@@ -204,7 +207,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 <h6>Time: <span>{DisplayTimeOnly(booking.time)}</span>            
 </h6>
                                 <div className="delete-button">
-                                    <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Supprimer </button>
+                                    <button alt="trashcan" onClick={() => deleteBooking(booking.id)}> Delete </button>
                                 </div>
                             </div>
 
