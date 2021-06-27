@@ -10,6 +10,7 @@
 
 .image-banner {
   height: 500px;
+  filter: brightness(0.5);
   object-fit: cover;
   width: 100%;
 }
@@ -20,7 +21,6 @@
   position: absolute;
   top: 30%;
   left:22%;
-  background-color: #00010241;
   padding:1rem;
 }
 
