@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, Link  } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { authenticate } from "store/actions";
 import "pages/SignUp/SignUp.css";
 import { PROD_SIGNUP } from 'api/apiHandler';
@@ -14,7 +14,8 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [is_manager, setIsManager] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const [success, setSuccess] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -57,11 +58,7 @@ const SignUp = () => {
       body: JSON.stringify(dataUser),
     });
     if (response.status != 200){
-      return (
-        <>
-        <AlertDismissibleDanger />
-        </>
-      );
+     setFailed(true);
     }
 
     const token = response.headers.get("Authorization").split("Bearer ")[1];
@@ -85,22 +82,21 @@ const SignUp = () => {
         token
       )
     );
-    return (
-      <>
-      <AlertDismissibleSuccess />
-      </>,
-      console.log('Alert ?'),
-      history.push("/profile")
-    );
+    setSuccess(true);
+  } else {
+    setFailed(true);
   }
-  return (
-    <>
-    <AlertDismissibleDanger />
-    </>
-  );
   };
   return (
     <div className="container d-flex align-items-center justify-content-center">
+      {failed && 
+        <>
+          <AlertDismissibleDanger />
+        </>}
+      {success && 
+        <>
+          <AlertDismissibleSuccess />
+        </>}
       <div className="form-container">
         <div>
           <h3>Sign Up</h3>
