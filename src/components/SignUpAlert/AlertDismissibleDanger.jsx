@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import { useState } from 'react';
 import { Alert } from 'react-bootstrap';
 
@@ -16,6 +15,5 @@ function AlertDismissibleDanger() {
         );
     }
 }
-render(<AlertDismissibleDanger />);
 
-export default AlertDismissibleDanger;
+export {AlertDismissibleDanger};
