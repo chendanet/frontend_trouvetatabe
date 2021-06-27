@@ -141,10 +141,23 @@ const Venue = () => {
     fetchAllRatings();
   }, [])
 
+
   let emptyRate = emptyRatings && emptyRatings.filter(rating => rating.venue_id == currentVenue.id)
   let emptyBooking = emptyBookings && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
 
   /* ********************************** RATINGS ********************************** */
+
+  /* ********************************** Method Time ********************************** */
+
+  const DisplayTimeOnly = (UTCDateTime) => {
+    var date = new Date(UTCDateTime.slice(0, -1));
+    var hour = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var formattedDate = hour + ':' + minutes.substr(-2);
+    return formattedDate;
+  }
+  /* **********************************  Method Time ********************************** */
+
 
   return (
     <div className="container w-100  ">
@@ -200,7 +213,7 @@ const Venue = () => {
                         <div>
                           <button type="button" onClick={toggleModal}>
                             Find a Table
-                            </button>{" "}
+                              </button>{" "}
                         </div>
                       )}
 
@@ -223,10 +236,10 @@ const Venue = () => {
                           className="m-2"
                         >
                           Edit
-                  </button>
+                    </button>
                         <button onClick={fetchDeleteVenue} className="m-2">
                           Delete
-                  </button>
+                    </button>
                       </div>
                     </div>
                   )}
@@ -266,8 +279,8 @@ const Venue = () => {
                 <div className="mb-2">
                   <button type="button" onClick={toggleModalRating}>
                     {" "}
-                      Leave a Review
-                    </button>{" "}
+                        Leave a Review
+                      </button>{" "}
                 </div>
               )}
             </div>
