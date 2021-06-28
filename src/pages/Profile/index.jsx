@@ -118,7 +118,7 @@ const Profile = () => {
         return formattedDate;
     }
 
-  let emptyBooking = emptyBookings && currentUser && emptyBookings.filter((booking) => booking.user_id == currentUser.id)
+    let emptyBooking = emptyBookings && currentUser && emptyBookings.filter((booking) => booking.user_id === parseInt(currentUser.id))
 
     return (
         <div className="container-profil">
@@ -133,7 +133,7 @@ const Profile = () => {
                     <p> Here, you can update your profile</p>
                     <form>
                         <div><label>
-                             E-mail
+                            E-mail
                                </label>
                             <input
                                 type="text"
@@ -143,7 +143,7 @@ const Profile = () => {
                                 placeholder="Change your Email"
                                 className="form-control" />
                             <label>
-                             Password
+                                Password
                                </label>
                             <input
                                 type="password"
@@ -151,21 +151,21 @@ const Profile = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Change your Password"
-                                className="form-control" />             
-                                <label>
-                                     First Name
-                               </label>                         
-                               <input
+                                className="form-control" />
+                            <label>
+                                First Name
+                               </label>
+                            <input
                                 type="text"
                                 name="first-name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="Your First name"
                                 className="form-control" />
-                                 <label>
-                                 Last Name
-                               </label>                              
-                              <input
+                            <label>
+                                Last Name
+                               </label>
+                            <input
                                 type="text"
                                 name="last-name"
                                 value={lastName}
@@ -197,8 +197,8 @@ const Profile = () => {
                 </div>
             </div>
             <div className="container ">
-            <div className="row my-5 d-flex justify-content-center w-100">
-            <h4 className="text-center"> My bookings </h4>
+                <div className="row my-5 d-flex justify-content-center w-100">
+                    <h4 className="text-center"> My bookings </h4>
                 </div>
                 <div className="row justify-content-center">
                     {myBooking.map((booking) => (
@@ -215,8 +215,8 @@ const Profile = () => {
 
                         ))
                     )}
-                      {emptyBooking && emptyBooking.length == 0 &&
-                <p className="text-center">  You don't have any booking yet</p>}
+                    {emptyBooking && emptyBooking.length === 0 &&
+                        <p className="text-center">  You don't have any booking yet</p>}
                 </div>
             </div>
         </div>
