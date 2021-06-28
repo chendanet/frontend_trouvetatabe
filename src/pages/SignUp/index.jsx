@@ -97,7 +97,7 @@ const SignUp = () => {
           <h3>Sign Up</h3>
           <p>Create your account</p>
         </div>
-        <form onSubmit={fetchSignUp} keyboard={false} dblClick={false}>
+        <form onSubmit={fetchSignUp} keyboard="false" dblClick="false">
           <div>
           <label>
             E-mail
@@ -145,9 +145,8 @@ const SignUp = () => {
                 value=""
                 checked={is_manager}
                 onChange={handleOnChange}
-                id="flexCheckDefault"
               />
-              <label className="form-check-label" for="flexCheckDefault">
+              <label className="form-check-label" htmlFor="flexCheckDefault">
                 Are you a manager ?
               </label>
             </div>{" "}
