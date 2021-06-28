@@ -147,7 +147,6 @@ body {
 
 .overlay{
   z-index: 100;
-  border:2px solid;
   min-width: 50vw;
   max-width:80vw;
   min-height: 50vh;
@@ -156,7 +155,7 @@ body {
   top: 50%; 
   left: 50%;
   transform:translate(-50%,-50%);
-  background: white;
+  background: rgba(0,0,0,0.5);
   display:flex;
   flex-flow: column;
   align-items: center;
@@ -165,3 +164,8 @@ body {
   z-index: 2; 
   box-shadow: 0 0 0 100vw rgba(0,0,0,0.5);
 }
+ 
+
+
+
+  

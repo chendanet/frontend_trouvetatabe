@@ -12,15 +12,22 @@
     width: 350px;
    
 }
+@media only screen and (max-width:360px){
+    .form-container{
+
+        width: 300px;
+        
+       
+    }
+  }
+
 form div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-form{
-    
-}
+
 input{
    border-radius: 5px;
 }
