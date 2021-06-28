@@ -49,7 +49,7 @@ const Booking = ({ modal, idVenue }) => {
       <div className="form-container " align="center">
         <h3> Book a table </h3>
         <button type="button" onClick={modal} className="close">X</button>
-        <form>
+        <form onSubmit={fetchBooking}>
         <label>
               Name
             </label>
@@ -58,7 +58,6 @@ const Booking = ({ modal, idVenue }) => {
             id="name"
             name="visitor_name"
             placeholder="Your Name"
-            required
             className="form-control mb-2"
           />
                   <label>
@@ -69,7 +68,6 @@ const Booking = ({ modal, idVenue }) => {
             id="phone"
             name="visitor_phone"
             placeholder="Your Phone"
-            required
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             className="form-control mb-2"
           />
@@ -109,7 +107,7 @@ const Booking = ({ modal, idVenue }) => {
             name="appt"
             required
             onChange={(e) => setTime(e.target.value)} />
-          <button type="submit" onClick={fetchBooking} className="btn-signin">
+          <button type="submit"  className="btn-signin">
             {" "}
             Submit{" "}
           </button>
