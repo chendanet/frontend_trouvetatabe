@@ -60,7 +60,7 @@ export const ListVenues = () => {
 
 
   return (
-    <>
+    <div className="container-ListVenue">
       <div className="container-banner">
         <div className="row py-lg-5 text-banner">
           <div className="text-center">
@@ -83,7 +83,7 @@ export const ListVenues = () => {
         <br />
         <div className="w-100 mx-5">
           <div className="row w-100 flex-row-center ">
-            <div className="col-md-2 col-sm-12 filter mt-1 me-4 filter-column">
+            <div className="col-md-2 col-sm-12 filter mt-1 me-4 filter-column bg-white">
               <div>
                 <h5 className="text-center fw-bold mt-1 mb-4">Filter</h5>
                 <div className="fs-6 mb-1 fw-bold">
@@ -179,6 +179,6 @@ export const ListVenues = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
