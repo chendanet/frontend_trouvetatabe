@@ -97,7 +97,7 @@ const SignUp = () => {
           <h3>Sign Up</h3>
           <p>Create your account</p>
         </div>
-        <form onSubmit={fetchSignUp} keyboard="false" dblClick="false">
+        <form onSubmit={fetchSignUp} keyboard="false" dblclick="false">
           <div>
           <label>
             E-mail
