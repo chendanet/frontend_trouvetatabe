@@ -22,6 +22,7 @@ const Profile = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const token = Cookies.get(config.COOKIE_STORAGE_KEY)
+    const [emptyBookings, setEmptyBookings] = useState()
 
     const updateCurrentUser = async (e) => {
         e.preventDefault()
@@ -71,6 +72,8 @@ const Profile = () => {
             .then((response) => response.json())
             .then((data) => {
                 setMyBooking(data)
+                setEmptyBookings(data)
+
             });
     }, [])
 
@@ -113,7 +116,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
     return formattedDate;
   }
 
-
+  let emptyBooking = emptyBookings && currentUser && emptyBookings.filter((booking) => booking.user_id == currentUser.id)
 
     return (
         <div className="container-profil">
@@ -127,7 +130,9 @@ const DisplayTimeOnly = (UTCDateTime) => {
                     <h3> Your profile</h3>
                     <p> Here, you can update your profile</p>
                     <form>
-                        <div>
+                        <div><label>
+                             E-mail
+                               </label>
                             <input
                                 type="text"
                                 name="email"
@@ -135,24 +140,30 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Change your Email"
                                 className="form-control" />
-                            <br />
+                            <label>
+                             Password
+                               </label>
                             <input
                                 type="password"
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Change your Password"
-                                className="form-control" />
-                            <br />
-                            <input
+                                className="form-control" />             
+                                <label>
+                                     First Name
+                               </label>                         
+                               <input
                                 type="text"
                                 name="first-name"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="Your First name"
                                 className="form-control" />
-                            <br />
-                             <input
+                                 <label>
+                                 Last Name
+                               </label>                              
+                              <input
                                 type="text"
                                 name="last-name"
                                 value={lastName}
@@ -173,9 +184,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                     <h4>Delete my account</h4>
                     <br />
                     <div className="textDelete">
-                        <p>Warning: you are about to delete your account : 😱</p>
-                           <p> Are you sure ? Deleting your account is permanent and will remove all your advantages and history.</p>
-                           <p>Any Bookings you booked will not be deleted automatically. Please go to Restaurants you booked and clic DELETE before deleting your account.</p>
+                        <p>Warning: you are about to delete your account. </p>
                     </div>
                     <div>
                         <button type="submit" onClick={fetchDeleteUser} className="btn-alert">
@@ -186,8 +195,8 @@ const DisplayTimeOnly = (UTCDateTime) => {
                 </div>
             </div>
             <div className="container ">
-                <div className="row justify-content-md-center">
-                    <h4 className="bloc-bookings col-md-2 ">My bookings : 🍽️ </h4>
+            <div className="row my-5 d-flex justify-content-center w-100">
+            <h4 className="text-center"> My bookings </h4>
                 </div>
                 <div className="row justify-content-center">
                     {myBooking.map((booking) => (
@@ -204,10 +213,10 @@ const DisplayTimeOnly = (UTCDateTime) => {
 
                         ))
                     )}
+                      {emptyBooking && emptyBooking.length == 0 &&
+                <p className="text-center">  You don't have any booking yet</p>}
                 </div>
             </div>
-
-
         </div>
 
 

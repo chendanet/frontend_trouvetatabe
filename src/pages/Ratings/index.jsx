@@ -71,6 +71,9 @@ const Ratings = ({ modal, idVenue }) => {
     </div>
         <button type="button" onClick={modal} className="close">✖️</button>
         <form>
+        <label>
+            Leave your review
+            </label>   
           <input
             type="text"
             id="name"
@@ -81,6 +84,9 @@ const Ratings = ({ modal, idVenue }) => {
             className="form-control mb-2"
              onChange={(e) => setReview(e.target.value)}
           />
+          <label>
+            and a score
+            </label>  
            <input
             type="number"
             id="score"

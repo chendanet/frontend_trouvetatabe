@@ -36,6 +36,9 @@ const ForgotPassword = () => {
         </div>
         <form>
           <div>
+          <label>
+            Your Email
+            </label> 
             <input
               type="text"
               name="email"

@@ -99,6 +99,9 @@ const SignUp = () => {
         </div>
         <form onSubmit={fetchSignUp} keyboard={false} dblClick={false}>
           <div>
+          <label>
+            E-mail
+            </label> 
             <input
               type="text"
               name="email"
@@ -108,6 +111,9 @@ const SignUp = () => {
               className="form-control"
             />
             <br />
+            <label>
+            Password
+            </label> 
             <input
               rows="4"
               type="password"
@@ -118,6 +124,9 @@ const SignUp = () => {
               className="form-control"
             />
             <br />
+            <label>
+            Confirm your Password
+            </label> 
             <input
               rows="4"
               type="password"
