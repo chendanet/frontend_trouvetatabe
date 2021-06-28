@@ -37,13 +37,13 @@ function CreateVenue() {
         if (response.ok) {
           history.push('/myVenues');
         } else {
-          setShow(true); 
+          setShow(true);
           return
         }
       })
       .catch(error => console.error('error', error));
   }
-  
+
   return (
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-create-venue">
@@ -51,11 +51,8 @@ function CreateVenue() {
           <h3>Create your venue</h3>
           <hr />
         </div>
-        <form onSubmit={handleSubmit} keyboard={false} dblClick={false}>
-          <div>
-          
-             
-
+        <form onSubmit={handleSubmit} keyboard="false" dblclick="false">
+          <div>       
                  <label className="fw-bold">
                    Venue name
                  </label>
@@ -198,12 +195,12 @@ function CreateVenue() {
             <label className="fw-bold">
             Your place has a terrace?
             <input
-              rows="4"
-              type="checkbox"
-              name="terrace"
-              ref={terraceRef}
-              className="form-check-label m-2"
-            /></label>{" "}
+                rows="4"
+                type="checkbox"
+                name="terrace"
+                ref={terraceRef}
+                className="form-check-label m-2"
+              /></label>{" "}
             <br />
             <label className="fw-bold">
             Number of couvert
@@ -226,7 +223,7 @@ function CreateVenue() {
             {" "}
             <br />
             <label className="fw-bold"> Please add one or more photos of your venue<hr /></label>
-            <input name="images[]"  type="file" multiple={true} className="form-control-file" />
+            <input name="images[]"  type="file" multiple={true} className="form-control" />
             <br /><br />
             <input type="submit" value="Create your Venue" className="btn-signin" />
             <br />

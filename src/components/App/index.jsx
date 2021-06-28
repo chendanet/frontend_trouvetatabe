@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import "components/App/index.css";
@@ -15,9 +14,8 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import {ListVenues} from "pages/ListVenue";
+import { ListVenues } from "pages/ListVenue";
 import MyVenues from 'pages/MyVenues';
-import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import ForgotPassword from 'pages/ForgotPassword';
 import ResetPassword from 'pages/ResetPassword';
 import Ratings from 'pages/Ratings';
@@ -27,15 +25,6 @@ import Blog from 'pages/Blog';
 
 const App = () => {
 
-  const [venues, setVenues] = useState(undefined);
-
-  useEffect(() => {
-    fetch(PROD_EDIT_VENUE)
-      .then((response) => response.json())
-      .then((data) => {
-        setVenues(data)
-      });
-  }, [])
 
   return (
     <Provider store={store}>

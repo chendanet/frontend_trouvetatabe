@@ -63,20 +63,22 @@ export const ListVenues = () => {
     <>
       <div className="container-banner">
         <div className="row py-lg-5 text-banner">
-          <h1><center>It's finally summer ! 😎☀️</center></h1>
-          <p><center>We can finally meet at the restaurant of bar without a mask ! 🍧</center></p>
-          <p><center>With TrouveTaTable, we can easily reserve a place in just a few clicks ! 🖱 </center></p>
+          <div className="text-center">
+            <h1>It's finally summer ! 😎☀️</h1>
+            <p>We can finally meet at the restaurant of bar without a mask ! 🍧</p>
+            <p>With TrouveTaTable, we can easily reserve a place in just a few clicks ! 🖱</p>
+          </div>
         </div>
       </div>
       <div className="container">
         <center><div className="detailsSearchbar input-group w-50">
-            <span className="input-group-text" id="basic-addon1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-funnel btn-outline-danger" viewBox="0 0 16 16">
-                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"></path>
-              </svg>
-            </span>
-            <input type="text" name="search" className="form-control" placeholder="Search your venue   Ex: Chez Dupont" aria-label="SearchBarFilter" aria-describedby="basic-addon1" onChange={(e) => setSearchTerme(e.target.value)} />
-          </div></center>
+          <span className="input-group-text" id="basic-addon1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-funnel btn-outline-danger" viewBox="0 0 16 16">
+              <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"></path>
+            </svg>
+          </span>
+          <input type="text" name="search" className="form-control" placeholder="Search your venue   Ex: Chez Dupont" aria-label="SearchBarFilter" aria-describedby="basic-addon1" onChange={(e) => setSearchTerme(e.target.value)} />
+        </div></center>
         <center><div className="advantageText">Registered clients get an exclusive 10% discount for every booking 😋 </div></center>
         <br />
         <div className="w-100 mx-5">
@@ -144,9 +146,9 @@ export const ListVenues = () => {
                   })
                   .filter(value => value.name.toLowerCase().includes(searchTerme.toLowerCase()))
                   .map((item, index) => (
-                    <div className="col-md-4 col-sm-6">
+                    <div className="col-md-4 col-sm-6" key={index}>
                       <Link to={"/venues/" + item.id} className="col-md-6">
-                        <div className="card"  key={index}>
+                        <div className="card" >
                           <div className="card_img-container ">
                             {!item.images[0] ?
                               <img

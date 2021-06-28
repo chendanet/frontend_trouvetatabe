@@ -35,7 +35,6 @@ const Booking = ({ modal, idVenue }) => {
       body: JSON.stringify(dataBooking),
     });
 
-    const data = await response.json();
 
     if (response) {
       history.push("/profile");
@@ -61,7 +60,6 @@ const Booking = ({ modal, idVenue }) => {
             placeholder="Your Name"
             required
             className="form-control mb-2"
-          // onChange={(e) => setName(e.target.value)}
           />
                   <label>
               Phone number

@@ -2,6 +2,11 @@
     background-color:#b8babb4b;
 }
 
+.lastName-profile,
+.email-profile{
+   color: #F53F3F; 
+}
+
 .form-container{
     display: flex;
     flex-direction: column;
