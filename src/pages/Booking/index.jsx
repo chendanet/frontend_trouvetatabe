@@ -50,6 +50,9 @@ const Booking = ({ modal, idVenue }) => {
         <h3> Book a table </h3>
         <button type="button" onClick={modal} className="close">X</button>
         <form>
+        <label>
+              Name
+            </label>
           <input
             type="text"
             id="name"
@@ -58,7 +61,9 @@ const Booking = ({ modal, idVenue }) => {
             required
             className="form-control mb-2"
           />
-
+                  <label>
+              Phone number
+            </label>
           <input
             type="tel"
             id="phone"
@@ -67,7 +72,9 @@ const Booking = ({ modal, idVenue }) => {
             required
             className="form-control mb-2"
           />
-
+                  <label>
+              Number of people
+            </label>
           <input
             type="number"
             id="people"

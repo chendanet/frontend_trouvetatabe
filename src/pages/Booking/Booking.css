@@ -9,5 +9,20 @@ button{
 .close{
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 30%;
+ 
 }
+/* @media only screen and (max-width:450px){
+  .close{
+    
+    top: 2px;
+    right: 0%;
+  }
+}
+@media only screen and (max-width:500px){
+  .close{
+    
+    top: 10px;
+    right: 10%;
+  }
+} */

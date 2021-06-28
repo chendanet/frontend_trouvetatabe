@@ -54,70 +54,84 @@ const EditVenue = ({ venues, modal }) => {
         <h3> Edit Venue</h3>
         <form>
           <div>
-            <label type="text" name="venuename">
-              Name
-          </label>
-            <input
+          <label>
+              Venue name
+            </label>
+           <input
               type="text"
               name="name"
               onChange={(e) => setName(e.target.value)}
+              className="form-control"
+              placeholder="Name"
             ></input>
           </div>
           <div>
-            <label type="text" name="city">
+          <label>
               City
-          </label>
-            <input
+            </label>
+           <input
               type="text"
               name="city"
               onChange={(e) => setCity(e.target.value)}
+              className="form-control"
+              placeholder="City"
             ></input>
           </div>
           <div>
-            <label type="text" name="cuisine">
+          <label>
+              Address
+            </label>
+            <input
+              type="text"
+              name="address"
+              onChange={(e) => setAddress(e.target.value)}
+              className="form-control"
+              placeholder="Address"
+            ></input>
+          </div>
+          <div>
+          <label>
               Cuisine
-          </label>
+            </label>
             <input
               type="text"
               name="cuisine"
               onChange={(e) => setCuisine(e.target.value)}
+              className="form-control"
+              placeholder="Cuisine"
             ></input>
           </div>
           <div>
-            <label type="text" name="cuisine">
+          <label>
               Number of couvert
-          </label>
-            <input
+            </label>
+           <input
               type="text"
-              name="cuisine"
+              name="seatnumber"
               onChange={(e) => setSeatnumber(e.target.value)}
+              className="form-control"
+              placeholder="Number of couvert"
             ></input>
           </div>
           <div>
-            <label type="text" name="cuisine">
-              Address
-               </label>
-            <input
-              type="text"
-              name="cuisine"
-              onChange={(e) => setAddress(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <label type="text" name="cuisine">
+          <label>
               Description
-               </label>
+            </label>
             <input
               type="text"
-              name="cuisine"
+              name="description"
               onChange={(e) => setDescription(e.target.value)}
+              className="form-control"
+              placeholder="Description"
             ></input>
           </div>
-          <div> <br />
+          <br />
+
+          <div> 
             <button type="submit" onClick={fetchEditVenue}>
               Edit Venue
           </button>
-          </div>
+                    </div>
         </form>
       </div>
     </div>

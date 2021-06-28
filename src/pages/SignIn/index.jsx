@@ -78,6 +78,9 @@ const SignIn = () => {
         </div>
         <form>
           <div>
+          <label>
+            E-mail
+            </label>   
             <input
               type="text"
               name="email"
@@ -86,6 +89,9 @@ const SignIn = () => {
               className="form-control"
             />
             <br />
+            <label>
+            Password
+            </label> 
             <input
               rows="4"
               type="password"
