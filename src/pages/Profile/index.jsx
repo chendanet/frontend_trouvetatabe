@@ -100,18 +100,20 @@ const Profile = () => {
                 },
             }
         );
-        dispatch(logout())
-        history.push("/");
+        if (response) {
+            dispatch(logout())
+            history.push("/");
+        }
     };
 
 
-const DisplayTimeOnly = (UTCDateTime) => {
-    var date = new Date(UTCDateTime.slice(0, -1));
-    var hour = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var formattedDate = hour + ':' + minutes.substr(-2);
-    return formattedDate;
-  }
+    const DisplayTimeOnly = (UTCDateTime) => {
+        var date = new Date(UTCDateTime.slice(0, -1));
+        var hour = date.getHours();
+        var minutes = "0" + date.getMinutes();
+        var formattedDate = hour + ':' + minutes.substr(-2);
+        return formattedDate;
+    }
 
 
 
@@ -119,7 +121,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
         <div className="container-profil">
             <div className="row justify-content-md-center justify-content-sm-center justify-content-xs-center">
                 <div className=" col-md-6 col-sm-6 mt-4 text-center ">
-                    {currentUser.last_name ? <p className="text-center"> Hello <h4>{currentUser.last_name}</h4></p> : <p> Hello, you are connected with: <h4>{currentUser.email}</h4></p>}
+                    {currentUser.last_name ? <p className="text-center"> Hello <span className="fs-6 fw-bold lastName-profile">{currentUser.last_name}</span></p> : <p> Hello, you are connected with: <span className="fs-6 fw-bold email-profile">{currentUser.email}</span></p>}
                 </div>
             </div>
             <div className="container d-flex align-items-center justify-content-center">
@@ -152,7 +154,7 @@ const DisplayTimeOnly = (UTCDateTime) => {
                                 placeholder="Your First name"
                                 className="form-control" />
                             <br />
-                             <input
+                            <input
                                 type="text"
                                 name="last-name"
                                 value={lastName}
@@ -174,8 +176,8 @@ const DisplayTimeOnly = (UTCDateTime) => {
                     <br />
                     <div className="textDelete">
                         <p>Warning: you are about to delete your account : 😱</p>
-                           <p> Are you sure ? Deleting your account is permanent and will remove all your advantages and history.</p>
-                           <p>Any Bookings you booked will not be deleted automatically. Please go to Restaurants you booked and clic DELETE before deleting your account.</p>
+                        <p> Are you sure ? Deleting your account is permanent and will remove all your advantages and history.</p>
+                        <p>Any Bookings you booked will not be deleted automatically. Please go to Restaurants you booked and clic DELETE before deleting your account.</p>
                     </div>
                     <div>
                         <button type="submit" onClick={fetchDeleteUser} className="btn-alert">

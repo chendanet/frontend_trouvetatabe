@@ -15,14 +15,10 @@ const Venue = () => {
   const { idVenue } = useParams();
   const [currentVenue, setCurrentVenue] = useState(null);
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
-  const [name, setName] = useState();
-  const [city, setCity] = useState();
-  const [cuisine, setCuisine] = useState();
   const history = useHistory();
   const [currentAddress, setCurrentAddress] = useState(null);
   const [currentCity, setCurrentCity] = useState(null);
   const currentUser = useSelector((state) => state.authReducer);
-  const userId = useSelector((state) => state.authReducer.id);
   const [lat, setLat] = useState()
   const [lon, setLon] = useState()
   const [bookings, setBookings] = useState([])
@@ -30,24 +26,6 @@ const Venue = () => {
   const star = "⭐️"
   const [emptyRatings, setEmptyRatings] = useState()
   const [emptyBookings, setEmptyBookings] = useState()
-
-  const dataVenue = {
-    venue: {
-      name: name,
-      city: city,
-      cuisine: cuisine,
-    },
-  };
-  const [venues, setVenues] = useState(undefined);
-
-  useEffect(() => {
-    fetch(PROD_EDIT_VENUE)
-      .then((response) => response.json())
-      .then((data) => {
-        setVenues(data);
-      });
-  }, []);
-
 
   const fetchDeleteVenue = async () => {
     const response = await fetch(`${PROD_EDIT_VENUE}/${idVenue}`, {
@@ -57,7 +35,9 @@ const Venue = () => {
         "Content-Type": "application/json",
       },
     });
-    history.push("/myVenues");
+    if (response) {
+      history.push("/myVenues");
+    }
   };
 
   const fetchVenue = async () => {
@@ -92,6 +72,7 @@ const Venue = () => {
   useEffect(() => {
     fetchVenue()
     fetchCordinatesFromAdresse()
+    // eslint-disable-next-line
   }, [currentCity, currentAddress]);
 
 
@@ -135,9 +116,9 @@ const Venue = () => {
 
 
   let emptyRate = emptyRatings && currentVenue && emptyRatings.filter(rating => rating.venue_id === currentVenue.id)
-  let emptyBooking = emptyBookings && currentVenue && emptyBookings.filter((booking) => booking.venue_id == currentVenue.id)
+  let emptyBooking = emptyBookings && currentVenue && emptyBookings.filter((booking) => booking.venue_id === currentVenue.id)
 
-  
+
 
   const DisplayTimeOnly = (UTCDateTime) => {
     var date = new Date(UTCDateTime.slice(0, -1));
@@ -192,7 +173,7 @@ const Venue = () => {
                     </div>
 
                     <div className="col-md-12 col-sm-12 my-2">
-                      {currentUser.id && currentVenue.user_id != currentUser.id && (
+                      {currentUser.id && currentVenue.user_id !== parseInt(currentUser.id) && (
                         <div>
                           <button type="button" onClick={toggleModal}>
                             Find a Table
@@ -209,7 +190,7 @@ const Venue = () => {
                       )}
                     </div>
                   </div>
-                  {currentVenue.user_id == currentUser.id && (
+                  {currentVenue.user_id === parseInt(currentUser.id) && (
                     <div>
                       <div className="text-center">
                         <button
@@ -242,21 +223,21 @@ const Venue = () => {
               <div className="">
 
                 {ratings &&
-                  ratings.filter(rating => rating.venue_id == currentVenue.id)
-                    .map((rating) => (
-                      <div className="col-md-12 col-sm-12 col-xs-12 my-2">
+                  ratings.filter(rating => rating.venue_id === currentVenue.id)
+                    .map((rating, index) => (
+                      <div key={index} className="col-md-12 col-sm-12 col-xs-12 my-2">
                         <span>{`${star.repeat(Math.abs(rating.score)) + " - " + rating.review}`}</span>
                       </div>
                     )
 
                     )}
 
-                {emptyRate && emptyRate.length == 0 &&
+                {emptyRate && emptyRate.length === 0 &&
                   <p>This venue doesn't have any review yet</p>}
 
               </div>
 
-              {currentUser.id && currentVenue.user_id != currentUser.id && (
+              {currentUser.id && currentVenue.user_id !== parseInt(currentUser.id) && (
                 <div className="mb-2">
                   <button type="button" onClick={toggleModalRating}>
                     {" "}
@@ -268,14 +249,14 @@ const Venue = () => {
           </div>
 
 
-          {currentVenue.user_id == currentUser.id && (
+          {currentVenue.user_id === parseInt(currentUser.id) && (
 
             <div className="row my-5 d-flex justify-content-center w-100">
               <h4 className="text-center"> {currentVenue.name} list of all bookings </h4>
               {bookings &&
                 bookings
                   .filter(
-                    (booking) => booking.venue_id == currentVenue.id
+                    (booking) => booking.venue_id === currentVenue.id
                   )
                   .map((booking) => (
                     <div className="col-md-5 col-xs-12 ms-4 my-2" key={booking.id}>
@@ -291,7 +272,7 @@ const Venue = () => {
                   )
                   )}
 
-              {emptyBooking && emptyBooking.length == 0 &&
+              {emptyBooking && emptyBooking.length === 0 &&
                 <p className="text-center">This venue doesn't have any booking yet</p>}
             </div>
           )}
