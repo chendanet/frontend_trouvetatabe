@@ -45,7 +45,7 @@ function CreateVenue() {
   }
 
   return (
-    <div className="container d-flex align-items-center justify-content-center">
+    <div className="container-fluid d-flex align-items-center justify-content-center container-bg">
       <div className="form-create-venue">
         <div>
           <h3>Create your venue</h3>

@@ -21,7 +21,7 @@ const MyVenues = () => {
     const currentManager = useSelector((state) => state.authReducer)
 
     return (
-        <div className="container w-100">
+        <div className="container-fluid w-100 h-100 container-bg">
             <h2 className="my-5 text-center fw-bold">My Venue(s)</h2>
             <div className="row w-100 d-flex justify-content-center" >
                 {venues && venues

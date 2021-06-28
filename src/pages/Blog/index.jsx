@@ -30,7 +30,7 @@ const Blog = () => {
   const events = data && data.records.map((record) => record.record.fields);
 
   return (
-    <div className="w-100 mx-5">
+    <div className="w-100  container-bg ">
       <div className="row w-100 justify-content-center ">
         <h2 className="my-5 text-center fw-bold"> Blog TrouveTaTable ...</h2>
         <h6 className=" text-center fw-bold"> ...soon with new features</h6>

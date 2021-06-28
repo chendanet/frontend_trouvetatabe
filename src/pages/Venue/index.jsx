@@ -130,7 +130,8 @@ const Venue = () => {
 
 
   return (
-    <div className="container w-100  ">
+    <div className="container-bg  w-100">
+    <div className="container w-100 ">
       {currentVenue && (
         <div className="w-100 justify-content-center">
           <div className="row my-5 d-flex justify-content-center">
@@ -297,6 +298,9 @@ const Venue = () => {
         </>
       )}
     </div>
+    </div>
+    
+      
   );
 };
 
