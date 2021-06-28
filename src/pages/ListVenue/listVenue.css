@@ -4,6 +4,11 @@
   box-shadow: 0 5px 6px 0px #ccc;
 }
 
+.container-ListVenue{
+  background-color:#b8babb4b;
+
+}
+
 .filter-column {
   height: 500px;
 }
