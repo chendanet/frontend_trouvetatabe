@@ -99,8 +99,11 @@ const SignUp = () => {
         </div>
         <form onSubmit={fetchSignUp} keyboard={false} dblClick={false}>
           <div>
+          <label>
+            E-mail
+            </label> 
             <input
-              type="text"
+              type="email"
               name="email"
               onChange={handleEmail}
               required="required"
@@ -108,6 +111,9 @@ const SignUp = () => {
               className="form-control"
             />
             <br />
+            <label>
+            Password
+            </label> 
             <input
               rows="4"
               type="password"
@@ -118,6 +124,9 @@ const SignUp = () => {
               className="form-control"
             />
             <br />
+            <label>
+            Confirm your Password
+            </label> 
             <input
               rows="4"
               type="password"
@@ -136,7 +145,6 @@ const SignUp = () => {
                 value=""
                 checked={is_manager}
                 onChange={handleOnChange}
-                // eslint-disable-next-line react/jsx-no-duplicate-props
                 id="flexCheckDefault"
               />
               <label className="form-check-label" for="flexCheckDefault">

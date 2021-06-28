@@ -4,7 +4,7 @@ import config from 'config';
 import { useHistory } from 'react-router-dom';
 import { PROD_CREATE_VENUE} from 'api/apiHandler'
 import { Alert, Button, Modal  } from 'react-bootstrap';
-
+import "pages/CreateVenue/createVenue.css";
 
 
 function CreateVenue() {
@@ -21,6 +21,7 @@ function CreateVenue() {
   const token = Cookies.get(config.COOKIE_STORAGE_KEY);
   const history = useHistory();
   const [show, setShow] = useState(false);
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,37 +37,39 @@ function CreateVenue() {
         if (response.ok) {
           history.push('/myVenues');
         } else {
-          setShow(true); 
+          setShow(true);
           return
         }
       })
       .catch(error => console.error('error', error));
   }
-  
+
   return (
-    <div className="container d-flex align-items-center justify-content-center">
-      <div className="form-container">
+    <div className="container-fluid d-flex align-items-center justify-content-center container-bg">
+      <div className="form-create-venue">
         <div>
           <h3>Create your venue</h3>
           <hr />
         </div>
-        <form onSubmit={handleSubmit} keyboard={false} dblClick={false}>
-          <div>
-            <label>
-              Venue name
-            </label>
-            <input
-              type="text"
-              name="name"
-              ref={nameRef}
-              placeholder="ex: Le Paris"
-              required="required"
-              className="form-control"
-            />
-            <br />
-            <label>
-            City
-              <select ref={cityRef} name="city" required>
+        <form onSubmit={handleSubmit} keyboard="false" dblclick="false">
+          <div>       
+                 <label className="fw-bold">
+                   Venue name
+                 </label>
+                 <input
+                   type="text"
+                   name="name"
+                   ref={nameRef}
+                   placeholder="ex: Le Paris"
+                   required="required"
+                   className="form-control"
+                 />
+              
+              <br />
+            <label className="fw-bold">
+                City
+            </label> 
+              <select ref={cityRef} name="city" required className="form-select">
               <option value="Aix-en-Provence">Aix-en-Provence</option>
               <option value="Ajaccio">Ajaccio</option>
                 <option value="Auxerre">Auxerre</option>
@@ -117,9 +120,10 @@ function CreateVenue() {
                 <option value="Toulouse">Toulouse</option>
                 <option value="Tours">Tours</option>
               </select>
-              </label>{" "}
+          
+          
             <br />
-            <label>
+            <label className="fw-bold">
             Address
             </label>
             <input
@@ -133,7 +137,7 @@ function CreateVenue() {
               className="form-control"
             />
             <br />
-            <label>
+            <label className="fw-bold">
             Zipcode
             </label>
             <input
@@ -147,7 +151,7 @@ function CreateVenue() {
               className="form-control"
             />{" "}
             <br />
-            <label>
+            <label className="fw-bold">
             Average price
             </label>
             <input
@@ -161,9 +165,8 @@ function CreateVenue() {
               className="form-control"
             />{" "}
             <br />
-            <label>
+            <label className="fw-bold">
             Cuisine
-            <hr />
             </label>
             <input
               rows="4"
@@ -175,7 +178,7 @@ function CreateVenue() {
               className="form-control"
             />{" "}
             <br />
-            <label>
+            <label className="fw-bold">
             Phone number
             </label>
             <input
@@ -189,17 +192,17 @@ function CreateVenue() {
               className="form-control"
             />{" "}
             <br />
-            <label>
+            <label className="fw-bold">
             Your place has a terrace?
             <input
-              rows="4"
-              type="checkbox"
-              name="terrace"
-              ref={terraceRef}
-              className="form-check-label m-2"
-            /></label>{" "}
+                rows="4"
+                type="checkbox"
+                name="terrace"
+                ref={terraceRef}
+                className="form-check-label m-2"
+              /></label>{" "}
             <br />
-            <label>
+            <label className="fw-bold">
             Number of couvert
             </label>
             <input
@@ -213,14 +216,14 @@ function CreateVenue() {
               className="form-control"
             />{" "}
             <br />
-            <label>
+            <label className="fw-bold">
             Add a short description of your venue
             </label>
             <textarea name="description" ref={descriptionRef} placeholder="describe your venue" required="required" className="form-control" />
             {" "}
             <br />
-            <label> Please add one or more photos of your venue<hr /></label>
-            <input name="images[]"  type="file" multiple={true} className="form-control-file" />
+            <label className="fw-bold"> Please add one or more photos of your venue<hr /></label>
+            <input name="images[]"  type="file" multiple={true} className="form-control" />
             <br /><br />
             <input type="submit" value="Create your Venue" className="btn-signin" />
             <br />

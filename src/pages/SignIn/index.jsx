@@ -76,16 +76,23 @@ const SignIn = () => {
           <h3>Login</h3>
           <br />
         </div>
-        <form>
+        <form onSubmit={fetchSignIn}>
           <div>
+          <label>
+            E-mail
+            </label>   
             <input
-              type="text"
+              type="email"
               name="email"
               onChange={handleEmail}
               placeholder="Enter Your Email"
               className="form-control"
+              required
             />
             <br />
+            <label>
+            Password
+            </label> 
             <input
               rows="4"
               type="password"
@@ -93,10 +100,12 @@ const SignIn = () => {
               onChange={handlePassword}
               placeholder="Enter your Password"
               className="form-control"
+              required
+
             />
             <br />
 
-            <button type="submit" onClick={fetchSignIn} className="btn-signin">
+            <button type="submit"  className="btn-signin">
               Login
               </button>
 

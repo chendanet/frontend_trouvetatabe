@@ -38,6 +38,9 @@ const ResetPassword = () => {
         </div>
         <form>
           <div>
+          <label>
+            New Password
+            </label> 
             <input
               type="password"
               name="email"
@@ -48,7 +51,7 @@ const ResetPassword = () => {
             />
             <br />
             <button type="submit" onClick={fetchResetPassword} className="btn-signin">
-              Enter your new password
+              Submit 
               </button>
             <br />
           </div>

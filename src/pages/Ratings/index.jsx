@@ -70,17 +70,23 @@ const Ratings = ({ modal, idVenue }) => {
    
     </div>
         <button type="button" onClick={modal} className="close">✖️</button>
-        <form>
+        <form onSubmit={fetchRating} >
+        <label>
+            Leave your review
+            </label>   
           <input
             type="text"
             id="name"
             name="review"
             placeholder="Your Review 🧐"
-            required="required"
+            required
             pattern="^(?!\s*$).+"
             className="form-control mb-2"
-             onChange={(e) => setReview(e.target.value)}
+            onChange={(e) => setReview(e.target.value)}
           />
+          <label>
+            and a score
+            </label>  
            <input
             type="number"
             id="score"
@@ -90,9 +96,10 @@ const Ratings = ({ modal, idVenue }) => {
             max="5"
             pattern="^([1-5]|1[005])$"
             className="form-control mb-2"
+            required
             onChange={(e) => setScore(e.target.value)}
           />
-          <button type="submit" onClick={fetchRating} className="btn-signin">
+          <button type="submit" className="btn-signin">
             {" "}
             Submit{" "}
           </button>

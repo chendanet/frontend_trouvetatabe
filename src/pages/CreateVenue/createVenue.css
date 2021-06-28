@@ -1,0 +1,27 @@
+.form-create-venue{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin: 3rem ;
+    background-color: #F53F3F;
+    border: 1px solid #F53F3F;
+    border-radius: 5px;
+    color: white;
+    width: 40%;
+   
+}
+.name-city{
+   
+    display: flex;
+    width: 100%;
+  
+
+}
+form{
+    width: 100%;
+}
+.container-bg{
+    background-color:#b8babb4b;
+}

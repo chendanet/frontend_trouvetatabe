@@ -20,7 +20,7 @@ function Navbar() {
     e.preventDefault()
     dispatch(logout())
     history.push('/')
-    setShow(true); 
+    setShow(true);
     return
   }
 
@@ -35,7 +35,7 @@ function Navbar() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clip-path="url(#clip0)">
+            <g clipPath="url(#clip0)">
               <path
                 d="M74.6536 10.9893L74.6618 10.9944C74.7908 11.1495 74.8499 11.3027 74.8499 11.4545C74.8499 11.8961 74.4005 12.3864 73.6549 12.3864H39.7533H39.2533V12.8864V61.5622C39.2533 62.0038 38.8039 62.494 38.0583 62.494C37.3183 62.494 36.8632 62.0025 36.8632 61.5622V12.8864V12.3864H36.3632H2.46168C1.71605 12.3864 1.2666 11.8961 1.2666 11.4545C1.2666 11.3087 1.32119 11.1612 1.43691 11.0116L1.52147 10.9339C1.68527 10.7835 1.87155 10.6431 1.98831 10.603L2.03952 10.5855L2.08578 10.5573C12.2957 4.34981 24.5099 0.5 38.0583 0.5C51.9221 0.5 64.3108 4.50952 74.6536 10.9893ZM7.94908 9.57693L8.1755 10.5227H67.9834L68.2097 9.57686C59.3505 5.08084 49.1664 2.36364 38.0583 2.36364C26.9428 2.36364 16.8011 5.08098 7.94908 9.57693ZM65.1795 47.75H65.6795V47.25V34.3636C65.6795 33.9221 66.1289 33.4318 66.8746 33.4318C67.6202 33.4318 68.0696 33.9221 68.0696 34.3636V61.5682C68.0696 62.0097 67.6202 62.5 66.8746 62.5C66.1289 62.5 65.6795 62.0097 65.6795 61.5682V50.1136V49.6136H65.1795H55.009H54.509V50.1136V61.5622C54.509 62.0038 54.0596 62.494 53.314 62.494C52.5683 62.494 52.1189 62.0038 52.1189 61.5622V48.6818C52.1189 48.2403 52.5683 47.75 53.314 47.75H65.1795ZM10.4371 47.25V47.75H10.9371H22.8026C23.5468 47.75 23.9977 48.245 23.9977 48.6818V61.5682C23.9977 62.0097 23.5482 62.5 22.8026 62.5C22.057 62.5 21.6075 62.0097 21.6075 61.5682V50.1136V49.6136H21.1075H10.9371H10.4371V50.1136V61.5682C10.4371 62.0097 9.98761 62.5 9.24198 62.5C8.49635 62.5 8.04691 62.0097 8.04691 61.5682V34.3636C8.04691 33.9233 8.50197 33.4318 9.24198 33.4318C9.982 33.4318 10.4371 33.9233 10.4371 34.3636V47.25Z"
                 fill="white"
@@ -55,7 +55,7 @@ function Navbar() {
           </svg>
           <Link className="nav-list item-list item-list-logo" aria-current="page" to="/">
             TrouveTaTable
-                  </Link>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -84,7 +84,7 @@ function Navbar() {
                       </Link>
                   </li>
                   <li className="nav-item">
-                  <Link className="nav-list item-list" to="/blog">
+                    <Link className="nav-list item-list" to="/blog">
                       Blog
                       </Link>
                   </li>
@@ -117,29 +117,29 @@ function Navbar() {
                     </>
                   )}
                   <li className="nav-item">
-                  <Link className="nav-list item-list" to="/blog">
+                    <Link className="nav-list item-list" to="/blog">
                       Blog
                       </Link>
                   </li>
-                  
+
                 </div>
               }
-{/* ****************************** Alert ********************** */}
-<>
-      <Modal show={show} variant="success" align="center">
-      <div className="card rounded-5 p-3 m-4" align="center">
+              {/* ****************************** Alert ********************** */}
+              <>
+                <Modal show={show} variant="success" align="center">
+                  <div className="card rounded-5 p-3 m-4" align="center">
 
-        <Alert.Heading> Disconnecting... </Alert.Heading>
-        <hr />
-        <p> Hope to see you soon at TrouveTaTable  </p>
-          <Button onClick={() => setShow(false)} variant="outline-danger">
-Close      </Button>
-</div>
+                    <Alert.Heading> Disconnecting... </Alert.Heading>
+                    <hr />
+                    <p> Hope to see you soon at TrouveTaTable  </p>
+                    <Button onClick={() => setShow(false)} variant="outline-danger">
+                      Close      </Button>
+                  </div>
 
-      </Modal>
-       </>
+                </Modal>
+              </>
 
-       {/* ****************************** Alert ********************** */}
+              {/* ****************************** Alert ********************** */}
 
 
             </ul>
