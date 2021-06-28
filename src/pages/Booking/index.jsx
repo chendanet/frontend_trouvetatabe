@@ -70,6 +70,7 @@ const Booking = ({ modal, idVenue }) => {
             name="visitor_phone"
             placeholder="Your Phone"
             required
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             className="form-control mb-2"
           />
                   <label>
@@ -93,6 +94,8 @@ const Booking = ({ modal, idVenue }) => {
             align="center"
             required
             className="form-control"
+            min="2021-06-29" 
+            max="2022-06-14"
             onChange={(e) => setDate(e.target.value)}
           />
           <br />
