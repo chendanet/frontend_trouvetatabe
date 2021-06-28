@@ -49,7 +49,7 @@ const Booking = ({ modal, idVenue }) => {
       <div className="form-container " align="center">
         <h3> Book a table </h3>
         <button type="button" onClick={modal} className="close">X</button>
-        <form>
+        <form onSubmit={fetchBooking}>
         <label>
               Name
             </label>
@@ -58,7 +58,6 @@ const Booking = ({ modal, idVenue }) => {
             id="name"
             name="visitor_name"
             placeholder="Your Name"
-            required
             className="form-control mb-2"
           />
                   <label>
@@ -68,8 +67,8 @@ const Booking = ({ modal, idVenue }) => {
             type="tel"
             id="phone"
             name="visitor_phone"
-            placeholder="Your Phone"
-            required
+            pattern="^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$"
+            placeholder="ex: +331.23 45-6789"
             className="form-control mb-2"
           />
                   <label>
@@ -93,6 +92,8 @@ const Booking = ({ modal, idVenue }) => {
             align="center"
             required
             className="form-control"
+            min="2021-06-29" 
+            max="2022-06-14"
             onChange={(e) => setDate(e.target.value)}
           />
           <br />
@@ -106,7 +107,7 @@ const Booking = ({ modal, idVenue }) => {
             name="appt"
             required
             onChange={(e) => setTime(e.target.value)} />
-          <button type="submit" onClick={fetchBooking} className="btn-signin">
+          <button type="submit"  className="btn-signin">
             {" "}
             Submit{" "}
           </button>

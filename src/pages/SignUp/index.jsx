@@ -103,7 +103,7 @@ const SignUp = () => {
             E-mail
             </label> 
             <input
-              type="text"
+              type="email"
               name="email"
               onChange={handleEmail}
               required="required"
@@ -145,7 +145,6 @@ const SignUp = () => {
                 value=""
                 checked={is_manager}
                 onChange={handleOnChange}
-                // eslint-disable-next-line react/jsx-no-duplicate-props
                 id="flexCheckDefault"
               />
               <label className="form-check-label" for="flexCheckDefault">

@@ -52,7 +52,7 @@ const EditVenue = ({ venues, modal }) => {
       <button type="button" onClick={modal} className="close">X</button>
       <div className="form-container">
         <h3> Edit Venue</h3>
-        <form>
+        <form onSubmit={fetchEditVenue}>
           <div>
           <label>
               Venue name
@@ -106,7 +106,7 @@ const EditVenue = ({ venues, modal }) => {
               Number of couvert
             </label>
            <input
-              type="text"
+              type="number"
               name="seatnumber"
               onChange={(e) => setSeatnumber(e.target.value)}
               className="form-control"
@@ -128,7 +128,7 @@ const EditVenue = ({ venues, modal }) => {
           <br />
 
           <div> 
-            <button type="submit" onClick={fetchEditVenue}>
+            <button type="submit" >
               Edit Venue
           </button>
                     </div>
