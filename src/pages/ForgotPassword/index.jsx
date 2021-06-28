@@ -34,21 +34,20 @@ const ForgotPassword = () => {
           <h3> Enter your email </h3>
           <br />
         </div>
-        <form>
+        <form onSubmit={fetchForgotPassword}>
           <div>
           <label>
             Your Email
             </label> 
             <input
-              type="text"
+              type="email"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter Your Email"
               className="form-control"
-
             />
             <br />
-            <button type="submit" onClick={fetchForgotPassword} className="btn-signin">
+            <button type="submit"  className="btn-signin">
               Enter your email
               </button>
             <br />

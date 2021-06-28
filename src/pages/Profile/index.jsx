@@ -131,16 +131,17 @@ const Profile = () => {
                 <div className="form-container">
                     <h3> Your profile</h3>
                     <p> Here, you can update your profile</p>
-                    <form>
+                    <form onSubmit={updateCurrentUser}>
                         <div><label>
                             E-mail
                                </label>
                             <input
-                                type="text"
+                                type="email"
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Change your Email"
+                                size="30"
                                 className="form-control" />
                             <label>
                                 Password
@@ -173,7 +174,7 @@ const Profile = () => {
                                 placeholder="Your Last name"
                                 className="form-control" />
                             <br />
-                            <button type="submit" onClick={updateCurrentUser} className="btn-signin">
+                            <button type="submit"  className="btn-signin">
                                 Modify my profile
                         </button>
                             <br />
