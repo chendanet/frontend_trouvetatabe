@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import Cookies from 'js-cookie';
 import config from 'config';
 import { useHistory } from 'react-router-dom';
-import { PROD_CREATE_VENUE} from 'api/apiHandler'
-import { Alert, Button, Modal  } from 'react-bootstrap';
+import { PROD_CREATE_VENUE } from 'api/apiHandler'
+import { Alert, Button, Modal } from 'react-bootstrap';
 
 
 
@@ -36,13 +36,13 @@ function CreateVenue() {
         if (response.ok) {
           history.push('/myVenues');
         } else {
-          setShow(true); 
+          setShow(true);
           return
         }
       })
       .catch(error => console.error('error', error));
   }
-  
+
   return (
     <div className="container d-flex align-items-center justify-content-center">
       <div className="form-container">
@@ -50,7 +50,7 @@ function CreateVenue() {
           <h3>Create your venue</h3>
           <hr />
         </div>
-        <form onSubmit={handleSubmit} keyboard={false} dblClick={false}>
+        <form onSubmit={handleSubmit} keyboard="false" dblclick="false">
           <div>
             <label>
               Venue name
@@ -65,10 +65,10 @@ function CreateVenue() {
             />
             <br />
             <label>
-            City
+              City
               <select ref={cityRef} name="city" required>
-              <option value="Aix-en-Provence">Aix-en-Provence</option>
-              <option value="Ajaccio">Ajaccio</option>
+                <option value="Aix-en-Provence">Aix-en-Provence</option>
+                <option value="Ajaccio">Ajaccio</option>
                 <option value="Auxerre">Auxerre</option>
                 <option value="Amiens">Amiens</option>
                 <option value="Angers">Angers</option>
@@ -117,10 +117,10 @@ function CreateVenue() {
                 <option value="Toulouse">Toulouse</option>
                 <option value="Tours">Tours</option>
               </select>
-              </label>{" "}
+            </label>{" "}
             <br />
             <label>
-            Address
+              Address
             </label>
             <input
               rows="4"
@@ -134,7 +134,7 @@ function CreateVenue() {
             />
             <br />
             <label>
-            Zipcode
+              Zipcode
             </label>
             <input
               rows="4"
@@ -148,7 +148,7 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            Average price
+              Average price
             </label>
             <input
               rows="4"
@@ -162,7 +162,7 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            Cuisine
+              Cuisine
             <hr />
             </label>
             <input
@@ -176,7 +176,7 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            Phone number
+              Phone number
             </label>
             <input
               rows="4"
@@ -190,17 +190,17 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            Your place has a terrace?
+              Your place has a terrace?
             <input
-              rows="4"
-              type="checkbox"
-              name="terrace"
-              ref={terraceRef}
-              className="form-check-label m-2"
-            /></label>{" "}
+                rows="4"
+                type="checkbox"
+                name="terrace"
+                ref={terraceRef}
+                className="form-check-label m-2"
+              /></label>{" "}
             <br />
             <label>
-            Number of couvert
+              Number of couvert
             </label>
             <input
               rows="4"
@@ -214,13 +214,13 @@ function CreateVenue() {
             />{" "}
             <br />
             <label>
-            Add a short description of your venue
+              Add a short description of your venue
             </label>
             <textarea name="description" ref={descriptionRef} placeholder="describe your venue" required="required" className="form-control" />
             {" "}
             <br />
             <label> Please add one or more photos of your venue<hr /></label>
-            <input name="images[]"  type="file" multiple={true} className="form-control-file" />
+            <input name="images[]" type="file" multiple={true} className="form-control-file" />
             <br /><br />
             <input type="submit" value="Create your Venue" className="btn-signin" />
             <br />
