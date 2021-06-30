@@ -8,23 +8,34 @@ import Venue from "pages/Venue";
 import Profile from "pages/Profile";
 import CreateVenue from "pages/CreateVenue"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PROD_EDIT_VENUE } from 'api/apiHandler';
 import store from 'store';
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom';
-import { ListVenues } from "pages/ListVenue";
 import MyVenues from 'pages/MyVenues';
 import ForgotPassword from 'pages/ForgotPassword';
 import ResetPassword from 'pages/ResetPassword';
 import Ratings from 'pages/Ratings';
 import Blog from 'pages/Blog';
+import Home from "pages/Home";
+import { useEffect, useState } from "react";
 
 
 
 const App = () => {
 
+  const [venues, setVenues] = useState(undefined);
+
+  useEffect(() => {
+    fetch(PROD_EDIT_VENUE)
+      .then((response) => response.json())
+      .then((data) => {
+        setVenues(data)
+      });
+  }, [])
 
   return (
     <Provider store={store}>
@@ -33,7 +44,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route path="/" exact>
-              <ListVenues />
+              <Home venues={venues} />
             </Route>
             <Route path="/register">
               <SignUp />
