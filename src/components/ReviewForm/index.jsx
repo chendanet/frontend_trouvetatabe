@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import config from "config";
-import "pages/Booking/Booking.css";
+import "components/BookingForm/index.css";
 import { useSelector } from "react-redux";
 import { PROD_BOOKINGS } from 'api/apiHandler';
 import { PROD_EDIT_VENUE } from 'api/apiHandler';
@@ -13,7 +13,7 @@ import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 
 
-const Ratings = ({ modal, idVenue }) => {
+const ReviewForm = ({ modal, idVenue }) => {
 
   const [venues, setVenues] = useState(undefined);
   const [show, setShow] = useState(false);
@@ -58,8 +58,9 @@ const Ratings = ({ modal, idVenue }) => {
     if (response) {
       history.push("/");
     } else {
-      setShow(true); 
-      return    }
+      setShow(true);
+      return
+    }
   };
 
   return (
@@ -67,13 +68,13 @@ const Ratings = ({ modal, idVenue }) => {
       <div className="form-container " align="center">
         <h3> Leave your review </h3>
         <div>
-   
-    </div>
+
+        </div>
         <button type="button" onClick={modal} className="close">✖️</button>
         <form onSubmit={fetchRating} >
-        <label>
+          <label>
             Leave your review
-            </label>   
+            </label>
           <input
             type="text"
             id="name"
@@ -86,8 +87,8 @@ const Ratings = ({ modal, idVenue }) => {
           />
           <label>
             and a score
-            </label>  
-           <input
+            </label>
+          <input
             type="number"
             id="score"
             name="score"
@@ -106,24 +107,24 @@ const Ratings = ({ modal, idVenue }) => {
         </form>
         {/* ****************************** Alert ********************** */}
         <>
-      <Modal show={show} variant="success" align="center">
-      <div className="card rounded-5 p-3 m-4" align="center">
+          <Modal show={show} variant="success" align="center">
+            <div className="card rounded-5 p-3 m-4" align="center">
 
-        <Alert.Heading> Ops, sorry </Alert.Heading>
-        <hr />
-        <p> Could not register your review. Please try again   </p>
-          <Button onClick={() => setShow(false)} variant="outline-danger">
-Close      </Button>
-</div>
+              <Alert.Heading> Ops, sorry </Alert.Heading>
+              <hr />
+              <p> Could not register your review. Please try again   </p>
+              <Button onClick={() => setShow(false)} variant="outline-danger">
+                Close      </Button>
+            </div>
 
-      </Modal>
-       </>
+          </Modal>
+        </>
 
-       {/* ****************************** Alert ********************** */}
+        {/* ****************************** Alert ********************** */}
       </div>
     </div>
   );
 };
 
-export default Ratings;
+export default ReviewForm;
 

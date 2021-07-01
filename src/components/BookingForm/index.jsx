@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import config from "config";
-import "pages/Booking/Booking.css";
+import "components/BookingForm/index.css";
 import { useSelector } from "react-redux";
 import { PROD_BOOKINGS } from 'api/apiHandler';
 
-const Booking = ({ modal, idVenue }) => {
+const BookingForm = ({ modal, idVenue }) => {
   const [seat, setSeat] = useState();
   const [time, setTime] = useState();
   const [date, setDate] = useState();
@@ -50,8 +50,8 @@ const Booking = ({ modal, idVenue }) => {
         <h3> Book a table </h3>
         <button type="button" onClick={modal} className="close">X</button>
         <form onSubmit={fetchBooking}>
-        <label>
-              Name
+          <label>
+            Name
             </label>
           <input
             type="text"
@@ -60,8 +60,8 @@ const Booking = ({ modal, idVenue }) => {
             placeholder="Your Name"
             className="form-control mb-2"
           />
-                  <label>
-              Phone number
+          <label>
+            Phone number
             </label>
           <input
             type="tel"
@@ -71,8 +71,8 @@ const Booking = ({ modal, idVenue }) => {
             placeholder="ex: +331.23 45-6789"
             className="form-control mb-2"
           />
-                  <label>
-              Number of people
+          <label>
+            Number of people
             </label>
           <input
             type="number"
@@ -92,7 +92,7 @@ const Booking = ({ modal, idVenue }) => {
             align="center"
             required
             className="form-control"
-            min="2021-06-29" 
+            min="2021-06-29"
             max="2022-06-14"
             onChange={(e) => setDate(e.target.value)}
           />
@@ -107,7 +107,7 @@ const Booking = ({ modal, idVenue }) => {
             name="appt"
             required
             onChange={(e) => setTime(e.target.value)} />
-          <button type="submit"  className="btn-signin">
+          <button type="submit" className="btn-signin">
             {" "}
             Submit{" "}
           </button>
@@ -117,4 +117,4 @@ const Booking = ({ modal, idVenue }) => {
   );
 };
 
-export default Booking;
+export default BookingForm;

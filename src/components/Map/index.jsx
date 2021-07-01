@@ -1,8 +1,12 @@
 import React from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-function MapOpen({ latitude, longitude, currentVenue }) {
+
+
+
+
+const Map = ({ latitude, longitude, currentVenue }) => {
   return (
-    <>
+    <div className="col-md-6">
       {latitude && longitude && currentVenue &&
         <MapContainer
           center={[latitude, longitude]}
@@ -37,8 +41,10 @@ function MapOpen({ latitude, longitude, currentVenue }) {
             </Popup>
           </Marker>
         </MapContainer>}
-    </>
+    </div>
+
+
   )
 }
 
-export default MapOpen
+export default Map
