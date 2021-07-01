@@ -22,6 +22,7 @@
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "strftime": "^0.10.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
