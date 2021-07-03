@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "pages/Booking/Booking.css";
+import "pages/Blog/Blog.css";
 
 
 const Blog = () => {

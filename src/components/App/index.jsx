@@ -4,7 +4,7 @@ import "components/App/index.css";
 import { Provider } from 'react-redux'
 import SignUp from "pages/SignUp";
 import SignIn from "pages/SignIn";
-import Venue from "pages/Venue";
+import VenueDetail from "pages/VenueDetail";
 import Profile from "pages/Profile";
 import CreateVenue from "pages/CreateVenue"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +18,7 @@ import {
 import MyVenues from 'pages/MyVenues';
 import ForgotPassword from 'pages/ForgotPassword';
 import ResetPassword from 'pages/ResetPassword';
-import Ratings from 'pages/Ratings';
+import Ratings from 'components/ReviewForm';
 import Blog from 'pages/Blog';
 import Home from "pages/Home";
 import { useEffect, useState } from "react";
@@ -56,7 +56,7 @@ const App = () => {
               <CreateVenue />
             </Route>
             <Route path="/venues/:idVenue" exact >
-              <Venue />
+              <VenueDetail />
             </Route>
             <Route path="/myVenues" exact>
               <MyVenues />
