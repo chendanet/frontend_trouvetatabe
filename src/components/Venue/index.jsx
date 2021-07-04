@@ -1,9 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { Link } from 'react-router-dom'
 
-
-
-
 const Venue = ({ venue }) => {
 
     return (
@@ -15,13 +12,11 @@ const Venue = ({ venue }) => {
                             <img
                                 src={`https://source.unsplash.com/600x600/?dish&sig=${uuidv4()}`}
                                 alt={`${venue.name}_image`}
-                                className="card_img"
-                            />
+                                className="card_img" />
                             : <img
                                 src={venue.images[0]}
                                 alt={`${venue.name}_image`}
-                                className="card_img"
-                            />}
+                                className="card_img" />}
                     </div>
                     <div className="card_desc">
                         <h5 className="card_name" title={venue.name}>{venue.name}</h5>
