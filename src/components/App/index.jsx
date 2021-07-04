@@ -59,7 +59,7 @@ const App = () => {
               <VenueDetail />
             </Route>
             <Route path="/myVenues" exact>
-              <MyVenues />
+              <MyVenues venues={venues} />
             </Route>
             <Route path="/profile" exact>
               <Profile />
