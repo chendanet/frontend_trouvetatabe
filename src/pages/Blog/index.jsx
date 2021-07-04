@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "pages/Blog/Blog.css";
-
+import { v4 as uuidv4 } from 'uuid'
+import Event from "components/Event";
 
 const Blog = () => {
-  const [data, setData] = useState();
 
+  const [data, setData] = useState();
   const DisplayDate = (UTCDateTime) => {
     var date = new Date(UTCDateTime);
     var day = date.getDate();
@@ -13,9 +14,6 @@ const Blog = () => {
     var formattedDate = day + "-" + month + "-" + year
     return formattedDate;
   }
-
-
-
 
   useEffect(() => {
     fetch(
@@ -34,30 +32,10 @@ const Blog = () => {
       <div className="row w-100 justify-content-center ">
         <h2 className="my-5 text-center fw-bold"> Blog TrouveTaTable ...</h2>
         <h6 className=" text-center fw-bold"> ...soon with new features</h6>
-
         {events &&
-          events.map((item, index) => (
-
-            <div key={index} className="card col-md-3 rounded-5 p-3 m-4" align="center">
-              <div className="card_img-container mb-3">
-
-                <img src={item.cover.url} alt="events paris" className="card_img rounded-2" />
-              </div>
-              <h5 className="card-title m-2" > {item.title.substring(0, 30) + "..."} </h5>
-
-              <p className="m-2"> Event: {item.price_type}</p>
-              <p className="m-2"> Date: {DisplayDate(item.date_start)}</p>
-
-
-
-              <button className="btn-events">
-                <a href={item.url}>Link Event</a>
-
-              </button>
-            </div>
-
+          events.map((event) => (
+            <Event event={event} key={uuidv4()} DisplayDate={DisplayDate} />
           ))}
-
       </div>
     </div>
   );
