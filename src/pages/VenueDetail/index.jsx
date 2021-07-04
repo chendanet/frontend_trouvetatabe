@@ -6,7 +6,7 @@ import { PROD_EDIT_VENUE } from "api/apiHandler";
 import Map from "components/Map";
 import VenueCard from "components/VenueCard";
 import Reviews from "components/Reviews";
-import ListBooking from "components/ListBooking";
+import VenueBookings from "components/VenueBookings";
 
 const VenueDetail = () => {
 
@@ -68,7 +68,7 @@ const VenueDetail = () => {
             </div>
             {currentVenue.user_id === parseInt(currentUser.id) && (
               <div className="row my-5 d-flex justify-content-center w-100">
-                <ListBooking currentVenue={currentVenue} />
+                <VenueBookings currentVenue={currentVenue} />
               </div>
             )}
           </div>

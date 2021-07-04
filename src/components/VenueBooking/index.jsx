@@ -1,4 +1,4 @@
-const Booking = ({ booking, key, DisplayTimeOnly }) => {
+const VenueBooking = ({ booking, key, DisplayTimeOnly }) => {
 
     return (
         <div className="card m-2 p-2">
@@ -12,4 +12,4 @@ const Booking = ({ booking, key, DisplayTimeOnly }) => {
 
 
 
-export default Booking
+export default VenueBooking

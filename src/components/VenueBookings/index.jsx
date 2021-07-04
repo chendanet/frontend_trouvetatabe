@@ -1,10 +1,10 @@
 import { PROD_BOOKINGS } from "api/apiHandler";
 import { useState, useEffect } from "react";
-import Booking from "components/Booking";
+import VenueBooking from "components/VenueBooking";
 import { v4 as uuidv4 } from 'uuid'
 
 
-const ListBooking = ({ currentVenue }) => {
+const VenueBookings = ({ currentVenue }) => {
 
     const [bookings, setBookings] = useState([])
     const [emptyBookings, setEmptyBookings] = useState()
@@ -39,7 +39,7 @@ const ListBooking = ({ currentVenue }) => {
                     )
                     .map((booking) => (
                         <div className="col-md-5 col-xs-12 ms-4 my-2" key={booking.id}>
-                            <Booking booking={booking} key={uuidv4()} DisplayTimeOnly={DisplayTimeOnly} />
+                            <VenueBooking booking={booking} key={uuidv4()} DisplayTimeOnly={DisplayTimeOnly} />
                         </div>
                     )
                     )}
@@ -51,4 +51,4 @@ const ListBooking = ({ currentVenue }) => {
 }
 
 
-export default ListBooking
+export default VenueBookings
